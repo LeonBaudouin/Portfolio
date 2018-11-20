@@ -3,6 +3,10 @@ export interface Point {
     y: number;
 }
 
+interface PolarPoint {
+    
+}
+
 export interface Size {
     width: number;
     height: number;
