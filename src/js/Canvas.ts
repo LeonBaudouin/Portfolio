@@ -1,26 +1,44 @@
-import { Size } from "./ReusableTypes";
-import { BackgroundColor } from "./Enum";
+import { Size, BackgroundColor } from "./CustomTypes";
+import { DrawnElement } from "./Drawable";
 
 class Canvas {
 
     private element: HTMLCanvasElement;
     public context: CanvasRenderingContext2D;
     public size: Size;
+    private grid: DrawnElement.Grid;
 
     constructor(uniqueSelector: string) {
 
         this.element = document.querySelector(uniqueSelector);
-        this.element.width = window.innerWidth;
-        this.element.height = window.innerHeight;
-
         this.context = this.element.getContext("2d");
+        
 
-        this.size = { width: this.element.width, height: this.element.height };
+        this.Resize();
+
+        window.addEventListener("resize", () => {
+            this.Resize();
+        });
+
+        this.grid = new DrawnElement.Grid(this.size);
     }
+
 
     public Update(): void {
         this.DrawBG();
+        this.grid.Draw(this.context);
         this.DrawGradient();
+
+        requestAnimationFrame(() => this.Update());
+    }
+
+
+
+    private Resize(): void {
+        this.element.width = window.innerWidth;
+        this.element.height = window.innerHeight;
+
+        this.size = { width: this.element.width, height: this.element.height };
     }
 
     private DrawBG(): void {
