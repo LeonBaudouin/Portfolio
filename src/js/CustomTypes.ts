@@ -19,10 +19,16 @@ export enum Palette {
     SquareLight = "#b5b5b5"
 }
 
+export interface rotationRoutine {
+    distance: number;
+    angle: number;
+    speed: number;
+}
+
 export interface tiltedSquareSettings {
     position: Point;
     size: number;
     strokeSize: number;
-    angle: number;
-    speed: number;
+    routines?: rotationRoutine[];
+    mouseSensible?: boolean;
 }
