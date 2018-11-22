@@ -1,3 +1,4 @@
 import css from "@css/main.scss"
-import "@js/canvasScript.ts"
+import "@js/canvas/canvasScript.ts"
+import "@js/menuScript.ts"
 import html from "./index.html"

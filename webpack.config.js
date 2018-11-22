@@ -100,8 +100,8 @@ module.exports =
                         loader: 'file-loader',
                         options: {
                             name: "[name].[ext]",
-                            outputPath: "fonts/",
-                            publicPath: "fonts/"
+                            useRelativePath: true,
+                            publicPath: "../fonts/"
                         }
                     }]
                 },
@@ -123,7 +123,7 @@ module.exports =
                     template: "./src/index.html"
                 }),
                 new ExtractTextPlugin({
-                    filename: "[name].css"
+                    filename: "css/[name].css"
                 }),
                 new CleanWebpackPlugin(path.resolve("./dist/"), {
                     root: path.resolve("./"),

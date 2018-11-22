@@ -17,7 +17,7 @@ $scroll-line-animation--offset: 100ms;
 
         @for $i from 1 through 3 {
             &:nth-child(#{$i}) {
-                animation-delay: $i * $scroll-line-animation--offset;
+                animation-delay: 5s + $i * $scroll-line-animation--offset;
             }
         }
     }

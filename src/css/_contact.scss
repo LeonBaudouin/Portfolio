@@ -1,0 +1,42 @@
+@font-face {
+    font-family: "IconFont";
+    src: url("../fonts/IconFont.eot");
+    src: url("../fonts/IconFont.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/IconFont.woff") format("woff"),
+    url("../fonts/IconFont.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.contact-icon {
+
+    color: $color-lightest-grey;
+
+    &::before {
+    	display: inline-block;
+    	font-family: "IconFont";
+    	font-style: normal;
+    	font-weight: normal;
+    	font-variant: normal;
+    	line-height: 1;
+    	text-decoration: inherit;
+    	text-rendering: optimizeLegibility;
+    	text-transform: none;
+    }
+
+    &.codepen::before {
+    	content: "\f100";
+    }
+
+    &.github::before {
+    	content: "\f101";
+    }
+
+    &.instagram::before {
+    	content: "\f102";
+    }
+
+    &.youtube::before {
+    	content: "\f103";
+    }
+}
