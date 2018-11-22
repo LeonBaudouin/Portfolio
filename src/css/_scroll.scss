@@ -1,0 +1,36 @@
+$scroll-line--length: 38;
+$scroll-line--width: 15px;
+$scroll-line-animation: scroll-line-dash 15s ease-in infinite;
+$scroll-line-animation--offset: 100ms;
+
+.scroll {
+    left: $margin-side-buttons - $scroll-line--width/2;
+    bottom: $margin-side-buttons - $scroll-line--width/2;
+
+    &-line {
+
+        stroke: $color-lightest-grey;
+        stroke-dasharray: $scroll-line--length;
+        stroke-dashoffset: 0;
+        
+        animation: $scroll-line-animation;
+
+        @for $i from 1 through 3 {
+            &:nth-child(#{$i}) {
+                animation-delay: $i * $scroll-line-animation--offset;
+            }
+        }
+    }
+}
+
+@keyframes scroll-line-dash {
+	0% {
+        stroke-dashoffset: 0;
+	}
+	4% {
+        stroke-dashoffset: - 2 * $scroll-line--length;
+    }
+    4.01% {
+        stroke-dashoffset: 0;
+    }
+}

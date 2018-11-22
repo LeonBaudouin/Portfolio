@@ -11,23 +11,22 @@ import { MathFunc } from "./Utils";
 export namespace DrawnElement {
   export interface Drawable {
     Draw(ctx: CanvasRenderingContext2D): void;
-    UpdateFromCursor(e: MouseEvent, ctx?: CanvasRenderingContext2D): void;
     style: Style;
     size: number;
-    mouseSensible: boolean;
   }
 
+  export interface MouseSensible {
+    UpdateFromCursor(e: MouseEvent): void;
+  }
+
+
   export class TiltedSquare implements Drawable {
-    
-    mouseSensible: boolean;
 
     position: Point;                    // Center of the whole animation
 
     style: Style;
     size: number;
     strokeSize: number;
-
-    rotationRoutine: rotationRoutine[] = [];
 
     processedPosition: Point;           // The real square center after the whole process
 
@@ -39,63 +38,128 @@ export namespace DrawnElement {
       this.style = Palette.SquareDark;
       this.size = squareSettings.size;
       this.strokeSize = squareSettings.strokeSize;
-
-      this.mouseSensible = squareSettings.mouseSensible ? squareSettings.mouseSensible : false; 
-      
-      if(squareSettings.routines) {
-        squareSettings.routines.forEach(routine => {
-              this.rotationRoutine.push(Object.assign({}, routine));
-         });
-      }
     }
 
     public Draw(ctx: CanvasRenderingContext2D) {
-      ctx.save();
+
+      ctx.strokeStyle = this.style;
+      ctx.lineWidth = this.strokeSize;
       
+      ctx.strokeRect(- this.size / 2, - this.size / 2, this.size, this.size);
+    }
+  }
+
+
+
+
+  export class FollowingTiltedSquare extends TiltedSquare implements MouseSensible {
+
+    offsetAngle: number;
+    previousAngle: number;
+    cursorAngle: number;
+    squareAngle: number;
+    sensitivity: number;
+
+    constructor(squareSettings: tiltedSquareSettings, defaultAngle: number, sensitivity: number) {
+      super(squareSettings);
+
+      this.offsetAngle = defaultAngle;
+      this.previousAngle = defaultAngle;
+      this.squareAngle = defaultAngle;
+      this.cursorAngle = defaultAngle;
+      this.sensitivity = sensitivity;
+    }
+
+    public UpdateFromCursor(e: MouseEvent) {
+      this.UpdateFocusPoint({ x: e.clientX, y: e.clientY });
+    }
+
+    public UpdateFocusPoint(focusPoint: Point) {
+      this.previousAngle = this.cursorAngle;
+      let delta = MathFunc.getAngle(this.position, focusPoint) - this.previousAngle + this.offsetAngle;
+      if(delta > 5) {
+        delta -= Math.PI*2;
+      } else if (delta < -5) {
+        delta += Math.PI*2;
+      }
+      this.cursorAngle += delta;
+
+    }
+
+    public Draw(ctx: CanvasRenderingContext2D) {
+      this.squareAngle += (this.cursorAngle - this.squareAngle) * this.sensitivity;
+
+      ctx.save();
+
+      ctx.strokeStyle = this.style;
+      ctx.lineWidth = this.strokeSize;
+
+      ctx.translate(
+        this.processedPosition.x,
+        this.processedPosition.y
+      );
+      ctx.rotate(this.squareAngle);
+      
+      ctx.strokeRect(- this.size / 2, - this.size / 2, this.size, this.size);
+
+      ctx.restore();
+    }
+    
+  }
+
+
+
+
+
+  export class RotatingTiltedSquare extends TiltedSquare implements Drawable{
+
+    rotationRoutines: rotationRoutine[] = [];
+
+    constructor(squareSettings: tiltedSquareSettings, rotationRoutines: rotationRoutine[]) {
+
+      super(squareSettings);
+
+      rotationRoutines.forEach(routine => {
+        this.rotationRoutines.push(Object.assign({}, routine));
+      });
+    }
+
+    public Draw(ctx: CanvasRenderingContext2D) {
+      
+      ctx.save();
+
       ctx.strokeStyle = this.style;
       ctx.lineWidth = this.strokeSize;
 
       // the rotate() method cause the canvas matrix to rotate
       // ATTENTION : this affect the draw location until restore()
-      if(this.rotationRoutine.length > 0) {
+      if (this.rotationRoutines.length > 0) {
         this.Rotate(ctx);
       }
+      
+
+      ctx.strokeRect(- this.size / 2, - this.size / 2, this.size, this.size);
 
       ctx.restore();
     }
 
-
-
-    public UpdateFromCursor(e: MouseEvent, ctx: CanvasRenderingContext2D) {
-        let angle = MathFunc.getAngle(this.position, {x: e.clientX, y: e.clientY});
-        ctx.translate(
-          this.processedPosition.x,
-          this.processedPosition.y
-        );
-        ctx.rotate(angle);
-    }
-
-
-
     private Rotate(ctx: CanvasRenderingContext2D) {
       this.PrimaryRotation(ctx);
-      if(this.rotationRoutine.length == 2) {
+      if (this.rotationRoutines.length == 2) {
         this.SecondaryRotation();
       }
-
-      ctx.strokeRect(- this.size/2, - this.size/2, this.size, this.size);
     }
 
     private SecondaryRotation() {
       this.processedPosition.x =
         this.position.x +
-        this.rotationRoutine[1].distance * Math.cos(this.rotationRoutine[1].angle);
+        this.rotationRoutines[1].distance * Math.cos(this.rotationRoutines[1].angle);
 
       this.processedPosition.y =
         this.position.y +
-        this.rotationRoutine[1].distance * Math.sin(this.rotationRoutine[1].angle);
+        this.rotationRoutines[1].distance * Math.sin(this.rotationRoutines[1].angle);
 
-      this.rotationRoutine[1].angle += this.rotationRoutine[1].speed;
+      this.rotationRoutines[1].angle += this.rotationRoutines[1].speed;
     }
 
     private PrimaryRotation(ctx: CanvasRenderingContext2D) {
@@ -103,10 +167,12 @@ export namespace DrawnElement {
         this.processedPosition.x,
         this.processedPosition.y
       );
-      ctx.rotate(this.rotationRoutine[0].angle);
-      this.rotationRoutine[0].angle += this.rotationRoutine[0].speed;
+      ctx.rotate(this.rotationRoutines[0].angle);
+      this.rotationRoutines[0].angle += this.rotationRoutines[0].speed;
     }
+
   }
+
 
   export class StraightSquare implements Drawable {
     style: Style;
@@ -118,12 +184,12 @@ export namespace DrawnElement {
       this.size = size;
     }
 
-    public Draw(ctx: CanvasRenderingContext2D) {}
-    public UpdateFromCursor(e: MouseEvent, ctx: CanvasRenderingContext2D) {}
+    public Draw(ctx: CanvasRenderingContext2D) { }
+    public UpdateFromCursor(e: MouseEvent, ctx: CanvasRenderingContext2D) { }
   }
 
   export class Grid implements Drawable {
-    
+
     style: Style;
     size: number;
 
@@ -166,6 +232,6 @@ export namespace DrawnElement {
       ctx.stroke();
     }
 
-    public UpdateFromCursor(e: MouseEvent, ctx: CanvasRenderingContext2D) {}
+    public UpdateFromCursor(e: MouseEvent, ctx: CanvasRenderingContext2D) { }
   }
 }

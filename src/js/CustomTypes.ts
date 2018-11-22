@@ -29,6 +29,4 @@ export interface tiltedSquareSettings {
     position: Point;
     size: number;
     strokeSize: number;
-    routines?: rotationRoutine[];
-    mouseSensible?: boolean;
 }

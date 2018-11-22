@@ -1,0 +1,35 @@
+$color-red: #fd393c;
+$color-lightest-grey: #c5c3c3;
+$color-dark-grey: #3f3f3f;
+$color-darkest-grey: #333131;
+
+$z-index-menu: 1000;
+$z-index-side-button: 100;
+$z-index-canvas: -1000;
+
+$margin-side-buttons: 40px;
+
+body {
+	position: relative;
+	margin: 0;
+	font-family: 'Raleway', sans-serif;
+}
+
+canvas {
+	background: $color-dark-grey;
+	position: fixed;
+	display: block;
+	
+	top: 0;
+	z-index: $z-index-canvas;
+	width: 100vw;
+	height: 100vh;
+}
+
+.sideButton {
+	position: fixed;
+	z-index: $z-index-side-button;
+}
+
+@import "_scroll.scss";
+@import "nav.scss";

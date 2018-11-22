@@ -9,7 +9,8 @@ class Canvas {
 
   private backgroundStyle: Style = Palette.BackgroundDark;
 
-  private drawnElement: DrawnElement.Drawable[];
+  private drawnElement: DrawnElement.Drawable[] = [];
+  private mousemoveElement: DrawnElement.MouseSensible[] = [];
 
   constructor(uniqueSelector: string) {
     this.element = document.querySelector(uniqueSelector);
@@ -22,9 +23,9 @@ class Canvas {
     });
 
     window.addEventListener("mousemove", e => {
-      this.drawnElement.forEach(element => {
-        if (element.mouseSensible) {
-          element.UpdateFromCursor(e, this.context);
+      this.mousemoveElement.forEach(element => {
+        if (element) {
+          element.UpdateFromCursor(e);
         }
       });
     });
@@ -41,12 +42,15 @@ class Canvas {
   }
 
   private onResize(): void {
+
+    this.drawnElement = [];
+    this.mousemoveElement = [];
+
     this.element.width = window.innerWidth;
     this.element.height = window.innerHeight;
 
     this.size = { width: this.element.width, height: this.element.height };
 
-    this.drawnElement = [];
     this.SetupSquare();
     this.drawnElement.push(new DrawnElement.Grid(this.size, Palette.GridDark));
   }
@@ -73,56 +77,73 @@ class Canvas {
     this.context.fillRect(0, 0, this.size.width, this.size.height);
   }
 
+
+
+
   private SetupSquare() {
     let settings: tiltedSquareSettings = {
       position: { x: this.size.width / 2, y: this.size.height / 2 },
-      size: 600,
+      size: this.size.height - 200,
       strokeSize: 25,
-      mouseSensible: true
     };
 
-    this.drawnElement.push(new DrawnElement.TiltedSquare(settings));
+    let FTS = new DrawnElement.FollowingTiltedSquare(settings, Math.PI/4, 0.05);
 
-    // let settings: tiltedSquareSettings = {
+    this.drawnElement.push(FTS);
+    this.mousemoveElement.push(FTS);
+
+    settings.strokeSize = 3;
+
+    for (let i = 0; i < 4; i++) {
+      settings.size = this.size.height - 300 - 100 * i;
+      let obj = new DrawnElement.FollowingTiltedSquare(settings, Math.PI/4, 0.045 - 0.005 * i);
+      this.drawnElement.push(obj);
+      this.mousemoveElement.push(obj);
+    }
+
+
+    // settings = {
     //   position: { x: this.size.width / 2, y: this.size.height / 2 },
     //   size: 600,
-    //   strokeSize: 25,
-    //   routines: [
-    //     {
-    //       distance: 0,
-    //       angle: Math.PI / 4,
-    //       speed: 0.001
-    //     }
-    //   ]
+    //   strokeSize: 25
     // };
 
-    // this.drawnElement.push(new DrawnElement.TiltedSquare(settings));
+    // let routines = [
+    //   {
+    //     distance: 0,
+    //     angle: Math.PI / 4,
+    //     speed: 0.001
+    //   }
+    // ]
+
+    // this.drawnElement.push(new DrawnElement.RotatingTiltedSquare(settings, routines));
 
     // settings = {
     //   position: { x: this.size.width / 2, y: this.size.height / 2 },
     //   size: 150,
-    //   strokeSize: 3,
-    //   routines: [
-    //     {
-    //       distance: 0,
-    //       angle: (10 * Math.PI) / 180,
-    //       speed: 0.005
-    //     },
-    //     {
-    //       distance: 425,
-    //       angle: 0,
-    //       speed: 0.001
-    //     }
-    //   ]
+    //   strokeSize: 3
     // };
 
-    // this.drawnElement.push(new DrawnElement.TiltedSquare(settings));
-    // settings.routines[1].angle = Math.PI / 2;
-    // this.drawnElement.push(new DrawnElement.TiltedSquare(settings));
-    // settings.routines[1].angle = (2 * Math.PI) / 2;
-    // this.drawnElement.push(new DrawnElement.TiltedSquare(settings));
-    // settings.routines[1].angle = (3 * Math.PI) / 2;
-    // this.drawnElement.push(new DrawnElement.TiltedSquare(settings));
+    // routines = [
+    //   {
+    //     distance: 0,
+    //     angle: (10 * Math.PI) / 180,
+    //     speed: 0.005
+    //   },
+    //   {
+    //     distance: 425,
+    //     angle: 0,
+    //     speed: 0.001
+    //   }
+    // ]
+
+    // this.drawnElement.push(new DrawnElement.RotatingTiltedSquare(settings, routines));
+    // routines[1].angle = Math.PI / 2;
+    // this.drawnElement.push(new DrawnElement.RotatingTiltedSquare(settings, routines));
+    // routines[1].angle = (2 * Math.PI) / 2;
+    // this.drawnElement.push(new DrawnElement.RotatingTiltedSquare(settings, routines));
+    // routines[1].angle = (3 * Math.PI) / 2;
+    // this.drawnElement.push(new DrawnElement.RotatingTiltedSquare(settings, routines));
   }
 }
 
