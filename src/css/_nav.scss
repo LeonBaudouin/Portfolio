@@ -20,17 +20,36 @@ $nav-text--size: 1.875rem;
     
         &-rect {
             transform-origin: center;
-            transform: rotate3d(0, 0, 1, -30deg);
+            transform: rotate3d(0, 0, 1, -245deg);
     
             fill:none;
-            stroke: $color-red;
+            stroke: $color-lightest-grey;
             stroke-width:2;
+
+            transition: all 1s cubic-bezier(.34,-0.23,.42,1);
         }
     
         &-line {
-    
-            stroke: $color-lightest-grey;
+
+            transform-origin: center;
+            stroke: $color-red;
             stroke-width:2;
+            
+            transition: all 1s cubic-bezier(.34,-0.23,.42,1),
+            stroke-dashoffset 200ms ease-in-out;
+
+            &:nth-child(2) {
+                stroke-dasharray: 12;
+                stroke-dashoffset: 12;
+            }
+            &:nth-child(3) {
+                stroke-dasharray: 12;
+                stroke-dashoffset: -12;
+            }
+
+            &:nth-child(4) {transform: rotate3d(0, 0, 1, -385deg);}
+
+            &:nth-child(5) {transform: rotate3d(0, 0, 1, -295deg);}
         }
     }
 
@@ -57,10 +76,10 @@ $nav-text--size: 1.875rem;
             
             transform: translate3d(50%, -50%, 0) rotate3d(0,0,1,-26deg);
 
-            transition: transform 4s cubic-bezier(.2,.86,0,1),
-                        width 4s cubic-bezier(.2,.86,0,1),
-                        height 4s cubic-bezier(.2,.86,0,1),
-                        visibility 4s linear;
+            transition: transform 3s 200ms cubic-bezier(.1,.86,0,1),
+                        width 3s 200ms cubic-bezier(.1,.86,0,1),
+                        height 3s 200ms cubic-bezier(.1,.86,0,1),
+                        visibility 3s 200ms linear;
         }
 
         &-list {
@@ -88,7 +107,7 @@ $nav-text--size: 1.875rem;
 
             @for $i from 1 through 5 {
                 &:nth-child(#{$i}) {
-                    transition-delay: 300ms + ($i - 1) * 100ms;
+                    transition-delay: 400ms + ($i - 1) * 100ms;
                 }
             }
         }
@@ -124,25 +143,49 @@ $nav-text--size: 1.875rem;
 
                 transform: translate3d(50%, -50%, 0) rotate3d(0,0,1, 61.5deg);
 
-                transition: transform 2s cubic-bezier(.71,.01,.6,1),
-                            width 2s cubic-bezier(.71,.01,.6,1),
-                            height 2s cubic-bezier(.71,.01,.6,1),
-                            visibility 2s linear;
+                transition: transform 1s cubic-bezier(.55,.01,.44,.82),
+                            width 1s cubic-bezier(.55,.01,.44,.82),
+                            height 1s cubic-bezier(.55,.01,.44,.82),
+                            visibility 1s linear;
             }
 
 
             &-item {
+
                 transform: translate3d(0, -30px, 0);
                 opacity: 0;
 
-                transition: transform 1.5s cubic-bezier(0,.64,.17,.99),
-                            opacity 0.8s cubic-bezier(0,.64,.17,.99),
-                            visibility 1.5s linear;
+                transition: transform 1.2s cubic-bezier(0,.64,.17,.99),
+                            opacity 0.2s cubic-bezier(0,.64,.17,.99),
+                            visibility 1.2s linear;
 
                 @for $j from 1 through 5 {
                     &:nth-last-child(#{$j}) {
-                        transition-delay: ($j - 1) * 100ms;
+                        transition-delay: ($j - 1) * 50ms;
                     }
+                }
+            }
+        }
+
+        &-burger {
+        
+            &-rect {
+                transform: rotate3d(0, 0, 1, -30deg);
+                stroke: $color-red;
+            }
+        
+            &-line {
+        
+                transition: all 1s cubic-bezier(.34,-0.23,.42,1),
+                stroke-dashoffset 200ms 800ms ease-in-out;
+
+                stroke: $color-lightest-grey;
+
+                transform-origin: center;
+                transform: rotate3d(0, 0, 0, 0);
+
+                &:nth-child(3), &:nth-child(2) {
+                    stroke-dashoffset: 0;
                 }
             }
         }
