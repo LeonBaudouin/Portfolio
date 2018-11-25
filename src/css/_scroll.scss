@@ -1,11 +1,13 @@
 $scroll-line--length: 38;
-$scroll-line--width: 15px;
 $scroll-line-animation: scroll-line-dash 15s ease-in infinite;
 $scroll-line-animation--offset: 100ms;
 
 .scroll {
-    left: $margin-side-buttons - $scroll-line--width/2;
-    bottom: $margin-side-buttons - $scroll-line--width/2;
+
+    --scroll-line--width: 15px;
+
+    left: calc( var(--margin-side-buttons) - var(--scroll-line--width)/2 );
+    bottom: calc( var(--margin-side-buttons) - var(--scroll-line--width)/2 );
 
     &-line {
 

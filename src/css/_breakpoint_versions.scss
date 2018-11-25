@@ -1,0 +1,10 @@
+@import "_media_queries";
+
+.v-m {
+    display: none;
+    @include min_query(display, $nav-breakpoint, initial);
+}
+
+.v-s {
+    @include min_query(display, $nav-breakpoint, none);
+}

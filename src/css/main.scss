@@ -1,3 +1,5 @@
+@import "_interpolate";
+
 $color-red: #fd393c;
 $color-lightest-grey: #c5c3c3;
 $color-dark-grey: #3f3f3f;
@@ -7,10 +9,14 @@ $z-index-menu: 1000;
 $z-index-side-button: 100;
 $z-index-canvas: -1000;
 
-$margin-side-buttons: 40px;
+//$margin-side-buttons: 40px;
 
 * {
 	box-sizing: border-box;
+}
+
+:root {
+    @include interpolate(--margin-side-buttons, 360px, 1024px, 40px, 60px);
 }
 
 body {
@@ -30,11 +36,31 @@ canvas {
 	height: 100vh;
 }
 
+.space-even {
+	display: flex;
+	justify-content: space-between;
+}
+
 .sideButton {
 	position: fixed;
 	z-index: $z-index-side-button;
 }
 
+.color-red {
+	color: $color-red;
+}
+
+.color-lightest-grey {
+	color: $color-lightest-grey;
+}
+
+.red-stroke {
+	width: 75%;
+	height: 2px;
+	background-color: $color-red;
+}
+
 @import "_scroll.scss";
 @import "_nav.scss";
 @import "_contact.scss";
+@import "_breakpoint_versions.scss";

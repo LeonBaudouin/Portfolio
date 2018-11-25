@@ -1,9 +1,16 @@
-$burger--width: 44;
-$nav-center--margin: $margin-side-buttons - $burger--width/2;
+@import "_interpolate";
+@import "_media_queries";
+
 $nav-menu-background--size: 150vh;
 $nav-text--size: 1.875rem;
+$nav-breakpoint: 600px;
 
 .nav {
+
+    @include interpolate(--burger--size, 360px, 1024px, 44px, 60px);
+
+    --nav-center--margin: calc(var(--margin-side-buttons) - var(--burger--size) / 2);
+
     position: relative;
 
     overflow: hidden;
@@ -15,8 +22,11 @@ $nav-text--size: 1.875rem;
 
     &-burger {
 
-        right: $nav-center--margin;
-        top: $nav-center--margin;
+        width: var(--burger--size);
+        height: var(--burger--size);
+
+        right: var(--nav-center--margin);
+        top: var(--nav-center--margin);
     
         &-rect {
             transform-origin: center;
@@ -36,7 +46,7 @@ $nav-text--size: 1.875rem;
             stroke-width:2;
             
             transition: all 1s cubic-bezier(.34,-0.23,.42,1),
-            stroke-dashoffset 200ms ease-in-out;
+                        stroke-dashoffset 200ms ease-in-out;
 
             &:nth-child(2) {
                 stroke-dasharray: 12;
@@ -54,6 +64,7 @@ $nav-text--size: 1.875rem;
     }
 
     &-menu {
+        @include interpolate(--lateral-margin, 360px, 1366px, 0px, 50px);
 
         visibility: visible;
         height: 100%;
@@ -63,18 +74,25 @@ $nav-text--size: 1.875rem;
             position: absolute;
             z-index: -1;
 
-            width: $nav-menu-background--size;
-            height: $nav-menu-background--size;
+            width: 150vh;
+            height: 150vh;
 
-            right: $margin-side-buttons;
-            top: $margin-side-buttons;
+            right: var(--margin-side-buttons);
+            top: var(--margin-side-buttons);
     
             border: $color-red 2px solid;
             background-color: rgba($color-darkest-grey, .85);
 
             transform-origin: center;
-            
+
             transform: translate3d(50%, -50%, 0) rotate3d(0,0,1,-26deg);
+            
+            @include min_query(width height, 600px, 155vh);
+            @include min_query(transform, 600px, translate3d(50%, -50%, 0) rotate3d(0,0,1,-20deg));
+            @include min_query(width height, 933px, 165vh);
+            @include min_query(transform, 933px, translate3d(50%, -50%, 0) rotate3d(0,0,1,-17deg));
+            @include min_query(width height, 1366px, 175vh);
+            @include min_query(transform, 1366px, translate3d(50%, -50%, 0) rotate3d(0,0,1,-13deg));
 
             transition: transform 3s 200ms cubic-bezier(.1,.86,0,1),
                         width 3s 200ms cubic-bezier(.1,.86,0,1),
@@ -83,21 +101,29 @@ $nav-text--size: 1.875rem;
         }
 
         &-list {
+            float: right;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
 
             height: 100%;
             padding: 150px 0;
-            margin: 0 $margin-side-buttons;
+
+            @include interpolate(width, 360px, 1366px, 280px, 350px);
+
+            margin: 0 calc(var(--margin-side-buttons) + var(--lateral-margin));
+
+
+            // @include min_query(margin, 1024px, 0, );        
 
             list-style: none;
         }
 
         &-item {
+            
+            @include min_query(text-align, $nav-breakpoint, right);
+            
 
-            display: flex;
-            justify-content: space-between;
             transform: translate3d(0, 0px, 0);
             opacity: 1;
 
@@ -105,11 +131,33 @@ $nav-text--size: 1.875rem;
                         opacity 1s cubic-bezier(0,.64,.17,.99),
                         visibility 2s linear;
 
-            @for $i from 1 through 5 {
-                &:nth-child(#{$i}) {
-                    transition-delay: 400ms + ($i - 1) * 100ms;
+                        
+
+            @for $i from 1 through 10 {
+                $nav-offset-counter: 0;
+                &:nth-of-type(#{$i}) {
+                    @if $i != 5 and $i != 6 {
+                        $nav-offset-counter: $nav-offset-counter + 1;
+                    }
+                    transition-delay: 400ms + ($nav-offset-counter - 1) * 100ms;
                 }
+                $nav-offset-counter: 0;
             }
+
+            @media screen and (min-width: $nav-breakpoint) {
+                $nav-offset-counter: 0;
+                @for $i from 1 through 10 {
+                    &:nth-of-type(#{$i}) {
+                        @if $i != 4 {
+                            $nav-offset-counter: $nav-offset-counter + 1;
+                        }
+                        transition-delay: 400ms + ($nav-offset-counter - 1) * 100ms;
+                    }
+                }
+                $nav-offset-counter: 0;
+            }
+
+            &:nth-last-of-type(1) { order: 10;}
         }
 
         &-link, &-contact {
@@ -126,6 +174,13 @@ $nav-text--size: 1.875rem;
         &-contact {
             color: $color-red;
         }
+    }
+}
+
+.v-m {
+    .nav-menu-contact {
+        font-size: 1.5rem;
+        color: $color-lightest-grey;
     }
 }
 
@@ -159,8 +214,8 @@ $nav-text--size: 1.875rem;
                             opacity 0.2s cubic-bezier(0,.64,.17,.99),
                             visibility 1.2s linear;
 
-                @for $j from 1 through 5 {
-                    &:nth-last-child(#{$j}) {
+                @for $j from 1 through 10 {
+                    &:nth-last-of-type(#{$j}) {
                         transition-delay: ($j - 1) * 50ms;
                     }
                 }
