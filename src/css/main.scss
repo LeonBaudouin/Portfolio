@@ -1,4 +1,4 @@
-@import "_interpolate";
+@import "_utils";
 
 $color-red: #fd393c;
 $color-lightest-grey: #c5c3c3;
@@ -16,7 +16,8 @@ $z-index-canvas: -1000;
 }
 
 :root {
-    @include interpolate(--margin-side-buttons, 360px, 1024px, 40px, 60px);
+    @include interpolate(--margin-side-buttons-top, 360px, 1024px, 40px, 60px);
+    @include interpolate(--margin-side-buttons-right, 360px, 1024px, 40px, 60px);
 }
 
 body {
@@ -36,31 +37,26 @@ canvas {
 	height: 100vh;
 }
 
-.space-even {
-	display: flex;
-	justify-content: space-between;
-}
-
 .sideButton {
 	position: fixed;
 	z-index: $z-index-side-button;
 }
 
-.color-red {
-	color: $color-red;
+.page {
+	height: 100vh;
+
+	&.accueil {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-content: center;
+	}
 }
 
-.color-lightest-grey {
-	color: $color-lightest-grey;
-}
-
-.red-stroke {
-	width: 75%;
-	height: 2px;
-	background-color: $color-red;
-}
 
 @import "_scroll.scss";
 @import "_nav.scss";
 @import "_contact.scss";
 @import "_breakpoint_versions.scss";
+@import "_titles.scss";
+@import "_utils_class.scss";

@@ -1,0 +1,31 @@
+.color-red {
+	color: $color-red;
+}
+
+.color-lightest-grey {
+	color: $color-lightest-grey;
+}
+
+.red-stroke {
+	float: right;
+	width: 75%;
+	height: 2px;
+	background-color: $color-red;
+}
+
+.space-even {
+	display: flex;
+	justify-content: space-between;
+}
+
+@for $i from 1 through 5 {
+	.z-minus-#{$i} {
+		position: relative;
+		z-index: -$i;
+	}
+
+	.z-plus-#{$i} {
+		position: relative;
+		z-index: $i;
+	}
+}

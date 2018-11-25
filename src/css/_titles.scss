@@ -1,0 +1,130 @@
+@import "_utils";
+
+.title {
+    text-transform: uppercase;
+    margin: 0;
+
+    & .first-part {
+        font-weight: 200;
+    }
+    & .second-part {
+        font-weight: 800;
+    }
+}
+
+.main_title {
+
+    @include interpolate(--scaler, 512px, 1024px, 1px, 2px);
+
+    align-self: center;
+    line-height: 0.8;
+
+    width: calc(240 * var(--scaler ));
+
+    & .first-part {
+        display: flex;
+        text-align: left;
+
+        color: $color-lightest-grey;
+        font-size: calc(52 * var(--scaler ));
+    }
+
+    & .second-part {
+        position: relative;
+        text-align: right;
+
+        color: $color-red;
+        font-size: calc(38.5 * var(--scaler ));
+    }
+
+    & .red-squares {
+        position: relative;
+        left: calc(8 * var(--scaler ));
+
+        display: inline-flex;
+        flex-grow: 1;
+        align-items: center;
+        justify-content: space-between;
+
+        &-element {
+            transform: rotate3d(0,0,1,var(--rotate));
+
+            position: relative;
+            z-index: -1;
+            background-color: $color-red;
+
+            @for $i from 1 through 10 {
+                &:nth-of-type(#{$i}) {
+                    animation: square-entering 1s 400ms - 100ms * $i cubic-bezier(0,.75,.2,.99) both, square-hovering 5s -500ms * $i ease-in-out infinite;
+                }
+            }
+
+            &:nth-of-type(1) {
+                width: calc(11 * var(--scaler ));
+                height: calc(11 * var(--scaler ));
+                --rotate: -15deg;
+            }
+            &:nth-of-type(2) {
+                top: calc(2 * var(--scaler ));
+                width: calc(8 * var(--scaler ));
+                height: calc(8 * var(--scaler ));
+                --rotate: 15deg;
+            }
+            &:nth-of-type(3) {
+                width: calc(7 * var(--scaler ));
+                height: calc(7 * var(--scaler ));
+                --rotate: 30deg;
+            }
+            &:nth-of-type(4) {
+                top: calc(3 * var(--scaler ));
+                width: calc(5 * var(--scaler ));
+                height: calc(5 * var(--scaler ));
+                --rotate: 45deg;
+            }
+        }
+    }
+
+    & .grey-strokes {
+        &-element {
+            position: absolute;
+            width: calc(70 * var(--scaler ));
+            height: calc(2 * var(--scaler ));
+            background-color: $color-lightest-grey;
+
+            &:nth-of-type(1) {
+                top: calc(10 * var(--scaler ));
+                left: calc(5 * var(--scaler ));
+            }
+            &:nth-of-type(2) {
+                top: calc(16 * var(--scaler ));
+                left: calc(25 * var(--scaler ));
+            }
+            &:nth-of-type(3) {
+                top: calc(22 * var(--scaler ));
+            }
+        }
+    }
+}
+
+@keyframes square-hovering {
+    0% {
+        transform: translate3d(0, calc(-3 * var(--scaler )), 0) rotate3d(0,0,1,var(--rotate));
+    }
+    50% {
+        transform: translate3d(0, calc(3 * var(--scaler )), 0) rotate3d(0,0,1,var(--rotate));
+    }
+    100% {
+        transform: translate3d(0, calc(-3 * var(--scaler )), 0) rotate3d(0,0,1,var(--rotate));
+    }
+}
+
+@keyframes square-entering {
+    0% {
+        opacity: 0;
+        left: calc(-100 * var(--scaler ));
+    }
+    100% {
+        opacity: 1;
+        left: 0;
+    }
+}

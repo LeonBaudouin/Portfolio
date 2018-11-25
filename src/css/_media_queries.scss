@@ -1,9 +1,0 @@
-@mixin min_query($properties, $min-screen, $after-value) {
-	& {
-		@media screen and (min-width: $min-screen) {
-			@each $property in $properties {
-				#{$property}: $after-value; 
-			}
-		}
-	}
-}

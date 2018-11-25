@@ -1,0 +1,84 @@
+@mixin interpolate($properties, $min-screen, $max-screen, $min-value, $max-value) {
+	& {
+		@each $property in $properties {
+			#{$property}: $min-value;
+		}
+
+		@media screen and (min-width: $min-screen) {
+			@each $property in $properties {
+				#{$property}: calc-interpolation($min-screen, $min-value, $max-screen, $max-value); 
+			}
+		}
+
+		@media screen and (min-width: $max-screen) {
+			@each $property in $properties {
+				#{$property}: $max-value;
+			}
+		}
+	}
+}
+
+@function calc-interpolation($min-screen, $min-value, $max-screen, $max-value) {
+	$a: ($max-value - $min-value) / ($max-screen - $min-screen);
+	$b: $min-value - $a * $min-screen; 
+
+	$sign: "+";
+	@if ($b < 0) {
+		$sign: "-";
+		$b: abs($b);
+	}
+	@return calc(#{$a*100}vw #{$sign} #{$b});
+}
+
+@mixin min_query($properties, $min-screen, $after-value) {
+	& {
+		@media screen and (min-width: $min-screen) {
+			@each $property in $properties {
+				#{$property}: $after-value; 
+			}
+		}
+	}
+}
+
+@function convert($value, $currentUnit, $convertUnit){
+	@if $currentUnit == px{
+  
+	  @if $convertUnit == rem{
+		@return $value / 16 + 0rem;
+	  }
+	  @else if $convertUnit == percent{
+		@return percentage($value / 16);
+	  }
+  
+	}@else if $currentUnit == rem{
+  
+	  @if $convertUnit == px{
+		@return $value * 16 + 0px;
+	  }
+	  @else if $convertUnit == percent{
+		@return percentage($value);
+	  }
+  
+	}@else if $currentUnit == percent{
+  
+	  @if $convertUnit == px{
+		@return $value * 16 / 100 + 0px;
+	  }
+	  @else if $convertUnit == rem{
+		@return $value / 100 + 0rem;
+	  }
+  
+	}@else if $currentUnit == pts{
+  
+	  @if $convertUnit == px{
+		@return $value * 1.3333 +0px;
+	  }
+	  @else if $convertUnit == rem{
+		@return $value / 12 + 0rem;
+	  }
+	  @else if $convertUnit == percent{
+		@return percentage($value / 12)
+	  }
+	}
+	@return $value;
+  }

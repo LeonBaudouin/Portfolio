@@ -1,13 +1,21 @@
+@import "_nav";
+
 $scroll-line--length: 38;
 $scroll-line-animation: scroll-line-dash 15s ease-in infinite;
 $scroll-line-animation--offset: 100ms;
 
 .scroll {
+    .accueil-exceptions & {
+        @include min_query(left, $nav-breakpoint, 50%);
+        @include min_query(transform, $nav-breakpoint, translateX(-50%));
+    }
+
+    @include interpolate(width, 360px, 1024px, 14px, 20px);
 
     --scroll-line--width: 15px;
 
-    left: calc( var(--margin-side-buttons) - var(--scroll-line--width)/2 );
-    bottom: calc( var(--margin-side-buttons) - var(--scroll-line--width)/2 );
+    left: calc( var(--margin-side-buttons-right) - var(--scroll-line--width)/2 );
+    bottom: calc( var(--margin-side-buttons-top) - var(--scroll-line--width)/2 );
 
     &-line {
 

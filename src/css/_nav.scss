@@ -1,17 +1,16 @@
-@import "_interpolate";
-@import "_media_queries";
+@import "_utils";
 
 $nav-menu-background--size: 150vh;
-$nav-text--size: 1.875rem;
 $nav-breakpoint: 600px;
 
 .nav {
 
     @include interpolate(--burger--size, 360px, 1024px, 44px, 60px);
 
-    --nav-center--margin: calc(var(--margin-side-buttons) - var(--burger--size) / 2);
+    --nav-center--margin-right: calc(var(--margin-side-buttons-right) - var(--burger--size) / 2);
+    --nav-center--margin-top: calc(var(--margin-side-buttons-top) - var(--burger--size) / 2);
 
-    position: relative;
+    position: fixed;
 
     overflow: hidden;
 
@@ -20,13 +19,20 @@ $nav-breakpoint: 600px;
 
     z-index: $z-index-menu;
 
+    .accueil-exceptions &.hidden {
+        @media screen and (min-width: $nav-breakpoint) {
+            --margin-side-buttons-right: 50vw;
+            transition: right 200ms linear;
+        }
+    }
+
     &-burger {
 
         width: var(--burger--size);
         height: var(--burger--size);
 
-        right: var(--nav-center--margin);
-        top: var(--nav-center--margin);
+        right: var(--nav-center--margin-right);
+        top: var(--nav-center--margin-top);
     
         &-rect {
             transform-origin: center;
@@ -77,8 +83,8 @@ $nav-breakpoint: 600px;
             width: 150vh;
             height: 150vh;
 
-            right: var(--margin-side-buttons);
-            top: var(--margin-side-buttons);
+            right: var(--margin-side-buttons-right);
+            top: var(--margin-side-buttons-top);
     
             border: $color-red 2px solid;
             background-color: rgba($color-darkest-grey, .85);
@@ -106,81 +112,139 @@ $nav-breakpoint: 600px;
             flex-direction: column;
             justify-content: space-between;
 
+            @include interpolate(width, 360px, 1500px, 280px, 400px);
             height: 100%;
+
             padding: 150px 0;
-
-            @include interpolate(width, 360px, 1366px, 280px, 350px);
-
-            margin: 0 calc(var(--margin-side-buttons) + var(--lateral-margin));
-
-
-            // @include min_query(margin, 1024px, 0, );        
+            margin: 0 calc(var(--margin-side-buttons-right) + var(--lateral-margin));   
 
             list-style: none;
         }
 
         &-item {
-            
-            @include min_query(text-align, $nav-breakpoint, right);
-            
-
             transform: translate3d(0, 0px, 0);
+
             opacity: 1;
+            @include min_query(text-align, $nav-breakpoint, right);
 
             transition: transform 2s cubic-bezier(0,.64,.17,.99),
                         opacity 1s cubic-bezier(0,.64,.17,.99),
                         visibility 2s linear;
 
                         
-
-            @for $i from 1 through 10 {
-                $nav-offset-counter: 0;
-                &:nth-of-type(#{$i}) {
-                    @if $i != 5 and $i != 6 {
-                        $nav-offset-counter: $nav-offset-counter + 1;
-                    }
-                    transition-delay: 400ms + ($nav-offset-counter - 1) * 100ms;
+            &:nth-of-type(1) {
+                transition-delay: 400ms;
+                .hidden & {
+                    @include min_query(transition-delay, $nav-breakpoint, 300ms);
+                    transition-delay: 200ms;
                 }
-                $nav-offset-counter: 0;
             }
-
-            @media screen and (min-width: $nav-breakpoint) {
-                $nav-offset-counter: 0;
-                @for $i from 1 through 10 {
-                    &:nth-of-type(#{$i}) {
-                        @if $i != 4 {
-                            $nav-offset-counter: $nav-offset-counter + 1;
-                        }
-                        transition-delay: 400ms + ($nav-offset-counter - 1) * 100ms;
-                    }
+            &:nth-of-type(2) {
+                transition-delay: 500ms;
+                .hidden & {
+                    @include min_query(transition-delay, $nav-breakpoint, 250ms);
+                    transition-delay: 150ms;
                 }
-                $nav-offset-counter: 0;
+            }
+            &:nth-of-type(3) {
+                transition-delay: 600ms;
+                .hidden & {
+                    @include min_query(transition-delay, $nav-breakpoint, 200ms);
+                    transition-delay: 100ms;
+                }
+            }
+            &:nth-of-type(4) {
+                transition-delay: 700ms;
+                .hidden & { transition-delay: 50ms; }
+            }
+            &:nth-of-type(5) {
+                transition-delay: 700ms;
+                .hidden & { transition-delay: 150ms; }
+            }
+            &:nth-of-type(6) {
+                transition-delay: 800ms;
+                .hidden & { transition-delay: 100ms; }
+            }
+            &:nth-of-type(7) {
+                transition-delay: 900ms;
+                .hidden & { transition-delay: 50ms; }
+            }
+            &:nth-of-type(8) {
+                @include min_query(transition-delay, $nav-breakpoint, 1000ms);
+                transition-delay: 800ms;
+                .hidden & { transition-delay: 0; }
             }
 
             &:nth-last-of-type(1) { order: 10;}
+
+            
         }
 
         &-link, &-contact {
-            font-size: $nav-text--size;
+            font-size: 1.875rem;
             font-weight: 200;
             text-decoration: none;
             text-transform: uppercase;
+            transition: padding 300ms cubic-bezier(.09,.64,.19,.99);
+            
+            &:after {
+                content: "";
+                display: inline-block;
+                position: absolute;
+
+                right: -2rem;
+                top: 50%;
+                height: 0.5rem;
+                width: 0.5rem;
+
+                transform: translateY(-50%) rotate3d(0, 0, 1, 0deg);
+                border: $color-red 2px solid;
+                opacity: 0;
+                transition: right 400ms cubic-bezier(.09,.64,.19,.99),
+                            opacity 400ms cubic-bezier(.09,.64,.19,.99),
+                            transform 450ms 50ms cubic-bezier(.09,.64,.19,.99);
+            }
+
+            &:hover {
+                padding-right: 1.5rem;
+                &:after {
+                    transform: translateY(-50%) rotate3d(0, 0, 1, 45deg);
+                    right: 0;
+                    opacity: 1;
+                }
+            }
         }
 
         &-link {
+            position: relative;
+            display: inline-block;
             color: $color-lightest-grey;
+            
+            @include interpolate(font-size, 37.5rem, 93.75rem, 1.875rem, 2.5rem);
         }
 
         &-contact {
-            color: $color-red;
-        }
-    }
-}
+            &.contact-icon {
+                color: $color-lightest-grey;
+                transition: all 200ms cubic-bezier(.09,.64,.19,.99);
 
-.v-m {
-    .nav-menu-contact {
-        font-size: 1.5rem;
-        color: $color-lightest-grey;
+                &:hover {
+                    padding: 0;
+                    color: $color-red;
+                }
+
+                &:after {
+                    content: none;
+                }
+            }
+
+            color: $color-red;
+
+            .v-m & {
+                font-size: 1.5rem;
+                color: $color-lightest-grey;
+            }
+        }
     }
 }
 
@@ -192,7 +256,6 @@ $nav-breakpoint: 600px;
             visibility: hidden;
 
             &-background {
-
                 width: 32px;
                 height: 32px;
 
@@ -213,12 +276,6 @@ $nav-breakpoint: 600px;
                 transition: transform 1.2s cubic-bezier(0,.64,.17,.99),
                             opacity 0.2s cubic-bezier(0,.64,.17,.99),
                             visibility 1.2s linear;
-
-                @for $j from 1 through 10 {
-                    &:nth-last-of-type(#{$j}) {
-                        transition-delay: ($j - 1) * 50ms;
-                    }
-                }
             }
         }
 
