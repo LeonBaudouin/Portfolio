@@ -10,7 +10,7 @@ $scroll-line-animation--offset: 100ms;
         @include min_query(transform, $nav-breakpoint, translateX(-50%));
     }
 
-    @include interpolate(width, 360px, 1024px, 14px, 20px);
+    @include interpolate(width, 360px, 1024px, 14px, 30px);
 
     --scroll-line--width: 15px;
 

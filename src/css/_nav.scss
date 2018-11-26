@@ -19,10 +19,9 @@ $nav-breakpoint: 600px;
 
     z-index: $z-index-menu;
 
-    .accueil-exceptions &.hidden {
+    .accueil-exceptions &/*.hidden*/ {
         @media screen and (min-width: $nav-breakpoint) {
             --margin-side-buttons-right: 50vw;
-            transition: right 200ms linear;
         }
     }
 
@@ -34,6 +33,8 @@ $nav-breakpoint: 600px;
         right: var(--nav-center--margin-right);
         top: var(--nav-center--margin-top);
     
+        transition: right 400ms cubic-bezier(.34,-0.23,.42,1);
+
         &-rect {
             transform-origin: center;
             transform: rotate3d(0, 0, 1, -245deg);
