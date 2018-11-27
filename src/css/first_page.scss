@@ -1,0 +1,49 @@
+@import "_general.scss";
+
+body {
+	position: fixed;
+	width: 100%;
+	margin: 0;
+	font-family: 'Raleway', sans-serif;
+
+	@for $i from 0 to 4 {
+		&.scroll-index-#{$i} {
+			& .content {
+				margin-top: -100vh * $i;
+			}
+		}
+	}
+}
+
+.content {
+	transition: all 500ms ease;
+	& .page {
+		height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+	
+		&.accueil {
+			align-items: center;
+        }
+
+        &.profil {
+			align-items: flex-end;
+        }
+        
+        & .section {
+            margin-bottom: 30px;
+            height: calc(100% - var(--margin-side-buttons-top) * 5);
+            width: calc(100% - var(--margin-side-buttons-right) * 1);
+            background-color: $color-lightest-grey;
+        }
+	}
+}
+
+@import "_breakpoint_versions.scss";
+@import "_contact.scss";
+@import "first_page/_exceptions.scss";
+@import "_nav.scss";
+@import "_scroll_icon.scss";
+@import "first_page/_main_title.scss";
+@import "_utils_class.scss";

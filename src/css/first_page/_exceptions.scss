@@ -1,0 +1,47 @@
+.scroll-index-0 {
+    & .nav {
+        @include min_query(--margin-side-buttons-right, $nav-breakpoint, 50vw);
+    }
+    
+    & .scroll {
+        @include min_query(left, $nav-breakpoint, 50%);
+        @include min_query(transform, $nav-breakpoint, translateX(-50%));
+    }
+
+    & .logo {
+        @include min_query(display, $nav-breakpoint, none);
+    }
+}
+
+.scroll-index-1 {
+    .logo  {        
+        $offset-delay: 200ms;
+
+        // skew animation
+        animation-delay: 300ms + $offset-delay;
+
+        & .first-part,
+        & .second-part {
+            
+            // height animation
+            animation-delay: $offset-delay;
+        }
+    
+        & .first-part-content {
+
+            // offset animation
+            animation-delay: 500ms + $offset-delay;
+        }
+    
+        & .second-part-content {
+
+            // offset animation
+            animation-delay: 700ms + $offset-delay;
+        }
+    }
+
+    .nav-burger {
+        $offset-delay: 700ms;
+        transition-delay: $offset-delay;
+    }
+}

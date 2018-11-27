@@ -20,7 +20,6 @@ export class ActivationButton {
         }
 
         this.targetClasses = this.target.classList;
-        console.log(this.targetClasses);
         this.isActivated = this.targetClasses.contains(this.className);
 
         this.BindActivation();

@@ -1,0 +1,183 @@
+@import "_utils";
+@import "_titles";
+
+.main_title {
+
+    @include interpolate(--scaler, 32rem, 64rem, 0.0625rem, 0.125rem);
+
+    align-self: center;
+    line-height: 0.8;
+
+    width: calc(240 * var(--scaler ));
+
+    & .first-part {
+        position: relative;
+        display: flex;
+        text-align: left;
+
+        color: $color-lightest-grey;
+        font-size: calc(52 * var(--scaler ));
+
+        animation: leon-entering 800ms cubic-bezier(0,.68,.2,.99);
+    }
+
+    & .second-part {
+        position: relative;
+        text-align: right;
+
+        color: $color-red;
+        font-size: calc(38.5 * var(--scaler ));
+
+        animation: baudouin-entering 1s 100ms cubic-bezier(0,.68,.2,.99) both;
+    }
+
+    & .red-squares {
+        position: relative;
+        left: calc(8 * var(--scaler ));
+
+        display: inline-flex;
+        flex-grow: 1;
+        align-items: center;
+        justify-content: space-between;
+
+        &-element {
+            transform: rotate3d(0,0,1,var(--rotate));
+
+            position: relative;
+            z-index: -1;
+            background-color: $color-red;
+
+            @for $i from 1 through 10 {
+                &:nth-of-type(#{$i}) {
+                    animation: square-entering 1s 800ms - 100ms * $i cubic-bezier(0,.75,.2,.99) both, square-hovering 5s -500ms * $i ease-in-out infinite;
+                }
+            }
+
+            &:nth-of-type(1) {
+                width: calc(11 * var(--scaler ));
+                height: calc(11 * var(--scaler ));
+                --rotate: -15deg;
+            }
+            &:nth-of-type(2) {
+                top: calc(2 * var(--scaler ));
+                width: calc(8 * var(--scaler ));
+                height: calc(8 * var(--scaler ));
+                --rotate: 15deg;
+            }
+            &:nth-of-type(3) {
+                width: calc(7 * var(--scaler ));
+                height: calc(7 * var(--scaler ));
+                --rotate: 30deg;
+            }
+            &:nth-of-type(4) {
+                top: calc(3 * var(--scaler ));
+                width: calc(5 * var(--scaler ));
+                height: calc(5 * var(--scaler ));
+                --rotate: 45deg;
+            }
+        }
+    }
+
+    & .grey-strokes {        
+        &-element {
+
+            position: absolute;
+            width: calc(70 * var(--scaler ));
+            height: calc(2 * var(--scaler ));
+            left: var(--left);
+            background-color: $color-lightest-grey;
+
+            &:nth-of-type(1) {
+                animation-delay: -600ms;
+                top: calc(10 * var(--scaler ));
+                --left: calc(5 * var(--scaler ));
+            }
+            &:nth-of-type(3) {
+                animation-delay: -400ms;
+                top: calc(16 * var(--scaler ));
+                --left: calc(25 * var(--scaler ));
+            }
+            &:nth-of-type(2) {
+                animation-delay: -700ms;
+                top: calc(22 * var(--scaler ));
+                --left: 0;
+            }
+
+            @for $i from 1 through 10 {
+                &:nth-of-type(#{$i}) {
+                    animation: stroke-entering 1s 1s - 100ms * $i cubic-bezier(0,.75,.2,.99) both, stroke-hovering 8s -600ms * $i ease-in-out infinite;
+                }
+            }
+        }
+    }
+    @keyframes square-hovering {
+        0% {
+            transform:  translate3d(0, calc(-3 * var(--scaler )), 0)
+                        rotate3d(0,0,1, calc(var(--rotate) + 4deg));
+        }
+        50% {
+            transform:  translate3d(0, calc(3 * var(--scaler )), 0)
+                        rotate3d(0,0,1,calc(var(--rotate) - 4deg));
+        }
+        100% {
+            transform:  translate3d(0, calc(-3 * var(--scaler )), 0)
+                        rotate3d(0,0,1,calc(var(--rotate) + 4deg));
+        }
+    }
+    
+    @keyframes square-entering {
+        0% {
+            opacity: 0;
+            left: calc(-100 * var(--scaler ));
+        }
+        100% {
+            opacity: 1;
+            left: 0;
+        }
+    }
+    
+    @keyframes stroke-hovering {
+        0% {
+            transform: translate3d(0, calc(-1.5 * var(--scaler )), 0);
+        }
+        50% {
+            transform: translate3d(0, calc(1.5 * var(--scaler )), 0);
+        }
+        100% {
+            transform: translate3d(0, calc(-1.5 * var(--scaler )), 0);
+        }
+    }
+    
+    @keyframes stroke-entering {
+        0% {
+            opacity: 0;
+            left: calc(100 * var(--scaler ));
+        }
+        100% {
+            opacity: 1;
+            left: var(--left);
+        }
+    }
+    
+    @keyframes leon-entering {
+        0% {
+            left: calc(100 * var(--scaler ));
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+            left: 0;
+        }
+    }
+    
+    @keyframes baudouin-entering {
+        0% {
+            right: calc(100 * var(--scaler ));
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+            right: 0;
+        }
+    }
+}

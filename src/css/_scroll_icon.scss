@@ -5,19 +5,15 @@ $scroll-line-animation: scroll-line-dash 15s ease-in infinite;
 $scroll-line-animation--offset: 100ms;
 
 .scroll {
-    z-index: $z-index-scroll;
-
-    .accueil-exceptions & {
-        @include min_query(left, $nav-breakpoint, 50%);
-        @include min_query(transform, $nav-breakpoint, translateX(-50%));
-    }
-
-    @include interpolate(width, 360px, 1024px, 14px, 30px);
-
     --scroll-line--width: 15px;
 
+    @include interpolate(width, 360px, 1024px, 14px, 30px);
+    z-index: $z-index-scroll;
+    
     left: calc( var(--margin-side-buttons-right) - var(--scroll-line--width)/2 );
     bottom: calc( var(--margin-side-buttons-top) - var(--scroll-line--width)/2 );
+
+    transition: left 500ms cubic-bezier(.64,.01,.27,1);
 
     &-line {
 

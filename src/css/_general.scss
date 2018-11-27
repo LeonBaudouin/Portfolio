@@ -12,8 +12,6 @@ $z-index-canvas: -1000;
 
 $nav-breakpoint: 600px;
 
-//$margin-side-buttons: 40px;
-
 * {
 	box-sizing: border-box;
 }
@@ -21,12 +19,6 @@ $nav-breakpoint: 600px;
 :root {
     @include interpolate(--margin-side-buttons-top, 360px, 1024px, 40px, 60px);
     @include interpolate(--margin-side-buttons-right, 360px, 1024px, 40px, 60px);
-}
-
-body {
-	position: relative;
-	margin: 0;
-	font-family: 'Raleway', sans-serif;
 }
 
 canvas {
@@ -44,22 +36,3 @@ canvas {
 	position: fixed;
 	z-index: $z-index-side-button;
 }
-
-.page {
-	height: 100vh;
-
-	&.accueil {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-content: center;
-	}
-}
-
-
-@import "_scroll.scss";
-@import "_nav.scss";
-@import "_contact.scss";
-@import "_breakpoint_versions.scss";
-@import "_titles.scss";
-@import "_utils_class.scss";

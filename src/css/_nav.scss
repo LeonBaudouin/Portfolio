@@ -4,7 +4,7 @@ $nav-menu-background--size: 150vh;
 
 .nav {
 
-    @include interpolate(--burger--size, 360px, 1024px, 44px, 60px);
+    @include interpolate(--burger--size, 320px, 1024px, 44px, 60px);
 
     --nav-center--margin-right: calc(var(--margin-side-buttons-right) - var(--burger--size) / 2);
     --nav-center--margin-top: calc(var(--margin-side-buttons-top) - var(--burger--size) / 2);
@@ -18,12 +18,6 @@ $nav-menu-background--size: 150vh;
 
     z-index: $z-index-menu;
 
-    .accueil-exceptions &/*.hidden*/ {
-        @media screen and (min-width: $nav-breakpoint) {
-            --margin-side-buttons-right: 50vw;
-        }
-    }
-
     &-burger {
 
         width: var(--burger--size);
@@ -32,7 +26,7 @@ $nav-menu-background--size: 150vh;
         right: var(--nav-center--margin-right);
         top: var(--nav-center--margin-top);
     
-        transition: right 400ms cubic-bezier(.34,-0.23,.42,1);
+        transition: right 500ms cubic-bezier(.64,.01,.27,1);
 
         &-rect {
             transform-origin: center;
@@ -70,7 +64,7 @@ $nav-menu-background--size: 150vh;
     }
 
     &-menu {
-        @include interpolate(--lateral-margin, 360px, 1366px, 0px, 50px);
+        @include interpolate(--lateral-margin, 320px, 1366px, 0px, 50px);
 
         visibility: visible;
         height: 100%;
@@ -112,7 +106,7 @@ $nav-menu-background--size: 150vh;
             flex-direction: column;
             justify-content: space-between;
 
-            @include interpolate(width, 360px, 1500px, 280px, 400px);
+            @include interpolate(width, 320px, 1500px, 240px, 400px);
             height: 100%;
 
             padding: 150px 0;
@@ -224,6 +218,8 @@ $nav-menu-background--size: 150vh;
         }
 
         &-contact {
+            color: $color-red;
+
             &.contact-icon {
                 color: $color-lightest-grey;
                 transition: all 200ms cubic-bezier(.09,.64,.19,.99);
@@ -238,18 +234,16 @@ $nav-menu-background--size: 150vh;
                 }
             }
 
-            color: $color-red;
-
             .v-m & {
-                font-size: 1.5rem;
+                @include interpolate(font-size, 37.5rem, 93.75rem, 1.2rem, 1.5rem);
                 color: $color-lightest-grey;
             }
         }
     }
 }
 
-.hidden {
 
+.hidden {
     &.nav {
         width: 0;
         height: 0;
@@ -262,7 +256,6 @@ $nav-menu-background--size: 150vh;
         
         &-menu {
             visibility: hidden;
-
             &-background {
                 width: 32px;
                 height: 32px;
@@ -276,11 +269,9 @@ $nav-menu-background--size: 150vh;
                             display 0s 1s linear;
             }
 
-
             &-item {
-
-                transform: translate3d(0, -30px, 0);
                 opacity: 0;
+                transform: translate3d(0, -30px, 0);
 
                 transition: transform 1.2s cubic-bezier(0,.64,.17,.99),
                             opacity 0.2s cubic-bezier(0,.64,.17,.99),
