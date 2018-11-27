@@ -191,45 +191,70 @@
 }
 
 .logo {
-    left: calc( var(--margin-side-buttons-right) - 70px);
-    top: calc( var(--margin-side-buttons-top));
+    &:hover {
+        --horizontal-offset: -250px;
+    }
+
     --deg: 35deg;
-    transform: rotate3d(0,0,1,var(--deg));
-    //display: inline-flex;
-    --lateral-offset: 25px;
-    --horizontal-offset: 3px;
+    --horizontal-offset: -5px;
+
+    left: calc( var(--margin-side-buttons-right) - 70px);
+    top: calc( var(--margin-side-buttons-top) - 25px);
+
+    @include min_query(left, $nav-breakpoint, calc( var(--margin-side-buttons-right) - 120px));
+    @include min_query(--deg, $nav-breakpoint, 45deg);
+    @include min_query(--horizontal-offset, $nav-breakpoint, -10px);
+    
+    transform: skew(calc(0deg - var(--deg)));
+    transition: all 200ms ease;
+
+
 
     & .first-part,
     & .second-part {
         display: inline-flex;
-        justify-content: center;
-        align-items: center;
         width: 70px;
-        height: 70px;
-        border: red 1px solid;
+        height: 50px;
+        //border: 1px solid red;
+        
+        align-items: center;
+        
         overflow: hidden;
+
+        @include min_query(width, $nav-breakpoint, 240px);
+
         &-content {
             position: relative;
-            transform: rotate3d(0,0,-1,var(--deg));
+
+            transform: skew(var(--deg));
+            transition: all 200ms ease;
         }
     }
 
     & .first-part {
+        justify-content: flex-end;
         font-size: 41px;
-        color: $color-lightest-grey;
+        @include min_query(font-size, $nav-breakpoint, 55px);
+
         text-align: right;
+        color: $color-lightest-grey;
+        border-right: 2px solid $color-darkest-grey;
+        @include min_query(border-right, $nav-breakpoint, 3px solid $color-lightest-grey);
+
         &-content {
-            left: var(--lateral-offset);
-            top: var(--horizontal-offset);
+            right: var(--horizontal-offset);
+            bottom: 2px;
         }
     }
 
     & .second-part {
+        justify-content: flex-start;
         font-size: 43px;
+        @include min_query(font-size, $nav-breakpoint, 40px);        
         color: $color-red;
         &-content {
-            right: var(--lateral-offset);
-            bottom: var(--horizontal-offset);
+            left: var(--horizontal-offset);
+            top: 2px;
         }
     }
 }

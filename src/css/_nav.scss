@@ -1,7 +1,6 @@
 @import "_utils";
 
 $nav-menu-background--size: 150vh;
-$nav-breakpoint: 600px;
 
 .nav {
 
@@ -251,6 +250,14 @@ $nav-breakpoint: 600px;
 
 .hidden {
 
+    &.nav {
+        width: 0;
+        height: 0;
+
+        transition: width 0s 1s linear,
+                    height 0s 1s linear;
+    }
+
     .nav {
         
         &-menu {
@@ -265,7 +272,8 @@ $nav-breakpoint: 600px;
                 transition: transform 1s cubic-bezier(.55,.01,.44,.82),
                             width 1s cubic-bezier(.55,.01,.44,.82),
                             height 1s cubic-bezier(.55,.01,.44,.82),
-                            visibility 1s linear;
+                            visibility 1s linear,
+                            display 0s 1s linear;
             }
 
 

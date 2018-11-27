@@ -5,6 +5,8 @@ $scroll-line-animation: scroll-line-dash 15s ease-in infinite;
 $scroll-line-animation--offset: 100ms;
 
 .scroll {
+    z-index: $z-index-scroll;
+
     .accueil-exceptions & {
         @include min_query(left, $nav-breakpoint, 50%);
         @include min_query(transform, $nav-breakpoint, translateX(-50%));
