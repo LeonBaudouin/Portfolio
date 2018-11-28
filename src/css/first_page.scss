@@ -6,18 +6,57 @@ body {
 	margin: 0;
 	font-family: 'Raleway', sans-serif;
 
-	@for $i from 0 to 4 {
-		&.scroll-index-#{$i} {
-			& .content {
-				margin-top: -100vh * $i;
-			}
-		}
-	}
+
 }
 
-.content {
+.container {
+	
+	--margin-top: 0;
+
 	transition: all 500ms ease;
+
+	@for $i from 0 to 4 {
+		.scroll-index-#{$i} & {
+			--margin-top: calc( -100vh * #{$i} );
+			margin-top: var(--margin-top);
+		}
+	}
+
+	.scroll-tilt-up & {
+		animation: tilt-up 500ms cubic-bezier(0,.71,.29,1.16);
+	}
+
+	.scroll-tilt-down & {
+		animation: tilt-down 500ms cubic-bezier(0,.71,.29,1.16);
+	}
+	
+	@keyframes tilt-up {
+		0% {
+			margin-top: var(--margin-top);
+		}
+		50% {
+			margin-top: calc(var(--margin-top) + 8vh);
+		}
+		100% {
+			margin-top: var(--margin-top);
+		}
+	}
+	
+	@keyframes tilt-down {
+		0% {
+			margin-top: var(--margin-top);
+		}
+		50% {
+			margin-top: calc(var(--margin-top) - 8vh);
+		}
+		100% {
+			margin-top: var(--margin-top);
+		}
+	}
+
+
 	& .page {
+
 		height: 100vh;
         display: flex;
         flex-direction: column;
@@ -30,20 +69,66 @@ body {
         &.profil {
 			align-items: flex-end;
         }
-        
-        & .section {
-            margin-bottom: 30px;
-            height: calc(100% - var(--margin-side-buttons-top) * 5);
-            width: calc(100% - var(--margin-side-buttons-right) * 1);
-            background-color: $color-lightest-grey;
-        }
 	}
 }
 
+
+.section {
+	position: relative;
+
+	margin-bottom: 30px;
+	
+	width: calc(100% - var(--margin-side-buttons-right) * 1);
+	height: calc(100% - var(--margin-side-buttons-top) * 5);
+	
+	&-background {
+		position: absolute;
+
+		width: 100%;
+		height: 100%;
+
+		z-index: -1;
+		background-color: $color-lightest-grey;
+	}
+
+	&-content {
+
+		display: flex;
+
+		padding: $padding;
+		margin-right: var(--margin-side-buttons-right);
+
+		flex-direction: column;
+		justify-content: flex-end;
+
+		& .regular-title {
+			font-size: 40px;
+		}
+	}
+}
+
+.profil {
+	.description {
+		display: flex;
+		flex-direction: row;
+		
+		&-paragraph {
+			flex: 1 0px;
+		}
+		
+		.continuer {
+			flex: 1 0px;
+		}
+	}
+}
+
+
 @import "_breakpoint_versions.scss";
 @import "_contact.scss";
-@import "first_page/_exceptions.scss";
 @import "_nav.scss";
 @import "_scroll_icon.scss";
+@import "_button.scss";
+
+@import "first_page/_exceptions.scss";
 @import "first_page/_main_title.scss";
 @import "_utils_class.scss";

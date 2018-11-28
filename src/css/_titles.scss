@@ -121,3 +121,40 @@
         }
     }
 }
+
+.regular-title {
+
+    display: inline-block;
+    position: relative;
+    color: $color-darkest-grey;
+    
+    & .first-part{
+
+        display: inline-block;
+        position: relative;
+        width: 100%;
+
+        &:before {
+            content: "";
+            
+            position: absolute;
+            display: inline-block;
+    
+            bottom: 0;
+    
+            width: 85%;
+            border-bottom: $color-red 1px solid;
+        }
+    }
+
+    &.direction-right {
+
+        text-align: right;
+        align-self: flex-end;
+
+        & .first-part:before {
+            right: 0;
+        }
+
+    }
+}

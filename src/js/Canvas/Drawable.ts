@@ -5,7 +5,7 @@ import {
   Point,
   tiltedSquareSettings,
   rotationRoutine
-} from "./CustomTypes";
+} from "../CustomTypes";
 import { MathFunc } from "./Utils";
 
 export namespace DrawnElement {

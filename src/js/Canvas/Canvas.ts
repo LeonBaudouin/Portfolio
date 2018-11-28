@@ -1,4 +1,4 @@
-import { Size, Palette, Style, tiltedSquareSettings } from "./CustomTypes";
+import { Size, Palette, Style, tiltedSquareSettings } from "../CustomTypes";
 import { DrawnElement } from "./Drawable";
 import { MathFunc } from "./Utils";
 

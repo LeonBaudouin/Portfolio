@@ -4,7 +4,7 @@ export class ActivationButton {
     button: HTMLElement;
     target: HTMLElement;
     targetClasses: DOMTokenList;
-    isActivated: boolean;
+    public isActivated: boolean;
 
     constructor(buttonSelector: string, targetSelector: string, className: string) {
 

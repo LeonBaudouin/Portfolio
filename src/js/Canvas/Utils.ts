@@ -1,4 +1,4 @@
-import { Point } from "./CustomTypes";
+import { Point } from "../CustomTypes";
 
 export namespace MathFunc {
   // Easing function using sinus

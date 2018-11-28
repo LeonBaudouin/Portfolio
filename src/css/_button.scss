@@ -1,0 +1,22 @@
+@import "_general.scss";
+
+.continuer {
+
+    width: 56px;
+    height: 56px;
+
+    &-rect, &-arrow-line, &-arrow-head {
+        fill: none;
+        stroke-width: 2px;
+    }
+
+    &-rect {
+        stroke: $color-darkest-grey;
+        transform-origin: 50% 50% 0;
+        transform: rotate3d(0,0,1,45deg);
+    }
+
+    &-arrow-line, &-arrow-head {
+        stroke: $color-red;
+    }
+}
