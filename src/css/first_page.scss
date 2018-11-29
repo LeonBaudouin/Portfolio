@@ -1,7 +1,11 @@
 @import "_general.scss";
 
+html {
+	height: 100%;
+}
+
 body {
-	// position: fixed;
+	height: 100%;
 	width: 100%;
 	margin: 0;
 	font-family: 'Raleway', sans-serif;
@@ -12,54 +16,13 @@ body {
 }
 
 .container {
-	
+
+	height: 100%;
 	--margin-top: 0;
-
-	transition: all 500ms ease;
-
-	// @for $i from 0 to 4 {
-	// 	.scroll-index-#{$i} & {
-	// 		--margin-top: calc( -100vh * #{$i} );
-	// 		margin-top: var(--margin-top);
-	// 	}
-	// }
-
-	.scroll-tilt-up & {
-		animation: tilt-up 500ms cubic-bezier(0,.71,.29,1.16);
-	}
-
-	.scroll-tilt-down & {
-		animation: tilt-down 500ms cubic-bezier(0,.71,.29,1.16);
-	}
-	
-	@keyframes tilt-up {
-		0% {
-			margin-top: var(--margin-top);
-		}
-		50% {
-			margin-top: calc(var(--margin-top) + 8vh);
-		}
-		100% {
-			margin-top: var(--margin-top);
-		}
-	}
-	
-	@keyframes tilt-down {
-		0% {
-			margin-top: var(--margin-top);
-		}
-		50% {
-			margin-top: calc(var(--margin-top) - 8vh);
-		}
-		100% {
-			margin-top: var(--margin-top);
-		}
-	}
-
 
 	& .page {
 
-		height: 100vh;
+		height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -68,9 +31,24 @@ body {
 			align-items: center;
         }
 
-        &.profil {
+        &.profil, &.projets {
 			align-items: flex-end;
-        }
+		}
+		
+		.description {
+			text-decoration: none;
+			display: flex;
+			align-items: center;
+			
+			&-paragraph {
+				font-size: 0.8125rem;
+				flex: 1 0px;
+			}
+			
+			.continuer {
+				flex: 0 56px;
+			}
+		}
 	}
 }
 
@@ -78,20 +56,24 @@ body {
 .section {
 	position: relative;
 
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	
 	width: calc(100% - var(--margin-side-buttons-right) * 1);
-	height: calc(100% - var(--margin-side-buttons-top) * 5);
+	height: calc(100% - var(--margin-side-buttons-top) * 4);
 	
 	&-background {
 		position: absolute;
 		overflow: hidden;
 
-		width: 100%;
+		right: 0;
+
+		width: 0%;
 		height: 100%;
 
 		z-index: -1;
 		background-color: $color-lightest-grey;
+
+		transition: width 500ms 200ms cubic-bezier(0,.64,0,1.1);
 	}
 
 	&-content {
@@ -113,20 +95,6 @@ body {
 }
 
 .profil {
-	.description {
-		text-decoration: none;
-		display: flex;
-		align-items: center;
-		
-		&-paragraph {
-			font-size: 0.8125rem;
-			flex: 1 0px;
-		}
-		
-		.continuer {
-			flex: 0 56px;
-		}
-	}
 
 	.section-background {
 		
@@ -177,6 +145,20 @@ body {
 			
 			transform: translate3d(-40%, 0, 0);
 			opacity: .23;
+		}
+	}
+	
+	.scroll-index-1 & {
+		.section-background {
+			width: 100%;
+		}
+
+		.first-part {
+			bottom: 0;
+		}
+
+		.second-part {
+			top: 0;
 		}
 	}
 }

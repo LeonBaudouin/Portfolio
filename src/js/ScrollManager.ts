@@ -7,35 +7,54 @@ export class ScrollManager {
 
     bodyClassList: DOMTokenList;
     container: HTMLElement;
-    currentSlideIndex : number;
-    slideNumber: number;
+    
     dragOrigin: Point;
     dragDelta: Point;
+    
+    currentSlideIndex : number;
+    slideNumber: number;
+
     cooldown: number;
+
     isEnable: boolean;
+
     menu: ActivationButton;
 
     constructor(slideNumber: number, coolDown: number, burgerMenu: ActivationButton) {
 
+        
         this.cooldown = coolDown;
         this.isEnable = true;
         this.menu = burgerMenu;
-
+        
         this.currentSlideIndex = 0;
         this.slideNumber = slideNumber;
         
         this.bodyClassList = document.querySelector("body").classList;
         this.container = document.querySelector(".container");
-
+        
         this.InitEvent()
     }
 
 
     InitEvent(): void {
+        
+        document.querySelector(".nav").addEventListener("wheel", (e: WheelEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+        })
+        
+        document.querySelector(".nav").addEventListener("touchmove", (e: WheelEvent) => {
+            e.preventDefault();
+            e.stopPropagation();
+        })
+
         this.container.addEventListener("wheel", (e: WheelEvent) => {
             e.preventDefault();
+            e.stopPropagation();
             this.ProcessScroll(e.deltaY);
         })
+
         window.addEventListener("touchstart", (e: TouchEvent) => {
             this.dragOrigin = {x: e.touches[0].screenX, y: e.touches[0].screenY};
             this.dragDelta = {x: 0, y: 0};
@@ -49,27 +68,11 @@ export class ScrollManager {
         })
 
         window.addEventListener("touchend", () => {
-            this.DragEnd();
+            let fraction = Math.abs(this.dragDelta.y / this.WindowHeight);
+            if(fraction > 0.05) {this.ProcessScroll(this.dragDelta.y);}
+            this.dragDelta = null;
         })
     }
-
-    DragEnd(): void {
-
-        let fraction = Math.abs(this.dragDelta.y / window.innerHeight);
-
-        if(fraction > 0.2) {
-
-            this.ProcessScroll(this.dragDelta.y);
-
-        } else {
-
-            this.VisualResponse(this.dragDelta.y);
-
-        }
-
-        this.dragDelta = null;
-    }
- 
 
     ProcessScroll(direction: number) {
 
@@ -83,33 +86,6 @@ export class ScrollManager {
             
                 this.Previous();
             
-            } else {
-            
-                this.VisualResponse(direction);
-            
-            }
-        }
-    }
-
-
-    VisualResponse(direction: number) {
-
-        if(this.CanScroll) {
-
-            if(direction < 0) {
-                
-                this.bodyClassList.add("scroll-tilt-up");
-                setTimeout((
-                    () => this.bodyClassList.remove("scroll-tilt-up")
-                    ), 500)
-                    
-            } else {
-
-            this.bodyClassList.add("scroll-tilt-down");
-            setTimeout((
-                () => this.bodyClassList.remove("scroll-tilt-down")
-                ), 500)
-                
             }
         }
     }
@@ -117,7 +93,7 @@ export class ScrollManager {
 
     Next(): void {
 
-        this.AnimationScroll(window.innerHeight * this.currentSlideIndex, 0, window.innerHeight, 24);
+        this.AnimationScroll(this.WindowHeight * this.currentSlideIndex, 0, this.WindowHeight, 24);
         this.bodyClassList.remove("scroll-index-" + this.currentSlideIndex);
         this.currentSlideIndex++;
         this.bodyClassList.add("scroll-index-" + this.currentSlideIndex);
@@ -127,7 +103,7 @@ export class ScrollManager {
 
     Previous(): void {
 
-        this.AnimationScroll(window.innerHeight * this.currentSlideIndex, 0, -window.innerHeight, 24);
+        this.AnimationScroll(this.WindowHeight * this.currentSlideIndex, 0, -this.WindowHeight, 24);
         this.bodyClassList.remove("scroll-index-" + this.currentSlideIndex);
         this.currentSlideIndex--;
         this.bodyClassList.add("scroll-index-" + this.currentSlideIndex);
@@ -158,5 +134,9 @@ export class ScrollManager {
 
     get CanScroll() {
         return this.isEnable && this.menu.isActivated;
+    }
+
+    get WindowHeight() {
+        return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     }
 }

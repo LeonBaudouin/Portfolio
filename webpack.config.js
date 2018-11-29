@@ -24,8 +24,8 @@ module.exports =
                 plugins: (loader) => [
                     require('autoprefixer')({
                         browsers: ["last 2 versions"]
-                    }),
-                    cssnano
+                    })
+                    // , cssnano
                 ]
             }
         }

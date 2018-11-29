@@ -131,7 +131,6 @@
     & .first-part{
 
         display: inline-block;
-        position: relative;
         width: 100%;
 
         &:before {
@@ -144,6 +143,25 @@
     
             width: 85%;
             border-bottom: $color-red 1px solid;
+        }
+
+        &-content {
+            bottom: -100%;
+        }
+    }
+
+    & .second-part-content {
+        top: -100%;
+    }
+
+    & .first-part, & .second-part {
+        
+        position: relative;
+        overflow: hidden;
+
+        &-content {
+            position: relative;
+            transition: all 600ms 500ms cubic-bezier(0,.64,0,1);
         }
     }
 
