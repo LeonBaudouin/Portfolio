@@ -1,5 +1,3 @@
-@import "_utils";
-
 .title, .logo {
     text-transform: uppercase;
     margin: 0;
@@ -123,6 +121,8 @@
 }
 
 .regular-title {
+    
+    margin-right: $padding;
 
     display: inline-block;
     position: relative;
@@ -150,7 +150,6 @@
     &.direction-right {
 
         text-align: right;
-        align-self: flex-end;
 
         & .first-part:before {
             right: 0;

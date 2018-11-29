@@ -1,8 +1,4 @@
-@import "_nav";
-
 $scroll-line--length: 38;
-$scroll-line-animation: scroll-line-dash 15s ease-in infinite;
-$scroll-line-animation--offset: 100ms;
 
 .scroll {
     --scroll-line--width: 15px;
@@ -21,11 +17,11 @@ $scroll-line-animation--offset: 100ms;
         stroke-dasharray: $scroll-line--length;
         stroke-dashoffset: 0;
         
-        animation: $scroll-line-animation;
+        animation: scroll-line-dash 15s ease-in infinite;
 
         @for $i from 1 through 3 {
             &:nth-child(#{$i}) {
-                animation-delay: 5s + $i * $scroll-line-animation--offset;
+                animation-delay: 5s + $i * 100ms;
             }
         }
     }

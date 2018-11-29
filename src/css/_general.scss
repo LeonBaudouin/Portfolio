@@ -2,6 +2,7 @@
 
 $color-red: #fd393c;
 $color-lightest-grey: #c5c3c3;
+$color-light-grey: #b2b2b2;
 $color-dark-grey: #3f3f3f;
 $color-darkest-grey: #333131;
 
@@ -12,7 +13,7 @@ $z-index-canvas: -1000;
 
 $nav-breakpoint: 600px;
 
-$padding: 10px;
+$padding: 20px;
 
 * {
 	box-sizing: border-box;
@@ -37,4 +38,9 @@ canvas {
 .sideButton {
 	position: fixed;
 	z-index: $z-index-side-button;
+}
+
+.paragraph {
+	font-weight: 500;
+	color: $color-darkest-grey;
 }
