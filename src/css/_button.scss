@@ -1,20 +1,43 @@
 .continuer {
+    width: 80%;
+    height: 0;
+    padding-bottom: calc(80% - 4px);
 
-    width: 56px;
-    height: 56px;
+    position: relative;
+    display: inline-block;
 
-    &-rect, &-arrow-line, &-arrow-head {
-        fill: none;
-        stroke-width: 2px;
+    border: 2px solid $color-darkest-grey;
+    transform: rotate3d(0,0,1,-45deg);
+    overflow: hidden;
+
+    transition: all 200ms ease;
+
+    &:hover {
+        background-color: $color-darkest-grey;
+        
+        .continuer-arrow {
+            left: 150%;
+            top: 150%;
+        }
+
+        .continuer-hover {
+            opacity: 1;
+        }
     }
 
-    &-rect {
-        stroke: $color-darkest-grey;
-        transform-origin: 50% 50% 0;
-        transform: rotate3d(0,0,1,45deg);
-    }
 
-    &-arrow-line, &-arrow-head {
+    &-arrow {
         stroke: $color-red;
+        fill: none;
+        width: 70%;
+        height: 70%;
+        transition: all 200ms ease;
+    }
+    
+    &-hover {
+        fill: $color-red;
+        opacity: 0;
+        width: 90%;
+        height: 90%;
     }
 }

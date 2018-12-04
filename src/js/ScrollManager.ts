@@ -7,6 +7,7 @@ export class ScrollManager {
 
     bodyClassList: DOMTokenList;
     container: HTMLElement;
+    pages: NodeListOf<Element>;
     
     dragOrigin: Point;
     dragDelta: Point;
@@ -16,20 +17,21 @@ export class ScrollManager {
 
     cooldown: number;
 
-    isEnable: boolean;
+    isScrolling: boolean;
 
     menu: ActivationButton;
 
     constructor(slideNumber: number, coolDown: number, burgerMenu: ActivationButton) {
-
         
         this.cooldown = coolDown;
-        this.isEnable = true;
+        this.isScrolling = false;
+
         this.menu = burgerMenu;
         
         this.currentSlideIndex = 0;
         this.slideNumber = slideNumber;
         
+        this.pages = document.querySelectorAll(".page");
         this.bodyClassList = document.querySelector("body").classList;
         this.container = document.querySelector(".container");
         
@@ -42,79 +44,104 @@ export class ScrollManager {
         document.querySelector(".nav").addEventListener("wheel", (e: WheelEvent) => {
             e.preventDefault();
             e.stopPropagation();
-        })
+        });
         
         document.querySelector(".nav").addEventListener("touchmove", (e: WheelEvent) => {
             e.preventDefault();
             e.stopPropagation();
-        })
+        });
 
-        this.container.addEventListener("wheel", (e: WheelEvent) => {
+        this.container.addEventListener("mousewheel", (e: WheelEvent) => {
+            console.log(e);
             e.preventDefault();
             e.stopPropagation();
-            this.ProcessScroll(e.deltaY);
-        })
+            if(Math.abs(e.deltaY) > 50 ) {
+                this.ProcessScroll(e.deltaY);
+            }
+        });
 
         window.addEventListener("touchstart", (e: TouchEvent) => {
             this.dragOrigin = {x: e.touches[0].screenX, y: e.touches[0].screenY};
             this.dragDelta = {x: 0, y: 0};
-        })
+        });
 
-        this.container.addEventListener("touchmove", (e: TouchEvent) => {
+        this.container.addEventListener("touchmove", (e: TouchEvent) => {   
             e.preventDefault();
             e.stopPropagation();
             this.dragDelta = {  x: this.dragOrigin.x - e.touches[0].screenX,
                                 y: this.dragOrigin.y - e.touches[0].screenY };
-        })
+        });
 
-        window.addEventListener("touchend", () => {
+        window.addEventListener("touchend", (e) => {
+            console.log(e);
             let fraction = Math.abs(this.dragDelta.y / this.WindowHeight);
             if(fraction > 0.05) {this.ProcessScroll(this.dragDelta.y);}
             this.dragDelta = null;
-        })
+        });
     }
 
     ProcessScroll(direction: number) {
 
-        if(this.CanScroll) {
-
-            if(direction > 0 && this.currentSlideIndex < this.slideNumber - 1) {
+        if(direction > 0 && this.currentSlideIndex < this.slideNumber - 1) {
             
-                this.Next();
+            this.Next();
             
-            } else if(direction < 0 && this.currentSlideIndex > 0) {
+        } else if(direction < 0 && this.currentSlideIndex > 0) {
             
-                this.Previous();
+            this.Previous();
             
-            }
         }
     }
         
 
-    Next(): void {
+    public Next(): void {
 
-        this.AnimationScroll(this.WindowHeight * this.currentSlideIndex, 0, this.WindowHeight, 24);
-        this.bodyClassList.remove("scroll-index-" + this.currentSlideIndex);
-        this.currentSlideIndex++;
-        this.bodyClassList.add("scroll-index-" + this.currentSlideIndex);
-        this.Timeout();
+        if(this.CanScroll) {
+            
+            this.Timeout();
+            this.MoveTo(this.currentSlideIndex + 1);
+        }
 
     }
+
 
     Previous(): void {
 
-        this.AnimationScroll(this.WindowHeight * this.currentSlideIndex, 0, -this.WindowHeight, 24);
-        this.bodyClassList.remove("scroll-index-" + this.currentSlideIndex);
-        this.currentSlideIndex--;
-        this.bodyClassList.add("scroll-index-" + this.currentSlideIndex);
-        this.Timeout();
+        if(this.CanScroll) {
+            
+            this.Timeout();
+            this.MoveTo(this.currentSlideIndex - 1);
+        }
 
     }
 
+    MoveTo(destination: number) {
+
+        let currentScroll = this.WindowHeight * this.currentSlideIndex;
+        let animationDistance = this.WindowHeight * destination - currentScroll;
+
+        this.AnimationScroll(currentScroll, 0, animationDistance, 24);
+
+        this.bodyClassList.remove("scroll-index-" + this.currentSlideIndex);
+        this.currentSlideIndex = destination;
+        this.bodyClassList.add("scroll-index-" + this.currentSlideIndex);
+        this.ActivatePage();
+    }
+
+
+
+    ActivatePage(): void {
+        let classList: DOMTokenList = this.pages[this.currentSlideIndex].classList;
+        if(!classList.contains("active")) {
+            classList.add("active");
+        }
+    }
+
+
     Timeout(): void {
-        this.isEnable = false;
+        this.isScrolling = true;
         setTimeout(
-            (() => this.isEnable = true),
+            (() => this.isScrolling = false),
             this.cooldown);
     }
 
@@ -124,7 +151,7 @@ export class ScrollManager {
         if(animationDuration > currentTime) {
 
             currentTime++;
-            let factor = MathFunc.easeInOutQuad(currentTime/animationDuration)
+            let factor = MathFunc.easeInOutQuad(currentTime/animationDuration);
             window.scroll(0, currentScroll + scrollDistance * factor);
             
             window.requestAnimationFrame( () => this.AnimationScroll(currentScroll, currentTime, scrollDistance, animationDuration) );
@@ -132,8 +159,8 @@ export class ScrollManager {
     }
 
 
-    get CanScroll() {
-        return this.isEnable && this.menu.isActivated;
+    get CanScroll(): boolean {
+        return !this.isScrolling && this.menu.isActivated;
     }
 
     get WindowHeight() {

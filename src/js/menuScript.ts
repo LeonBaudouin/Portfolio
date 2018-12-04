@@ -1,13 +1,11 @@
 import { ActivationButton } from "./ActivationButton";
 import { ScrollManager } from "./ScrollManager";
 
-update();
-
-function update() {
-    let text = Math.max(document.documentElement.clientHeight, window.innerHeight || 0).toString();
-    document.querySelector(".indicateur").innerHTML = text;
-    requestAnimationFrame(update);
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
 }
 
 let burgerMenu = new ActivationButton(".nav-burger", ".nav", "hidden");
 let scroll = new ScrollManager(3, 500, burgerMenu);
+
+document.querySelector(".scroll").addEventListener("click", () => scroll.Next());

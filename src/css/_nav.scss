@@ -36,6 +36,7 @@ $nav-menu-background--size: 150vh;
 
             transition: all 1s cubic-bezier(.34,-0.23,.42,1),
                         transform 1s cubic-bezier(.34,-0.23,.42,1);
+
         }
     
         &-line {
@@ -260,7 +261,9 @@ $nav-menu-background--size: 150vh;
     .nav {
         
         &-menu {
+
             visibility: hidden;
+
             &-background {
                 width: 32px;
                 height: 32px;
@@ -285,6 +288,12 @@ $nav-menu-background--size: 150vh;
         }
 
         &-burger {
+
+            &:hover {
+                .nav-burger-rect {
+                    transform: rotate3d(0, 0, 1, 30deg);
+                }
+            }
         
             &-rect {
                 transform: rotate3d(0, 0, 1, -30deg);
