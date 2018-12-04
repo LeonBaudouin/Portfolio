@@ -15,7 +15,7 @@
 
 .scroll-index-1 {
     .logo  {        
-        $offset-delay: 200ms;
+        $offset-delay: 2000ms;
 
         // skew animation
         animation-delay: 300ms + $offset-delay;
@@ -41,7 +41,7 @@
     }
 
     .nav-burger {
-        $offset-delay: 700ms;
+        $offset-delay: 00ms;
         transition-delay: $offset-delay;
     }
 }

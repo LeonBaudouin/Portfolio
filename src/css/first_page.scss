@@ -33,6 +33,12 @@ body {
 	height: 100%;
 	--margin-top: 0;
 
+	.paragraph {
+		margin-right: 10px;
+		@include interpolate(max-width, $regular-page-breakpoint, 1366px, 200px, 300px);
+		@include interpolate(font-size, 40rem, 64rem,  0.72rem, 1rem);
+	}
+
 	& .page {
 
 		height: 100%;
@@ -48,11 +54,6 @@ body {
 			align-items: flex-end;
 		}
 		
-		.paragraph {
-			font-size: 0.8125rem;
-			margin-right: 10px;
-			@include interpolate(max-width, $regular-page-breakpoint, 1366px, 200px, 350px);
-		}
 	}
 }
 
@@ -84,46 +85,74 @@ body {
 	}
 
 	&-content {
-		--button-size: 15vw;
-		@include min_query(--button-size, $regular-page-breakpoint, 12vw)
+
+		--button-size: 56px;
+		@media screen and (min-width: 360px) {
+			--button-size: calc(5.45455vw + 36.36364px);
+		}
+		@media screen and (min-width: $regular-page-breakpoint) {
+			--button-size: calc(3.53357vw + 51.73145px);
+		}
+		@media screen and (min-width: 1366px) {
+			--button-size: 100px;
+		}
 
 		display: grid;
-		height: 100%;
 
+		height: 100%;
 		padding: $padding 0 $padding $padding;
 		margin-right: var(--margin-side-buttons-right);
-		grid-template-columns: auto var(--button-size);
-		grid-template-rows: repeat(3, 1fr);
 
-				
-		// @include interpolate(width, 360px, 1366px, 45px, 80px);
-		// @include interpolate(height, 360px, 1366px, 45px, 80px);
+		grid-template-columns: auto var(--button-size);
+		grid-template-rows: 1fr 1fr auto;
 
 		& .regular-title {
 			grid-area: title;
+			align-self: start;
 			position: relative;
-			font-size: 40px;
 		}
-		& .paragraph {grid-area: paragraph;}
-		& .continuer {grid-area: continuer;}
+		& .paragraph {
+			grid-area: paragraph;
+
+			opacity: 0;
+			transition: opacity 200ms linear;
+			.active & {opacity: 1;}
+		}
+		& .continuer {
+			grid-area: continuer;
+
+			opacity: 0;
+			transition: opacity 200ms linear;
+			.active & {opacity: 1;}
+		}
 	}
 }
 
 .profil {
 
+	$desktop-delay-offset: 500ms;
+
 	& .regular-title {
 		justify-self: end;
+		@include min_query(margin-right, $regular-page-breakpoint, 12vw);
 	}
 
 	& .paragraph {
 		align-self: center;
+		@include min_query(margin-right, $regular-page-breakpoint, 6vw);
 		@include min_query(justify-self, $regular-page-breakpoint, end);
 		@include min_query(text-align, $regular-page-breakpoint, right);
+
+		transition-delay: 800ms;
+		@include min_query(transition-delay, $regular-page-breakpoint, 800ms + $desktop-delay-offset);
 	}
 
 	& .continuer {
 		align-self: center;
 		justify-self: center;
+
+		transition-delay: 1000ms;
+		@include min_query(transition-delay, $regular-page-breakpoint, 1000ms + $desktop-delay-offset);
 	}
 
 	.section-content {
@@ -133,11 +162,29 @@ body {
 				"paragraph continuer";
 
 		@media screen and (min-width: $regular-page-breakpoint) {
+			margin-right: calc(var(--margin-side-buttons-right) + 8vw);
 			grid-template-rows: repeat(3,15vh);
 			grid-template-areas: "title title"
 								 "paragraph paragraph"
 								 "none continuer";
 			align-content: space-around;
+		}
+
+		
+		.regular-title {
+			.first-part:before {
+				transition-delay: 400ms;
+				@include min_query(transition-delay, $regular-page-breakpoint, 400ms + $desktop-delay-offset);
+			}
+
+			.first-part-content {
+				transition-delay: 500ms;
+				@include min_query(transition-delay, $regular-page-breakpoint, 500ms + $desktop-delay-offset);
+			}
+			.second-part-content {
+				transition-delay: 600ms;
+				@include min_query(transition-delay, $regular-page-breakpoint, 600ms + $desktop-delay-offset);
+			}
 		}
 	}
 
@@ -145,6 +192,20 @@ body {
 
 		width: 0;
 		transition: width 500ms 400ms cubic-bezier(0,.64,0,1.1);
+
+		@media screen and (min-width: $regular-page-breakpoint) {
+			left: 50%;
+			right: unset;
+			top: 100%;
+			
+			width: 0;
+			height: 0;
+			transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1, -90deg);
+
+			transition: transform 3s 200ms cubic-bezier(0,.87,0,1),
+                        width 1.5s 200ms cubic-bezier(.1,.86,0,1),
+                        height 1.5s 200ms cubic-bezier(.1,.86,0,1);
+		}
 
 		.background-strokes {
 
@@ -205,7 +266,6 @@ body {
 		}
 	}
 
-	
 	&.active {
 
 		.section-background {
@@ -215,9 +275,6 @@ body {
 				width: 170vh;
 				height: 170vh;
 				transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,-19deg);
-				left: 50%;
-				right: unset;
-				top: 100%;
 			}
 
 			&:after {
@@ -232,7 +289,7 @@ body {
 				background-color: blue;
 			}
 
-			.background-stroke {
+			.background-strokes {
 				transform: translate(30%, -50%) rotate3d(0,0,1,-45deg);
 
 			}
@@ -245,39 +302,5 @@ body {
 				}
 			}
 		}
-
-	}
-
-	// .description>* {
-	// 	opacity: 0;
-	// 	.scroll-index-1 & {opacity: 1;}
-
-	// 	transition: opacity 500ms 800ms linear;
-	// 	@for $i from 1 through 5 {
-	// 		&:nth-child(#{$i}) {
-	// 			transition-delay: 700ms + 200ms * $i;
-	// 		}
-	// 	}
-	// }
-	
-	.first-part {
-		&::before {
-			width: 0%;
-			.scroll-index-1 & {width: 85%;}
-			transition: width 500ms 400ms cubic-bezier(0,.64,0,1.1);
-		}
-		
-		&-content {
-			bottom: -100%;
-			.scroll-index-1 & {bottom: 0;}
-            transition: bottom 600ms 500ms cubic-bezier(0,.64,0,1);
-		}
-	}
-	
-	.second-part-content {
-		top: -100%;
-		.scroll-index-1 & {top: 0;}
-		transition: top 600ms 500ms cubic-bezier(0,.64,0,1);
-
-	}
+	}	
 }

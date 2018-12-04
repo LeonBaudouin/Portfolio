@@ -121,6 +121,8 @@
 }
 
 .regular-title {
+
+    @include interpolate(font-size, 40rem, 64rem, 2.5rem, 4rem);
     
     position: relative;
     display: inline-flex;
@@ -134,7 +136,7 @@
         
         position: relative;
         overflow: hidden;
-        height: 3rem;
+		@include interpolate(height, 40rem, 64rem, 3rem, 5rem);
     
         &-content {
             position: relative;
@@ -146,18 +148,35 @@
         display: inline-block;
         width: 100%;
 
+        &-content {
+            bottom: -100%;
+            transition: bottom 600ms 500ms cubic-bezier(0,.64,0,1);
+            .active & {bottom: 0;}
+        }
+
         &:before {
             content: "";
             
             position: absolute;
             display: inline-block;
             bottom: 0;
+            width: 0%;
             border-bottom: $color-red 1px solid;
     
-            width: 85%;
+            .active & {width: 85%;}
+            transition: width 500ms 400ms cubic-bezier(0,.64,0,1.1);
         }
     }
 
+    & .second-part{
+        &-content {
+			top: -100%;
+			transition: top 600ms 500ms cubic-bezier(0,.64,0,1);
+			.active & {top: 0;}
+        }
+    }
+
+    
 
     &.direction-right {
 

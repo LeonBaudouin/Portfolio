@@ -7,6 +7,7 @@
     display: inline-block;
 
     border: 2px solid $color-darkest-grey;
+    @include min_query(border-width, $regular-page-breakpoint, 3px);
     transform: rotate3d(0,0,1,-45deg);
     overflow: hidden;
 
@@ -28,6 +29,7 @@
 
     &-arrow {
         stroke: $color-red;
+        @include min_query(stroke-width, $regular-page-breakpoint, 1.5);
         fill: none;
         width: 70%;
         height: 70%;
