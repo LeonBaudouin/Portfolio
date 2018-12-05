@@ -128,7 +128,6 @@
     display: inline-flex;
     
     flex-direction: column;
-    margin-right: $padding;
        
     color: $color-darkest-grey;
     
@@ -179,6 +178,8 @@
     
 
     &.direction-right {
+        
+        margin-right: $padding;
 
         text-align: right;
 
