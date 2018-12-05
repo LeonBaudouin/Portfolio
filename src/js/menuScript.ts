@@ -8,4 +8,5 @@ window.onbeforeunload = function () {
 let burgerMenu = new ActivationButton(".nav-burger", ".nav", "hidden");
 let scroll = new ScrollManager(3, 500, burgerMenu);
 
+
 document.querySelector(".scroll").addEventListener("click", () => scroll.Next());

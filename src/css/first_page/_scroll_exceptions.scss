@@ -6,6 +6,7 @@
     & .scroll {
         @include min_query(left, $nav-breakpoint, 50%);
         @include min_query(transform, $nav-breakpoint, translateX(-50%));
+        @include min_query(opacity, $regular-page-breakpoint, 1);
     }
 
     & .logo {
@@ -14,6 +15,7 @@
 }
 
 .scroll-index-1 {
+
     .logo  {        
         $offset-delay: 2000ms;
 

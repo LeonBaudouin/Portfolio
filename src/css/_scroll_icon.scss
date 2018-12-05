@@ -3,13 +3,17 @@ $scroll-line--length: 38;
 .scroll {
     --scroll-line--width: 15px;
 
+    @include min_query(opacity, $regular-page-breakpoint, 0);
     @include interpolate(width, 360px, 1024px, 14px, 30px);
     z-index: $z-index-scroll;
+    opacity: 1;
     
     left: calc( var(--margin-side-buttons-right) - var(--scroll-line--width)/2 );
     bottom: calc( var(--margin-side-buttons-top) - var(--scroll-line--width)/2 );
 
-    transition: left 500ms cubic-bezier(.64,.01,.27,1);
+    transition: left 500ms cubic-bezier(.64,.01,.27,1),
+                transform 500ms cubic-bezier(.64,.01,.27,1),
+                opacity 500ms linear;
 
     &-line {
 

@@ -22,7 +22,8 @@
         }
 
         .continuer-hover {
-            opacity: 1;
+            left: 50%;
+            top: 50%;
         }
     }
 
@@ -36,10 +37,12 @@
         transition: all 200ms ease;
     }
     
-    &-hover {
+    body &-hover {
         fill: $color-red;
-        opacity: 0;
         width: 90%;
         height: 90%;
+        left: -50%;
+        top: -50%;
+        transition: all 200ms ease;
     }
 }
