@@ -1,6 +1,7 @@
 import { Point } from "./CustomTypes";
 import { ActivationButton } from "./ActivationButton";
 import { MathFunc } from "./Utils";
+import { ProjectDisplayer } from "./ProjectDisplayer";
 
 
 export class ScrollManager {
@@ -20,13 +21,15 @@ export class ScrollManager {
     isScrolling: boolean;
 
     menu: ActivationButton;
+    projectDisplayer: ProjectDisplayer;
 
-    constructor(slideNumber: number, coolDown: number, burgerMenu: ActivationButton) {
+    constructor(slideNumber: number, coolDown: number, burgerMenu: ActivationButton, projDisp: ProjectDisplayer) {
         
         this.cooldown = coolDown;
         this.isScrolling = false;
 
         this.menu = burgerMenu;
+        this.projectDisplayer = projDisp;
         
         this.currentSlideIndex = 0;
         this.slideNumber = slideNumber;
@@ -131,10 +134,16 @@ export class ScrollManager {
 
 
     ActivatePage(): void {
+
         let classList: DOMTokenList = this.pages[this.currentSlideIndex].classList;
+
         if(!classList.contains("active")) {
             classList.add("active");
+            if(this.currentSlideIndex == 2) {
+                this.projectDisplayer.CycleChange(0);
+            }
         }
+
     }
 
 

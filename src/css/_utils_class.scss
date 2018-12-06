@@ -25,6 +25,10 @@
 	left: 50%;
 }
 
+.hide {
+	visibility: hidden;
+}
+
 @for $i from 1 through 5 {
 	.z-minus-#{$i} {
 		position: relative;

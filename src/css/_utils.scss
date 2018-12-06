@@ -81,4 +81,17 @@
 	  }
 	}
 	@return $value;
-  }
+	}
+	
+	@mixin delay_by_child($type, $starting-delay, $offset, $number-of-child) {
+		@for $i from 1 through $number-of-child {
+			&:nth-child(#{$i}) {
+				@if $type == animation {
+					animation-delay: $starting-delay + $offset * ($i - 1);
+				}
+				@else {
+					transition-delay: $starting-delay + $offset * ($i - 1);
+				}
+			}
+		}
+	}
