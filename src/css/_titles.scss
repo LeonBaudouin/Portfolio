@@ -122,7 +122,7 @@
 
 .regular-title {
 
-    @include interpolate(font-size, 40rem, 64rem, 2.5rem, 4rem);
+    @include interpolate(font-size, 40rem, 64rem, 2.3rem, 4rem);
     
     position: relative;
     display: inline-flex;
@@ -135,7 +135,7 @@
         
         position: relative;
         overflow: hidden;
-		@include interpolate(height, 40rem, 64rem, 3rem, 5rem);
+		@include interpolate(height, 40rem, 64rem, 2.8rem, 5rem);
     
         &-content {
             position: relative;

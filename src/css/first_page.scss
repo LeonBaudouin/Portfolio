@@ -165,6 +165,12 @@ body {
 				.active & {transform: translate3d(0, 0, 0) rotate3d(0,0,1,-45deg);}
 			}
 		}
+
+		& .all {
+			align-self: center;
+			justify-self: center;
+			grid-area: all;
+		}
 	}
 }
 
@@ -351,7 +357,6 @@ body {
 
 			.background-strokes {
 				transform: translate(30%, -50%) rotate3d(0,0,1,-45deg);
-
 			}
 			
 			.photo-profil {
@@ -367,7 +372,51 @@ body {
 
 
 .projets {
+
+	$project-exposition-time: 7s;
+
+	.section {
+		&-content {
+			grid-template-rows: auto 1fr auto;
+		}
+
+		&-background {
+
+			&:before {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				border-bottom: 3px $color-medium-grey solid;
+
+			}
+
+			&:after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				border-bottom: 3px $color-red solid;
+			}
+
+			@keyframes border-loader {
+				0% {
+					width: 100%;
+				}
+				3% {
+					width: 0;
+				}
+
+				100% {
+					width: 100%;
+				}
+			}
+		}
+	}
 	
+	.regular-title {
+		justify-self: start;
+	}
+
 	.project {
 		
 		&>* {
@@ -383,7 +432,7 @@ body {
 				top: 50%;
 				
 				transform: translate(0, -50%);
-				border: solid 1px $color-darkest-grey;
+				border-left: solid 2px $color-darkest-grey;
 			}
 		}
 		
@@ -421,6 +470,10 @@ body {
 				width: 170vh;
 				height: 170vh;
 				--rotation: -19deg;
+			}
+
+			&:after {
+				animation: border-loader $project-exposition-time linear infinite;
 			}
 		}
 	}
