@@ -12,6 +12,10 @@
     & .logo {
         @include min_query(display, $nav-breakpoint, none);
     }
+
+    .projets .section, .profil .section {
+        @include min_query(top, $regular-page-breakpoint, 120vh);
+    }
 }
 
 .scroll-index-1 {
@@ -43,7 +47,21 @@
     }
 
     .nav-burger {
-        $offset-delay: 00ms;
+        $offset-delay: 0;
         transition-delay: $offset-delay;
+    }
+
+    .projets .section {
+        @include min_query(top, $regular-page-breakpoint, 120vh);
+    }
+}
+
+.scroll-index-2 {
+    .logo .first-part {
+        color: $color-darkest-grey;
+    }
+    
+    .profil .section {
+        @include min_query(top, $regular-page-breakpoint, -120vh);
     }
 }

@@ -46,3 +46,54 @@
         transition: all 200ms ease;
     }
 }
+
+.next-project {
+
+    width: 100%;
+
+    &-before, &-after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 27px;
+        height: 27px;
+        stroke-width: 2;
+        stroke: $color-darkest-grey;
+        fill: none;
+        top: 50%;
+        cursor: pointer;
+    }
+
+    &-before {
+        left: -30px;
+        transform: translate3d(0, -50%, 0) rotate3d(0,0,1, 135deg);
+    }
+
+    &-after {
+        right: -30px;
+        transform: translate3d(0, -50%, 0) rotate3d(0,0,1,-45deg);
+    }
+
+    &-progress {
+        transform: rotate3d(0,0,1,-90deg);
+
+        &-circle {
+            &-idle, &-loading  {
+                fill: none;
+                stroke-width: 3.5;
+                stroke-dasharray: 339.292;
+                stroke-dashoffset: 339.292;
+            }
+            &-idle {
+                stroke: $color-darkest-grey;
+            }
+            &-loading {
+                stroke: $color-red;
+            }
+        }
+    }
+
+    &-indicator {
+        position: absolute;
+    }
+}

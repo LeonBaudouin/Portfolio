@@ -140,7 +140,7 @@ export class ScrollManager {
         if(!classList.contains("active")) {
             classList.add("active");
             if(this.currentSlideIndex == 2) {
-                this.projectDisplayer.CycleChange(0);
+                this.projectDisplayer.Activate();
             }
         }
 

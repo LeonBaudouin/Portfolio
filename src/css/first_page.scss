@@ -62,9 +62,12 @@ body {
 	position: relative;
 
 	margin-bottom: 20px;
-	
+	top: 0;
+
 	width: calc(100% - var(--margin-side-buttons-right) * 1);
 	height: calc(100% - var(--margin-side-buttons-top) * 4);
+
+	transition: top 500ms ease;
 
 	@media screen and (min-width: $regular-page-breakpoint) {
 		width: 100%;
@@ -100,9 +103,43 @@ body {
                         height 1.5s 200ms cubic-bezier(.1,.86,0,1);
 		}
 
+		.background-empty-squares {
+			display: none;
+			@include min_query(display, $regular-page-breakpoint, block);
+
+			&-element {
+				position: absolute;
+				border: 2px solid $color-light-grey;
+				width: 0;
+				height: 0;
+				
+				transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,0deg);
+
+				transition: width 800ms ease,
+							height 800ms ease,
+							transform 10s cubic-bezier(0,.98,0,.99);
+
+				&.thick {
+					border-width: 10px;
+				}
+			}
+		}
 		
 		.active & {
 			width: 100%;
+
+			.background-empty-squares-element {
+				transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,235deg);
+
+				@for $i from 1 through 4  {
+					&:nth-child(#{$i}) {
+						width: 18vw + ($i - 1) * 6vw;
+						height: 18vw + ($i - 1) * 6vw;
+
+						transition-delay: 75ms * (4 - ($i - 1));
+					}
+				}
+			}
 		}
 	}
 
@@ -141,6 +178,11 @@ body {
 			@media screen and (min-width: $regular-page-breakpoint) {
 				transform: translate3d(-20px, 0, 0);
 				.active & {transform: translate3d(0, 0, 0);}
+
+				&.button {
+					transform: translate3d(-20px, 0, 0) rotate3d(0,0,1,-45deg);
+					.active & {transform: translate3d(0, 0, 0) rotate3d(0,0,1,-45deg);}
+				}
 			}
 		}
 
@@ -159,17 +201,21 @@ body {
 			justify-self: center;
 
 			grid-area: continuer;
-
-			@media screen and (min-width: $regular-page-breakpoint) {
-				transform: translate3d(-20px, 0, 0) rotate3d(0,0,1,-45deg);
-				.active & {transform: translate3d(0, 0, 0) rotate3d(0,0,1,-45deg);}
-			}
 		}
 
 		& .all {
 			align-self: center;
 			justify-self: center;
 			grid-area: all;
+		}
+
+		& .next-project {
+			align-self: center;
+			justify-self: center;
+			grid-area: next-project;
+
+			display: none;
+			@include min_query(display, $regular-page-breakpoint, block);
 		}
 	}
 }
@@ -212,7 +258,7 @@ body {
 		@include min_query(transition-delay, $regular-page-breakpoint, 1100ms + $desktop-delay-offset);
 	}
 
-	.section-content {
+	& .section-content {
 		grid-template-areas:
 				"title title"
 				"none none"
@@ -220,7 +266,7 @@ body {
 
 		@media screen and (min-width: $regular-page-breakpoint) {
 			margin-right: calc(var(--margin-side-buttons-right) + 9vw);
-			grid-template-rows: repeat(3,15vh);
+			grid-template-rows: repeat(3,auto);
 			grid-template-areas: "title title"
 								 "description description"
 								 "none continuer";
@@ -276,28 +322,6 @@ body {
 				}
 			}
 		}
-
-		.background-empty-squares {
-			display: none;
-			@include min_query(display, $regular-page-breakpoint, block);
-
-			&-element {
-				position: absolute;
-				border: 2px solid $color-light-grey;
-				width: 0;
-				height: 0;
-				
-				transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,0deg);
-
-				transition: width 800ms ease,
-							height 800ms ease,
-							transform 10s cubic-bezier(0,.98,0,.99);
-
-				&.thick {
-					border-width: 10px;
-				}
-			}
-		}
 		
 		.photo-profil {
 			position: absolute;
@@ -325,31 +349,6 @@ body {
 				--rotation: -19deg;
 			}
 
-			&:after {
-				content: "";
-				display: inline-block;
-				position: absolute;
-				left: 50%;
-				top: 50%;
-				transform: translate(-50%, -50%);
-				width: 5px;
-				height: 5px;
-				background-color: blue;
-			}
-
-			.background-empty-squares-element {
-				transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,235deg);
-
-				@for $i from 1 through 4  {
-					&:nth-child(#{$i}) {
-						width: 18vw + ($i - 1) * 6vw;
-						height: 18vw + ($i - 1) * 6vw;
-
-						transition-delay: 75ms * (4 - ($i - 1));
-					}
-				}
-			}
-
 			.background-strokes {
 				transform: translate(30%, -50%) rotate3d(0,0,1,-45deg);
 			}
@@ -369,14 +368,29 @@ body {
 .projets {
 
 	$project-exposition-time: 7s;
-	$desktop-delay-offset: 200ms;
+	$desktop-delay-offset: 500ms;
 
 	.section {
 		&-content {
 			grid-template-rows: auto 1fr auto;
+			@media screen and (min-width: $regular-page-breakpoint) {
+				padding: calc(var(--margin-side-buttons-right) + 3vw) 
+						0
+						var(--margin-side-buttons-right)
+						0;
+				margin-left: calc(var(--margin-side-buttons-right) + 9vw);
+				grid-template-columns: var(--button-size) auto;
+				grid-template-areas:
+						"all title"
+						"next-project none"
+						"continuer description";
+
+				@include min_query(grid-column-gap, $regular-page-breakpoint, 2vw);
+			}
 		}
 
 		&-background {
+			--rotation:  130deg;
 
 			&:before {
 				content: "";
@@ -394,6 +408,12 @@ body {
 				border-bottom: 3px $color-red solid;
 			}
 
+			@media screen and (min-width: $regular-page-breakpoint) {
+				left: 42%;
+				right: unset;
+				top: 10%;
+			}
+
 			@keyframes border-loader {
 				0% {
 					width: 100%;
@@ -408,38 +428,47 @@ body {
 			}
 		}
 	}
-	
-	& .all {
-		transition-delay: 400ms;
-	}
 
 	& .regular-title {
 		justify-self: start;
 		
 		.first-part:before {
 			transition-delay: 600ms;
-			@include min_query(transition-delay, $regular-page-breakpoint, 500ms + $desktop-delay-offset);
+			@include min_query(transition-delay, $regular-page-breakpoint, 00ms + $desktop-delay-offset);
 		}
 		.first-part-content {
 			transition-delay: 700ms;
-			@include min_query(transition-delay, $regular-page-breakpoint, 600ms + $desktop-delay-offset);
+			@include min_query(transition-delay, $regular-page-breakpoint, 100ms + $desktop-delay-offset);
 		}
 		.second-part-content {
 			transition-delay: 800ms;
-			@include min_query(transition-delay, $regular-page-breakpoint, 700ms + $desktop-delay-offset);
+			@include min_query(transition-delay, $regular-page-breakpoint, 200ms + $desktop-delay-offset);
 		}
 	}
 
 	& .description {
 		transition-delay: 1000ms;
+		@include min_query(transition-delay, $regular-page-breakpoint, 1000ms + $desktop-delay-offset);
 	}
 
 	& .continuer {
 		transition-delay: 1200ms;
-		@include min_query(transition-delay, $regular-page-breakpoint, 1100ms + $desktop-delay-offset);
+		@include min_query(transition-delay, $regular-page-breakpoint, 800ms + $desktop-delay-offset);
+	}
+	
+	& .all {
+		transition-delay: 400ms;
+		@include min_query(transition-delay, $regular-page-breakpoint, 400ms + $desktop-delay-offset);
+	}
+
+	& .next-project {
+		@include min_query(transition-delay, $regular-page-breakpoint, 600ms + $desktop-delay-offset);
 	}
 
 	.project {
+
+		max-width: 400px;
+		@include min_query(margin-left, $regular-page-breakpoint, 28px);
 		
 		&>* {
 			position: relative;
@@ -450,8 +479,11 @@ body {
 				position: absolute;
 				
 				height: 90%;
-				width: 2px;
+				--width: 2px;
+				width: var(--width);
+				@include min_query(--width, $regular-page-breakpoint, 3px);
 				left: -20px;
+				@include min_query(left, $regular-page-breakpoint, -28px);
 				top: 50%;
 				
 				transform: translate(0, -50%);
@@ -460,21 +492,21 @@ body {
 		}
 		
 		&-title {
-			font-size: 1.375rem;
 			font-weight: 800;
 			color: $color-darkest-grey;
+			@include interpolate(font-size, 40rem, 64rem,  1.375rem, 2.5rem);
 		}
 
 		&-type {
 			margin: 0.15rem 0 0.3rem 0;
 
-			font-size: 1rem;
+			@include interpolate(font-size, 40rem, 64rem,  1rem, 2rem);
 			font-weight: 200;
 			color: $color-darkest-grey;
 		}
 
 		&-skills {
-			height: 2rem;
+			@include interpolate(height, 40rem, 64rem,  2rem, 4rem);
 
 			&-icon {
 				height: 100%;
@@ -494,8 +526,6 @@ body {
 		transition: transform 4s 600ms cubic-bezier(0,.66,0,.99);
 
 		@media screen and (min-width: $regular-page-breakpoint) {
-			bottom: unset;
-			top: 0;
 			transition: transform 3s 200ms cubic-bezier(0,.87,0,1);
 			transform: translate3d(-100%, -35%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
 		}
@@ -505,31 +535,53 @@ body {
 	&.active {
 
 		.section-background {
+
 			@media screen and (min-width: $regular-page-breakpoint) {
-				width: 170vh;
-				height: 170vh;
+				width: 200vh;
+				height: 200vh;
 				--rotation: -19deg;
 			}
 
 			&:after {
 				animation: border-loader $project-exposition-time linear infinite;
 			}
+			
+			.background-empty-squares-element {
+				@for $i from 1 through 4  {
+					&:nth-child(#{$i}) {
+						width: 8vw + ($i - 1) * 5vw;
+						height: 8vw + ($i - 1) * 5vw;
+					}
+				}
+			}
 		}
 
 		.photo-projet {
 			transform: translate3d(-40%, -50%, 0);
-			animation: photo-hiding 3.5s cubic-bezier(0,.66,0,.99) infinite alternate;
+			animation: photo-hiding-phone $project-exposition-time/2 cubic-bezier(0,.66,0,.99) infinite alternate;
 
 			@media screen and (min-width: $regular-page-breakpoint) {
+				top: 80%;
+				right: 0;
 				transform: translate3d(0, -15%, 0) rotate3d(0,0,1,19deg);
+				animation: photo-hiding-desktop $project-exposition-time/2 cubic-bezier(0,.66,0,.99) infinite alternate;
 			}
 
-			@keyframes photo-hiding {
+			@keyframes photo-hiding-phone {
 				0% {
-					transform: translate3d(-100%, -50%, 0);
+					transform: translate3d(-100%, -50%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
 				}
 				100% {
-					transform: translate3d(-40%, -50%, 0);
+					transform: translate3d(-20%, -50%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
+				}
+			}
+
+			@keyframes photo-hiding-desktop {
+				0% {
+					transform: translate3d(110%, -30%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
+				}
+				100% {
+					transform: translate3d(10%, -50%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
 				}
 			}
 		}
@@ -538,27 +590,58 @@ body {
 
 			@for $i from 1 through 3 {
 				&>*:nth-child(#{$i}):before {
-					animation-delay: 100ms * ($i - 1);
+					animation-delay: 100ms * ($i - 2);
 				}
 			}
 
 			&>*:before {
 				animation: project-reveal $project-exposition-time ease infinite;
-				
-				@keyframes project-reveal {
-					0% {
-						width: 100%;
-					}
-					5% {
-						width: 2px;
-					}
-					95% {
-						width: 2px;
-					}
-					100% {
-						width: 100%;
-					}
+			}
+			
+			@keyframes project-reveal {
+				0% {
+					width: 100%;
 				}
+				5% {
+					width: var(--width);
+				}
+				95% {
+					width: var(--width);
+				}
+				100% {
+					width: 100%;
+				}
+			}
+		}
+
+		.next-project-progress-circle {
+
+			&-loading {
+				animation: progress-loading $project-exposition-time * 2 infinite linear;
+			}
+
+			&-idle {
+				animation: progress-idle $project-exposition-time * 2 infinite linear reverse;
+			}
+
+			@keyframes progress-loading {
+				0% {
+					stroke-dashoffset: -339.292;
+				}
+				100% {
+					stroke-dashoffset: 339.292;
+				}
+
+			}
+			
+			@keyframes progress-idle {
+				0% {
+					stroke-dashoffset: 0;
+				}
+				100% {
+					stroke-dashoffset: -339.292 * 2;
+				}
+
 			}
 		}
 	}
