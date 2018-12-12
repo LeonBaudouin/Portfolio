@@ -385,12 +385,19 @@ body {
 						"next-project none"
 						"continuer description";
 
-				@include min_query(grid-column-gap, $regular-page-breakpoint, 2vw);
+				grid-column-gap: 2vw;
 			}
 		}
 
 		&-background {
-			--rotation:  130deg;
+			
+			@media screen and (min-width: $regular-page-breakpoint) {
+				--rotation:  180deg;
+				
+				transition: transform 3s 200ms cubic-bezier(0,.87,0,1),
+							width 3s 200ms cubic-bezier(.1,.86,0,1),
+							height 3s 200ms cubic-bezier(.1,.86,0,1);
+			}
 
 			&:before {
 				content: "";
@@ -614,34 +621,54 @@ body {
 			}
 		}
 
-		.next-project-progress-circle {
-
-			&-loading {
-				animation: progress-loading $project-exposition-time * 2 infinite linear;
+		.next-project {
+			&-progress-circle {
+				
+				&-loading {
+					animation: progress-loading $project-exposition-time * 2 infinite linear;
+				}
+				
+				&-idle {
+					animation: progress-idle $project-exposition-time * 2 infinite linear reverse;
+				}
+				
+				@keyframes progress-loading {
+					0% {
+						stroke-dashoffset: -339.292;
+					}
+					100% {
+						stroke-dashoffset: 339.292;
+					}
+					
+				}
+				
+				@keyframes progress-idle {
+					0% {
+						stroke-dashoffset: 0;
+					}
+					100% {
+						stroke-dashoffset: -339.292 * 2;
+					}
+					
+				}
 			}
 
-			&-idle {
-				animation: progress-idle $project-exposition-time * 2 infinite linear reverse;
-			}
-
-			@keyframes progress-loading {
-				0% {
-					stroke-dashoffset: -339.292;
+			&-indicator {
+				&-current {
+					&-content {
+						animation: indicator-hiding $project-exposition-time/2 cubic-bezier(0,.66,0,.99) infinite alternate;
+					}
+					
+					@keyframes indicator-hiding {
+						0% {
+							right: -1.2rem;
+						}
+						
+						10% {
+							right: 0.25rem;
+						}
+					}
 				}
-				100% {
-					stroke-dashoffset: 339.292;
-				}
-
-			}
-			
-			@keyframes progress-idle {
-				0% {
-					stroke-dashoffset: 0;
-				}
-				100% {
-					stroke-dashoffset: -339.292 * 2;
-				}
-
 			}
 		}
 	}

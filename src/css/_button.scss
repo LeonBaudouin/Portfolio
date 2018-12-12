@@ -83,6 +83,7 @@
                 stroke-width: 3.5;
                 stroke-dasharray: 339.292;
                 stroke-dashoffset: 339.292;
+                transition: fill 200ms cubic-bezier(.08,.67,.12,1);
             }
             &-idle {
                 stroke: $color-darkest-grey;
@@ -94,6 +95,96 @@
     }
 
     &-indicator {
+        display: flex;
         position: absolute;
+    
+        --deg: 35deg;
+    
+        left: calc(50% - 1.3rem);
+        top: calc(50% - 0.275rem);
+        
+        transform: skew(calc(0deg - var(--deg))) translate3d(-50%, -50%, 0);
+    
+        &-current,
+        &-total {
+            display: inline-flex;
+            color: $color-darkest-grey;
+    
+            width: 4.375rem;
+            height: 3.8rem;
+            font-weight: 200;
+            font-size: 3.5rem;
+            padding-bottom: 0.5rem;
+            
+            align-items: center;
+            overflow: hidden;
+    
+            &-content {
+                position: relative;
+                transform: skew(var(--deg));
+                transition: transform 200ms cubic-bezier(.08,.67,.12,1),
+                            left 200ms cubic-bezier(.08,.67,.12,0.5),
+                            right 200ms cubic-bezier(.08,.67,.12,0.5);
+            }
+        }
+    
+        &-current {
+            position: relative;
+            justify-content: flex-end;
+            text-align: right;
+
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                z-index: 1;
+                height: 100%;
+                top: 0;
+                right: 0;
+                opacity: 1;
+                border-right: 3px solid $color-red;
+                transform: skew(var(--deg)) rotate(calc(var(--deg)));
+                transition: opacity 500ms cubic-bezier(.79,.01,.2,.99);
+            }
+    
+            &-content {
+                right: 0.25rem;
+                bottom: 0.125rem;
+                transition: right 500ms cubic-bezier(.79,.01,.2,.99);
+            }
+        }
+    
+        &-total {
+            justify-content: flex-start;
+            
+            &-content {
+                left: -0.5rem;
+                top: 0.125rem;
+            }
+        }
+    }
+
+    &:hover & {
+        &-progress-circle-idle {
+            fill: $color-darkest-grey !important;
+        }
+
+        &-indicator {
+            left: calc(50% + 0.2rem);
+            &-current {
+                color: $color-lightest-grey;
+                &:before {
+                    opacity: 0;
+                }
+                &-content {
+                    right: 1.05rem ;
+                }
+            }
+            &-total {
+                &-content {
+                    left: -0.8rem;
+                }
+            }
+        }
     }
 }
