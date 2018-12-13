@@ -5,6 +5,7 @@ export class ProjectDisplayer {
     buttonPrevious: Element;
     buttonNext: Element;
     buttonIndicator: Element;
+    buttonMain: Element;
     expositionTime: number;
     currentIndex: number;
 
@@ -16,6 +17,7 @@ export class ProjectDisplayer {
         this.buttonPrevious = document.querySelector(buttonSelector + " .next-project-before");
         this.buttonNext = document.querySelector(buttonSelector + " .next-project-after");
         this.buttonIndicator = document.querySelector(buttonSelector + " .next-project-indicator-current-content");
+        this.buttonMain = document.querySelector(buttonSelector + " .next-project-progress");
 
         this.currentIndex = 0;
 
@@ -27,6 +29,7 @@ export class ProjectDisplayer {
 
     BindEventButtons() {
         this.buttonNext.addEventListener("click", () => (this.Next()));
+        this.buttonMain.addEventListener("click", () => (this.Next()));
         this.buttonPrevious.addEventListener("click", () => (this.Previous()));
     }
 

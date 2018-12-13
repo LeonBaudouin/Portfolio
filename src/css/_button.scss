@@ -2,31 +2,27 @@
     width: 80%;
     height: 0;
     padding-bottom: calc(80% - 4px);
-
+    
     position: relative;
     display: inline-block;
-
+    
     border: 2px solid $color-darkest-grey;
     @include min_query(border-width, $regular-page-breakpoint, 3px);
     transform: rotate3d(0,0,1,-45deg);
     overflow: hidden;
+    cursor: pointer;
 
-    transition: all 200ms ease;
-
-    &:hover {
+    &:before {
+        content: "";
+        position: absolute;
+        transform: translate3d(0, -50%, 0);
+        width: 0;
+        height: 200%;
+        right: 0;
+        top: 50%;
         background-color: $color-darkest-grey;
-        
-        .button-arrow {
-            left: 150%;
-            top: 150%;
-        }
-
-        .button-hover {
-            left: 50%;
-            top: 50%;
-        }
+        transition: all 400ms cubic-bezier(1,0,0,1);
     }
-
 
     &-arrow {
         stroke: $color-red;
@@ -34,22 +30,58 @@
         fill: none;
         width: 70%;
         height: 70%;
-        transition: all 200ms ease;
+        transition: all 400ms cubic-bezier(1,0,0,1);
     }
     
     body &-hover {
         fill: $color-red;
+        transform: translate3d(60%, 60%, 0);
         width: 90%;
         height: 90%;
-        left: -50%;
-        top: -50%;
-        transition: all 200ms ease;
+        transition: all 400ms cubic-bezier(1,0,0,1);
+    }
+
+    &:hover {
+        .button-arrow {
+            animation: button-arrow-hover 400ms cubic-bezier(1,0,0,1);
+            transform: translate3d(-175%, -175%, 0);
+        }
+
+        @keyframes button-arrow-hover {
+            0% {
+                transform: translate3d(-50%, -50%, 0);
+            }
+            100% {
+                transform: translate3d(75%, 75%, 0);
+            }
+        }
+
+        .button-hover {
+            transform: translate3d(-50%, -50%, 0);
+            animation: button-hover-hover 400ms cubic-bezier(1,0,0,1);
+        }
+
+        @keyframes button-hover-hover {
+            0% {
+                transform: translate3d(-160%, -160%, 0);
+            }
+            100% {
+                transform: translate3d(-50%, -50%, 0);
+            }
+        }
+
+        &:before {
+            width: 100%;
+            right: unset;
+            left: 0;
+        }
     }
 }
 
 .next-project {
 
     width: 100%;
+    cursor: pointer;
 
     &-before, &-after {
         display: inline-block;
@@ -141,8 +173,6 @@
                 fill: none;
                 stroke-width: 0;
                 stroke: $color-darkest-grey;
-                // fill: $color-darkest-grey;
-                // opacity: 0;
                 transition: stroke-width 200ms ease;
             }
         }
@@ -228,7 +258,7 @@
     &:hover & {
 
         &-progress-circle-background {
-            stroke-width: 120;
+            stroke-width: calc(100% - 5);
         }
 
         &-indicator {
@@ -249,7 +279,7 @@
             }
             &-total {
                 &-content {
-                    left: -1.4rem;
+                    left: -2.4rem;
                 }
             }
         }

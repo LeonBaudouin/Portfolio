@@ -38,7 +38,7 @@ class Canvas {
     });
     this.DrawGradient();
 
-    requestAnimationFrame(() => this.Update());
+    // requestAnimationFrame(() => this.Update());
   }
 
   private onResize(): void {
