@@ -4,20 +4,23 @@ export class ProjectDisplayer {
     illustrationList: NodeListOf<Element>;
     buttonPrevious: Element;
     buttonNext: Element;
+    buttonIndicator: Element;
     expositionTime: number;
     currentIndex: number;
 
-    constructor(projectSelector: string, illustrationSelector: string, buttonNext: string, buttonPrevious: string, expositionTime: number) {
+    constructor(projectSelector: string, illustrationSelector: string, buttonSelector: string, expositionTime: number) {
 
         this.projectList = document.querySelectorAll(projectSelector);
         this.illustrationList = document.querySelectorAll(illustrationSelector);
         this.expositionTime = expositionTime;
-        this.buttonPrevious = document.querySelector(buttonPrevious);
-        this.buttonNext = document.querySelector(buttonNext);
+        this.buttonPrevious = document.querySelector(buttonSelector + " .next-project-before");
+        this.buttonNext = document.querySelector(buttonSelector + " .next-project-after");
+        this.buttonIndicator = document.querySelector(buttonSelector + " .next-project-indicator-current-content");
 
         this.currentIndex = 0;
 
         this.Switch(this.currentIndex);
+        console.log(this.currentIndex);
 
         this.BindEventButtons();
     }
@@ -28,9 +31,6 @@ export class ProjectDisplayer {
     }
 
     public Activate() {
-
-        this.Next()
-
         setInterval(() => {
             this.Next()
         }, this.expositionTime);
@@ -39,13 +39,17 @@ export class ProjectDisplayer {
     async Previous() {
         this.currentIndex = (this.currentIndex + this.projectList.length - 1) % this.projectList.length;
         this.Switch(this.currentIndex);
-        console.log("Prev");
+        console.log(this.currentIndex);
+
+        this.buttonIndicator.textContent = (this.currentIndex + 1).toString();
     }
 
     async Next() {
         this.currentIndex = (this.currentIndex + 1) % this.projectList.length;
         this.Switch(this.currentIndex);
-        console.log("Next");
+        console.log(this.currentIndex);
+
+        this.buttonIndicator.textContent = (this.currentIndex + 1).toString();
 
     }
 
@@ -75,6 +79,7 @@ export class ProjectDisplayer {
             illusClasses.add("hide");
             illusClasses.remove("show");
         }
+
     }
 
     Show(index: number) {

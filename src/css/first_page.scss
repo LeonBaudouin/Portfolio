@@ -470,6 +470,10 @@ body {
 
 	& .next-project {
 		@include min_query(transition-delay, $regular-page-breakpoint, 600ms + $desktop-delay-offset);
+
+		&-after, &-before {
+			@include min_query(transition-delay, $regular-page-breakpoint, 650ms + $desktop-delay-offset);
+		}
 	}
 
 	.project {
@@ -661,11 +665,11 @@ body {
 					
 					@keyframes indicator-hiding {
 						0% {
-							right: -1.2rem;
+							right: calc(var(--right) - var(--lateral-offset));
 						}
 						
 						10% {
-							right: 0.25rem;
+							right: var(--right);
 						}
 					}
 				}

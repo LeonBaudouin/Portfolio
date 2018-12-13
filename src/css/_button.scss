@@ -52,38 +52,84 @@
     width: 100%;
 
     &-before, &-after {
-        content: "";
         display: inline-block;
         position: absolute;
+
+        top: 50%;
+        
+        z-index: 1;
         width: 27px;
         height: 27px;
+
         stroke-width: 2;
         stroke: $color-darkest-grey;
         fill: none;
-        top: 50%;
+        opacity: 0;
+
+        transition: left 400ms ease,
+                    right 400ms ease,
+                    opacity 400ms linear;
+
         cursor: pointer;
     }
 
     &-before {
-        left: -30px;
+        left: 15px;
         transform: translate3d(0, -50%, 0) rotate3d(0,0,1, 135deg);
+
+        .active & {
+            left: -30px;
+            opacity: 1;
+        }
+
+        &:hover {
+            animation: 400ms bounce-left infinite ease alternate;
+        }
+
+        @keyframes bounce-left {
+            0% {
+                transform: translate3d(0, -50%, 0) rotate3d(0,0,1, 135deg);
+            }
+            100% {
+                transform: translate3d(-5px, -50%, 0) rotate3d(0,0,1, 135deg);
+            }
+        }
     }
 
     &-after {
-        right: -30px;
+        right: 15px;
         transform: translate3d(0, -50%, 0) rotate3d(0,0,1,-45deg);
+        transition: right 400ms ease;
+
+        .active & {
+            right: -30px;
+            opacity: 1;
+        }
+        
+        &:hover {
+            animation: 400ms bounce-right infinite ease alternate;
+        }
+
+        @keyframes bounce-right {
+            0% {
+                transform: translate3d(0, -50%, 0) rotate3d(0,0,1, -45deg);
+            }
+            100% {
+                transform: translate3d(5px, -50%, 0) rotate3d(0,0,1, -45deg);
+            }
+        }
     }
 
     &-progress {
         transform: rotate3d(0,0,1,-90deg);
+        border-radius: 50%;
 
         &-circle {
-            &-idle, &-loading  {
+            &-idle, &-loading {
                 fill: none;
                 stroke-width: 3.5;
                 stroke-dasharray: 339.292;
                 stroke-dashoffset: 339.292;
-                transition: fill 200ms cubic-bezier(.08,.67,.12,1);
             }
             &-idle {
                 stroke: $color-darkest-grey;
@@ -91,7 +137,16 @@
             &-loading {
                 stroke: $color-red;
             }
+            &-background {
+                fill: none;
+                stroke-width: 0;
+                stroke: $color-darkest-grey;
+                // fill: $color-darkest-grey;
+                // opacity: 0;
+                transition: stroke-width 200ms ease;
+            }
         }
+        
     }
 
     &-indicator {
@@ -104,6 +159,9 @@
         top: calc(50% - 0.275rem);
         
         transform: skew(calc(0deg - var(--deg))) translate3d(-50%, -50%, 0);
+        transition: transform 200ms cubic-bezier(.08,.67,.12,0.5),
+                    left 200ms cubic-bezier(.08,.67,.12,0.5),
+                    right 200ms cubic-bezier(.08,.67,.12,0.5);
     
         &-current,
         &-total {
@@ -112,7 +170,7 @@
     
             width: 4.375rem;
             height: 3.8rem;
-            font-weight: 200;
+            font-weight: 300;
             font-size: 3.5rem;
             padding-bottom: 0.5rem;
             
@@ -122,7 +180,9 @@
             &-content {
                 position: relative;
                 transform: skew(var(--deg));
-                transition: transform 200ms cubic-bezier(.08,.67,.12,1),
+                width: 2rem;
+                text-align: center;
+                transition: transform 200ms cubic-bezier(.08,.67,.12,0.5),
                             left 200ms cubic-bezier(.08,.67,.12,0.5),
                             right 200ms cubic-bezier(.08,.67,.12,0.5);
             }
@@ -144,13 +204,14 @@
                 opacity: 1;
                 border-right: 3px solid $color-red;
                 transform: skew(var(--deg)) rotate(calc(var(--deg)));
-                transition: opacity 500ms cubic-bezier(.79,.01,.2,.99);
+                transition: height 200ms cubic-bezier(.79,.01,.2,.99);
             }
     
             &-content {
-                right: 0.25rem;
+                --right: 0.25rem;
+                --lateral-offset: 1.55rem;
+                right: var(--right);
                 bottom: 0.125rem;
-                transition: right 500ms cubic-bezier(.79,.01,.2,.99);
             }
         }
     
@@ -165,24 +226,30 @@
     }
 
     &:hover & {
-        &-progress-circle-idle {
-            fill: $color-darkest-grey !important;
+
+        &-progress-circle-background {
+            stroke-width: 120;
         }
 
         &-indicator {
-            left: calc(50% + 0.2rem);
+            top: calc(50% - 0.075rem);
+            left: calc(50% + 0.4rem);
             &-current {
+                font-size: 3.7rem;
                 color: $color-lightest-grey;
                 &:before {
-                    opacity: 0;
+                    top: unset;
+                    bottom: 0;
+                    height: 0;
                 }
                 &-content {
-                    right: 1.05rem ;
+                    --right: 1.05rem;
+                    --lateral-offset: 0;
                 }
             }
             &-total {
                 &-content {
-                    left: -0.8rem;
+                    left: -1.4rem;
                 }
             }
         }
