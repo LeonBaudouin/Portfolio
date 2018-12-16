@@ -1,10 +1,21 @@
 @import "_utils";
 
 .v-m {
-    display: none;
-    @include min_query(display, $nav-breakpoint, unset);
+    &-nav {
+        display: none;
+        @include min_query(display, $nav-breakpoint, unset);
+    }
+    &-page {
+        display: none;
+        @include min_query(display, $regular-page-breakpoint, unset);
+    }
 }
 
 .v-s {
-    @include min_query(display, $nav-breakpoint, none !important);
+    &-nav {   
+        @include min_query(display, $nav-breakpoint, none !important);
+    }
+    &-page {
+        @include min_query(display, $regular-page-breakpoint, none !important);
+    }
 }

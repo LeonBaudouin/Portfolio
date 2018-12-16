@@ -24,6 +24,7 @@ $nav-menu-background--size: 150vh;
         right: var(--nav-center--margin-right);
         top: var(--nav-center--margin-top);
     
+        cursor: pointer;
         transition: right 500ms cubic-bezier(.64,.01,.27,1);
 
         &-rect {
@@ -83,8 +84,6 @@ $nav-menu-background--size: 150vh;
     
             border: $color-red 2px solid;
             background-color: rgba($color-darkest-grey, .85);
-
-            transform-origin: center;
 
             transform: translate3d(50%, -50%, 0) rotate3d(0,0,1,-26deg);
             
@@ -240,7 +239,7 @@ $nav-menu-background--size: 150vh;
                 }
             }
 
-            .v-m & {
+            .v-m-nav & {
                 @include interpolate(font-size, 37.5rem, 93.75rem, 1.2rem, 1.5rem);
                 color: $color-lightest-grey;
             }

@@ -23,7 +23,7 @@ body {
 	margin: 0;
 	font-family: 'Raleway', sans-serif;
 
-	&::-webkit-scrollbar { 
+	&::-webkit-scrollbar {
 		display: none; 
 	}
 }
@@ -45,15 +45,11 @@ body {
         display: flex;
         flex-direction: column;
         justify-content: center;
+		align-items: flex-end;
 	
 		&.accueil {
 			align-items: center;
         }
-
-        &.profil, &.projets {
-			align-items: flex-end;
-		}
-		
 	}
 }
 
@@ -66,6 +62,7 @@ body {
 
 	width: calc(100% - var(--margin-side-buttons-right) * 1);
 	height: calc(100% - var(--margin-side-buttons-top) * 4);
+
 
 	transition: top 500ms ease;
 
@@ -88,6 +85,7 @@ body {
 		width: 0%;
 		height: 100%;
 	
+		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 		background-color: $color-lightest-grey;
 		transition: width 500ms 400ms cubic-bezier(0,.64,0,1.1);
 
@@ -130,6 +128,7 @@ body {
 
 			.background-empty-squares-element {
 				transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,235deg);
+				animation: background-square-rotation 90s linear infinite;
 
 				@for $i from 1 through 4  {
 					&:nth-child(#{$i}) {
@@ -137,6 +136,16 @@ body {
 						height: 18vw + ($i - 1) * 6vw;
 
 						transition-delay: 75ms * (4 - ($i - 1));
+						animation-delay: 75ms * (4 - ($i - 1)) + 3s;
+					}
+				}
+
+				@keyframes background-square-rotation {
+					0% {
+						transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,224.5deg);
+					}
+					100% {
+						transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,595deg);
 					}
 				}
 			}
@@ -219,6 +228,31 @@ body {
 		}
 	}
 }
+
+
+.photo-projet, .photo-lab {
+	position: absolute;
+	top: 50%;
+	
+	transform: translate3d(-100%, -50%, 0);
+	transition: transform 4s 600ms cubic-bezier(0,.66,0,.99);
+
+	@media screen and (min-width: $regular-page-breakpoint) {
+		transition: transform 3s 200ms cubic-bezier(0,.87,0,1);
+		transform: translate3d(-100%, -35%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
+	}
+	
+
+	@keyframes photo-hiding-phone {
+		0% {
+			transform: translate3d(-100%, -50%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
+		}
+		100% {
+			transform: translate3d(-20%, -50%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
+		}
+	}
+}
+
 
 .profil {
 
@@ -327,7 +361,7 @@ body {
 			position: absolute;
 			bottom: 0;
 			
-			transform: translate3d(-100%, 0, 0);
+			transform: translate3d(-100%, 3%, 0);
 			transition: transform 4s 600ms cubic-bezier(0,.66,0,.99);
 
 			@media screen and (min-width: $regular-page-breakpoint) {
@@ -354,10 +388,10 @@ body {
 			}
 			
 			.photo-profil {
-				transform: translate3d(-40%, 0, 0);
+				transform: translate3d(-80%, 3%, 0);
 
 				@media screen and (min-width: $regular-page-breakpoint) {
-					transform: translate3d(0, -15%, 0) rotate3d(0,0,1,19deg);
+					transform: translate3d(-40%, -18%, 0) rotate3d(0,0,1,19deg);
 				}
 			}
 		}
@@ -368,13 +402,13 @@ body {
 .projets {
 
 	$project-exposition-time: 7s;
-	$desktop-delay-offset: 500ms;
+	$desktop-delay-offset: 800ms;
 
 	.section {
 		&-content {
 			grid-template-rows: auto 1fr auto;
 			@media screen and (min-width: $regular-page-breakpoint) {
-				padding: calc(var(--margin-side-buttons-right) + 3vw) 
+				padding: calc(var(--margin-side-buttons-right) + 6vw) 
 						0
 						var(--margin-side-buttons-right)
 						0;
@@ -484,7 +518,7 @@ body {
 		&>* {
 			position: relative;
 
-			&:before {
+			&:before, &:after {
 				content: "";
 				display: block;
 				position: absolute;
@@ -498,7 +532,16 @@ body {
 				top: 50%;
 				
 				transform: translate(0, -50%);
+			}
+
+			&:before {
 				background-color: $color-darkest-grey;
+			}
+
+			&:after {
+				transition: width 400ms ease;
+				background-color: $color-light-grey;
+				z-index: -1;
 			}
 		}
 		
@@ -523,25 +566,11 @@ body {
 				height: 100%;
 			}
 
-			&:before {
+			&:before, &:after {
 				height: 110%;
 			}
 		}
 	}
-
-	.photo-projet {
-		position: absolute;
-		top: 50%;
-		
-		transform: translate3d(-100%, -50%, 0);
-		transition: transform 4s 600ms cubic-bezier(0,.66,0,.99);
-
-		@media screen and (min-width: $regular-page-breakpoint) {
-			transition: transform 3s 200ms cubic-bezier(0,.87,0,1);
-			transform: translate3d(-100%, -35%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
-		}
-	}
-
 
 	&.active {
 
@@ -558,10 +587,24 @@ body {
 			}
 			
 			.background-empty-squares-element {
+
+				transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,-235deg);
+
+				animation: background-square-rotation-inverse 90s linear infinite;
+
 				@for $i from 1 through 4  {
 					&:nth-child(#{$i}) {
 						width: 8vw + ($i - 1) * 5vw;
 						height: 8vw + ($i - 1) * 5vw;
+					}
+				}
+
+				@keyframes background-square-rotation-inverse {
+					0% {
+						transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,224.5deg);
+					}
+					100% {
+						transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,-135.5deg);
 					}
 				}
 			}
@@ -575,19 +618,11 @@ body {
 				top: 80%;
 				right: 0;
 				transform: translate3d(0, -15%, 0) rotate3d(0,0,1,19deg);
-				animation: photo-hiding-desktop $project-exposition-time/2 cubic-bezier(0,.66,0,.99) infinite alternate;
+				animation: photo-hiding-desktop-projet $project-exposition-time/2 cubic-bezier(0,.66,0,.99) infinite alternate;
 			}
 
-			@keyframes photo-hiding-phone {
-				0% {
-					transform: translate3d(-100%, -50%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
-				}
-				100% {
-					transform: translate3d(-20%, -50%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
-				}
-			}
-
-			@keyframes photo-hiding-desktop {
+			
+			@keyframes photo-hiding-desktop-projet {
 				0% {
 					transform: translate3d(110%, -30%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
 				}
@@ -600,13 +635,22 @@ body {
 		.project {
 
 			@for $i from 1 through 3 {
-				&>*:nth-child(#{$i}):before {
-					animation-delay: 100ms * ($i - 2);
+				&>*:nth-child(#{$i}) {
+					&:before {
+						animation-delay: 100ms * ($i - 1);
+					}
+					&:after {
+						transition-delay: 100ms * ($i - 1);
+					}
 				}
 			}
 
 			&>*:before {
 				animation: project-reveal $project-exposition-time ease infinite;
+			}
+
+			&:hover>*:after {
+				width: 100%;
 			}
 			
 			@keyframes project-reveal {
@@ -672,6 +716,426 @@ body {
 							right: var(--right);
 						}
 					}
+				}
+			}
+		}
+	}
+}
+
+.lab {
+	overflow: hidden;
+	@include min_query(overflow, $regular-page-breakpoint, unset);
+	position: relative;
+	$desktop-delay-offset: 700ms;
+
+	.contact {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: $z-index-contact;
+
+		&-background {
+			position: absolute;
+			bottom: -2%;
+			right: 20%;
+
+			width: 115vw;
+			height: 115vw;
+
+			border: $color-red 2px solid;
+			background-color: rgba($color-darkest-grey, .85);
+			transform: translate3d(50%, 50%, 0) rotate3d(0,0,1,-18deg);
+		}
+
+		&-content {
+			position: absolute;
+			display: grid;
+
+			grid-template-rows: 1fr 1fr;
+			grid-template-columns: repeat(4, 1fr);
+			grid-template-areas: 
+						"cv cv mail mail"
+						"codepen instagram github youtube";
+
+			grid-row-gap: 1vh;
+
+			margin-right: 10vw;
+			margin-bottom: 5vh;
+
+			height: calc(var(--margin-side-buttons-top) * 2);
+			width: 60vw;
+
+			z-index: 1;
+			bottom: 0;
+			right: 0;
+
+			&-link {
+				color: $color-lightest-grey;
+
+				text-decoration: none;
+				text-transform: uppercase;
+				
+				font-weight: 800;
+				font-size: 1.75rem;
+			}
+
+			.mail, .cv {
+
+				display: inline-block;
+				position: relative;
+				justify-self: start;
+
+				&:before {
+					content: "";
+
+					display: block;
+					position: absolute;
+
+					bottom: 2px;
+					width: 75%;
+
+					border-bottom: 1px solid $color-red;
+				}
+			}
+
+			.mail {
+				grid-area: mail;
+			}
+			.cv {
+				grid-area: cv;
+			}
+		}
+	}
+
+	.section {
+		margin-bottom: 70px;
+		height: calc(100% - var(--margin-side-buttons-top) * 5.5);
+		@include min_query(height, $regular-page-breakpoint, 100%);
+
+		&-content {
+
+			grid-template-rows: auto 1fr auto;
+
+			@media screen and (min-width: $regular-page-breakpoint) {
+				
+				padding: calc(var(--margin-side-buttons-top) + 6vw) 
+				0
+				var(--margin-side-buttons-top)
+				0;
+				margin-left: calc(var(--margin-side-buttons-right) + 9vw);
+				grid-template-columns: auto var(--button-size);
+				grid-template-areas:
+				"title all"
+				"none next-project"
+				"description continuer";
+				
+				grid-column-gap: 2vw;
+			}
+		}
+
+		&-background {
+			&:before {
+				content: "";
+				position: absolute;
+				z-index: 1;
+				bottom: 0;
+				width: 100%;
+				border-bottom: 3px $color-medium-grey solid;
+
+			}
+
+			&:after {
+				content: "";
+				position: absolute;
+				z-index: 1;
+				bottom: 0;
+				border-bottom: 3px $color-red solid;
+			}
+
+			@media screen and (min-width: $regular-page-breakpoint) {
+				--rotation: 18.5deg;
+
+				left: 50%;
+				top: 80%;
+
+				&:after, &:before {
+					bottom: unset;
+					top: 0;
+				}
+			}
+
+			@keyframes border-loader {
+				0% {
+					width: 100%;
+				}
+				3% {
+					width: 0;
+				}
+
+				100% {
+					width: 100%;
+				}
+			}			
+
+			.background-squares {
+
+				@media screen and (min-width: $regular-page-breakpoint) {
+					transform: rotate3d(0, 0, 1, calc(0deg - var(--rotation)));
+				}
+
+				&-group:nth-of-type(1) {
+					$square-unit: 6vw;
+					
+					width: 100%;
+
+					&-element {
+						display: inline-block;
+						position: absolute;
+						padding-top: $square-unit;
+						width: $square-unit;
+						background-color: $color-light-grey;
+					}
+
+					&:nth-of-type(1) {
+						.background-squares-group-element {
+							&:nth-of-type(1) {left: $square-unit}
+							&:nth-of-type(2) {left: $square-unit * 2}
+							&:nth-of-type(3) {left: $square-unit * 5}
+							&:nth-of-type(4) {left: $square-unit; top: $square-unit}
+							&:nth-of-type(5) {left: $square-unit * 3; top: $square-unit}
+							&:nth-of-type(6) {left: $square-unit * 4; top: $square-unit}
+							&:nth-of-type(7) {top: $square-unit * 2}
+							&:nth-of-type(8) {top: $square-unit * 3}
+						}
+					}
+
+					&:nth-of-type(2) {
+						.background-squares-group-element {
+							&:nth-of-type(1) {right: 0; bottom: 0}
+							&:nth-of-type(2) {right: $square-unit; bottom: 0}
+							&:nth-of-type(3) {right: $square-unit*2; bottom: 0}
+							&:nth-of-type(4) {right: $square-unit*5; bottom: 0}
+							&:nth-of-type(5) {right: 0; bottom: $square-unit}
+							&:nth-of-type(6) {right: 0; bottom: $square-unit*4}
+							&:nth-of-type(7) {right: 0; bottom: $square-unit*6}
+							&:nth-of-type(8) {right: 0; bottom: $square-unit*7}
+							&:nth-of-type(9) {right: $square-unit*2; bottom: $square-unit}
+							&:nth-of-type(10) {right: $square-unit*3; bottom: $square-unit}
+							&:nth-of-type(11) {right: $square-unit; bottom: $square-unit*3}
+							&:nth-of-type(12) {right: $square-unit; bottom: $square-unit*4}
+							&:nth-of-type(13) {right: $square-unit; bottom: $square-unit*5}
+							&:nth-of-type(14) {right: $square-unit*2; bottom: $square-unit*2}
+							&:nth-of-type(15) {right: $square-unit*2; bottom: $square-unit*3}
+						}
+					}
+
+					&:nth-of-type(3) {
+						.background-squares-group-element {
+							&:nth-of-type(1) {right: $square-unit; top: $square-unit*2}
+							&:nth-of-type(2) {right: $square-unit*2; top: $square-unit*3}
+							&:nth-of-type(3) {right: $square-unit*3; top: $square-unit*4}
+							&:nth-of-type(4) {right: $square-unit*4; top: $square-unit*2}
+							&:nth-of-type(5) {right: $square-unit*4; top: $square-unit*3}
+						}
+					}
+				}
+				
+				&-group:nth-of-type(2) {
+					$square-unit: 4vw;
+					
+					width: 120%;
+
+					&-element {
+						display: inline-block;
+						position: absolute;
+						padding-top: $square-unit;
+						width: $square-unit;
+						background-color: $color-light-grey;
+					}
+
+					&:nth-of-type(1) {
+						.background-squares-group-element {
+							&:nth-of-type(1) {left: $square-unit}
+							&:nth-of-type(2) {left: $square-unit * 2}
+							&:nth-of-type(3) {left: $square-unit * 5}
+							&:nth-of-type(4) {left: $square-unit; top: $square-unit}
+							&:nth-of-type(5) {left: $square-unit * 3; top: $square-unit}
+							&:nth-of-type(6) {left: $square-unit * 4; top: $square-unit}
+							&:nth-of-type(7) {top: $square-unit * 2}
+							&:nth-of-type(8) {top: $square-unit * 3}
+						}
+					}
+
+					&:nth-of-type(2) {
+						.background-squares-group-element {
+							&:nth-of-type(1) {right: 0; bottom: 0}
+							&:nth-of-type(2) {right: $square-unit; bottom: 0}
+							&:nth-of-type(3) {right: $square-unit*2; bottom: 0}
+							&:nth-of-type(4) {right: $square-unit*5; bottom: 0}
+							&:nth-of-type(5) {right: 0; bottom: $square-unit}
+							&:nth-of-type(6) {right: 0; bottom: $square-unit*4}
+							&:nth-of-type(7) {right: 0; bottom: $square-unit*6}
+							&:nth-of-type(8) {right: 0; bottom: $square-unit*7}
+							&:nth-of-type(9) {right: $square-unit*2; bottom: $square-unit}
+							&:nth-of-type(10) {right: $square-unit*3; bottom: $square-unit}
+							&:nth-of-type(11) {right: $square-unit; bottom: $square-unit*3}
+							&:nth-of-type(12) {right: $square-unit; bottom: $square-unit*4}
+							&:nth-of-type(13) {right: $square-unit; bottom: $square-unit*5}
+							&:nth-of-type(14) {right: $square-unit*2; bottom: $square-unit*2}
+							&:nth-of-type(15) {right: $square-unit*2; bottom: $square-unit*3}
+						}
+					}
+
+					&:nth-of-type(3) {
+						.background-squares-group-element {
+							&:nth-of-type(1) {right: $square-unit; top: $square-unit*2}
+							&:nth-of-type(2) {right: $square-unit*2; top: $square-unit*3}
+							&:nth-of-type(3) {right: $square-unit*3; top: $square-unit*4}
+							&:nth-of-type(4) {right: $square-unit*4; top: $square-unit*2}
+							&:nth-of-type(5) {right: $square-unit*4; top: $square-unit*3}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.all {
+		transition-delay: 400ms;
+	}
+
+	.regular-title {
+		justify-self: start;
+		@include min_query(justify-self, $regular-page-breakpoint, end);
+		
+		.first-part:before {
+			transition-delay: 600ms;
+			@include min_query(transition-delay, $regular-page-breakpoint, 00ms + $desktop-delay-offset);
+		}
+		.first-part-content {
+			transition-delay: 700ms;
+			@include min_query(transition-delay, $regular-page-breakpoint, 100ms + $desktop-delay-offset);
+		}
+		.second-part-content {
+			transition-delay: 800ms;
+			@include min_query(transition-delay, $regular-page-breakpoint, 200ms + $desktop-delay-offset);
+		}
+	}
+
+	.description {
+		transition-delay: 1000ms;
+		@include min_query(justify-self, $regular-page-breakpoint, end);
+	}
+
+	.continuer {
+		transition-delay: 1200ms;
+	}
+
+	&-title {
+		display: inline-block;
+		position: relative;
+		color: #333131;
+		@include interpolate(font-size, 40rem, 64rem, 1.2rem, 1.75rem);
+
+		&:before {
+			content: "";
+			position: absolute;
+			display: block;
+
+			height: 1rem;
+			width: 0;
+			
+			right: 0.4rem;
+			top: 0.4rem;
+			z-index: -1;
+
+			transition: width 500ms 600ms cubic-bezier(0,.64,0,1.1);
+			background: $color-light-grey;
+		}
+	}
+
+	&.active {
+		
+		$project-exposition-time: 7s;
+
+		.section {
+			&-background {
+				@media screen and (min-width: $regular-page-breakpoint) {	
+					width: 90vw;
+					height: 90vw;
+				}
+
+				&:after {
+					animation: border-loader $project-exposition-time linear infinite;
+				}
+			}
+		}
+
+		.lab-title {
+			
+			&-content {
+				animation: change-lab-title $project-exposition-time 100ms cubic-bezier(1,0,0,1) infinite;
+			}
+			
+			&:before {
+				width: 100%;
+			}
+
+			@keyframes change-lab-title {
+				0% {
+					opacity: 0;
+					transform: translate3d(10px,0,0);
+				}
+				5% {
+					opacity: 1;
+					transform: translate3d(0,0,0)
+				}
+				95% {
+					opacity: 1;
+					transform: translate3d(0,0,0)					
+				}
+				100% {
+					opacity: 0;
+					transform: translate3d(-10px,0,0);
+				}
+			}
+		}
+
+		.paragraph {
+			animation: hiding-lab-paragraph $project-exposition-time linear 200ms infinite;
+
+			@keyframes hiding-lab-paragraph {
+				0% {
+					opacity: 0;
+				}
+				5% {
+					opacity: 1;
+				}
+				95% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+		}
+
+		.photo-lab {
+			transform: translate3d(-40%, -50%, 0);
+			animation: photo-hiding-phone $project-exposition-time/2 cubic-bezier(0,.66,0,.99) infinite alternate;
+
+			@media screen and (min-width: $regular-page-breakpoint) {
+				animation: photo-hiding-desktop-lab $project-exposition-time/2 cubic-bezier(0,.66,0,.99) infinite alternate;
+			}
+
+			
+			
+			@keyframes photo-hiding-desktop-lab {
+				0% {
+					transform: translate3d(-100%, 40%, 0) rotate3d(0, 0, 1, calc(0deg - var(--rotation)));
+				}
+				100% {
+					transform: translate3d(-50%, -30%, 0) rotate3d(0, 0, 1, calc(0deg - var(--rotation)));
 				}
 			}
 		}

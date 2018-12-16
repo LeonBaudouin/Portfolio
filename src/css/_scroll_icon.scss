@@ -3,27 +3,32 @@ $scroll-line--length: 38;
 .scroll {
     --scroll-line--width: 15px;
 
-    @include min_query(opacity, $regular-page-breakpoint, 0);
     @include interpolate(width, 360px, 1024px, 14px, 30px);
+
     z-index: $z-index-scroll;
-    opacity: 1;
     
     left: calc( var(--margin-side-buttons-right) - var(--scroll-line--width)/2 );
+    @include min_query(left, $regular-page-breakpoint, calc( var(--margin-side-buttons-right) /2 ));
+
     bottom: calc( var(--margin-side-buttons-top) - var(--scroll-line--width)/2 );
+    @include min_query(bottom, $regular-page-breakpoint, calc( var(--margin-side-buttons-top) /2 ));
 
     transition: left 500ms cubic-bezier(.64,.01,.27,1),
                 transform 500ms cubic-bezier(.64,.01,.27,1),
                 opacity 500ms linear;
 
-    &-line {
+    cursor: pointer;
 
+    &-line {
         stroke: $color-lightest-grey;
         stroke-dasharray: $scroll-line--length;
         stroke-dashoffset: 0;
         
         animation: scroll-line-dash 15s ease-in infinite;
+        transition: stroke-dashoffset 250ms ease-in;
 
         @include delay_by_child(animation, 5s, 100ms, 3);
+        @include delay_by_child(transition, 0, 100ms, 3);
     }
 }
 

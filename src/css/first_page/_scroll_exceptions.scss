@@ -6,7 +6,6 @@
     & .scroll {
         @include min_query(left, $nav-breakpoint, 50%);
         @include min_query(transform, $nav-breakpoint, translateX(-50%));
-        @include min_query(opacity, $regular-page-breakpoint, 1);
     }
 
     & .logo {
@@ -58,10 +57,17 @@
 
 .scroll-index-2 {
     .logo .first-part {
-        color: $color-darkest-grey;
+        @include min_query(color, $regular-page-breakpoint, $color-darkest-grey);
     }
     
     .profil .section {
         @include min_query(top, $regular-page-breakpoint, -120vh);
+    }
+}
+
+.scroll-index-3 {
+    & .scroll-line {
+        animation: none;
+        stroke-dashoffset: -$scroll-line--length;
     }
 }

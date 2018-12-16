@@ -6,9 +6,12 @@
     position: relative;
     display: inline-block;
     
+    background-color: $color-lightest-grey;
     border: 2px solid $color-darkest-grey;
+
     @include min_query(border-width, $regular-page-breakpoint, 3px);
     transform: rotate3d(0,0,1,-45deg);
+
     overflow: hidden;
     cursor: pointer;
 
@@ -170,10 +173,12 @@
                 stroke: $color-red;
             }
             &-background {
-                fill: none;
+                r: 0;
+                fill: transparent;
                 stroke-width: 0;
                 stroke: $color-darkest-grey;
-                transition: stroke-width 200ms ease;
+                transition: r 400ms ease,
+                            fill 0ms 300ms cubic-bezier(1, 0, 0, 1);
             }
         }
         
@@ -258,7 +263,20 @@
     &:hover & {
 
         &-progress-circle-background {
-            stroke-width: calc(100% - 5);
+            animation: hover-progress 400ms cubic-bezier(1,0,0,1);
+            r: 57;
+            fill: $color-darkest-grey;
+        }
+
+        @keyframes hover-progress {
+            0% {
+                stroke-width: 0;
+                r: 57;
+            }
+            100% {
+                stroke-width: 100%;
+                r: 57;
+            }
         }
 
         &-indicator {

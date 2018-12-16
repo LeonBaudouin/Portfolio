@@ -21,19 +21,31 @@
     	text-transform: none;
     }
 
-    &.codepen::before {
-    	content: "\f100";
+    &.codepen {
+        grid-area: codepen;
+        &:before {
+            content: "\f100";
+        }
     }
 
-    &.github::before {
-    	content: "\f101";
+    &.github{
+        grid-area: github;
+        &:before {
+            content: "\f101";
+        }
     }
 
-    &.instagram::before {
-    	content: "\f102";
+    &.instagram{
+        grid-area: instagram;
+        &:before {
+            content: "\f102";
+        }
     }
 
-    &.youtube::before {
-    	content: "\f103";
+    &.youtube{
+        grid-area: youtube;
+        &:before {
+            content: "\f103";
+        }
     }
 }

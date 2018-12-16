@@ -8,6 +8,6 @@ window.onbeforeunload = function () {
 
 let burgerMenu = new ActivationButton(".nav-burger", ".nav", "hidden");
 let project = new ProjectDisplayer(".project", ".photo-projet", ".projets", 7000);
-let scroll = new ScrollManager(3, 500, burgerMenu, project);
+let scroll = new ScrollManager(4, 500, burgerMenu, project);
 
 document.querySelector(".scroll").addEventListener("click", () => scroll.Next());
