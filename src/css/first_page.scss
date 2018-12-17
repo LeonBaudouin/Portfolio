@@ -762,7 +762,7 @@ body {
 			margin-right: 10vw;
 			margin-bottom: 5vh;
 
-			height: calc(var(--margin-side-buttons-top) * 2);
+			height: 13vh;
 			width: 60vw;
 
 			z-index: 1;
@@ -808,7 +808,7 @@ body {
 	}
 
 	.section {
-		margin-bottom: 70px;
+		margin-bottom: 10vh;
 		height: calc(100% - var(--margin-side-buttons-top) * 5.5);
 		@include min_query(height, $regular-page-breakpoint, 100%);
 
@@ -879,123 +879,129 @@ body {
 
 			.background-squares {
 
-				@media screen and (min-width: $regular-page-breakpoint) {
-					transform: rotate3d(0, 0, 1, calc(0deg - var(--rotation)));
-				}
-
-				&-group:nth-of-type(1) {
-					$square-unit: 6vw;
-					
+				&-group {
 					width: 100%;
 
 					&-element {
 						display: inline-block;
 						position: absolute;
-						padding-top: $square-unit;
-						width: $square-unit;
 						background-color: $color-light-grey;
 					}
-
-					&:nth-of-type(1) {
-						.background-squares-group-element {
-							&:nth-of-type(1) {left: $square-unit}
-							&:nth-of-type(2) {left: $square-unit * 2}
-							&:nth-of-type(3) {left: $square-unit * 5}
-							&:nth-of-type(4) {left: $square-unit; top: $square-unit}
-							&:nth-of-type(5) {left: $square-unit * 3; top: $square-unit}
-							&:nth-of-type(6) {left: $square-unit * 4; top: $square-unit}
-							&:nth-of-type(7) {top: $square-unit * 2}
-							&:nth-of-type(8) {top: $square-unit * 3}
-						}
-					}
-
-					&:nth-of-type(2) {
-						.background-squares-group-element {
-							&:nth-of-type(1) {right: 0; bottom: 0}
-							&:nth-of-type(2) {right: $square-unit; bottom: 0}
-							&:nth-of-type(3) {right: $square-unit*2; bottom: 0}
-							&:nth-of-type(4) {right: $square-unit*5; bottom: 0}
-							&:nth-of-type(5) {right: 0; bottom: $square-unit}
-							&:nth-of-type(6) {right: 0; bottom: $square-unit*4}
-							&:nth-of-type(7) {right: 0; bottom: $square-unit*6}
-							&:nth-of-type(8) {right: 0; bottom: $square-unit*7}
-							&:nth-of-type(9) {right: $square-unit*2; bottom: $square-unit}
-							&:nth-of-type(10) {right: $square-unit*3; bottom: $square-unit}
-							&:nth-of-type(11) {right: $square-unit; bottom: $square-unit*3}
-							&:nth-of-type(12) {right: $square-unit; bottom: $square-unit*4}
-							&:nth-of-type(13) {right: $square-unit; bottom: $square-unit*5}
-							&:nth-of-type(14) {right: $square-unit*2; bottom: $square-unit*2}
-							&:nth-of-type(15) {right: $square-unit*2; bottom: $square-unit*3}
-						}
-					}
-
-					&:nth-of-type(3) {
-						.background-squares-group-element {
-							&:nth-of-type(1) {right: $square-unit; top: $square-unit*2}
-							&:nth-of-type(2) {right: $square-unit*2; top: $square-unit*3}
-							&:nth-of-type(3) {right: $square-unit*3; top: $square-unit*4}
-							&:nth-of-type(4) {right: $square-unit*4; top: $square-unit*2}
-							&:nth-of-type(5) {right: $square-unit*4; top: $square-unit*3}
-						}
-					}
 				}
-				
-				&-group:nth-of-type(2) {
-					$square-unit: 4vw;
+
+				&:nth-of-type(1) {
+					.background-squares-group {
+						$square-unit: 6vw;
 					
-					width: 120%;
-
-					&-element {
-						display: inline-block;
-						position: absolute;
-						padding-top: $square-unit;
-						width: $square-unit;
-						background-color: $color-light-grey;
-					}
-
-					&:nth-of-type(1) {
-						.background-squares-group-element {
-							&:nth-of-type(1) {left: $square-unit}
-							&:nth-of-type(2) {left: $square-unit * 2}
-							&:nth-of-type(3) {left: $square-unit * 5}
-							&:nth-of-type(4) {left: $square-unit; top: $square-unit}
-							&:nth-of-type(5) {left: $square-unit * 3; top: $square-unit}
-							&:nth-of-type(6) {left: $square-unit * 4; top: $square-unit}
-							&:nth-of-type(7) {top: $square-unit * 2}
-							&:nth-of-type(8) {top: $square-unit * 3}
+						&-element {
+							padding-top: $square-unit;
+							width: $square-unit;
 						}
-					}
 
-					&:nth-of-type(2) {
-						.background-squares-group-element {
-							&:nth-of-type(1) {right: 0; bottom: 0}
-							&:nth-of-type(2) {right: $square-unit; bottom: 0}
-							&:nth-of-type(3) {right: $square-unit*2; bottom: 0}
-							&:nth-of-type(4) {right: $square-unit*5; bottom: 0}
-							&:nth-of-type(5) {right: 0; bottom: $square-unit}
-							&:nth-of-type(6) {right: 0; bottom: $square-unit*4}
-							&:nth-of-type(7) {right: 0; bottom: $square-unit*6}
-							&:nth-of-type(8) {right: 0; bottom: $square-unit*7}
-							&:nth-of-type(9) {right: $square-unit*2; bottom: $square-unit}
-							&:nth-of-type(10) {right: $square-unit*3; bottom: $square-unit}
-							&:nth-of-type(11) {right: $square-unit; bottom: $square-unit*3}
-							&:nth-of-type(12) {right: $square-unit; bottom: $square-unit*4}
-							&:nth-of-type(13) {right: $square-unit; bottom: $square-unit*5}
-							&:nth-of-type(14) {right: $square-unit*2; bottom: $square-unit*2}
-							&:nth-of-type(15) {right: $square-unit*2; bottom: $square-unit*3}
+
+						&:nth-of-type(1) {
+							.background-squares-group-element {
+								&:nth-of-type(1) {left: $square-unit}
+								&:nth-of-type(2) {left: $square-unit * 2}
+								&:nth-of-type(3) {left: $square-unit * 5}
+								&:nth-of-type(4) {left: $square-unit; top: $square-unit}
+								&:nth-of-type(5) {left: $square-unit * 3; top: $square-unit}
+								&:nth-of-type(6) {left: $square-unit * 4; top: $square-unit}
+								&:nth-of-type(7) {top: $square-unit * 2}
+								&:nth-of-type(8) {top: $square-unit * 3}
+							}
 						}
-					}
 
-					&:nth-of-type(3) {
-						.background-squares-group-element {
-							&:nth-of-type(1) {right: $square-unit; top: $square-unit*2}
-							&:nth-of-type(2) {right: $square-unit*2; top: $square-unit*3}
-							&:nth-of-type(3) {right: $square-unit*3; top: $square-unit*4}
-							&:nth-of-type(4) {right: $square-unit*4; top: $square-unit*2}
-							&:nth-of-type(5) {right: $square-unit*4; top: $square-unit*3}
+						&:nth-of-type(2) {
+							.background-squares-group-element {
+								&:nth-of-type(1) {right: 0; bottom: 0}
+								&:nth-of-type(2) {right: $square-unit; bottom: 0}
+								&:nth-of-type(3) {right: $square-unit*2; bottom: 0}
+								&:nth-of-type(4) {right: $square-unit*5; bottom: 0}
+								&:nth-of-type(5) {right: 0; bottom: $square-unit}
+								&:nth-of-type(6) {right: 0; bottom: $square-unit*4}
+								&:nth-of-type(7) {right: 0; bottom: $square-unit*6}
+								&:nth-of-type(8) {right: 0; bottom: $square-unit*7}
+								&:nth-of-type(9) {right: $square-unit*2; bottom: $square-unit}
+								&:nth-of-type(10) {right: $square-unit*3; bottom: $square-unit}
+								&:nth-of-type(11) {right: $square-unit; bottom: $square-unit*3}
+								&:nth-of-type(12) {right: $square-unit; bottom: $square-unit*4}
+								&:nth-of-type(13) {right: $square-unit; bottom: $square-unit*5}
+								&:nth-of-type(14) {right: $square-unit*2; bottom: $square-unit*2}
+								&:nth-of-type(15) {right: $square-unit*2; bottom: $square-unit*3}
+							}
+						}
+
+						&:nth-of-type(3) {
+							.background-squares-group-element {
+								&:nth-of-type(1) {right: $square-unit; top: $square-unit*2}
+								&:nth-of-type(2) {right: $square-unit*2; top: $square-unit*3}
+								&:nth-of-type(3) {right: $square-unit*3; top: $square-unit*4}
+								&:nth-of-type(4) {right: $square-unit*4; top: $square-unit*2}
+								&:nth-of-type(5) {right: $square-unit*4; top: $square-unit*3}
+							}
 						}
 					}
 				}
+
+				&:nth-of-type(2) {					
+					.background-squares-group {
+						
+						$square-unit: 4vw;
+						width: 120%;
+						transform: rotate3d(0, 0, 1, calc(0deg - var(--rotation)));
+
+						&-element {
+							padding-top: $square-unit;
+							width: $square-unit;
+						}
+
+
+						&:nth-of-type(1) {
+
+							position: absolute;
+							top: 8vw;
+							right: 7vw;
+
+							.background-squares-group-element {
+								&:nth-of-type(1) {top: $square-unit * 3; right: 0}
+								&:nth-of-type(2) {top: $square-unit * 4; right: 0}
+								&:nth-of-type(3) {top: $square-unit * 5; right: 0}
+								&:nth-of-type(4) {top: $square-unit * 2; right: $square-unit * 2}
+								&:nth-of-type(5) {top: $square-unit * 2; right: $square-unit * 3}
+								&:nth-of-type(6) {top: $square-unit; right: $square-unit * 2}
+								&:nth-of-type(7) {top: $square-unit; right: $square-unit * 4}
+								&:nth-of-type(8) {top: $square-unit * 3; right: $square-unit}
+								&:nth-of-type(9) {top: $square-unit * 6; right: $square-unit}
+							}
+						}
+
+						&:nth-of-type(2) {
+
+							position: relative;
+							width: $square-unit;
+							height: $square-unit;
+							transform: translate3d(-50%, -50%, 0) rotate3d(0, 0, 1, calc(0deg - var(--rotation)));
+							
+							.background-squares-group-element {
+								&:nth-of-type(1) {top: -$square-unit}
+								&:nth-of-type(1) {top: -$square-unit*3}
+								&:nth-of-type(1) {top: -$square-unit*2; right: -$square-unit}
+								&:nth-of-type(1) {top: -$square-unit*4; right: -$square-unit}
+							}
+						}
+
+						&:nth-of-type(3) {
+							.background-squares-group-element {
+								&:nth-of-type(1) {right: $square-unit; top: $square-unit*2}
+								&:nth-of-type(2) {right: $square-unit*2; top: $square-unit*3}
+								&:nth-of-type(3) {right: $square-unit*3; top: $square-unit*4}
+								&:nth-of-type(4) {right: $square-unit*4; top: $square-unit*2}
+								&:nth-of-type(5) {right: $square-unit*4; top: $square-unit*3}
+							}
+						}
+					}
+				}	
 			}
 		}
 	}
