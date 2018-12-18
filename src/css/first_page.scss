@@ -822,7 +822,7 @@ body {
 				0
 				var(--margin-side-buttons-top)
 				0;
-				margin-left: calc(var(--margin-side-buttons-right) + 9vw);
+				margin-right: calc(var(--margin-side-buttons-right) + 9vw);
 				grid-template-columns: auto var(--button-size);
 				grid-template-areas:
 				"title all"
@@ -947,7 +947,7 @@ body {
 				&:nth-of-type(2) {					
 					.background-squares-group {
 						
-						$square-unit: 4vw;
+						$square-unit: 3vw;
 						width: 120%;
 						transform: rotate3d(0, 0, 1, calc(0deg - var(--rotation)));
 
@@ -960,7 +960,7 @@ body {
 						&:nth-of-type(1) {
 
 							position: absolute;
-							top: 8vw;
+							top: 10vw;
 							right: 7vw;
 
 							.background-squares-group-element {
@@ -978,16 +978,31 @@ body {
 
 						&:nth-of-type(2) {
 
-							position: relative;
+							position: absolute;
+							left: 50%;
+							top: 50%;
 							width: $square-unit;
 							height: $square-unit;
 							transform: translate3d(-50%, -50%, 0) rotate3d(0, 0, 1, calc(0deg - var(--rotation)));
 							
 							.background-squares-group-element {
-								&:nth-of-type(1) {top: -$square-unit}
-								&:nth-of-type(1) {top: -$square-unit*3}
-								&:nth-of-type(1) {top: -$square-unit*2; right: -$square-unit}
-								&:nth-of-type(1) {top: -$square-unit*4; right: -$square-unit}
+								&:nth-of-type(1) {bottom: $square-unit*3}
+								&:nth-of-type(2) {bottom: $square-unit*5}
+								&:nth-of-type(3) {bottom: $square-unit*4; left: $square-unit}
+								&:nth-of-type(4) {bottom: $square-unit*6; left: $square-unit}
+								&:nth-of-type(5) {bottom: $square-unit*4; right: $square-unit}
+								&:nth-of-type(6) {bottom: $square-unit*3; left: $square-unit*2}
+								&:nth-of-type(7) {bottom: $square-unit*2; left: 0}
+								&:nth-of-type(8) {bottom: $square-unit*2; right: $square-unit}
+								&:nth-of-type(9) {bottom: $square-unit; left: $square-unit}
+								&:nth-of-type(10) {bottom: $square-unit; left: $square-unit*2}
+								&:nth-of-type(11) {bottom: $square-unit; right: $square-unit}
+								&:nth-of-type(12) {bottom: $square-unit; right: $square-unit*2}
+								&:nth-of-type(13) {top: 0; left: $square-unit}
+								&:nth-of-type(14) {top: 0; right: $square-unit}
+								&:nth-of-type(15) {top: 0; right: $square-unit*3}
+								&:nth-of-type(16) {top: $square-unit}
+								&:nth-of-type(17) {top: $square-unit*2; left: $square-unit}
 							}
 						}
 
@@ -1142,6 +1157,57 @@ body {
 				}
 				100% {
 					transform: translate3d(-50%, -30%, 0) rotate3d(0, 0, 1, calc(0deg - var(--rotation)));
+				}
+			}
+		}
+		
+		.next-project {
+			&-progress-circle {
+				
+				&-loading {
+					animation: progress-loading $project-exposition-time * 2 infinite linear;
+				}
+				
+				&-idle {
+					animation: progress-idle $project-exposition-time * 2 infinite linear reverse;
+				}
+				
+				@keyframes progress-loading {
+					0% {
+						stroke-dashoffset: -339.292;
+					}
+					100% {
+						stroke-dashoffset: 339.292;
+					}
+					
+				}
+				
+				@keyframes progress-idle {
+					0% {
+						stroke-dashoffset: 0;
+					}
+					100% {
+						stroke-dashoffset: -339.292 * 2;
+					}
+					
+				}
+			}
+
+			&-indicator {
+				&-current {
+					&-content {
+						animation: indicator-hiding $project-exposition-time/2 cubic-bezier(0,.66,0,.99) infinite alternate;
+					}
+					
+					@keyframes indicator-hiding {
+						0% {
+							right: calc(var(--right) - var(--lateral-offset));
+						}
+						
+						10% {
+							right: var(--right);
+						}
+					}
 				}
 			}
 		}
