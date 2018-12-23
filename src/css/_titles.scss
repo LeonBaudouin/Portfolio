@@ -162,6 +162,7 @@
             bottom: 0;
             width: 0%;
             border-bottom: $color-red 1px solid;
+            @include min_query(border-width, $regular-page-breakpoint, 2px);
     
             .active & {width: 85%;}
             transition: width 500ms 400ms cubic-bezier(0,.64,0,1.1);

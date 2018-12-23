@@ -24,7 +24,6 @@ export class ProjectDisplayer {
         this.currentIndex = 0;
 
         this.Switch(this.currentIndex);
-        console.log(this.currentIndex);
 
         this.BindEventButtons();
     }

@@ -23,9 +23,7 @@ body {
 	margin: 0;
 	font-family: 'Raleway', sans-serif;
 
-	&::-webkit-scrollbar {
-		display: none; 
-	}
+	overflow: hidden;
 }
 
 .container {
@@ -731,43 +729,93 @@ body {
 	.contact {
 		position: absolute;
 		width: 100%;
-		height: 100%;
+
+		bottom: 0;
 		z-index: $z-index-contact;
+
+		@include min_query(z-index, $regular-page-breakpoint, 1);
 
 		&-background {
 			position: absolute;
-			bottom: -2%;
-			right: 20%;
+			bottom: -2vh;
+			right: 20vw;
 
-			width: 115vw;
-			height: 115vw;
+			width: 0;
+			height: 0;
 
 			border: $color-red 2px solid;
 			background-color: rgba($color-darkest-grey, .85);
-			transform: translate3d(50%, 50%, 0) rotate3d(0,0,1,-18deg);
+			transform: translate3d(50%, 50%, 0) rotate3d(0,0,1, 90deg);
+
+			transition: transform 3s 1200ms cubic-bezier(0,.87,0,1),
+                        width 1.5s 1200ms cubic-bezier(.1,.86,0,1),
+                        height 1.5s 1200ms cubic-bezier(.1,.86,0,1);
+
+			@media screen and (min-width: $regular-page-breakpoint) {
+				transform: translate3d(-50%, 50%, 0) rotate3d(0,0,1,-8deg);
+				bottom: 0;
+				left: 12vw;
+			}
+
 		}
 
 		&-content {
+
 			position: absolute;
-			display: grid;
+			display: flex;
 
-			grid-template-rows: 1fr 1fr;
-			grid-template-columns: repeat(4, 1fr);
-			grid-template-areas: 
-						"cv cv mail mail"
-						"codepen instagram github youtube";
-
-			grid-row-gap: 1vh;
-
-			margin-right: 10vw;
-			margin-bottom: 5vh;
-
-			height: 13vh;
-			width: 60vw;
-
-			z-index: 1;
+			height: calc(var(--margin-side-buttons-top) * 3.5);
+			width: 70%;
+			max-width: 400px;
 			bottom: 0;
 			right: 0;
+			
+			flex-direction: column;
+			align-items: flex-end;
+			justify-content: center;
+
+			@media screen and (min-width: $regular-page-breakpoint) {
+				left: 0;
+				justify-content: space-around;
+				align-items: flex-start;
+			}
+
+			&-grid {
+				display: grid;
+				position: relative;
+				
+				grid-template-rows: auto 1fr;
+				grid-template-columns: repeat(4, 1fr);
+				grid-template-areas: 
+				"cv cv mail mail"
+				"codepen instagram github youtube";
+				
+				grid-row-gap: 1vh;
+				
+				margin-right: 20px;
+				
+				height: 64%;
+				width: calc(100% - 20px);
+				max-width: 250px;
+				
+				@media screen and (min-width: $regular-page-breakpoint) {
+					grid-template-areas: 
+							"cv mail mail mail"
+							"codepen instagram github youtube";
+					grid-column-gap: 0.5vw;
+					max-width: unset;
+					width: 80%;
+					height: 50%;
+					margin-left: 4vw;
+				}
+
+			}
+
+			&-title {
+				color: $color-lightest-grey;
+				margin-left: 6vw;
+				font-weight: 400;
+			}
 
 			&-link {
 				color: $color-lightest-grey;
@@ -777,6 +825,46 @@ body {
 				
 				font-weight: 800;
 				font-size: 1.75rem;
+				@include min_query(font-size, $regular-page-breakpoint, 0.8rem);
+
+				padding-bottom: 5px;
+
+				opacity: 0;
+
+				transform: translate3d(10px, 0, 0);
+				@include min_query(transform, $regular-page-breakpoint, translate3d(-10px, 0, 0));
+
+				transition: opacity 400ms cubic-bezier(.09,.64,.19,.99),
+							transform 450ms 50ms cubic-bezier(.09,.64,.19,.99),
+							color 200ms cubic-bezier(.09,.64,.19,.99);
+
+
+				&:nth-of-type(2) {transition-delay: 1500ms;}
+				&:nth-of-type(4) {transition-delay: 1400ms;}
+				&:nth-of-type(5) {
+					transition: opacity 400ms 1900ms cubic-bezier(.09,.64,.19,.99),
+								transform 450ms 1900ms cubic-bezier(.09,.64,.19,.99),
+								color 200ms cubic-bezier(.09,.64,.19,.99);}
+				&:nth-of-type(6) {
+					transition: opacity 400ms 1800ms cubic-bezier(.09,.64,.19,.99),
+								transform 450ms 1800ms cubic-bezier(.09,.64,.19,.99),
+								color 200ms cubic-bezier(.09,.64,.19,.99);}
+				&:nth-of-type(7) {
+					transition: opacity 400ms 1700ms cubic-bezier(.09,.64,.19,.99),
+								transform 450ms 1700ms cubic-bezier(.09,.64,.19,.99),
+								color 200ms cubic-bezier(.09,.64,.19,.99);}
+				&:nth-of-type(8) {
+					transition: opacity 400ms  1600ms cubic-bezier(.09,.64,.19,.99),
+								transform 450ms  1600ms cubic-bezier(.09,.64,.19,.99),
+								color 200ms cubic-bezier(.09,.64,.19,.99);}
+			}
+
+			.contact-icon {
+				@include min_query(font-size, $regular-page-breakpoint, 2.8rem);
+
+                &:hover {
+                    color: $color-red;
+                }
 			}
 
 			.mail, .cv {
@@ -1005,16 +1093,6 @@ body {
 								&:nth-of-type(17) {top: $square-unit*2; left: $square-unit}
 							}
 						}
-
-						&:nth-of-type(3) {
-							.background-squares-group-element {
-								&:nth-of-type(1) {right: $square-unit; top: $square-unit*2}
-								&:nth-of-type(2) {right: $square-unit*2; top: $square-unit*3}
-								&:nth-of-type(3) {right: $square-unit*3; top: $square-unit*4}
-								&:nth-of-type(4) {right: $square-unit*4; top: $square-unit*2}
-								&:nth-of-type(5) {right: $square-unit*4; top: $square-unit*3}
-							}
-						}
 					}
 				}	
 			}
@@ -1022,16 +1100,21 @@ body {
 	}
 
 	.all {
-		transition-delay: 400ms;
+		transition-delay: 500ms;
 	}
 
 	.regular-title {
 		justify-self: start;
 		@include min_query(justify-self, $regular-page-breakpoint, end);
+		@include min_query(text-align, $regular-page-breakpoint, right);
 		
 		.first-part:before {
 			transition-delay: 600ms;
-			@include min_query(transition-delay, $regular-page-breakpoint, 00ms + $desktop-delay-offset);
+			@media screen and (min-width: $regular-page-breakpoint) {
+				transition-delay: 00ms + $desktop-delay-offset;
+				right: 0;
+				left: unset;
+			}
 		}
 		.first-part-content {
 			transition-delay: 700ms;
@@ -1046,6 +1129,7 @@ body {
 	.description {
 		transition-delay: 1000ms;
 		@include min_query(justify-self, $regular-page-breakpoint, end);
+		@include min_query(text-align, $regular-page-breakpoint, right);
 	}
 
 	.continuer {
@@ -1066,8 +1150,8 @@ body {
 			height: 1rem;
 			width: 0;
 			
-			right: 0.4rem;
-			top: 0.4rem;
+			left: -0.2rem;
+			bottom: -0.1rem;
 			z-index: -1;
 
 			transition: width 500ms 600ms cubic-bezier(0,.64,0,1.1);
@@ -1079,11 +1163,25 @@ body {
 		
 		$project-exposition-time: 7s;
 
+		.contact {
+			&-background {
+				@include interpolate(width, 400px, 1366px, 368px, 500px);
+				@include interpolate(height, 400px, 1366px, 368px, 500px);
+				transform: translate3d(50%, 50%, 0) rotate3d(0,0,1,-18deg);
+				@include min_query(transform, $regular-page-breakpoint, translate3d(-50%, 50%, 0) rotate3d(0,0,1,-8deg));
+			}
+
+			&-content-link {
+				opacity: 1;
+				transform: translate3d(0, 0, 0);
+			}
+		}
+
 		.section {
 			&-background {
 				@media screen and (min-width: $regular-page-breakpoint) {	
-					width: 90vw;
-					height: 90vw;
+					width: 192vh;
+					height: 192vh;
 				}
 
 				&:after {
@@ -1148,8 +1246,6 @@ body {
 			@media screen and (min-width: $regular-page-breakpoint) {
 				animation: photo-hiding-desktop-lab $project-exposition-time/2 cubic-bezier(0,.66,0,.99) infinite alternate;
 			}
-
-			
 			
 			@keyframes photo-hiding-desktop-lab {
 				0% {

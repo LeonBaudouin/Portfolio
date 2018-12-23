@@ -1,10 +1,13 @@
 import { Point } from "./CustomTypes";
 import { ActivationButton } from "./ActivationButton";
-import { MathFunc } from "./Utils";
+import { MathFunc } from "./Utils";;
 import { ProjectDisplayer } from "./ProjectDisplayer";
+import "./lib/AddWheelListener.js";
 
-
+type WindowWheel = Window & {addWheelListener : (elem: any, callback: any, useCapture?: any) => {}};
 export class ScrollManager {
+
+    // lineHeight: number;
 
     bodyClassList: DOMTokenList;
     container: HTMLElement;
@@ -25,6 +28,8 @@ export class ScrollManager {
 
     constructor(slideNumber: number, coolDown: number, burgerMenu: ActivationButton, projDisp: ProjectDisplayer) {
         
+        // this.lineHeight = parseFloat(window.getComputedStyle(document.documentElement).fontSize);
+
         this.cooldown = coolDown;
         this.isScrolling = false;
 
@@ -43,25 +48,42 @@ export class ScrollManager {
 
 
     InitEvent(): void {
-        
-        document.querySelector(".nav").addEventListener("wheel", (e: WheelEvent) => {
-            e.preventDefault();
-            e.stopPropagation();
-        });
-        
-        document.querySelector(".nav").addEventListener("touchmove", (e: WheelEvent) => {
-            e.preventDefault();
-            e.stopPropagation();
-        });
 
-        this.container.addEventListener("mousewheel", (e: WheelEvent) => {
-            console.log(e);
+        (window as WindowWheel).addWheelListener( this.container, (e : WheelEvent) => {
+            let distance : number;
             e.preventDefault();
-            e.stopPropagation();
-            if(Math.abs(e.deltaY) > 50 ) {
-                this.ProcessScroll(e.deltaY);
+
+            if(e.deltaMode === 1) {
+                distance = e.deltaY * 50;
+            } else {
+                distance = e.deltaY;
             }
-        });
+
+            console.log(distance);
+
+            if(Math.abs(distance) > 80 ) {
+                this.DirectionScroll(distance);
+            }
+        })
+        
+        // document.querySelector(".nav").addEventListener("wheel", (e: WheelEvent) => {
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        // });
+        
+        // document.querySelector(".nav").addEventListener("touchmove", (e: WheelEvent) => {
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        // });
+
+        // this.container.addEventListener("wheel", (e: WheelEvent) => {
+        //     console.log(e);
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        //     if(Math.abs(e.deltaY) > 50 ) {
+        //         this.DirectionScroll(e.deltaY);
+        //     }
+        // });
 
         window.addEventListener("touchstart", (e: TouchEvent) => {
             this.dragOrigin = {x: e.touches[0].screenX, y: e.touches[0].screenY};
@@ -78,12 +100,16 @@ export class ScrollManager {
         window.addEventListener("touchend", (e) => {
             console.log(e);
             let fraction = Math.abs(this.dragDelta.y / this.WindowHeight);
-            if(fraction > 0.05) {this.ProcessScroll(this.dragDelta.y);}
+            if(fraction > 0.05) {this.DirectionScroll(this.dragDelta.y);}
             this.dragDelta = null;
         });
     }
 
-    ProcessScroll(direction: number) {
+    ProcessWheel(e: WheelEvent) {
+
+    }
+
+    DirectionScroll(direction: number) {
 
         if(direction > 0 && this.currentSlideIndex < this.slideNumber - 1) {
             

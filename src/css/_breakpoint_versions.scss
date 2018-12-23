@@ -2,12 +2,12 @@
 
 .v-m {
     &-nav {
-        display: none;
-        @include min_query(display, $nav-breakpoint, unset);
+        display: none !important;
+        @include min_query(display, $nav-breakpoint, unset !important);
     }
     &-page {
-        display: none;
-        @include min_query(display, $regular-page-breakpoint, unset);
+        display: none !important;
+        @include min_query(display, $regular-page-breakpoint, unset !important);
     }
 }
 
