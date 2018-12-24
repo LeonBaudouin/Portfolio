@@ -59,8 +59,6 @@ export class ScrollManager {
                 distance = e.deltaY;
             }
 
-            console.log(distance);
-
             if(Math.abs(distance) > 80 ) {
                 this.DirectionScroll(distance);
             }

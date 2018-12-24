@@ -76,6 +76,10 @@
         @include min_query(top, $regular-page-breakpoint, -120vh);
     }
 
+    .profil .section {
+        @include min_query(top, $regular-page-breakpoint, -50vh);
+    }
+
     & .scroll-line {
         animation: none;
         stroke-dashoffset: -$scroll-line--length;

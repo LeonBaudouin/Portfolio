@@ -1,0 +1,321 @@
+.projets {
+
+	$project-exposition-time: 7s;
+	$desktop-delay-offset: 800ms;
+
+	.section {
+		&-content {
+			grid-template-rows: auto 1fr auto;
+			@media screen and (min-width: $regular-page-breakpoint) {
+				padding: calc(var(--margin-side-buttons-right) + 6vw) 
+						0
+						var(--margin-side-buttons-right)
+						0;
+				margin-left: calc(var(--margin-side-buttons-right) + 9vw);
+				grid-template-columns: var(--button-size) auto;
+				grid-template-areas:
+						"all title"
+						"next-project none"
+						"continuer description";
+
+				grid-column-gap: 2vw;
+			}
+		}
+
+		&-background {
+			
+			@media screen and (min-width: $regular-page-breakpoint) {
+				--rotation:  180deg;
+				
+				transition: transform 3s 200ms cubic-bezier(0,.87,0,1),
+							width 3s 200ms cubic-bezier(.1,.86,0,1),
+							height 3s 200ms cubic-bezier(.1,.86,0,1);
+			}
+
+			&:before {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				border-bottom: 3px $color-medium-grey solid;
+
+			}
+
+			&:after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				border-bottom: 3px $color-red solid;
+			}
+
+			@media screen and (min-width: $regular-page-breakpoint) {
+				left: 42%;
+				right: unset;
+				top: 10%;
+			}
+
+			@keyframes border-loader {
+				0% {
+					width: 100%;
+				}
+				3% {
+					width: 0;
+				}
+
+				100% {
+					width: 100%;
+				}
+			}
+		}
+	}
+
+	.regular-title {
+		justify-self: start;
+		
+		.first-part:before {
+			transition-delay: 600ms;
+			@include min_query(transition-delay, $regular-page-breakpoint, 00ms + $desktop-delay-offset);
+		}
+		.first-part-content {
+			transition-delay: 700ms;
+			@include min_query(transition-delay, $regular-page-breakpoint, 100ms + $desktop-delay-offset);
+		}
+		.second-part-content {
+			transition-delay: 800ms;
+			@include min_query(transition-delay, $regular-page-breakpoint, 200ms + $desktop-delay-offset);
+		}
+	}
+
+	.description {
+		transition-delay: 1000ms;
+		@include min_query(transition-delay, $regular-page-breakpoint, 1000ms + $desktop-delay-offset);
+	}
+
+	.continuer {
+		transition-delay: 1200ms;
+		@include min_query(transition-delay, $regular-page-breakpoint, 800ms + $desktop-delay-offset);
+	}
+	
+	.all {
+		transition-delay: 400ms;
+		@include min_query(transition-delay, $regular-page-breakpoint, 400ms + $desktop-delay-offset);
+	}
+
+	.next-project {
+		@include min_query(transition-delay, $regular-page-breakpoint, 600ms + $desktop-delay-offset);
+
+		&-after, &-before {
+			@include min_query(transition-delay, $regular-page-breakpoint, 650ms + $desktop-delay-offset);
+		}
+	}
+
+	.project {
+
+		max-width: 400px;
+		@include min_query(margin-left, $regular-page-breakpoint, 28px);
+		
+		&>* {
+			position: relative;
+
+			&:before, &:after {
+				content: "";
+				display: block;
+				position: absolute;
+				
+				height: 90%;
+				--width: 2px;
+				width: var(--width);
+				@include min_query(--width, $regular-page-breakpoint, 3px);
+				left: -20px;
+				@include min_query(left, $regular-page-breakpoint, -28px);
+				top: 50%;
+				
+				transform: translate(0, -50%);
+			}
+
+			&:before {
+				background-color: $color-darkest-grey;
+			}
+
+			&:after {
+				transition: width 400ms ease;
+				background-color: $color-light-grey;
+				z-index: -1;
+			}
+		}
+		
+		&-title {
+			font-weight: 800;
+			color: $color-darkest-grey;
+			@include interpolate(font-size, 40rem, 64rem,  1.375rem, 2.5rem);
+		}
+
+		&-type {
+			margin: 0.15rem 0 0.3rem 0;
+
+			@include interpolate(font-size, 40rem, 64rem,  1rem, 2rem);
+			font-weight: 200;
+			color: $color-darkest-grey;
+		}
+
+		&-skills {
+			@include interpolate(height, 40rem, 64rem,  2rem, 4rem);
+
+			&-icon {
+				height: 100%;
+			}
+
+			&:before, &:after {
+				height: 110%;
+			}
+		}
+	}
+
+	&.active {
+
+		.section-background {
+
+			@media screen and (min-width: $regular-page-breakpoint) {
+				width: 200vh;
+				height: 200vh;
+				--rotation: -19deg;
+			}
+
+			&:after {
+				animation: border-loader $project-exposition-time linear infinite;
+			}
+			
+			.background-empty-squares-element {
+
+				transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,-235deg);
+
+				animation: background-square-rotation-inverse 90s linear infinite;
+
+				@for $i from 1 through 4  {
+					&:nth-child(#{$i}) {
+						width: 8vw + ($i - 1) * 5vw;
+						height: 8vw + ($i - 1) * 5vw;
+					}
+				}
+
+				@keyframes background-square-rotation-inverse {
+					0% {
+						transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,224.5deg);
+					}
+					100% {
+						transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,-135.5deg);
+					}
+				}
+			}
+		}
+
+		.photo-projet {
+			transform: translate3d(-40%, -50%, 0);
+			animation: photo-hiding-phone $project-exposition-time/2 cubic-bezier(0,.66,0,.99) infinite alternate;
+
+			@media screen and (min-width: $regular-page-breakpoint) {
+				top: 80%;
+				right: 0;
+				animation: photo-hiding-desktop-projet $project-exposition-time/2 cubic-bezier(0,.66,0,.99) infinite alternate;
+			}
+
+			
+			@keyframes photo-hiding-desktop-projet {
+				0% {
+					transform: translate3d(76%, -15%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
+				}
+				100% {
+					transform: translate3d(33%, -44%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
+				}
+			}
+		}
+
+		.project {
+
+			@for $i from 1 through 3 {
+				&>*:nth-child(#{$i}) {
+					&:before {
+						animation-delay: 100ms * ($i - 1);
+					}
+					&:after {
+						transition-delay: 100ms * ($i - 1);
+					}
+				}
+			}
+
+			&>*:before {
+				animation: project-reveal $project-exposition-time ease infinite;
+			}
+
+			&:hover>*:after {
+				width: 100%;
+			}
+			
+			@keyframes project-reveal {
+				0% {
+					width: 100%;
+				}
+				5% {
+					width: var(--width);
+				}
+				95% {
+					width: var(--width);
+				}
+				100% {
+					width: 100%;
+				}
+			}
+		}
+
+		.next-project {
+			&-progress-circle {
+				
+				&-loading {
+					animation: progress-loading $project-exposition-time * 2 infinite linear;
+				}
+				
+				&-idle {
+					animation: progress-idle $project-exposition-time * 2 infinite linear reverse;
+				}
+				
+				@keyframes progress-loading {
+					0% {
+						stroke-dashoffset: -339.292;
+					}
+					100% {
+						stroke-dashoffset: 339.292;
+					}
+					
+				}
+				
+				@keyframes progress-idle {
+					0% {
+						stroke-dashoffset: 0;
+					}
+					100% {
+						stroke-dashoffset: -339.292 * 2;
+					}
+					
+				}
+			}
+
+			&-indicator {
+				&-current {
+					&-content {
+						animation: indicator-hiding $project-exposition-time/2 cubic-bezier(0,.66,0,.99) infinite alternate;
+					}
+					
+					@keyframes indicator-hiding {
+						0% {
+							right: calc(var(--right) - var(--lateral-offset));
+						}
+						
+						10% {
+							right: var(--right);
+						}
+					}
+				}
+			}
+		}
+	}
+}

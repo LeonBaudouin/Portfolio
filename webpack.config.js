@@ -52,7 +52,8 @@ module.exports =
                         loader: 'html-loader',
                         options: {
                             minimize: prod,
-                            removeComments: prod
+                            removeComments: prod,
+                            attrs: ['img:src', 'source:srcset']
                         }
                     }
                 },

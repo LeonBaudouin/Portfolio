@@ -1,0 +1,245 @@
+@import "_scroll_exceptions.scss";
+@import "_main_title.scss";
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	font-family: 'Raleway', sans-serif;
+
+	overflow: hidden;
+}
+
+.container {
+
+	height: 100%;
+	--margin-top: 0;
+
+	.paragraph {
+		margin-right: 10px;
+		@include interpolate(max-width, $regular-page-breakpoint, 1366px, 200px, 300px);
+		@include interpolate(font-size, 40rem, 64rem,  0.72rem, 1rem);
+	}
+
+	& .page {
+
+		height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+		align-items: flex-end;
+	
+		&.accueil {
+			align-items: center;
+        }
+	}
+}
+
+.section {
+	position: relative;
+
+	margin-bottom: 20px;
+	top: 0;
+
+	width: calc(100% - var(--margin-side-buttons-right) * 1);
+	height: calc(100% - var(--margin-side-buttons-top) * 4);
+
+
+	transition: top 500ms ease;
+
+	@media screen and (min-width: $regular-page-breakpoint) {
+		width: 100%;
+		height: 100%;
+	}
+
+
+	&-background {
+
+		--rotation: 0deg;
+
+		position: absolute;
+		overflow: hidden;
+
+		right: 0;
+		z-index: -1;
+
+		width: 0%;
+		height: 100%;
+	
+		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+		background-color: $color-lightest-grey;
+		transition: width 500ms 400ms cubic-bezier(0,.64,0,1.1);
+
+		@media screen and (min-width: $regular-page-breakpoint) {
+
+			--rotation: -90deg;
+			
+			height: 0;
+			transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1, var(--rotation));
+
+			transition: transform 3s 200ms cubic-bezier(0,.87,0,1),
+                        width 1.5s 200ms cubic-bezier(.1,.86,0,1),
+                        height 1.5s 200ms cubic-bezier(.1,.86,0,1);
+		}
+
+		.background-empty-squares {
+			display: none;
+			@include min_query(display, $regular-page-breakpoint, block);
+
+			&-element {
+				position: absolute;
+				border: 2px solid $color-light-grey;
+				width: 0;
+				height: 0;
+				
+				transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,0deg);
+
+				transition: width 800ms ease,
+							height 800ms ease,
+							transform 10s cubic-bezier(0,.98,0,.99);
+
+				&.thick {
+					border-width: 10px;
+				}
+			}
+		}
+		
+		.active & {
+			width: 100%;
+
+			.background-empty-squares-element {
+				transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,235deg);
+				animation: background-square-rotation 90s linear infinite;
+
+				@for $i from 1 through 4  {
+					&:nth-child(#{$i}) {
+						width: 18vw + ($i - 1) * 6vw;
+						height: 18vw + ($i - 1) * 6vw;
+
+						transition-delay: 75ms * (4 - ($i - 1));
+						animation-delay: 75ms * (4 - ($i - 1)) + 3s;
+					}
+				}
+
+				@keyframes background-square-rotation {
+					0% {
+						transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,224.5deg);
+					}
+					100% {
+						transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,584.5deg);
+					}
+				}
+			}
+		}
+	}
+
+	&-content {
+
+		--button-size: 56px;
+		@media screen and (min-width: 360px) {
+			--button-size: calc(5.45455vw + 36.36364px);
+		}
+		@media screen and (min-width: $regular-page-breakpoint) {
+			--button-size: calc(3.53357vw + 51.73145px);
+		}
+		@media screen and (min-width: 1366px) {
+			--button-size: 100px;
+		}
+
+		display: grid;
+
+		height: 100%;
+		padding: $padding 0 $padding $padding;
+		margin-right: var(--margin-side-buttons-right);
+
+		grid-template-columns: auto var(--button-size);
+		grid-template-rows: 1fr 1fr auto;
+		grid-template-areas:
+				"title all"
+				"none none"
+				"description continuer";
+
+		& .fade-from-left {
+			opacity: 0;
+			transition: opacity 200ms linear,
+						transform 500ms ease;
+			.active & {opacity: 1;}
+			
+			@media screen and (min-width: $regular-page-breakpoint) {
+				transform: translate3d(-20px, 0, 0);
+				.active & {transform: translate3d(0, 0, 0);}
+
+				&.button {
+					transform: translate3d(-20px, 0, 0) rotate3d(0,0,1,-45deg);
+					.active & {transform: translate3d(0, 0, 0) rotate3d(0,0,1,-45deg);}
+				}
+			}
+		}
+
+		& .regular-title {
+			grid-area: title;
+			align-self: start;
+			position: relative;
+		}
+
+		& .description {
+			grid-area: description;
+		}
+
+		& .continuer {
+			align-self: center;
+			justify-self: center;
+
+			grid-area: continuer;
+		}
+
+		& .all {
+			align-self: center;
+			justify-self: center;
+			grid-area: all;
+		}
+
+		& .next-project {
+			align-self: center;
+			justify-self: center;
+			grid-area: next-project;
+
+			display: none;
+			@include min_query(display, $regular-page-breakpoint, block);
+		}
+	}
+}
+
+.photo-projet, .photo-lab {
+	position: absolute;
+	top: 50%;
+	height: 100%;
+	
+	transform: translate3d(-100%, -50%, 0);
+	transition: transform 4s 600ms cubic-bezier(0,.66,0,.99);
+
+	@media screen and (min-width: $regular-page-breakpoint) {
+		height: 100vh;
+		transition: transform 3s 200ms cubic-bezier(0,.87,0,1);
+		transform: translate3d(-100%, -35%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
+	}
+	
+
+	@keyframes photo-hiding-phone {
+		0% {
+			transform: translate3d(-100%, -50%, 0);
+		}
+		100% {
+			transform: translate3d(-50%, -50%, 0);
+		}
+	}
+}
+
+
+@import "_profil.scss";
+@import "_projets.scss";
+@import "_lab.scss";
