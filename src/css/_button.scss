@@ -13,7 +13,6 @@
     transform: rotate3d(0,0,1,-45deg);
 
     overflow: hidden;
-    cursor: pointer;
 
     &:before {
         content: "";
@@ -44,7 +43,7 @@
         transition: all 400ms cubic-bezier(1,0,0,1);
     }
 
-    &:hover {
+    &:hover, .title:hover~&.all, .description:hover~&.continuer {
         .button-arrow {
             animation: button-arrow-hover 400ms cubic-bezier(1,0,0,1);
             transform: translate3d(-175%, -175%, 0);

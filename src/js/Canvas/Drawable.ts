@@ -15,8 +15,9 @@ export namespace DrawnElement {
     size: number;
   }
 
-  export interface MouseSensible {
+  export interface Interactive {
     UpdateFromCursor(e: MouseEvent): void;
+    UpdateFromOrientation(e: DeviceOrientationEvent): void;
   }
 
 
@@ -52,10 +53,9 @@ export namespace DrawnElement {
 
 
 
-  export class FollowingTiltedSquare extends TiltedSquare implements MouseSensible {
+  export class InteractiveTiltedSquare extends TiltedSquare implements Interactive {
 
     offsetAngle: number;
-    previousAngle: number;
     cursorAngle: number;
     squareAngle: number;
     sensitivity: number;
@@ -64,26 +64,37 @@ export namespace DrawnElement {
       super(squareSettings);
 
       this.offsetAngle = defaultAngle;
-      this.previousAngle = defaultAngle;
       this.squareAngle = defaultAngle;
       this.cursorAngle = defaultAngle;
       this.sensitivity = sensitivity;
     }
 
-    public UpdateFromCursor(e: MouseEvent) {
-      this.UpdateFocusPoint({ x: e.clientX, y: e.clientY });
+    public UpdateFromCursor(e: MouseEvent) : void {
+      let angle = MathFunc.getAngle(this.position, { x: e.clientX, y: e.clientY });
+      this.UpdateAngle(angle);
     }
 
-    public UpdateFocusPoint(focusPoint: Point) {
-      this.previousAngle = this.cursorAngle;
-      let delta = MathFunc.getAngle(this.position, focusPoint) - this.previousAngle + this.offsetAngle;
-      if(delta > 5) {
-        delta -= Math.PI*2;
-      } else if (delta < -5) {
-        delta += Math.PI*2;
-      }
-      this.cursorAngle += delta;
+    public UpdateFromOrientation(e : DeviceOrientationEvent) : void {
+      this.UpdateAngle(e.alpha);
+    }
 
+
+
+    public UpdateAngle(newAngle: number) {
+      let previousAngle = this.cursorAngle;
+      let delta = newAngle - previousAngle  + this.offsetAngle;
+
+      while(Math.abs(delta) > Math.PI/2) {
+        if(delta > 0) {
+          this.offsetAngle -= Math.PI/2;
+        } else {
+          this.offsetAngle += Math.PI/2;
+        }
+        delta = newAngle - previousAngle  + this.offsetAngle;
+      }
+
+
+      this.cursorAngle += delta;
     }
 
     public Draw(ctx: CanvasRenderingContext2D) {
@@ -185,7 +196,6 @@ export namespace DrawnElement {
     }
 
     public Draw(ctx: CanvasRenderingContext2D) { }
-    public UpdateFromCursor(e: MouseEvent, ctx: CanvasRenderingContext2D) { }
   }
 
   export class Grid implements Drawable {
@@ -231,7 +241,5 @@ export namespace DrawnElement {
       ctx.lineTo(this.canvasSize.width, y);
       ctx.stroke();
     }
-
-    public UpdateFromCursor(e: MouseEvent, ctx: CanvasRenderingContext2D) { }
   }
 }

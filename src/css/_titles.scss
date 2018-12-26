@@ -1,6 +1,12 @@
 .title, .logo {
     text-transform: uppercase;
+    text-decoration: none;
     margin: 0;
+
+    & .first-part, & .second-part {
+        text-decoration: inherit;
+        color: inherit;
+    }
 
     & .first-part {
         font-weight: 200;
@@ -21,10 +27,14 @@
     left: calc( var(--margin-side-buttons-right) - 4.375rem);
     top: calc( var(--margin-side-buttons-top) - 1.5625rem);
 
-    @include min_query(left, $nav-breakpoint, calc( var(--margin-side-buttons-right) - 7.5rem));
-    @include min_query(--deg, $nav-breakpoint, 45deg);
-    @include min_query(--horizontal-offset, $nav-breakpoint, -0.625rem);
-    
+    @media screen and (min-width: $nav-breakpoint) {
+        left: calc( var(--margin-side-buttons-right) - 7.5rem);
+        --deg: 45deg;
+        --horizontal-offset: -0.625rem;
+    }
+
+    text-decoration: none;
+
     transform: skew(calc(0deg - var(--deg)));
     transition: transform 200ms cubic-bezier(.08,.67,.12,1.13);
 

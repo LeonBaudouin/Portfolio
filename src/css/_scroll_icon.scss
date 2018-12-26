@@ -1,6 +1,6 @@
 $scroll-line--length: 38;
 
-.scroll {
+.scroll-icon {
     --scroll-line--width: 15px;
 
     @include interpolate(width, 360px, 1024px, 14px, 30px);

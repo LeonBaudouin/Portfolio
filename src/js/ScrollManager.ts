@@ -96,15 +96,12 @@ export class ScrollManager {
         });
 
         window.addEventListener("touchend", (e) => {
-            console.log(e);
             let fraction = Math.abs(this.dragDelta.y / this.WindowHeight);
-            if(fraction > 0.05) {this.DirectionScroll(this.dragDelta.y);}
+            if(fraction > 0.05) {
+                this.DirectionScroll(this.dragDelta.y);
+            }
             this.dragDelta = null;
         });
-    }
-
-    ProcessWheel(e: WheelEvent) {
-
     }
 
     DirectionScroll(direction: number) {
@@ -142,7 +139,7 @@ export class ScrollManager {
 
     }
 
-    MoveTo(destination: number) {
+    public MoveTo(destination: number) {
 
         let currentScroll = this.WindowHeight * this.currentSlideIndex;
         let animationDistance = this.WindowHeight * destination - currentScroll;

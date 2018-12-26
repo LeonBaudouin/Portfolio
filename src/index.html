@@ -14,13 +14,21 @@
   <body class="scroll-index-0">
     <canvas></canvas>
 
-    <svg class="scroll sideButton" viewbox="-1 0 15 52" width="16" height="52">
-      <line class="scroll-line" x1="1" y1="8" x2="1" y2="46" stroke-width="2" />
-      <line class="scroll-line" x1="7" y1="17" x2="7" y2="55" stroke-width="2" />
-      <line class="scroll-line" x1="13" y1="0" x2="13" y2="38" stroke-width="2" />
+    <div class="scroll-bar sideButton">
+      <div class="scroll-bar-section to-title"></div>
+      <div class="scroll-bar-section to-profil"></div>
+      <div class="scroll-bar-section to-projet"></div>
+      <div class="scroll-bar-section to-lab"></div>
+      <div class="scroll-bar-current"></div>
+    </div>
+
+    <svg class="scroll-icon sideButton" viewbox="-1 0 15 52" width="16" height="52">
+      <line class="scroll-icon-line" x1="1" y1="8" x2="1" y2="46" stroke-width="2" />
+      <line class="scroll-icon-line" x1="7" y1="17" x2="7" y2="55" stroke-width="2" />
+      <line class="scroll-icon-line" x1="13" y1="0" x2="13" y2="38" stroke-width="2" />
     </svg>
 
-    <div class="logo sideButton">
+    <a href="#" class="logo sideButton">
       <div class="first-part">
         <div class="first-part-content">L<span class="v-m-page">éon</span>
         </div>
@@ -29,7 +37,7 @@
         <div class="second-part-content">B<span class="v-m-page">audouin</span>
         </div>
       </div>
-    </div>
+    </a>
 
     <nav class="nav hidden">
       <svg class="nav-burger sideButton" viewbox="0 0 44 44" width="44" height="44">
@@ -46,7 +54,7 @@
           <li class="nav-menu-item"><a href="#" class="nav-menu-link">Le lab</a></li>
           <li class="nav-menu-item space-even v-s-nav">
             <a href="#" class="nav-menu-contact">CV</a>
-            <a href="#" class="nav-menu-contact">Mail</a>
+            <a href="#" class="nav-menu-contact copy-to-clipboard">Mail</a>
             <div class="null"></div>
           </li>
           <li class="nav-menu-item v-m-nav">
@@ -56,7 +64,9 @@
             <a href="#" class="nav-menu-contact">Mon cv</a>
           </li>
           <li class="nav-menu-item v-m-nav">
-            <a href="mailto:leondedouin@gmail.com" class="nav-menu-contact"><span>leondedouin<span class="color-red">@</span>gmail.com</span></a>
+            <a href="mailto:leondedouin@gmail.com" class="nav-menu-contact copy-to-clipboard">
+              <span>leondedouin<span class="color-red">@</span>gmail.com</span>
+            </a>
           </li>
           <li class="nav-menu-item space-even">
             <a href="#" class="nav-menu-contact contact-icon codepen"></a>
@@ -100,7 +110,6 @@
               <div class="background-empty-squares-element absolute-centering"></div>
               <div class="background-empty-squares-element thick absolute-centering"></div>
             </div>
-            <!-- <img src="img/leon_profil3.png" height="85%" alt="photo de Léon" class="photo-profil"> -->
             <img src="img/leon_profil3.png" height="60%" alt="photo de Léon" class="photo-profil">
             <svg class="background-strokes" viewbox="0 0 190 50">
               <line class="background-strokes-line" x1="70" y1="1" x2="190" y2="1"/>
@@ -111,13 +120,13 @@
           </div>
           <div class="section-content">
             <h2 class="title regular-title direction-right">
-              <div class="first-part"><span class="first-part-content">Mon</span></div>
-              <div class="second-part"><span class="second-part-content">Profil</span></div>
+              <a href="#" class="first-part"><span class="first-part-content">Mon</span></a>
+              <a href="#" class="second-part"><span class="second-part-content">Profil</span></a>
             </h2>
             <p class="description paragraph fade-from-left">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quis cursus tellus, at consectetur arcu. Phasellus purus arcu, porttitor non interdum...
             </p>
-            <div class="button continuer fade-from-left">
+            <a href="#" class="button continuer fade-from-left">
               <svg x="0px" y="0px" width="52.5px" height="54px" viewbox="0 0 52.5 54" class="absolute-centering button-hover">
                 <path d="M1.3,1.3c0.4-0.4,0.8-0.7,1.3-0.9C3.1,0.1,3.6,0,4.2,0c0.5,0,1.1,0.1,1.6,0.3c0.5,0.2,1.1,0.5,1.5,1
                 c0.6,0.6,0.9,1.2,1.1,1.8c0.2,0.7,0.2,1.3,0,1.9L6.6,4.7C6.7,4.4,6.7,4.2,6.7,4c0-0.2,0-0.4-0.1-0.6C6.6,3.2,6.5,3.1,6.4,2.9
@@ -150,7 +159,7 @@
                 <line class="button-arrow-line" x1="20.5" y1="20.5" x2="0.7" y2="0.7"/>
                 <polyline class="button-arrow-head" points="20.9,4.6 20.9,20.9 4.6,20.9 "/>
               </svg>
-            </div>
+            </a>
           </div>
         </section>
       </div>
@@ -181,7 +190,31 @@
               <div class="first-part"><span class="first-part-content">Mes</span></div>
               <div class="second-part"><span class="second-part-content">Projets</span></div>
             </h2>
-            <div class="button all fade-from-left">
+            <a href="#" class="description project fade-from-left">
+              <h3 class="project-title title">Call Me</h3>
+              <h4 class="project-type title">Motion Design</h4>
+              <div class="project-skills">
+                <img src="svg/Ae.svg" alt="After effect" class="project-skills-icon">
+                <img src="svg/Ai.svg" alt="After effect" class="project-skills-icon">
+              </div>
+            </a>
+            <a href="#" class="description project fade-from-left">
+              <h3 class="project-title title">CV interactif</h3>
+              <h4 class="project-type title">Site Web</h4>
+              <div class="project-skills">
+                <img src="svg/CSS.svg" alt="CSS" class="project-skills-icon">
+                <img src="svg/JS.svg" alt="Javascript" class="project-skills-icon">
+              </div>
+            </a>
+            <a href="#" class="description project fade-from-left">
+              <h3 class="project-title title">Glint</h3>
+              <h4 class="project-type title">Jeu vidéo</h4>
+              <div class="project-skills">
+                <img src="svg/Csharp.svg" alt="C#" class="project-skills-icon">
+                <img src="svg/Unity.svg" alt="Unity" class="project-skills-icon">
+              </div>
+            </a>
+            <a href="#" class="button all fade-from-left">
               <svg x="0px" y="0px" width="19.2px" height="20.5" viewbox="0 0 19.2 20.5" class="absolute-centering button-hover">
                 <path d="M3.2,2.6L2.5,1.9L0.7,3.8L0,3.1l1.8-1.8L1.1,0.6L1.7,0l2.1,2.1L3.2,2.6z"/>
                 <path d="M2.6,5.8C2.5,5.6,2.3,5.4,2.2,5.2C2.2,5,2.1,4.8,2.1,4.5c0-0.2,0.1-0.4,0.1-0.6c0.1-0.2,0.2-0.4,0.4-0.5
@@ -214,8 +247,8 @@
                 <polyline class="button-arrow-head" points="24.3,8 24.3,24.3 8,24.3 "/>
                 <polyline class="button-arrow-head" points="16.3,0 16.3,16.3 0,16.3 "/>
               </svg>
-            </div>
-            <div class="button continuer fade-from-left">
+            </a>
+            <a href="#" class="button continuer fade-from-left">
               <svg x="0px" y="0px" width="21.9px" height="21.9px" viewbox="0 0 21.9 21.9" class="absolute-centering button-arrow" >
                 <line class="button-arrow-line" x1="20.5" y1="20.5" x2="0.7" y2="0.7"/>
                 <polyline class="button-arrow-head" points="20.9,4.6 20.9,20.9 4.6,20.9 "/>
@@ -252,7 +285,7 @@
                 <line class="button-arrow-line" x1="20.5" y1="20.5" x2="0.7" y2="0.7"/>
                 <polyline class="button-arrow-head" points="20.9,4.6 20.9,20.9 4.6,20.9 "/>
               </svg>
-            </div>
+            </a>
             <div class="next-project fade-from-left">
               <svg x="0px" y="0px" width="17.3px" height="17.3px" viewbox="0 0 17.3 17.3" class="next-project-before" >
                   <polyline class="next-project-before-arrow" points="15.3,0 15.3,15.3 0,15.3 "/>
@@ -272,30 +305,6 @@
                 <div class="next-project-indicator-total">
                   <span class="next-project-indicator-total-content">3</span>
                 </div>
-              </div>
-            </div>
-            <div class="description project fade-from-left">
-              <h3 class="project-title title">Call Me</h3>
-              <h4 class="project-type title">Motion Design</h4>
-              <div class="project-skills">
-                <img src="svg/Ae.svg" alt="After effect" class="project-skills-icon">
-                <img src="svg/Ai.svg" alt="After effect" class="project-skills-icon">
-              </div>
-            </div>
-            <div class="description project fade-from-left">
-              <h3 class="project-title title">CV interactif</h3>
-              <h4 class="project-type title">Site Web</h4>
-              <div class="project-skills">
-                <img src="svg/CSS.svg" alt="CSS" class="project-skills-icon">
-                <img src="svg/JS.svg" alt="Javascript" class="project-skills-icon">
-              </div>
-            </div>
-            <div class="description project fade-from-left">
-              <h3 class="project-title title">Glint</h3>
-              <h4 class="project-type title">Jeu vidéo</h4>
-              <div class="project-skills">
-                <img src="svg/Csharp.svg" alt="C#" class="project-skills-icon">
-                <img src="svg/Unity.svg" alt="Unity" class="project-skills-icon">
               </div>
             </div>
           </div>
@@ -381,10 +390,16 @@
           </div>
           <div class="section-content">
             <h2 class="title regular-title">
-              <div class="first-part"><span class="first-part-content">Mon</span></div>
-              <div class="second-part"><span class="second-part-content">Lab</span></div>
+              <a href="#" class="first-part"><span class="first-part-content">Mon</span></a>
+              <a href="#" class="second-part"><span class="second-part-content">Lab</span></a>
             </h2>
-            <div class="button all fade-from-left">
+            <a href="#" class="description fade-from-left">
+              <h3 class="lab-title title"><span class="lab-title-content">Mikros Motion</span></h3>
+              <p class="paragraph">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue, augue ut semper tempus, nibh justo vehicula metus, id...
+              </p>
+            </a>
+            <a href="#" class="button all fade-from-left">
               <svg x="0px" y="0px" width="19.2px" height="20.5" viewbox="0 0 19.2 20.5" class="absolute-centering button-hover">
                 <path d="M3.2,2.6L2.5,1.9L0.7,3.8L0,3.1l1.8-1.8L1.1,0.6L1.7,0l2.1,2.1L3.2,2.6z"/>
                 <path d="M2.6,5.8C2.5,5.6,2.3,5.4,2.2,5.2C2.2,5,2.1,4.8,2.1,4.5c0-0.2,0.1-0.4,0.1-0.6c0.1-0.2,0.2-0.4,0.4-0.5
@@ -417,8 +432,8 @@
                 <polyline class="button-arrow-head" points="24.3,8 24.3,24.3 8,24.3 "/>
                 <polyline class="button-arrow-head" points="16.3,0 16.3,16.3 0,16.3 "/>
               </svg>
-            </div>
-            <div class="button continuer fade-from-left">
+            </a>
+            <a href="#" class="button continuer fade-from-left">
               <svg x="0px" y="0px" width="21.9px" height="21.9px" viewbox="0 0 21.9 21.9" class="absolute-centering button-arrow" >
                 <line class="button-arrow-line" x1="20.5" y1="20.5" x2="0.7" y2="0.7"/>
                 <polyline class="button-arrow-head" points="20.9,4.6 20.9,20.9 4.6,20.9 "/>
@@ -455,7 +470,7 @@
                 <line class="button-arrow-line" x1="20.5" y1="20.5" x2="0.7" y2="0.7"/>
                 <polyline class="button-arrow-head" points="20.9,4.6 20.9,20.9 4.6,20.9 "/>
               </svg>
-            </div>
+            </a>
             <div class="next-project fade-from-left">
               <svg x="0px" y="0px" width="17.3px" height="17.3px" viewbox="0 0 17.3 17.3" class="next-project-before" >
                 <polyline class="next-project-before-arrow" points="15.3,0 15.3,15.3 0,15.3 "/>
@@ -477,12 +492,6 @@
                 </div>
               </div>
             </div>
-            <div class="description fade-from-left">
-              <h3 class="lab-title title"><span class="lab-title-content">Mikros Motion</span></h3>
-              <p class="paragraph">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue, augue ut semper tempus, nibh justo vehicula metus, id...
-              </p>
-            </div>
           </div>
         </section>
         <div class="contact">
@@ -492,8 +501,8 @@
             <div class="contact-content-grid">
               <a href="#" class="contact-content-link cv v-m-page">mon cv</a>
               <a href="#" class="contact-content-link cv v-s-page">CV</a>
-              <a href="mailto:leondedouin@gmail.com" class="contact-content-link mail v-m-page">leondedouin<span class="color-red">@</span>gmail.com</a>
-              <a href="mailto:leondedouin@gmail.com" class="contact-content-link mail v-s-page">Mail</a>
+              <a href="mailto:leondedouin@gmail.com" class="contact-content-link mail v-m-page copy-to-clipboard">leondedouin<span class="color-red">@</span>gmail.com</a>
+              <a href="mailto:leondedouin@gmail.com" class="contact-content-link mail v-s-page copy-to-clipboard">Mail</a>
               <a href="#" class="contact-content-link contact-icon codepen"></a>
               <a href="#" class="contact-content-link contact-icon instagram"></a>
               <a href="#" class="contact-content-link contact-icon github"></a>

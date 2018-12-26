@@ -3,7 +3,7 @@
         @include min_query(--margin-side-buttons-right, $nav-breakpoint, 50vw);
     }
     
-    & .scroll {
+    & .scroll-icon {
         @include min_query(left, $nav-breakpoint, 50%);
         @include min_query(transform, $nav-breakpoint, translateX(-50%));
     }
@@ -12,14 +12,18 @@
         @include min_query(display, $nav-breakpoint, none);
     }
 
-    .projets .section, .profil .section {
+    & .projets .section, & .profil .section {
         @include min_query(top, $regular-page-breakpoint, 120vh);
+    }
+
+    & .scroll-bar-current {
+        top: 0;
     }
 }
 
 .scroll-index-1 {
 
-    .logo  {        
+    & .logo  {
         $offset-delay: 2000ms;
 
         // skew animation
@@ -45,47 +49,58 @@
         }
     }
 
-    .nav-burger {
+    & .nav-burger {
         $offset-delay: 0;
         transition-delay: $offset-delay;
     }
 
-    .projets .section {
+    & .projets .section {
         @include min_query(top, $regular-page-breakpoint, 120vh);
+    }
+
+    & .scroll-bar-current {
+        top: 25%;
     }
 }
 
 .scroll-index-2 {
-    .logo .first-part {
+    & .logo .first-part {
         @include min_query(color, $regular-page-breakpoint, $color-darkest-grey);
     }
     
-    .profil .section {
+    & .profil .section {
         @include min_query(top, $regular-page-breakpoint, -120vh);
     }
 
-    .lab .section {
+    & .lab .section {
         @include min_query(top, $regular-page-breakpoint, 60vh);
     }
 
+    & .scroll-bar-current {
+        top: 50%;
+    }
 }
 
 .scroll-index-3 {
 
-    .projets .section {
+    & .projets .section {
         @include min_query(top, $regular-page-breakpoint, -120vh);
     }
 
-    .profil .section {
+    & .profil .section {
         @include min_query(top, $regular-page-breakpoint, -50vh);
     }
 
-    & .scroll-line {
+    & .scroll-icon-line {
         animation: none;
         stroke-dashoffset: -$scroll-line--length;
     }
 
     & .hidden .nav-burger-line {
         @include min_query(stroke, $regular-page-breakpoint, $color-darkest-grey);
+    }
+    
+    & .scroll-bar-current {
+        top: 75%;
     }
 }

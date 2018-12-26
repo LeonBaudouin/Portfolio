@@ -10,7 +10,7 @@ class Canvas {
   private backgroundStyle: Style = Palette.BackgroundDark;
 
   private drawnElement: DrawnElement.Drawable[] = [];
-  private mousemoveElement: DrawnElement.MouseSensible[] = [];
+  private interactiveElement: DrawnElement.Interactive[] = [];
 
   constructor(uniqueSelector: string) {
     this.element = document.querySelector(uniqueSelector);
@@ -22,10 +22,18 @@ class Canvas {
       this.onResize();
     });
 
-    window.addEventListener("mousemove", e => {
-      this.mousemoveElement.forEach(element => {
+    window.addEventListener("mousemove", (e : MouseEvent) => {
+      this.interactiveElement.forEach(element => {
         if (element) {
           element.UpdateFromCursor(e);
+        }
+      });
+    });
+
+    window.addEventListener("deviceorientation", (e : DeviceOrientationEvent) => {
+      this.interactiveElement.forEach(element => {
+        if (element) {
+          element.UpdateFromOrientation(e);
         }
       });
     });
@@ -38,13 +46,13 @@ class Canvas {
     });
     this.DrawGradient();
 
-    // requestAnimationFrame(() => this.Update());
+    requestAnimationFrame(() => this.Update());
   }
 
   private onResize(): void {
 
     this.drawnElement = [];
-    this.mousemoveElement = [];
+    this.interactiveElement = [];
 
     this.element.width = window.innerWidth;
     this.element.height = window.innerHeight;
@@ -77,28 +85,25 @@ class Canvas {
     this.context.fillRect(0, 0, this.size.width, this.size.height);
   }
 
-
-
-
-  private SetupSquare() {
+  private SetupSquare() : void {
     let settings: tiltedSquareSettings = {
       position: { x: this.size.width / 2, y: this.size.height / 2 },
       size: this.size.height - 200,
       strokeSize: 25,
     };
 
-    let FTS = new DrawnElement.FollowingTiltedSquare(settings, Math.PI/4, 0.05);
+    let FTS = new DrawnElement.InteractiveTiltedSquare(settings, Math.PI/4, 0.05);
 
     this.drawnElement.push(FTS);
-    this.mousemoveElement.push(FTS);
+    this.interactiveElement.push(FTS);
 
     settings.strokeSize = 3;
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 3; i++) {
       settings.size = this.size.height - 300 - 100 * i;
-      let obj = new DrawnElement.FollowingTiltedSquare(settings, Math.PI/4, 0.045 - 0.005 * i);
+      let obj = new DrawnElement.InteractiveTiltedSquare(settings, Math.PI/4, 0.045 - 0.005 * i);
       this.drawnElement.push(obj);
-      this.mousemoveElement.push(obj);
+      this.interactiveElement.push(obj);
     }
 
 
