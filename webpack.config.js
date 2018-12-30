@@ -121,7 +121,12 @@ module.exports =
             },
             plugins: [
                 new HtmlWebpackPlugin({
+                    filename: "index.html",
                     template: "./src/index.html"
+                }),
+                new HtmlWebpackPlugin({
+                    filename: "profil.html",
+                    template: "./src/profil.html"
                 }),
                 new ExtractTextPlugin({
                     filename: "css/[name].css"

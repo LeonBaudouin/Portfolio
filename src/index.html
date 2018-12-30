@@ -11,7 +11,7 @@
     <title>Test</title>
   </head>
 
-  <body class="scroll-index-0">
+  <body class="scroll-index-0 main-page" data-page="main-page">
     <canvas></canvas>
 
     <div class="scroll-bar sideButton">
@@ -53,26 +53,26 @@
           <li class="nav-menu-item"><a href="#" class="nav-menu-link">Mes projets</a></li>
           <li class="nav-menu-item"><a href="#" class="nav-menu-link">Le lab</a></li>
           <li class="nav-menu-item space-even v-s-nav">
-            <a href="#" class="nav-menu-contact">CV</a>
-            <a href="#" class="nav-menu-contact copy-to-clipboard">Mail</a>
+            <a href="#" class="contact-item">CV</a>
+            <a href="#" class="contact-item copy-to-clipboard">Mail</a>
             <div class="null"></div>
           </li>
           <li class="nav-menu-item v-m-nav">
             <div class="red-stroke"></div>
           </li>
           <li class="nav-menu-item v-m-nav">
-            <a href="#" class="nav-menu-contact">Mon cv</a>
+            <a href="#" class="contact-item">Mon cv</a>
           </li>
           <li class="nav-menu-item v-m-nav">
-            <a href="mailto:leondedouin@gmail.com" class="nav-menu-contact copy-to-clipboard">
+            <a href="mailto:leondedouin@gmail.com" class="contact-item copy-to-clipboard">
               <span>leondedouin<span class="color-red">@</span>gmail.com</span>
             </a>
           </li>
           <li class="nav-menu-item space-even">
-            <a href="#" class="nav-menu-contact contact-icon codepen"></a>
-            <a href="#" class="nav-menu-contact contact-icon instagram"></a>
-            <a href="#" class="nav-menu-contact contact-icon github"></a>
-            <a href="#" class="nav-menu-contact contact-icon youtube"></a>
+            <a href="#" class="contact-icon codepen"></a>
+            <a href="#" class="contact-icon instagram"></a>
+            <a href="#" class="contact-icon github"></a>
+            <a href="#" class="contact-icon youtube"></a>
           </li>
         </ul>
         <div class="nav-menu-background"></div>
@@ -104,13 +104,17 @@
       <div class="page profil">
         <section class="section">
           <div class="section-background">
-            <div class="background-empty-squares absolute-centering">
-              <div class="background-empty-squares-element absolute-centering"></div>
-              <div class="background-empty-squares-element absolute-centering"></div>
-              <div class="background-empty-squares-element absolute-centering"></div>
-              <div class="background-empty-squares-element thick absolute-centering"></div>
+            <div class="background-empty-squares">
+              <div class="background-empty-squares-element"></div>
+              <div class="background-empty-squares-element"></div>
+              <div class="background-empty-squares-element"></div>
+              <div class="background-empty-squares-element thick"></div>
             </div>
-            <img src="img/leon_profil3.png" height="60%" alt="photo de Léon" class="photo-profil">
+            <!-- <img src="img/leon_profil3.png" height="60%" alt="photo de Léon" class="photo-profil"> -->
+            <picture class="photo-profil">
+              <source media="(min-width: 800px)" srcset="img/profil_1920.png">
+              <img src="img/profil_800.png" alt="Une photo de moi">
+            </picture>
             <svg class="background-strokes" viewbox="0 0 190 50">
               <line class="background-strokes-line" x1="70" y1="1" x2="190" y2="1"/>
               <line class="background-strokes-line" x1="30" y1="20" x2="150" y2="20"/>
@@ -178,11 +182,11 @@
               <source media="(min-width: 800px)" srcset="img/Glint_1920.png">
               <img src="img/Glint_800.png" alt="Illustration du projet Glint">
             </picture>
-            <div class="background-empty-squares absolute-centering">
-              <div class="background-empty-squares-element absolute-centering"></div>
-              <div class="background-empty-squares-element absolute-centering"></div>
-              <div class="background-empty-squares-element absolute-centering"></div>
-              <div class="background-empty-squares-element thick absolute-centering"></div>
+            <div class="background-empty-squares">
+              <div class="background-empty-squares-element"></div>
+              <div class="background-empty-squares-element"></div>
+              <div class="background-empty-squares-element"></div>
+              <div class="background-empty-squares-element thick"></div>
             </div>
           </div>
           <div class="section-content">
@@ -317,6 +321,14 @@
               <source media="(min-width: 800px)" srcset="img/Mikros_1920.png">
               <img src="img/Mikros_800.png" alt="Illustration du projet Mikros">
             </picture>
+            <picture class="photo-lab">
+              <source media="(min-width: 800px)" srcset="img/Particles_1920.png">
+              <img src="img/Particles_800.png" alt="Illustration du projet Particules">
+            </picture>
+            <picture class="photo-lab">
+              <source media="(min-width: 800px)" srcset="img/CaneShuga_1920.png">
+              <img src="img/CaneShuga_800.png" alt="Illustration du projet Cane Shuga">
+            </picture>
             <div class="background-squares v-s-page">
               <div class="background-squares-group">
                 <div class="background-squares-group-element"></div>
@@ -395,6 +407,18 @@
             </h2>
             <a href="#" class="description fade-from-left">
               <h3 class="lab-title title"><span class="lab-title-content">Mikros Motion</span></h3>
+              <p class="paragraph">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue, augue ut semper tempus, nibh justo vehicula metus, id...
+              </p>
+            </a>
+            <a href="#" class="description fade-from-left">
+              <h3 class="lab-title title"><span class="lab-title-content">Particules</span></h3>
+              <p class="paragraph">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue, augue ut semper tempus, nibh justo vehicula metus, id...
+              </p>
+            </a>
+            <a href="#" class="description fade-from-left">
+              <h3 class="lab-title title"><span class="lab-title-content">Cane Shuga</span></h3>
               <p class="paragraph">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue, augue ut semper tempus, nibh justo vehicula metus, id...
               </p>
@@ -499,10 +523,10 @@
           <div class="contact-content">
             <h5 class="contact-content-title title v-m-page"><span class="color-red">contactez</span> moi <span class="color-red">!</span></h5>
             <div class="contact-content-grid">
-              <a href="#" class="contact-content-link cv v-m-page">mon cv</a>
-              <a href="#" class="contact-content-link cv v-s-page">CV</a>
-              <a href="mailto:leondedouin@gmail.com" class="contact-content-link mail v-m-page copy-to-clipboard">leondedouin<span class="color-red">@</span>gmail.com</a>
-              <a href="mailto:leondedouin@gmail.com" class="contact-content-link mail v-s-page copy-to-clipboard">Mail</a>
+              <a href="#" class="contact-content-link contact-item cv v-m-page">mon cv</a>
+              <a href="#" class="contact-content-link contact-item cv v-s-page">CV</a>
+              <a href="mailto:leondedouin@gmail.com" class="contact-content-link contact-item mail v-m-page copy-to-clipboard">leondedouin<span class="color-red">@</span>gmail.com</a>
+              <a href="mailto:leondedouin@gmail.com" class="contact-content-link contact-item mail v-s-page copy-to-clipboard">Mail</a>
               <a href="#" class="contact-content-link contact-icon codepen"></a>
               <a href="#" class="contact-content-link contact-icon instagram"></a>
               <a href="#" class="contact-content-link contact-icon github"></a>

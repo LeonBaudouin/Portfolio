@@ -24,9 +24,9 @@ export class ScrollManager {
     isScrolling: boolean;
 
     menu: ActivationButton;
-    projectDisplayer: ProjectDisplayer;
+    displayers: ProjectDisplayer[];
 
-    constructor(slideNumber: number, coolDown: number, burgerMenu: ActivationButton, projDisp: ProjectDisplayer) {
+    constructor(slideNumber: number, coolDown: number, burgerMenu: ActivationButton, projDisp: ProjectDisplayer[]) {
         
         // this.lineHeight = parseFloat(window.getComputedStyle(document.documentElement).fontSize);
 
@@ -34,7 +34,7 @@ export class ScrollManager {
         this.isScrolling = false;
 
         this.menu = burgerMenu;
-        this.projectDisplayer = projDisp;
+        this.displayers = projDisp;
         
         this.currentSlideIndex = 0;
         this.slideNumber = slideNumber;
@@ -104,6 +104,7 @@ export class ScrollManager {
         });
     }
 
+
     DirectionScroll(direction: number) {
 
         if(direction > 0 && this.currentSlideIndex < this.slideNumber - 1) {
@@ -160,8 +161,8 @@ export class ScrollManager {
 
         if(!classList.contains("active")) {
             classList.add("active");
-            if(this.currentSlideIndex == 2) {
-                this.projectDisplayer.Activate();
+            if(this.displayers[this.currentSlideIndex]) {
+                this.displayers[this.currentSlideIndex].Activate();
             }
         }
 

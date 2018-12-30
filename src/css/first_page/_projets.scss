@@ -247,8 +247,10 @@
 				animation: project-reveal $project-exposition-time ease infinite;
 			}
 
-			&:hover>*:after {
-				width: 100%;
+			@include hover($regular-page-breakpoint) {
+				&>*:after {
+					width: 100%;
+				}
 			}
 			
 			@keyframes project-reveal {

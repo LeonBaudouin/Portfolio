@@ -10,16 +10,16 @@ export class ProjectDisplayer {
     expositionTime: number;
     currentIndex: number;
 
-    constructor(projectSelector: string, illustrationSelector: string, buttonSelector: string, expositionTime: number) {
+    constructor(illustrationSelector: string, sectionSelector: string, expositionTime: number) {
 
-        this.projectList = document.querySelectorAll(projectSelector);
+        this.projectList = document.querySelectorAll(sectionSelector + " .description");
         this.illustrationList = document.querySelectorAll(illustrationSelector);
         this.expositionTime = expositionTime;
-        this.buttonPrevious = document.querySelector(buttonSelector + " .next-project-before");
-        this.buttonNext = document.querySelector(buttonSelector + " .next-project-after");
-        this.buttonIndicator = document.querySelector(buttonSelector + " .next-project-indicator");
-        this.buttonIndicatorContent = document.querySelector(buttonSelector + " .next-project-indicator-current-content");
-        this.buttonMain = document.querySelector(buttonSelector + " .next-project-progress");
+        this.buttonPrevious = document.querySelector(sectionSelector + " .next-project-before");
+        this.buttonNext = document.querySelector(sectionSelector + " .next-project-after");
+        this.buttonIndicator = document.querySelector(sectionSelector + " .next-project-indicator");
+        this.buttonIndicatorContent = document.querySelector(sectionSelector + " .next-project-indicator-current-content");
+        this.buttonMain = document.querySelector(sectionSelector + " .next-project-progress");
 
         this.currentIndex = 0;
 

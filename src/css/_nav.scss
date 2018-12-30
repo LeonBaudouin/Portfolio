@@ -179,10 +179,9 @@ $nav-menu-background--size: 150vh;
             
         }
 
-        &-link, &-contact {
+        &-link, .contact-item, .contact-icon {
             font-size: 1.875rem;
             font-weight: 200;
-            text-decoration: none;
             text-transform: uppercase;
             transition: padding 300ms cubic-bezier(.09,.64,.19,.99);
             
@@ -204,8 +203,9 @@ $nav-menu-background--size: 150vh;
                             transform 450ms 50ms cubic-bezier(.09,.64,.19,.99);
             }
 
-            &:hover {
+            @include hover($nav-breakpoint) {
                 padding-right: 1.5rem;
+
                 &:after {
                     transform: translateY(-50%) rotate3d(0, 0, 1, 45deg);
                     right: 0;
@@ -222,24 +222,24 @@ $nav-menu-background--size: 150vh;
             @include interpolate(font-size, 37.5rem, 93.75rem, 1.875rem, 2.5rem);
         }
 
-        &-contact {
-            color: $color-red;
+        .contact-icon {
+            color: $color-lightest-grey;
+            transition: all 200ms cubic-bezier(.09,.64,.19,.99);
 
-            &.contact-icon {
-                color: $color-lightest-grey;
-                transition: all 200ms cubic-bezier(.09,.64,.19,.99);
-
-                &:hover {
-                    padding: 0;
-                    color: $color-red;
-                }
-
-                &:after {
-                    content: none;
-                }
+            @include hover($nav-breakpoint) {
+                padding: 0;
+                color: $color-red;
             }
 
-            .v-m-nav & {
+            &:after {
+                content: none;
+            }
+        }
+
+        .contact-item {
+            color: $color-red;
+
+            @media screen and (min-width: $nav-breakpoint) {
                 @include interpolate(font-size, 37.5rem, 93.75rem, 1.2rem, 1.5rem);
                 color: $color-lightest-grey;
             }
@@ -288,7 +288,7 @@ $nav-menu-background--size: 150vh;
 
         &-burger {
 
-            &:hover {
+            @include hover($nav-breakpoint) {
                 .nav-burger-rect {
                     transform: rotate3d(0, 0, 1, 30deg);
                 }

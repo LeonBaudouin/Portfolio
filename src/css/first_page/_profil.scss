@@ -1,4 +1,4 @@
-.profil {
+body[data-page="main-page"] .profil {
 
 	$desktop-delay-offset: 500ms;
 
@@ -103,16 +103,24 @@
 		
 		.photo-profil {
 			position: absolute;
-			bottom: 0;
 			
-			transform: translate3d(-100%, 3%, 0);
-			transition: transform 4s 600ms cubic-bezier(0,.66,0,.99);
+			bottom: 0;
 
+			height: 100%;
+			
+			transform: translate3d(-100%, 0, 0);
+			transition: transform 4s 600ms cubic-bezier(0,.66,0,.99);
+			
 			@media screen and (min-width: $regular-page-breakpoint) {
+				height: 70%;
 				bottom: unset;
 				top: 0;
 				transition: transform 3s 200ms cubic-bezier(0,.87,0,1);
 				transform: translate3d(-100%, -35%, 0) rotate3d(0,0,1,calc(0deg - var(--rotation)));
+			}
+
+			& img {
+				height: 100%;
 			}
 		}
 	}
@@ -132,7 +140,7 @@
 			}
 			
 			.photo-profil {
-				transform: translate3d(-80%, 3%, 0);
+				transform: translate3d(-45%, 0, 0);
 
 				@media screen and (min-width: $regular-page-breakpoint) {
 					transform: translate3d(-40%, -18%, 0) rotate3d(0,0,1,19deg);

@@ -1,6 +1,5 @@
 .title, .logo {
     text-transform: uppercase;
-    text-decoration: none;
     margin: 0;
 
     & .first-part, & .second-part {
@@ -32,8 +31,6 @@
         --deg: 45deg;
         --horizontal-offset: -0.625rem;
     }
-
-    text-decoration: none;
 
     transform: skew(calc(0deg - var(--deg)));
     transition: transform 200ms cubic-bezier(.08,.67,.12,1.13);

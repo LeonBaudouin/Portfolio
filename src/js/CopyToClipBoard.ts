@@ -23,7 +23,9 @@ export class CopyToClipBoard {
     CreateInput() {
         this.input = document.createElement("input");
         this.input.setAttribute("type", "email");
+        this.input.setAttribute("spellcheck", "false");
         this.input.setAttribute("value", this.text);
+        this.input.classList.add(...this.classArray);
     }
 
     ClickOnLink(e : Event) {

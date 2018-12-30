@@ -81,10 +81,11 @@ export namespace DrawnElement {
 
 
     public UpdateAngle(newAngle: number) {
+
       let previousAngle = this.cursorAngle;
       let delta = newAngle - previousAngle  + this.offsetAngle;
 
-      while(Math.abs(delta) > Math.PI/2) {
+      while(Math.abs(delta) > Math.PI/4) {
         if(delta > 0) {
           this.offsetAngle -= Math.PI/2;
         } else {
@@ -92,7 +93,6 @@ export namespace DrawnElement {
         }
         delta = newAngle - previousAngle  + this.offsetAngle;
       }
-
 
       this.cursorAngle += delta;
     }
@@ -147,7 +147,6 @@ export namespace DrawnElement {
       if (this.rotationRoutines.length > 0) {
         this.Rotate(ctx);
       }
-      
 
       ctx.strokeRect(- this.size / 2, - this.size / 2, this.size, this.size);
 

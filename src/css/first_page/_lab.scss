@@ -102,8 +102,7 @@
 
 			&-link {
 				color: $color-lightest-grey;
-
-				text-decoration: none;
+				
 				text-transform: uppercase;
 				
 				font-weight: 800;
@@ -170,12 +169,12 @@
 			.contact-icon {
 				@include min_query(font-size, $regular-page-breakpoint, 2.8rem);
 
-                &:hover {
+                @include hover($nav-breakpoint) {
                     color: $color-red;
                 }
 			}
 
-			.mail, .cv {
+			.contact-item {
 
 				display: inline-block;
 				position: relative;

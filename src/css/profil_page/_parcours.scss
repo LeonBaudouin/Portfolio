@@ -1,0 +1,106 @@
+.parcours {
+
+    position: relative;
+
+    &-experience {
+
+        position: relative;
+        margin-top: 7vh;
+
+        &-title, &-time {
+            position: relative;
+            margin-left: 10px;
+            color: $color-darkest-grey;
+
+            &:before {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                height: 60%;
+                top: 50%;
+                left: -10px;
+                transform: translateY(-50%);
+                border-left: 1px solid $color-red;
+            }
+        }
+
+        &-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+
+        &-time {
+            font-size: 1.25rem;
+            font-weight: 200;
+        }
+    }
+
+    .background-empty-squares {
+        
+        position: absolute;
+        right: 50px;
+        top: 20px;
+        z-index: -1;
+        
+		&-element {
+
+            @extend .absolute-centering;
+
+			position: absolute;
+			border: 1px solid $color-light-grey;
+			width: 0;
+            height: 0;
+			
+			transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,0deg);
+			transition: width 800ms ease,
+						height 800ms ease,
+                        transform 10s cubic-bezier(0,.98,0,.99);
+                        
+			&.thick {
+				border-width: 5px;
+            }
+            
+            &:nth-child(1) {
+                width: 30px;
+                height: 30px;
+            }
+            &:nth-child(2) {
+                width: 50px;
+                height: 50px;
+            }
+            &:nth-child(3) {
+                width: 75px;
+                height: 75px;
+            }
+		}
+    }
+    
+    &:before {
+        content: "";
+
+        @extend .absolute-centering;        
+
+        z-index: -3;
+
+        display: inline-block;
+
+        width: 115vw;
+        height: 110%;
+
+        background-color: $color-lightest-grey;
+
+        transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,5deg);
+        outline: 1px solid transparent;
+    }
+}
+
+.active {
+    .background-empty-squares-element {
+        // @for $i from 1 through 4  {
+        //     &:nth-child(#{$i}) {
+        //         width: 2vw + ($i - 1) * 1vw;
+        //         height: 2vw + ($i - 1) * 1vw;
+        //     }
+        // }
+    }
+}

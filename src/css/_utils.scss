@@ -95,3 +95,9 @@
 			}
 		}
 	}
+
+	@mixin hover($min-query) {
+		&:hover {
+			@media screen and (min-width: $min-query) { @content;	}
+		}
+	}

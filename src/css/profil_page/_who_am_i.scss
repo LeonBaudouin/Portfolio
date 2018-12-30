@@ -1,0 +1,227 @@
+.presentation {
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    margin-bottom: 30vh;
+    align-self: center;
+
+    max-width: 400px;
+
+    @media screen and (min-width: $regular-page-breakpoint) {
+        @include interpolate(max-width, 1000px, 1920px, 600px, 755px);
+        align-self: flex-end;
+        
+        margin-bottom: 10vh;
+        margin-top: 10vh;
+        padding-right: 50px;
+        padding-bottom: 5vh;
+    }
+        
+    .section-title {
+
+        align-self: flex-start;
+
+        @media screen and (min-width: $regular-page-breakpoint) {
+            align-self: flex-end;
+        
+            text-align: right;
+            
+            & .first-part:before {
+                right: 0;
+            }
+        }        
+    }
+
+    
+    &:before {
+        @media screen and (min-width: $regular-page-breakpoint) {
+            content: "";
+            position: absolute;
+            
+            width: 50%;
+            padding-top: 50%;
+            
+            top: 50%;
+            right: 75vw;
+            z-index: -3;
+            
+            transform: translate3d(0, -50%, 0) rotate3d(0,0,1,-28deg);
+            background-color: $color-lightest-grey;
+        }
+    }
+    
+    &-paragraph {
+        margin-bottom: 20px;
+
+        @media screen and (min-width: $regular-page-breakpoint) {
+            text-align: right;
+            margin: 8vh 0;
+            max-width: 600px;
+            margin-left: auto;
+        }
+    }
+
+    &-links {
+
+        margin-right: 5vw;
+
+        @media screen and (min-width: $regular-page-breakpoint) {
+            font-size: 1.25rem;
+            margin-right: 0;
+        }
+
+        &-element {
+            padding: 2px 6px;
+
+            color: $color-darkest-grey;
+
+            text-transform: uppercase;
+            font-weight: 800;
+
+            border: 1px solid $color-red;
+        }
+
+    }
+
+    &-background {
+        @extend .absolute-centering;        
+
+        z-index: -1;
+
+        display: inline-block;
+
+        @include interpolate(width, 320px, 800px, 350px, 600px);
+        @include interpolate(padding-top, 320px, 800px, 350px, 600px);
+
+        background-color: $color-lightest-grey;
+
+        transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,35deg);
+        outline: 1px solid transparent;
+
+        @media screen and (min-width: $regular-page-breakpoint) {
+            width: 110%;
+            padding-top: 110%;
+
+            transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,-21deg);
+            clip-path: none;
+
+        }
+    }
+
+    &-photo {
+        @extend .absolute-centering;
+
+        @include interpolate(width, 320px, 800px, 400px, 600px);
+
+        top: 25%;
+        z-index: -2;
+
+        border: $color-red solid 1px;
+        transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,-30deg);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 34% 72%);
+
+        @media screen and (min-width: $regular-page-breakpoint) {
+            width: 90%;
+            top: 70%;
+            left: -17vw;
+
+            transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,17deg);
+            clip-path: none;
+        }
+
+        & img {
+            width: 100%;
+        }
+    }
+
+    &-particles {
+
+        &-group {
+            &:nth-of-type(2) {
+                position: absolute;
+                right: 1vw;
+                bottom: 8vh;
+
+                @media screen and (min-width: $regular-page-breakpoint) {
+                    right: unset;
+                    left: 9.5vw;
+                    bottom: -9vw;
+                    transform: rotate3d(0, 0, 1, 97deg) scale(1.4);
+                }
+
+                .presentation-particles-element {
+                    &:nth-of-type(1) {
+                        transform: rotate3d(0,0,1, 45deg);
+                        top: 160px;
+                        width: 13px;
+                        height: 13px;
+                    }
+                    &:nth-of-type(2) {
+                        transform: rotate3d(0,0,1, 30deg);
+                        top: 112px;
+                        left: 10px;
+                        width: 21px;
+                        height: 21px;
+                    }
+                    &:nth-of-type(3) {
+                        transform: rotate3d(0,0,1, 10deg);
+                        top: 56px;
+                        left: 16px;
+                        width: 28px;
+                        height: 28px;
+                    }
+                    &:nth-of-type(4) {
+                        transform: rotate3d(0,0,1, -10deg);
+                        width: 33px;
+                        height: 33px;
+                    }
+                }
+            }
+
+            &:nth-of-type(1) {
+                position: absolute;
+                bottom: -5vw;
+                left: 5vh;
+
+                @media screen and (min-width: $regular-page-breakpoint) {
+                    bottom: unset;
+                    top: -4vw;
+                    left: 6vw;
+                    transform: rotate3d(0,0,1,117deg) scale(1.4);
+                }
+
+                .presentation-particles-element {
+                    &:nth-of-type(1) {
+                        transform: rotate3d(0,0,1, 30deg);
+                        top: 80px;
+                        left: 43px;
+                        width: 16px;
+                        height: 16px;
+                    }
+                    &:nth-of-type(2) {
+                        transform: rotate3d(0,0,1, -20deg);
+                        top: 45px;
+                        left: 18px;
+                        width: 22px;
+                        height: 22px;
+                    }
+                    &:nth-of-type(3) {
+                        transform: rotate3d(0,0,1, 15deg);
+                        width: 27px;
+                        height: 27px;
+                    }
+                }
+            }
+        }
+
+        &-element {
+            position: absolute;
+            background-color: $color-red;
+
+            
+        }
+    }
+}

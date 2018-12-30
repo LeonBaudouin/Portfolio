@@ -27,6 +27,19 @@ $padding: 20px;
     @include interpolate(--margin-side-buttons-right, 360px, 1024px, 40px, 60px);
 }
 
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: 'Raleway', sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
 canvas {
 	background: $color-dark-grey;
 	position: fixed;
@@ -38,6 +51,53 @@ canvas {
 	height: 100%;
 }
 
+.color-red {
+	color: $color-red;
+}
+
+.color-lightest-grey {
+	color: $color-lightest-grey;
+}
+
+.light-text {
+	font-weight: 300;
+}
+
+.red-stroke {
+	float: right;
+	width: 75%;
+	height: 2px;
+	background-color: $color-red;
+}
+
+.space-even {
+	display: flex;
+	justify-content: space-between;
+}
+
+.absolute-centering {
+	position: absolute;
+	transform: translate3d(-50%, -50%, 0);
+	top: 50%;
+	left: 50%;
+}
+
+.hide {
+	visibility: hidden;
+}
+
+@for $i from 1 through 5 {
+	.z-minus-#{$i} {
+		position: relative;
+		z-index: -$i;
+	}
+
+	.z-plus-#{$i} {
+		position: relative;
+		z-index: $i;
+	}
+}
+
 .sideButton {
 	position: fixed;
 	z-index: $z-index-side-button;
@@ -46,4 +106,74 @@ canvas {
 .paragraph {
 	font-weight: 500;
 	color: $color-darkest-grey;
+	@include interpolate(font-size, 40rem, 64rem,  0.81rem, 1rem);
+}
+
+input.contact-item.copy-to-clipboard {
+	position: relative;
+
+	padding: 0;
+	margin: 0;
+	border: 1px solid $color-red;
+
+	background: none;
+	
+	font-size: 1rem;
+	font-family: 'Raleway', sans-serif;
+
+	text-transform: initial;
+	text-decoration: none;
+	text-align: right;
+
+	&::selection {
+		background-color: $color-dark-grey;
+	}
+
+	.nav & {
+		@media screen and (min-width: $nav-breakpoint) {
+			@include interpolate(font-size, 37.5rem, 93.75rem, 1.2rem, 1.5rem);
+		}
+
+		&:hover {
+			padding-right: 0;
+		}
+	}
+
+	.lab & {
+		position: relative;
+		font-size: 0.8rem;
+		left: -50%;
+
+		@media screen and (min-width: $regular-page-breakpoint) {
+			font-size: 0.79rem;
+			left: 0;
+		}
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&:before {
+		content: "Copié !";
+		position: absolute;
+		@extend .absolute-centering;
+	}
+}
+
+.fade-from-left {
+	opacity: 0;
+	transition: opacity 200ms linear,
+				transform 500ms ease;
+	.active & {opacity: 1;}
+	
+	@media screen and (min-width: $regular-page-breakpoint) {
+		transform: translate3d(-20px, 0, 0);
+		.active & {transform: translate3d(0, 0, 0);}
+
+		&.button {
+			transform: translate3d(-20px, 0, 0) rotate3d(0,0,1,-45deg);
+			.active & {transform: translate3d(0, 0, 0) rotate3d(0,0,1,-45deg);}
+		}
+	}
 }

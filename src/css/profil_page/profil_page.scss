@@ -1,0 +1,35 @@
+.profil-page {
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        overflow: hidden;
+        @include interpolate(padding-left, 320px, 800px, 48px, 96px);
+        @include interpolate(padding-right, 320px, 800px, 48px, 96px);
+    }
+
+    .section {
+        width: 100%;
+    }
+
+    .regular-title {
+        @include interpolate(font-size, 40rem, 64rem, 1.8rem, 4rem);
+    
+        .first-part, .second-part {
+		    @include interpolate(height, 40rem, 64rem, 2.1rem, 5rem);
+        }
+    }
+}
+
+.section-title {
+    margin-left: 5vw;
+}
+
+.welcome {
+    height: 80vh;
+    @include min_query(height, $regular-page-breakpoint, 35vw);
+}
+
+@import "./who_am_i";
+@import "./parcours";
