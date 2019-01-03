@@ -24,6 +24,8 @@
 
 .section-title {
     margin-left: 5vw;
+
+    @include min_query(margin-left, $regular-page-breakpoint, 0);
 }
 
 .welcome {
@@ -33,3 +35,4 @@
 
 @import "./who_am_i";
 @import "./parcours";
+@import "./skills";

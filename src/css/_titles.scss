@@ -197,4 +197,18 @@
         }
 
     }
+
+    &.direction-center {
+        
+        margin-left: auto;
+        margin-right: auto;
+
+        text-align: center;
+
+        & .first-part:before {
+            right: 50%;
+            transform: translate3d(50%, 0, 0);
+        }
+
+    }
 }

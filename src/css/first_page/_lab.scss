@@ -279,37 +279,6 @@
 
 				&-group {
 					width: 100%;
-
-					&-element {
-						display: inline-block;
-						position: absolute;
-						background-color: $color-light-grey;
-						opacity: 0;
-
-						transition: opacity 500ms linear,
-									transform 500ms ease;
-
-						@for $i from 1 through 30 {
-							&:nth-of-type(#{$i}) {
-								$r: random(30);
-								$ra: random(30);
-								transition-delay: 800ms + 50ms * $r;
-								@if $r%2 == 0 {
-									@if $r > 15 {
-										transform: translate3d(15px, 0, 0);
-									} @else {
-										transform: translate3d(-15px, 0, 0);
-									}
-								} @else {
-									@if $r > 15 {
-										transform: translate3d(0, 15px, 0);
-									} @else {
-										transform: translate3d(0, 15px, 0);
-									}
-								}
-							}
-						}
-					}
 				}
 
 				&:nth-of-type(1) {
@@ -536,32 +505,6 @@
 
 				&:after {
 					animation: border-loader $project-exposition-time linear infinite;
-				}
-
-				.background-squares-group-element {
-					transform: translate3d(0,0,0);
-					opacity: 1;
-
-					animation: square-flickering 10s 5s ease infinite;
-
-					@for $i from 1 through 30 {
-						&:nth-of-type(#{$i}) {
-							$r: random(30);
-							animation-delay: 4s + 500ms * $r;
-						}
-					}
-
-					@keyframes square-flickering {
-						0% {
-							opacity: 1;
-						}
-						15% {
-							opacity: 0;
-						}
-						30% {
-							opacity: 1;
-						}
-					}
 				}
 			}
 		}

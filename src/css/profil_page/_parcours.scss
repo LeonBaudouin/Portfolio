@@ -1,15 +1,29 @@
 .parcours {
 
+    $margin-phone: 10px;
+    $margin-desktop: 20px;
+
     position: relative;
+    margin-bottom: 30vh;
+
+    @include min_query(padding-bottom, $regular-page-breakpoint, 8vh);
+
+    .section-title {
+        margin-bottom: 7vh;
+    }
 
     &-experience {
 
+        display: flex;
+
         position: relative;
-        margin-top: 7vh;
+        margin-bottom: 7vh;
+        @include min_query(margin-bottom, $regular-page-breakpoint, 15vh);
+
+        flex-direction: column;
 
         &-title, &-time {
             position: relative;
-            margin-left: 10px;
             color: $color-darkest-grey;
 
             &:before {
@@ -18,20 +32,100 @@
                 position: absolute;
                 height: 60%;
                 top: 50%;
-                left: -10px;
                 transform: translateY(-50%);
                 border-left: 1px solid $color-red;
+                @include min_query(border-width, $regular-page-breakpoint, 2px);
             }
         }
 
         &-title {
-            font-size: 1.4rem;
+            @include interpolate(font-size, 25rem, 86rem, 1.4rem, 3rem);
             font-weight: 800;
         }
 
         &-time {
-            font-size: 1.25rem;
+            @include interpolate(font-size, 25rem, 86rem, 1.25rem, 2.8rem);
             font-weight: 200;
+        }
+
+        &-description {
+            margin-top: 4vh;
+
+            @media screen and (min-width: $regular-page-breakpoint) {
+                position: relative;
+                max-width: 500px;
+                width: 50%;
+
+                &:before {
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    height: 100%;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    border-left: 2px solid $color-red;
+                }
+            }
+        }
+
+        &:nth-of-type(2n + 1) {
+
+            align-items: flex-start;
+
+            .parcours-experience {
+                &-title, &-time {
+                    margin-left: $margin-phone;
+
+                    &:before {
+                        left: -$margin-phone;
+                    }
+                }
+
+                @media screen and (min-width: $regular-page-breakpoint) {
+                    &-title, &-time, &-description {
+                        margin-left: $margin-desktop;
+    
+                        &:before {
+                            left: -$margin-desktop;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        &:nth-of-type(2n) {
+
+            align-items: flex-end;
+
+            .parcours-experience {
+                &-title, &-time {
+                    margin-right: $margin-phone;
+
+                    &:before {
+                        right: -$margin-phone;
+                    }
+                }
+
+                @media screen and (min-width: $regular-page-breakpoint) {
+                    &-title, &-time, &-description {
+                        margin-right: $margin-desktop;
+    
+                        &:before {
+                            right: -$margin-desktop;
+                        }
+                    }
+                    
+                    &-description {
+                        text-align: right;
+                    }
+                }
+
+            }
+        }
+
+        &:last-of-type {
+            margin-bottom: 0;
         }
     }
 
@@ -41,13 +135,20 @@
         right: 50px;
         top: 20px;
         z-index: -1;
+
+        @media screen and (min-width: $regular-page-breakpoint) {
+            right: 10vw;
+            top: 50%;
+            transform: translate3d(0,-50%,0);
+        }
         
 		&-element {
 
             @extend .absolute-centering;
 
 			position: absolute;
-			border: 1px solid $color-light-grey;
+            border: 1px solid $color-light-grey;
+            @include min_query(border-width, $regular-page-breakpoint, 2px);
 			width: 0;
             height: 0;
 			
@@ -55,24 +156,80 @@
 			transition: width 800ms ease,
 						height 800ms ease,
                         transform 10s cubic-bezier(0,.98,0,.99);
+
+            animation: background-square-rotation-inverse 60s linear infinite;
                         
 			&.thick {
 				border-width: 5px;
-            }
-            
-            &:nth-child(1) {
-                width: 30px;
-                height: 30px;
-            }
-            &:nth-child(2) {
-                width: 50px;
-                height: 50px;
-            }
-            &:nth-child(3) {
-                width: 75px;
-                height: 75px;
+                @include min_query(border-width, $regular-page-breakpoint, 10px);
             }
 		}
+    }
+
+    .background-squares {
+
+        position: absolute;
+
+        left: 40px;
+        top: 20px;
+
+        z-index: -1;
+
+        @media screen and (min-width: $regular-page-breakpoint) {
+            left: 10vw;
+            top: 50%;
+            transform: translate3d(0,-50%,0);
+        }
+
+        &-group {
+
+            $square-unit: 13px;
+
+            &-element {
+                width: $square-unit;
+                height: $square-unit;
+
+                &:nth-of-type(1) {right: $square-unit * 2;}
+                &:nth-of-type(2) {left: $square-unit * 2;}
+                &:nth-of-type(3) {left: $square-unit * 3;}
+                &:nth-of-type(4) {bottom: 0; right: 0;}
+                &:nth-of-type(5) {bottom: 0; right: $square-unit;}
+                &:nth-of-type(6) {bottom: 0; left: $square-unit;}
+                &:nth-of-type(7) {bottom: $square-unit}
+                &:nth-of-type(8) {bottom: $square-unit; left: $square-unit;}
+                &:nth-of-type(9) {bottom: $square-unit * 2}
+                &:nth-of-type(10) {top: $square-unit}
+                &:nth-of-type(11) {top: $square-unit; left: $square-unit;}
+                &:nth-of-type(12) {top: $square-unit; right: 0;}
+                &:nth-of-type(13) {top: $square-unit * 2}
+                &:nth-of-type(14) {top: $square-unit * 3; left: $square-unit}
+            }
+
+            @media screen and (min-width: $regular-page-breakpoint) {
+                $square-unit: 37px;
+
+                &-element {
+
+                    width: $square-unit;
+                    height: $square-unit;
+    
+                    &:nth-of-type(1) {right: $square-unit * 2;}
+                    &:nth-of-type(2) {left: $square-unit * 2;}
+                    &:nth-of-type(3) {left: $square-unit * 3;}
+                    &:nth-of-type(4) {bottom: 0; right: 0;}
+                    &:nth-of-type(5) {bottom: 0; right: $square-unit;}
+                    &:nth-of-type(6) {bottom: 0; left: $square-unit;}
+                    &:nth-of-type(7) {bottom: $square-unit}
+                    &:nth-of-type(8) {bottom: $square-unit; left: $square-unit;}
+                    &:nth-of-type(9) {bottom: $square-unit * 2}
+                    &:nth-of-type(10) {top: $square-unit}
+                    &:nth-of-type(11) {top: $square-unit; left: $square-unit;}
+                    &:nth-of-type(12) {top: $square-unit; right: 0;}
+                    &:nth-of-type(13) {top: $square-unit * 2}
+                    &:nth-of-type(14) {top: $square-unit * 3; left: $square-unit}
+                }
+            }
+        }
     }
     
     &:before {
@@ -83,8 +240,8 @@
         z-index: -3;
 
         display: inline-block;
-
-        width: 115vw;
+        
+        width: calc(100vw + 50px);
         height: 110%;
 
         background-color: $color-lightest-grey;
@@ -96,11 +253,40 @@
 
 .active {
     .background-empty-squares-element {
-        // @for $i from 1 through 4  {
-        //     &:nth-child(#{$i}) {
-        //         width: 2vw + ($i - 1) * 1vw;
-        //         height: 2vw + ($i - 1) * 1vw;
-        //     }
-        // }
+        $size-base: 30px;
+        $size-delta: 20px;
+        $size-thick-add: 5px;        
+
+        &:nth-child(1) {
+            width: $size-base;
+            height: $size-base;
+        }
+        &:nth-child(2) {
+            width: $size-base + $size-delta;
+            height: $size-base + $size-delta;
+        }
+        &:nth-child(3) {
+            width: $size-base + $size-delta * 2 + $size-thick-add;
+            height: $size-base + $size-delta * 2 + $size-thick-add;
+        }
+
+        @media screen and (min-width: $regular-page-breakpoint) {
+            $size-base: 130px;
+            $size-delta: 48px;
+            $size-thick-add: 5px;
+
+            &:nth-child(1) {
+                width: $size-base;
+                height: $size-base;
+            }
+            &:nth-child(2) {
+                width: $size-base + $size-delta;
+                height: $size-base + $size-delta;
+            }
+            &:nth-child(3) {
+                width: $size-base + $size-delta * 2 + $size-thick-add;
+                height: $size-base + $size-delta * 2 + $size-thick-add;
+            }
+        }
     }
 }
