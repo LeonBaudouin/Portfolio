@@ -30,3 +30,9 @@ export interface tiltedSquareSettings {
     size: number;
     strokeSize: number;
 }
+
+export interface scrollSensitiveElement {
+    element: Element;
+    state: boolean
+    top: number;
+}
