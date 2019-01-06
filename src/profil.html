@@ -10,7 +10,7 @@
     />
     <title>Profil</title>
 </head>
-<body class="profil-page active" data-type="profil-page">
+<body class="profil-page" data-page="profil-page">
     <canvas></canvas>
     
     <nav class="nav hidden">
@@ -28,7 +28,7 @@
             <li class="nav-menu-item"><a href="#" class="nav-menu-link">Le lab</a></li>
             <li class="nav-menu-item space-even v-s-nav">
               <a href="#" class="contact-item">CV</a>
-              <a href="#" class="contact-item copy-to-clipboard">Mail</a>
+              <a href="#" class="contact-item js-copy-to-clipboard">Mail</a>
               <div class="null"></div>
             </li>
             <li class="nav-menu-item v-m-nav">
@@ -38,7 +38,7 @@
               <a href="#" class="contact-item">Mon cv</a>
             </li>
             <li class="nav-menu-item v-m-nav">
-              <a href="mailto:leondedouin@gmail.com" class="contact-item copy-to-clipboard">
+              <a href="mailto:leondedouin@gmail.com" class="contact-item js-copy-to-clipboard">
                 <span>leondedouin<span class="color-red">@</span>gmail.com</span>
               </a>
             </li>
@@ -71,7 +71,7 @@
             </h1>
         </section>
 
-        <section class="section presentation">
+        <section class="section presentation js-activate-on-scroll">
             <picture class="presentation-photo">
                 <source media="(min-width: 800px)" srcset="img/profilPhoto_1200.jpg">
                 <img src="img/profilPhoto_800.jpg" alt="Photo de moi à la BNF">
@@ -112,7 +112,7 @@
             </div>
         </section>
 
-        <section class="section parcours">
+        <section class="section parcours js-activate-on-scroll">
             <h2 class="title regular-title section-title">
                 <div href="#" class="first-part"><span class="first-part-content">Mon</span></div>
                 <div href="#" class="second-part"><span class="second-part-content">Parcours</span></div>
@@ -181,7 +181,7 @@
             </article>
         </section>
 
-        <section class="section skills">
+        <section class="section skills js-activate-on-scroll">
             <div class="wrapper">
                 <h2 class="title regular-title section-title">
                     <div href="#" class="first-part"><span class="first-part-content">Mes</span></div>
@@ -282,19 +282,23 @@
             </article>
         </section>
 
-        <div class="contact">
+        <div class="contact active">
             <div class="contact-background"></div>
             <div class="contact-content">
                 <h4 class="contact-content-title title"><span class="color-red">contactez</span> moi <span class="color-red">!</span></h4>
                 <div class="contact-content-grid">
-                <a href="#" class="contact-content-link contact-item cv v-m-page">mon cv</a>
-                <a href="#" class="contact-content-link contact-item cv v-s-page">CV</a>
-                <a href="mailto:leondedouin@gmail.com" class="contact-content-link contact-item mail v-m-page copy-to-clipboard">leondedouin<span class="color-red">@</span>gmail.com</a>
-                <a href="mailto:leondedouin@gmail.com" class="contact-content-link contact-item mail v-s-page copy-to-clipboard">Mail</a>
-                <a href="#" class="contact-content-link contact-icon codepen"><span class="v-m-page">Codepen</span></a>
-                <a href="#" class="contact-content-link contact-icon instagram"><span class="v-m-page">Instagram</span></a>
-                <a href="#" class="contact-content-link contact-icon github"><span class="v-m-page">Github</span></a>
-                <a href="#" class="contact-content-link contact-icon youtube"><span class="v-m-page">Youtube</span></a>
+                    <div class="wrapper cv">
+                        <a href="#" class="contact-content-link contact-item v-m-page">mon cv</a>
+                        <a href="#" class="contact-content-link contact-item v-s-page">CV</a>
+                    </div>
+                    <div class="wrapper mail">
+                        <a href="mailto:leondedouin@gmail.com" class="contact-content-link contact-item v-m-page js-copy-to-clipboard">leondedouin<span class="color-red">@</span>gmail.com</a>
+                        <a href="mailto:leondedouin@gmail.com" class="contact-content-link contact-item v-s-page js-copy-to-clipboard">Mail</a>
+                    </div>
+                    <a href="#" class="contact-content-link contact-icon codepen"><span class="v-m-page">Codepen</span></a>
+                    <a href="#" class="contact-content-link contact-icon instagram"><span class="v-m-page">Instagram</span></a>
+                    <a href="#" class="contact-content-link contact-icon github"><span class="v-m-page">Github</span></a>
+                    <a href="#" class="contact-content-link contact-icon youtube"><span class="v-m-page">Youtube</span></a>
                 </div>
             </div>
         </div>

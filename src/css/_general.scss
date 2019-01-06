@@ -109,7 +109,7 @@ canvas {
 	@include interpolate(font-size, 40rem, 64rem,  0.81rem, 1rem);
 }
 
-input.contact-item.copy-to-clipboard {
+input.contact-item.js-copy-to-clipboard {
 	position: relative;
 
 	padding: 0;

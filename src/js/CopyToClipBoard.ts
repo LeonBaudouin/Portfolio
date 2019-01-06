@@ -41,7 +41,6 @@ export class CopyToClipBoard {
         if(this.isInput) {
             e.preventDefault();
             e.stopPropagation();
-            console.log(e);
             document.removeEventListener("click", this.ClickElseWhere);
             this.input.replaceWith(this.link);
             this.isInput = false;

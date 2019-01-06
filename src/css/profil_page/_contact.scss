@@ -1,0 +1,39 @@
+.profil-page {   
+    .contact {
+        margin-bottom: 1vh;
+        
+        &-background {            
+            bottom: 4vh;
+            right: 20vw;
+            
+            transform: translate3d(50%, 50%, 0) rotate3d(0,0,1, 90deg);
+        }
+        
+        &-content {
+            &-grid {
+                grid-row-gap: 1vh;
+                margin: 6vh 0;
+            }
+            
+            &-title {
+                text-align: right;
+            }
+            
+            &-link {
+                font-size: 1.75rem;
+            }
+        }
+        
+        &-icon {
+            @include min_query(font-size, $regular-page-breakpoint, 2.8rem);
+        }
+    }
+
+    .active .contact {
+        &-background {
+            @include interpolate(width, 400px, 1366px, 368px, 500px);
+            @include interpolate(height, 400px, 1366px, 368px, 500px);
+			transform: translate3d(50%, 50%, 0) rotate3d(0,0,1,-18deg);
+        }
+    }
+}

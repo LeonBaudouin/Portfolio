@@ -1,6 +1,6 @@
 import { scrollSensitiveElement } from "./CustomTypes";
 
-class OnScrollActivator {
+export class OnScrollActivator {
 
     scrollElements: scrollSensitiveElement[];
     scrollOffset: number;
@@ -8,26 +8,41 @@ class OnScrollActivator {
     constructor(selector: string, offset: number) {
 
         this.scrollOffset = offset;
+        this.scrollElements = [];
 
-        document.addEventListener("scroll", this.CheckAll);
+        let elementList = document.querySelectorAll(selector);
+        this.FillArray(elementList);
+
+        document.addEventListener("scroll", this.CheckAll.bind(this));
     }
 
     private FillArray(elementList: NodeListOf<Element>) {
         elementList.forEach(element => {
             let scrollElement: scrollSensitiveElement = {
-                element: element,
-                state: false,
-                top: element.getBoundingClientRect().top - window.innerHeight
-            } 
+                DOM: element,
+                classes: element.classList,
+                isActive: false,
+                top: null
+            }
+            this.scrollElements.push(scrollElement);
         });
     }
 
-    private CheckAll() {
-
+    private CheckAll(e: MouseEvent) {
+        this.scrollElements.forEach(
+            this.CheckElement.bind(this)
+        );
     }
 
-    private CheckElement(element: Element) {
-
+    private CheckElement(element: scrollSensitiveElement) {
+        if(!element.isActive) {
+            element.top = element.DOM.getBoundingClientRect().top - window.innerHeight;
+            console.log(element.top);
+            if(element.top <= -this.scrollOffset) {
+                element.classes.add("active");
+                element.isActive = true;
+            }
+        }
     }
 
 }

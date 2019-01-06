@@ -8,44 +8,142 @@
     font-style: normal;
 }
 
-.contact-icon {
-    &::before {
-    	display: inline-block;
-    	font-family: "IconFont";
-    	font-style: normal;
-    	font-weight: normal;
-    	font-variant: normal;
-    	line-height: 1;
-    	text-decoration: inherit;
-    	text-rendering: optimizeLegibility;
-    	text-transform: none;
+.contact {
+    position: relative;
+
+    &-background {
+		position: absolute;
+        z-index: $z-index-contact;
+
+        width: 0;
+        height: 0;
+        
+        border: $color-red 2px solid;
+        background-color: rgba($color-darkest-grey, .85);
     }
 
-    &.codepen {
-        grid-area: codepen;
-        &:before {
-            content: "\f100";
+    &-content {
+        display: flex;
+        flex-direction: column;
+
+        &-grid {
+            display: grid;
+            position: relative;
+            
+            grid-template-rows: auto 1fr;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-areas: 
+                        "cv cv mail mail"
+                        "codepen instagram github youtube";
+                        
+            @media screen and (min-width: $regular-page-breakpoint) {
+                grid-template-areas: 
+                        "cv mail mail mail"
+                        "codepen instagram github youtube";
+            }
+        }
+
+        &-title {
+            color: $color-lightest-grey;
+            font-weight: 400;
+            opacity: 0;
+            transform: translate3d(-10px, 0, 0);
+        }
+
+        &-link {
+            color: $color-lightest-grey;
+            
+            text-transform: uppercase;
+            
+            font-weight: 800;
+
+            opacity: 0;
+
+            transform: translate3d(10px, 0, 0);
+            @include min_query(transform, $regular-page-breakpoint, translate3d(-10px, 0, 0));
+
+
+        }
+        
+        .contact-icon {
+            @include hover($nav-breakpoint) {
+                color: $color-red;
+            }
+        }
+
+        .contact-item {
+            display: inline-block;
+            position: relative;
+
+            &:before {
+                content: "";
+
+                display: block;
+                position: absolute;
+
+                bottom: 2px;
+                width: 75%;
+
+                border-bottom: 1px solid $color-red;
+            }
         }
     }
 
-    &.github{
-        grid-area: github;
-        &:before {
-            content: "\f101";
+    .mail {
+        grid-area: mail;
+    }
+    .cv {
+        grid-area: cv;
+    }
+
+    &-icon {
+        &::before {
+            display: inline-block;
+            font-family: "IconFont";
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            line-height: 1;
+            text-decoration: inherit;
+            text-rendering: optimizeLegibility;
+            text-transform: none;
+        }
+    
+        &.codepen {
+            grid-area: codepen;
+            &:before {
+                content: "\f100";
+            }
+        }
+    
+        &.github{
+            grid-area: github;
+            &:before {
+                content: "\f101";
+            }
+        }
+    
+        &.instagram{
+            grid-area: instagram;
+            &:before {
+                content: "\f102";
+            }
+        }
+    
+        &.youtube{
+            grid-area: youtube;
+            &:before {
+                content: "\f103";
+            }
         }
     }
 
-    &.instagram{
-        grid-area: instagram;
-        &:before {
-            content: "\f102";
-        }
-    }
-
-    &.youtube{
-        grid-area: youtube;
-        &:before {
-            content: "\f103";
+    .active & {
+        &-content {
+            &-link, &-title {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
         }
     }
 }

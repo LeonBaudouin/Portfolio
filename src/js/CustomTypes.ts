@@ -32,7 +32,8 @@ export interface tiltedSquareSettings {
 }
 
 export interface scrollSensitiveElement {
-    element: Element;
-    state: boolean
+    DOM: Element;
+    classes: DOMTokenList;
+    isActive: boolean;
     top: number;
 }
