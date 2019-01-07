@@ -75,7 +75,7 @@ export namespace DrawnElement {
     }
 
     public UpdateFromOrientation(e : DeviceOrientationEvent) : void {
-      this.UpdateAngle(e.alpha);
+      this.UpdateAngle(e.alpha * Math.PI / 180);
     }
 
 

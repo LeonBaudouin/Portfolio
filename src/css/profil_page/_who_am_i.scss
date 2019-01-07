@@ -102,7 +102,7 @@
                 transition: all 250ms ease;
             }
 
-            &:hover {
+            @include hover($regular-page-breakpoint) {
                 color: $color-red;
                 border-color: transparent;
 

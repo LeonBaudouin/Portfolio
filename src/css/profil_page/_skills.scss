@@ -2,17 +2,20 @@
 
     position: relative;
     display: grid;
-    grid-row-gap: 7vh;
+    grid-row-gap: 8vh;
     margin-bottom: 13vh;
 
     @media screen and (min-width: $regular-page-breakpoint) and (max-width: 999px) {
         grid-template-columns: 1fr 1fr;
-        grid-row-gap: 10vh;
+        grid-column-gap: 6vw;
     }
-
+    
     @media screen and (min-width: 1000px) {
         grid-template-columns: 1fr 1fr 1fr;
+        grid-row-gap: 11vh;
     }
+
+    @include min_query(margin-bottom, $regular-page-breakpoint, 35vh);
 
     .wrapper {
         @media screen and (min-width: $regular-page-breakpoint) {
@@ -44,15 +47,19 @@
             align-items: center;
 
             &-element {
-                @include interpolate(width, 25rem, 64rem, 2.25rem, 4rem);
+                $min: 2.25rem;
+                $max: 3rem;
+                @include interpolate(width, 25rem, 64rem, $min, $max);
                 margin-right: 10px;
 
                 &.s {
-                    @include interpolate(width, 25rem, 64rem, 1.75rem, 3.5rem);
+                    $offset: -0.5rem;
+                    @include interpolate(width, 25rem, 64rem, $min + $offset, $max + $offset);
                 }
 
                 &.l {
-                    @include interpolate(width, 25rem, 64rem, 3.25rem, 5rem);
+                    $offset: 1rem;
+                    @include interpolate(width, 25rem, 64rem, $min + $offset, $max + $offset);
                 }
 
                 &:last-of-type {
@@ -63,7 +70,7 @@
 
         .profil-page &-title {
 
-            margin: 1vh;
+            margin: 3vh 0;
 
             @include interpolate(font-size, 40rem, 64rem, 1.4rem, 1.7rem);
             
@@ -74,7 +81,7 @@
 
         &-description {
             margin: 0;
-            text-align: center;
+            text-align: justify;
         }
 
         @media screen and (min-width: $regular-page-breakpoint) and (max-width: 999px) {
@@ -108,10 +115,11 @@
         width: calc(100vw + 170px);
         height: 105%;
         @include min_query(height, $regular-page-breakpoint, 125%);
-
+        
         background-color: $color-lightest-grey;
-
+        
         transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,8deg);
+        @include min_query(transform, $regular-page-breakpoint, translate3d(-50%, -50%, 0) rotate3d(0,0,1,-6deg));
         outline: 1px solid transparent;
         box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
     }

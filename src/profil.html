@@ -12,6 +12,10 @@
 </head>
 <body class="profil-page" data-page="profil-page">
     <canvas></canvas>
+
+    <div class="popup">
+        <p class="popup-text">Copié <span class="color-red">!</span></p>
+    </div>
     
     <nav class="nav hidden">
         <svg class="nav-burger sideButton" viewbox="0 0 44 44" width="44" height="44">
@@ -66,8 +70,9 @@
 
     <div class="container">
         <section class="section welcome">
-            <h1 class="title regular-title v-m-page">
-                Mon profil
+            <h1 class="title regular-title">
+                <div href="#" class="first-part"><span class="first-part-content">Mon</span></div>
+                <div href="#" class="second-part"><span class="second-part-content">Profil</span></div>
             </h1>
         </section>
 
@@ -287,14 +292,10 @@
             <div class="contact-content">
                 <h4 class="contact-content-title title"><span class="color-red">contactez</span> moi <span class="color-red">!</span></h4>
                 <div class="contact-content-grid">
-                    <div class="wrapper cv">
-                        <a href="#" class="contact-content-link contact-item v-m-page">mon cv</a>
-                        <a href="#" class="contact-content-link contact-item v-s-page">CV</a>
-                    </div>
-                    <div class="wrapper mail">
-                        <a href="mailto:leondedouin@gmail.com" class="contact-content-link contact-item v-m-page js-copy-to-clipboard">leondedouin<span class="color-red">@</span>gmail.com</a>
-                        <a href="mailto:leondedouin@gmail.com" class="contact-content-link contact-item v-s-page js-copy-to-clipboard">Mail</a>
-                    </div>
+                    <a href="#" class="contact-content-link contact-item v-m-page cv">mon cv</a>
+                    <a href="#" class="contact-content-link contact-item v-s-page cv">CV</a>
+                    <a href="mailto:leondedouin@gmail.com" class="contact-content-link contact-item v-m-page js-copy-to-clipboard mail">leondedouin<span class="color-red">@</span>gmail.com</a>
+                    <a href="mailto:leondedouin@gmail.com" class="contact-content-link contact-item v-s-page js-copy-to-clipboard mail">Mail</a>
                     <a href="#" class="contact-content-link contact-icon codepen"><span class="v-m-page">Codepen</span></a>
                     <a href="#" class="contact-content-link contact-icon instagram"><span class="v-m-page">Instagram</span></a>
                     <a href="#" class="contact-content-link contact-icon github"><span class="v-m-page">Github</span></a>

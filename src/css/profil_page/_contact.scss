@@ -1,39 +1,142 @@
 .profil-page {   
     .contact {
         margin-bottom: 1vh;
+        @include min_query(margin-left, $regular-page-breakpoint, 10vw);
         
-        &-background {            
-            bottom: 4vh;
+        &-background {
             right: 20vw;
-            
+
             transform: translate3d(50%, 50%, 0) rotate3d(0,0,1, 90deg);
+            
+            @include interpolate(bottom, 400px, 1366px, 16px, -70px);
+
+            @media screen and (min-width: $regular-page-breakpoint) {
+                right: 62%;
+                bottom: -39vh;
+            }
         }
         
         &-content {
             &-grid {
                 grid-row-gap: 1vh;
                 margin: 6vh 0;
+                justify-items: start;
+
+                @media screen and (min-width: $regular-page-breakpoint) {
+                    grid-row-gap: 5vh;
+                    grid-template-areas: 
+                        "cv mail mail mail"
+                        "codepen instagram github youtube";
+                }
             }
             
             &-title {
                 text-align: right;
+                @media screen and (min-width: $regular-page-breakpoint) {
+                    text-align: left;
+                    font-size: 1.425rem;
+                    margin-bottom: 2vh;
+                }
             }
             
             &-link {
                 font-size: 1.75rem;
             }
+
+        }
+
+        .cv {
+            @include min_query(justify-self, $regular-page-breakpoint, center);
+        }
+
+        &-item {
+
+            transition: all 400ms ease;
+            @include min_query(padding, $regular-page-breakpoint, 0.2rem 0.7rem);
+            
+            &:before {
+                bottom: -1px;
+
+                @media screen and (min-width: $regular-page-breakpoint) {
+                    
+                    box-sizing: border-box;
+                    left: 0;
+                    top: 0;
+                        
+                    width: 100%;
+                    height: 100%;
+                        
+                    border: 1px solid $color-red;
+                }
+            }
+
+            &:after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 50%;
+                z-index: -1;
+                height: calc(100% + 2px);
+                width: 0;
+                background-color: $color-lightest-grey;
+                transform: translate3d(0, -50%, 0);
+
+                transition: all 400ms ease;
+            }
+
+            @include hover($regular-page-breakpoint) {
+                color: $color-darkest-grey;
+
+                &:before {
+                    border-color: transparent;
+                }
+
+                &:after {
+                    right: unset;
+                    left: 0;
+                    width: 100%;
+                }
+            }
+
         }
         
         &-icon {
-            @include min_query(font-size, $regular-page-breakpoint, 2.8rem);
+            @media screen and (min-width: $regular-page-breakpoint) {
+                display: inline-flex;
+                flex-direction: column-reverse;
+                font-size: 1.4rem;
+                align-items: center;
+                color: $color-red;
+
+                transition: all 200ms ease;
+                
+                &:before {
+                    color: $color-lightest-grey;
+                    margin-top: 1vh;
+                    font-size: 4rem;
+
+                    transition: all 200ms ease;
+                }
+            }
+
+            @include hover($regular-page-breakpoint) {
+                color: $color-lightest-grey;
+
+                &:before {
+                    color: $color-red;
+                }
+            }
         }
     }
 
     .active .contact {
         &-background {
-            @include interpolate(width, 400px, 1366px, 368px, 500px);
-            @include interpolate(height, 400px, 1366px, 368px, 500px);
-			transform: translate3d(50%, 50%, 0) rotate3d(0,0,1,-18deg);
+            @include interpolate(width, 400px, 1366px, 368px, 1250px);
+            @include interpolate(height, 400px, 1366px, 368px, 1250px);
+            transform: translate3d(50%, 50%, 0) rotate3d(0,0,1,-18deg);
+            @media screen and (min-width: $regular-page-breakpoint) {
+                transform: translate3d(50%, 50%, 0) rotate3d(0,0,1,7deg);
+            }
         }
     }
 }

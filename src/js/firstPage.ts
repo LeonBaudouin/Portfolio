@@ -13,7 +13,7 @@ let burgerMenu = new ActivationButton(".nav-burger", ".nav", "hidden");
 
 document.querySelectorAll(".js-copy-to-clipboard").forEach(
     (element) => {
-        new CopyToClipBoard(element, "leondedouin@gmail.com");
+        new CopyToClipBoard(element, "leondedouin@gmail.com", ".popup");
     }
 );
 

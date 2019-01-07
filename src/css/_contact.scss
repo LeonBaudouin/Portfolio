@@ -9,6 +9,7 @@
 }
 
 .contact {
+    @include min_query(z-index,$regular-page-breakpoint, 1);
     position: relative;
 
     &-background {

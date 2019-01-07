@@ -4,12 +4,14 @@ export class CopyToClipBoard {
 
     text : string;
     link : Element;
+    popup: Element;
     input : HTMLInputElement;
     classArray : string[];
 
-    constructor(link: Element, text: string) {
+    constructor(link: Element, text: string, popupSelector: string) {
         this.isInput = false;
 
+        this.popup = document.querySelector(popupSelector);
         this.text = text;
         this.link = link;
         this.classArray = this.link.classList.value.split(" ");
@@ -32,9 +34,18 @@ export class CopyToClipBoard {
         e.preventDefault();
         e.stopPropagation();
         this.link.replaceWith(this.input);
+        this.Copy();
+        this.isInput = true;
+    }
+
+    Copy() {
+        this.popup.classList.add("active");
+        setTimeout(
+            () => { this.popup.classList.remove("active"); },
+            1200
+        )
         this.input.select();
         document.execCommand("copy");
-        this.isInput = true;
     }
 
     ClickElseWhere(e : Event) {
