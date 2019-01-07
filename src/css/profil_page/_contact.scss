@@ -1,12 +1,17 @@
 .profil-page {   
     .contact {
         margin-bottom: 1vh;
+
         @include min_query(margin-left, $regular-page-breakpoint, 10vw);
-        
+
         &-background {
             right: 20vw;
 
             transform: translate3d(50%, 50%, 0) rotate3d(0,0,1, 90deg);
+
+            transition: transform 3s cubic-bezier(0,.87,0,1),
+                        width 1.5s cubic-bezier(.1,.86,0,1),
+                        height 1.5s cubic-bezier(.1,.86,0,1);
             
             @include interpolate(bottom, 400px, 1366px, 16px, -70px);
 
@@ -41,6 +46,8 @@
             
             &-link {
                 font-size: 1.75rem;
+
+                transition: all 200ms 300ms ease;
             }
 
         }
@@ -56,6 +63,7 @@
             
             &:before {
                 bottom: -1px;
+                z-index: -1;
 
                 @media screen and (min-width: $regular-page-breakpoint) {
                     
@@ -131,11 +139,13 @@
 
     .active .contact {
         &-background {
-            @include interpolate(width, 400px, 1366px, 368px, 1250px);
-            @include interpolate(height, 400px, 1366px, 368px, 1250px);
+            width: 110vw;
+            height: 110vw;
             transform: translate3d(50%, 50%, 0) rotate3d(0,0,1,-18deg);
             @media screen and (min-width: $regular-page-breakpoint) {
                 transform: translate3d(50%, 50%, 0) rotate3d(0,0,1,7deg);
+                width: 90vw;
+                height: 90vw;
             }
         }
     }

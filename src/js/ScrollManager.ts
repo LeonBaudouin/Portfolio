@@ -1,6 +1,6 @@
-import { Point } from "./CustomTypes";
+import { Point } from "./lib/CustomTypes";
 import { ActivationButton } from "./ActivationButton";
-import { MathFunc } from "./Utils";;
+import { MathFunc } from "./lib/UtilsFunctions";;
 import { ProjectDisplayer } from "./ProjectDisplayer";
 import "./lib/AddWheelListener.js";
 

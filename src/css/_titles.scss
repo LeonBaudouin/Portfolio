@@ -26,7 +26,9 @@
     left: calc( var(--margin-side-buttons-right) - 4.375rem);
     top: calc( var(--margin-side-buttons-top) - 1.5625rem);
 
-    @media screen and (min-width: $nav-breakpoint) {
+    background-color: transparentize($color-darkest-grey, $amount: 0.2);
+
+    @media screen and (min-width: $regular-page-breakpoint) {
         left: calc( var(--margin-side-buttons-right) - 7.5rem);
         --deg: 45deg;
         --horizontal-offset: -0.625rem;
@@ -37,36 +39,16 @@
 
     animation: logo-skew-enter 200ms 300ms cubic-bezier(.68,.01,.62,1) backwards;
 
-    & .first-part,
-    & .second-part {
-        display: inline-flex;
-
-        width: 4.375rem;
-        height: 3.125rem;
-        
-        align-items: center;
-        overflow: hidden;
-
-        animation: logo-height 300ms cubic-bezier(.68,0,.62,1) backwards;
-
-        @include min_query(width, $nav-breakpoint, 15rem);
-
-        &-content {
-            position: relative;
-            transform: skew(var(--deg));
-            transition: transform 200ms cubic-bezier(.08,.67,.12,1.13);
-        }
-    }
-
     & .first-part {
+        width: 4.375rem;
         justify-content: flex-end;
         font-size: 2.56rem;
         text-align: right;
         color: $color-lightest-grey;
         border-right: 2px solid $color-darkest-grey;
         
-        @include min_query(border-right, $nav-breakpoint, 3px solid $color-lightest-grey);
-        @include min_query(font-size, $nav-breakpoint, 3.4375rem);
+        @include min_query(border-right, $regular-page-breakpoint, 3px solid $color-lightest-grey);
+        @include min_query(font-size, $regular-page-breakpoint, 3.4375rem);
         
         transition: color 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
 
@@ -78,16 +60,38 @@
     }
 
     & .second-part {
+        width: 3rem;
         justify-content: flex-start;
 
         font-size: 2.69rem;
         color: $color-red;
-        @include min_query(font-size, $nav-breakpoint, 2.5rem);       
+        @include min_query(font-size, $regular-page-breakpoint, 2.5rem);     
         
         &-content {
             left: var(--horizontal-offset);
             top: 0.125rem;
             animation: logo-second-part-content 800ms 700ms cubic-bezier(0,.7,0,.99) both;
+        }
+    }
+    
+    & .first-part,
+    & .second-part {
+        display: inline-flex;
+
+        height: 3.125rem;
+        // width: 4.375rem;
+        
+        align-items: center;
+        overflow: hidden;
+
+        animation: logo-height 300ms cubic-bezier(.68,0,.62,1) backwards;
+
+        @include min_query(width, $regular-page-breakpoint, 15rem);
+
+        &-content {
+            position: relative;
+            transform: skew(var(--deg));
+            transition: transform 200ms cubic-bezier(.08,.67,.12,1.13);
         }
     }
 

@@ -23,6 +23,10 @@ $padding: 20px;
 	box-sizing: border-box;
 }
 
+::selection {
+	background-color: $color-dark-grey;
+}
+
 :root {
     @include interpolate(--margin-side-buttons-top, 360px, 1024px, 40px, 60px);
     @include interpolate(--margin-side-buttons-right, 360px, 1024px, 40px, 60px);
@@ -110,6 +114,7 @@ canvas {
 	@include interpolate(font-size, 40rem, 64rem,  0.81rem, 1rem);
 }
 
+
 input.contact-item.js-copy-to-clipboard {
 	position: relative;
 
@@ -119,15 +124,14 @@ input.contact-item.js-copy-to-clipboard {
 
 	background: none;
 	
-	font-size: 1rem;
 	font-family: 'Raleway', sans-serif;
 
 	text-transform: initial;
 	text-decoration: none;
 	text-align: right;
 
-	&::selection {
-		background-color: $color-dark-grey;
+	.main-page & {
+		font-size: 1rem;
 	}
 
 	.nav & {

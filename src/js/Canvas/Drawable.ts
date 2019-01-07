@@ -5,8 +5,8 @@ import {
   Point,
   tiltedSquareSettings,
   rotationRoutine
-} from "../CustomTypes";
-import { MathFunc } from "../Utils";
+} from "../lib/CustomTypes";
+import { MathFunc } from "../lib/UtilsFunctions";
 
 export namespace DrawnElement {
   export interface Drawable {

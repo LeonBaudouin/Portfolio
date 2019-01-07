@@ -1,4 +1,4 @@
-import { scrollSensitiveElement } from "./CustomTypes";
+import { scrollSensitiveElement } from "./lib/CustomTypes";
 
 export class OnScrollActivator {
 
@@ -14,6 +14,8 @@ export class OnScrollActivator {
         this.FillArray(elementList);
 
         document.addEventListener("scroll", this.CheckAll.bind(this));
+
+        setTimeout(this.CheckAll.bind(this), 0);
     }
 
     private FillArray(elementList: NodeListOf<Element>) {
@@ -28,7 +30,7 @@ export class OnScrollActivator {
         });
     }
 
-    private CheckAll(e: MouseEvent) {
+    private CheckAll() {
         this.scrollElements.forEach(
             this.CheckElement.bind(this)
         );

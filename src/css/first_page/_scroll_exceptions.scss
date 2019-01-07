@@ -64,9 +64,6 @@
 }
 
 .scroll-index-2 {
-    & .logo .first-part {
-        @include min_query(color, $regular-page-breakpoint, $color-darkest-grey);
-    }
     
     & .profil .section {
         @include min_query(top, $regular-page-breakpoint, -120vh);
@@ -94,10 +91,6 @@
     & .scroll-icon-line {
         animation: none;
         stroke-dashoffset: -$scroll-line--length;
-    }
-
-    & .hidden .nav-burger-line {
-        @include min_query(stroke, $regular-page-breakpoint, $color-darkest-grey);
     }
     
     & .scroll-bar-current {

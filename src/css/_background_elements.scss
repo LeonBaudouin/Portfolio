@@ -21,7 +21,7 @@
                 }
             } @else {
                 @if $r > 15 {
-                    transform: translate3d(0, 15px, 0);
+                    transform: translate3d(0, -15px, 0);
                 } @else {
                     transform: translate3d(0, 15px, 0);
                 }

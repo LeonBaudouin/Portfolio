@@ -1,6 +1,6 @@
-import { Size, Palette, Style, tiltedSquareSettings } from "../CustomTypes";
+import { Size, Palette, Style, tiltedSquareSettings } from "../lib/CustomTypes";
 import { DrawnElement } from "./Drawable";
-import { MathFunc } from "../Utils";
+import { MathFunc } from "../lib/UtilsFunctions";
 
 class Canvas {
   private element: HTMLCanvasElement;

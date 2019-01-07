@@ -20,18 +20,40 @@
 		    @include interpolate(height, 40rem, 64rem, 2.1rem, 5rem);
         }
     }
+
+    
+    .section-title {
+        margin-left: 5vw;
+        
+        @include min_query(margin-left, $regular-page-breakpoint, 0);
+    }
+    
+    .main-title {
+        @include interpolate(font-size, 40rem, 64rem, 2.5rem, 4.7rem);
+
+        .first-part, .second-part {
+            color: $color-lightest-grey;
+            @include interpolate(height, 40rem, 64rem, 2.8rem, 5.7rem);
+            
+            &-content {
+                transition-delay: 0;
+            }
+        }
+    }
+
+    .welcome {
+        height: 80vh;
+        @include min_query(height, $regular-page-breakpoint, 35vw);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10vh;
+    }
 }
 
-.section-title {
-    margin-left: 5vw;
 
-    @include min_query(margin-left, $regular-page-breakpoint, 0);
-}
 
-.welcome {
-    height: 80vh;
-    @include min_query(height, $regular-page-breakpoint, 35vw);
-}
+
 
 @import "./who_am_i";
 @import "./parcours";
