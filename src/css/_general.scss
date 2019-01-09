@@ -43,6 +43,7 @@ body {
 
 a {
 	text-decoration: none;
+	color: inherit;
 }
 
 canvas {
@@ -130,8 +131,20 @@ input.contact-item.js-copy-to-clipboard {
 	text-decoration: none;
 	text-align: right;
 
-	.main-page & {
+	.main-page &, .nav & {
 		font-size: 1rem;
+	}
+	
+	.profil-page & {
+		left: -50%;
+		
+		@media screen and (max-width: $nav-breakpoint - 1) {
+			font-size: 1rem;
+		}
+
+		@media screen and (min-width: $nav-breakpoint) {
+			left: 0;
+		}
 	}
 
 	.nav & {
@@ -147,11 +160,9 @@ input.contact-item.js-copy-to-clipboard {
 	.lab & {
 		position: relative;
 		font-size: 0.8rem;
-		left: -50%;
 
 		@media screen and (min-width: $regular-page-breakpoint) {
 			font-size: 0.79rem;
-			left: 0;
 		}
 	}
 

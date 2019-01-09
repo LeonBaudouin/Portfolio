@@ -3,8 +3,7 @@
     margin: 0;
 
     & .first-part, & .second-part {
-        text-decoration: inherit;
-        color: inherit;
+        color: $color-darkest-grey;
     }
 
     & .first-part {

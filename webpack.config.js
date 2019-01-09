@@ -129,8 +129,12 @@ module.exports =
                     template: "./src/profil.html"
                 }),
                 new HtmlWebpackPlugin({
-                    filename: "gallery.html",
-                    template: "./src/gallery.html"
+                    filename: "projects.html",
+                    template: "./src/projects.html"
+                }),
+                new HtmlWebpackPlugin({
+                    filename: "lab.html",
+                    template: "./src/lab.html"
                 }),
                 new ExtractTextPlugin({
                     filename: "css/[name].css"

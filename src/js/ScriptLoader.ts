@@ -1,8 +1,9 @@
-import { ActivationButton } from "./ActivationButton";
-import { ScrollManager } from "./ScrollManager";
-import { ProjectDisplayer } from "./ProjectDisplayer";
-import { CopyToClipBoard } from "./CopyToClipBoard";
-import { OnScrollActivator } from "./OnScrollActivator";
+import { ActivationButton } from "./Buttons/ActivationButton";
+import { ScrollManager } from "./Scroll/ScrollManager";
+import { ProjectDisplayer } from "./Buttons/ProjectDisplayer";
+import { CopyToClipBoard } from "./Buttons/CopyToClipBoard";
+import { OnScrollActivator } from "./Scroll/OnScrollActivator";
+import Canvas from "./Canvas/Canvas";
 
 class ScriptLoader {
 
@@ -29,6 +30,14 @@ class ScriptLoader {
 
             this.ProfilPageScripts();
 
+        } else if(this.currentPage == "projects-page") {
+
+            this.ProjectsPageScripts();
+
+        } else if(this.currentPage == "lab-page") {
+
+            this.LabPageScripts();
+
         }
     }
 
@@ -42,6 +51,7 @@ class ScriptLoader {
 
         //  Bind a automatic copy to clipboard to elements with the class ".js-copy-to-clipboard" 
         this.BindClipboardButtons();
+        
 
     }
 
@@ -60,6 +70,9 @@ class ScriptLoader {
         //  Bind a one page scroll to the scroll icon and every sections of the scroll bar
         this.BindScrollButons();
 
+        
+        let canvas = new Canvas("canvas");
+        canvas.Update();
     }
 
     private ProfilPageScripts() {
@@ -67,6 +80,21 @@ class ScriptLoader {
         // Object that add the "active" class when the user scroll the element
         this.onScrollActivator = new OnScrollActivator(".js-activate-on-scroll", window.innerHeight/4);
 
+        let canvas = new Canvas("canvas");
+        canvas.Update();
+    }
+    
+    private ProjectsPageScripts() {
+
+        let canvas = new Canvas("canvas");
+        canvas.Update();
+    }
+    
+    private LabPageScripts() {
+
+        let canvas = new Canvas("canvas", true);
+        canvas.Update();
+        
     }
 
 

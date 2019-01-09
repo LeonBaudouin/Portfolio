@@ -1,8 +1,8 @@
-import { Point } from "./lib/CustomTypes";
-import { ActivationButton } from "./ActivationButton";
-import { MathFunc } from "./lib/UtilsFunctions";;
-import { ProjectDisplayer } from "./ProjectDisplayer";
-import "./lib/AddWheelListener.js";
+import { Point } from "../Utils/CustomTypes";
+import { ActivationButton } from "../Buttons/ActivationButton";
+import { MathFunc } from "../Utils/UtilsFunctions";;
+import { ProjectDisplayer } from "../Buttons/ProjectDisplayer";
+import "../lib/AddWheelListener.js";
 
 type WindowWheel = Window & {addWheelListener : (elem: any, callback: any, useCapture?: any) => {}};
 export class ScrollManager {

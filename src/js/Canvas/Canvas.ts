@@ -1,26 +1,35 @@
-import { Size, Palette, Style, tiltedSquareSettings } from "../lib/CustomTypes";
-import { DrawnElement } from "./Drawable";
-import { MathFunc } from "../lib/UtilsFunctions";
+import { Size, Palette, Style, tiltedSquareSettings } from "../Utils/CustomTypes";
+import { Drawable, Interactive } from "./Drawable";
+import { MathFunc } from "../Utils/UtilsFunctions";
+import { InteractiveTiltedSquare } from "./TiltedSquares";
+import { Grid } from "./Grid";
+import { StraightSquare } from "./StraightSquares";
 
 class Canvas {
   private element: HTMLCanvasElement;
   public context: CanvasRenderingContext2D;
   public size: Size;
 
-  private backgroundStyle: Style = Palette.BackgroundDark;
+  private backgroundStyle: Style;
 
-  private drawnElement: DrawnElement.Drawable[] = [];
-  private interactiveElement: DrawnElement.Interactive[] = [];
+  private drawnElement: Drawable[] = [];
+  private interactiveElement: Interactive[] = [];
+  private isLight: boolean;
 
-  constructor(uniqueSelector: string) {
+  constructor(uniqueSelector: string, isLight: boolean = false) {
+    
     this.element = document.querySelector(uniqueSelector);
     this.context = this.element.getContext("2d");
+    this.isLight = isLight;
+    this.backgroundStyle = this.isLight ? Palette.BackgroundLight : Palette.BackgroundDark;
 
     this.onResize();
+
 
     window.addEventListener("resize", () => {
       this.onResize();
     });
+
 
     window.addEventListener("mousemove", (e : MouseEvent) => {
       this.interactiveElement.forEach(element => {
@@ -30,6 +39,7 @@ class Canvas {
       });
     });
 
+
     window.addEventListener("deviceorientation", (e : DeviceOrientationEvent) => {
       this.interactiveElement.forEach(element => {
         if (element) {
@@ -37,17 +47,25 @@ class Canvas {
         }
       });
     });
+
   }
 
+
+
   public Update(): void {
+
     this.DrawBG();
+
     this.drawnElement.forEach(element => {
       element.Draw(this.context);
     });
+
     this.DrawGradient();
 
     requestAnimationFrame(() => this.Update());
   }
+
+
 
   private onResize(): void {
 
@@ -59,14 +77,16 @@ class Canvas {
 
     this.size = { width: this.element.width, height: this.element.height };
 
-    this.SetupSquare();
-    this.drawnElement.push(new DrawnElement.Grid(this.size, Palette.GridDark));
+    this.SetupElements();
   }
+
+
 
   private DrawBG(): void {
     this.context.fillStyle = this.backgroundStyle;
     this.context.fillRect(0, 0, this.size.width, this.size.height);
   }
+
 
   private DrawGradient(): void {
     let gradient: CanvasGradient = this.context.createRadialGradient(
@@ -78,21 +98,60 @@ class Canvas {
       0
     );
 
-    gradient.addColorStop(0.0, "rgba(0, 0, 0, 0.250)");
+    if(this.isLight) {
+      gradient.addColorStop(0.0, "rgba(0, 0, 0, 0.1)");
+    } else {
+      gradient.addColorStop(0.0, "rgba(0, 0, 0, 0.250)");
+    }
     gradient.addColorStop(1.0, "rgba(0, 0, 0, 0.000)");
 
     this.context.fillStyle = gradient;
     this.context.fillRect(0, 0, this.size.width, this.size.height);
   }
 
-  private SetupSquare() : void {
+
+  private SetupElements() {
+
+    let gridSize = Math.floor(
+      MathFunc.easeInOutSine(this.size.width, 40, 24, 1920)
+    );
+
+    if(this.isLight) {
+      
+      this.SetupStraightSquares(gridSize);
+      this.SetupGrid(gridSize, Palette.GridLight);
+      
+    } else {
+
+      this.SetupTiltedSquares();
+      this.SetupGrid(gridSize, Palette.GridDark);
+
+    }
+  }
+
+
+
+  private SetupGrid(gridSize: number, style: Style) {
+    this.drawnElement.push(new Grid(gridSize, this.size, style));
+  }
+
+  private SetupStraightSquares(gridSize: number) {
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: -1}, {x: 1, y: 0}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: -1}, {x: 0, y: 2}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 0, y: 0}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 0, y: 0}));
+  }
+
+
+
+  private SetupTiltedSquares() : void {
     let settings: tiltedSquareSettings = {
       position: { x: this.size.width / 2, y: this.size.height / 2 },
       size: this.size.height - 200,
       strokeSize: 25,
     };
 
-    let FTS = new DrawnElement.InteractiveTiltedSquare(settings, Math.PI/4, 0.05);
+    let FTS = new InteractiveTiltedSquare(settings, Math.PI/4, 0.05);
 
     this.drawnElement.push(FTS);
     this.interactiveElement.push(FTS);
@@ -101,7 +160,7 @@ class Canvas {
 
     for (let i = 0; i < 3; i++) {
       settings.size = this.size.height - 300 - 100 * i;
-      let obj = new DrawnElement.InteractiveTiltedSquare(settings, Math.PI/4, 0.045 - 0.005 * i);
+      let obj = new InteractiveTiltedSquare(settings, Math.PI/4, 0.045 - 0.005 * i);
       this.drawnElement.push(obj);
       this.interactiveElement.push(obj);
     }
@@ -121,7 +180,7 @@ class Canvas {
     //   }
     // ]
 
-    // this.drawnElement.push(new DrawnElement.RotatingTiltedSquare(settings, routines));
+    // this.drawnElement.push(new RotatingTiltedSquare(settings, routines));
 
     // settings = {
     //   position: { x: this.size.width / 2, y: this.size.height / 2 },
@@ -142,13 +201,13 @@ class Canvas {
     //   }
     // ]
 
-    // this.drawnElement.push(new DrawnElement.RotatingTiltedSquare(settings, routines));
+    // this.drawnElement.push(new RotatingTiltedSquare(settings, routines));
     // routines[1].angle = Math.PI / 2;
-    // this.drawnElement.push(new DrawnElement.RotatingTiltedSquare(settings, routines));
+    // this.drawnElement.push(new RotatingTiltedSquare(settings, routines));
     // routines[1].angle = (2 * Math.PI) / 2;
-    // this.drawnElement.push(new DrawnElement.RotatingTiltedSquare(settings, routines));
+    // this.drawnElement.push(new RotatingTiltedSquare(settings, routines));
     // routines[1].angle = (3 * Math.PI) / 2;
-    // this.drawnElement.push(new DrawnElement.RotatingTiltedSquare(settings, routines));
+    // this.drawnElement.push(new RotatingTiltedSquare(settings, routines));
   }
 }
 
