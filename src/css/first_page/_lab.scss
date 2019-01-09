@@ -134,10 +134,6 @@
 			.contact-icon {
 				@include min_query(font-size, $regular-page-breakpoint, 2.8rem);
 			}
-
-			.contact-item {
-				justify-self: start;
-			}
 		}
 	}
 

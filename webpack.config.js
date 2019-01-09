@@ -128,6 +128,10 @@ module.exports =
                     filename: "profil.html",
                     template: "./src/profil.html"
                 }),
+                new HtmlWebpackPlugin({
+                    filename: "gallery.html",
+                    template: "./src/gallery.html"
+                }),
                 new ExtractTextPlugin({
                     filename: "css/[name].css"
                 }),

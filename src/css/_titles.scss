@@ -26,6 +26,8 @@
     left: calc( var(--margin-side-buttons-right) - 4.375rem);
     top: calc( var(--margin-side-buttons-top) - 1.5625rem);
 
+    padding-top: 0.2rem;
+
     background-color: transparentize($color-darkest-grey, $amount: 0.2);
 
     @media screen and (min-width: $regular-page-breakpoint) {

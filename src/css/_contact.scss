@@ -37,6 +37,9 @@
                         "cv cv mail mail"
                         "codepen instagram github youtube";
                         
+            justify-items: center;
+            align-items: center;
+            
             @media screen and (min-width: $regular-page-breakpoint) {
                 grid-template-areas: 
                         "cv mail mail mail"

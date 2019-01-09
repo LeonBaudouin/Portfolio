@@ -44,7 +44,6 @@ export class ProjectDisplayer {
     async Previous() {
         this.currentIndex = (this.currentIndex + this.projectList.length - 1) % this.projectList.length;
         this.Switch(this.currentIndex);
-        console.log(this.currentIndex);
 
         this.buttonIndicatorContent.textContent = (this.currentIndex + 1).toString();
     }
@@ -52,7 +51,6 @@ export class ProjectDisplayer {
     async Next() {
         this.currentIndex = (this.currentIndex + 1) % this.projectList.length;
         this.Switch(this.currentIndex);
-        console.log(this.currentIndex);
 
         this.buttonIndicatorContent.textContent = (this.currentIndex + 1).toString();
 
