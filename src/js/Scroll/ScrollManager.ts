@@ -2,7 +2,7 @@ import { Point } from "../Utils/CustomTypes";
 import { ActivationButton } from "../Buttons/ActivationButton";
 import { MathFunc } from "../Utils/UtilsFunctions";;
 import { ProjectDisplayer } from "../Buttons/ProjectDisplayer";
-import "../lib/AddWheelListener.js";
+import "../Utils/AddWheelListener.js";
 
 type WindowWheel = Window & {addWheelListener : (elem: any, callback: any, useCapture?: any) => {}};
 export class ScrollManager {

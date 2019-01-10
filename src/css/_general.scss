@@ -24,7 +24,7 @@ $padding: 20px;
 }
 
 ::selection {
-	background-color: $color-dark-grey;
+	background-color: $color-light-grey;
 }
 
 :root {
@@ -55,6 +55,12 @@ canvas {
 	z-index: $z-index-canvas;
 	width: 100%;
 	height: 100%;
+}
+
+input {
+	&::selection {
+		background-color: $color-dark-grey;
+	}
 }
 
 .color-red {
