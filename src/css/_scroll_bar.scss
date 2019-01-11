@@ -30,9 +30,6 @@
             height: calc(100% - 2px);
             width: 2px;
             background-color: $color-lightest-grey;
-                
-            border-top: $color-dark-grey 1px solid;
-            border-bottom: $color-dark-grey 1px solid;
 
             transition: all 200ms ease;
             @media screen and (min-width: $regular-page-breakpoint) {

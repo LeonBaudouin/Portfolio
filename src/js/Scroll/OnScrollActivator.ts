@@ -39,7 +39,6 @@ export class OnScrollActivator {
     private CheckElement(element: scrollSensitiveElement) {
         if(!element.isActive) {
             element.top = element.DOM.getBoundingClientRect().top - window.innerHeight;
-            console.log(element.top);
             if(element.top <= -this.scrollOffset) {
                 element.classes.add("active");
                 element.isActive = true;
