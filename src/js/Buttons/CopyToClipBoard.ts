@@ -19,7 +19,7 @@ export class CopyToClipBoard {
         this.CreateInput();
 
         this.link.addEventListener("click", this.ClickOnLink.bind(this));
-        document.addEventListener("click", this.ClickElseWhere.bind(this));
+        // document.addEventListener("click", this.ClickElseWhere.bind(this));
     }
 
     CreateInput() {
@@ -35,7 +35,8 @@ export class CopyToClipBoard {
         e.stopPropagation();
         this.link.replaceWith(this.input);
         this.Copy();
-        this.isInput = true;
+        this.input.replaceWith(this.link);
+        // this.isInput = true;
     }
 
     Copy() {

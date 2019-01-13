@@ -220,6 +220,9 @@
 				animation: photo-hiding-desktop-projet $project-exposition-time/2 cubic-bezier(0,.66,0,.99) infinite alternate;
 			}
 
+			img {
+				height: 100%;
+			}
 			
 			@keyframes photo-hiding-desktop-projet {
 				0% {

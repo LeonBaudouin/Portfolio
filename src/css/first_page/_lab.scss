@@ -149,6 +149,7 @@
 		&-content {
 
 			grid-template-rows: auto 1fr auto;
+			padding-bottom: 0;
 
 			@media screen and (min-width: $regular-page-breakpoint) {
 				
@@ -447,7 +448,11 @@
 		.lab-title {
 			
 			&-content {
-				animation: change-lab-title $project-exposition-time 100ms cubic-bezier(1,0,0,1) infinite;
+				animation: change-lab-title $project-exposition-time cubic-bezier(1,0,0,1) infinite;
+
+				&:before {
+					animation: hiding-lab-paragraph $project-exposition-time linear infinite;
+				}
 			}
 			
 			&:before {
@@ -475,7 +480,7 @@
 		}
 
 		.paragraph {
-			animation: hiding-lab-paragraph $project-exposition-time linear 200ms infinite;
+			animation: hiding-lab-paragraph $project-exposition-time linear infinite;
 
 			@keyframes hiding-lab-paragraph {
 				0% {
@@ -508,6 +513,10 @@
 				100% {
 					transform: translate3d(-32%, -56%, 0) rotate3d(0, 0, 1, calc(0deg - var(--rotation)));
 				}
+			}
+
+			img {
+				height: 100%;
 			}
 		}
 		

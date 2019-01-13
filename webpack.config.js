@@ -53,7 +53,7 @@ module.exports =
                         options: {
                             minimize: prod,
                             removeComments: prod,
-                            attrs: ['img:src', 'source:srcset']
+                            attrs: ['img:src', 'source:srcset', 'link:href']
                         }
                     }
                 },

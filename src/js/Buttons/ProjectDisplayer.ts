@@ -2,6 +2,7 @@ export class ProjectDisplayer {
 
     projectList : NodeListOf<Element>;
     illustrationList: NodeListOf<Element>;
+    buttonList: NodeListOf<Element>;
     buttonPrevious: Element;
     buttonNext: Element;
     buttonIndicator: Element;
@@ -14,6 +15,7 @@ export class ProjectDisplayer {
 
         this.projectList = document.querySelectorAll(sectionSelector + " .description");
         this.illustrationList = document.querySelectorAll(illustrationSelector);
+        this.buttonList = document.querySelectorAll(sectionSelector + " .continuer");
         this.expositionTime = expositionTime;
         this.buttonPrevious = document.querySelector(sectionSelector + " .next-project-before");
         this.buttonNext = document.querySelector(sectionSelector + " .next-project-after");
@@ -72,6 +74,7 @@ export class ProjectDisplayer {
     Hide(index: number) {
         let projectClasses: DOMTokenList = this.projectList[index].classList;
         let illusClasses: DOMTokenList = this.illustrationList[index].classList;
+        let buttonClasses: DOMTokenList = this.buttonList[index].classList;
 
         if(!projectClasses.contains("hide")) {
             projectClasses.add("hide");
@@ -83,12 +86,18 @@ export class ProjectDisplayer {
             illusClasses.remove("show");
         }
 
+        if(!buttonClasses.contains("hide")) {
+            buttonClasses.add("hide");
+            buttonClasses.remove("show");
+        }
+
     }
 
     Show(index: number) {
         let projectClasses: DOMTokenList = this.projectList[index].classList;
         let illusClasses: DOMTokenList = this.illustrationList[index].classList;
-        
+        let buttonClasses: DOMTokenList = this.buttonList[index].classList;        
+
         if(projectClasses.contains("hide")) {
             projectClasses.remove("hide");
             projectClasses.add("show");
@@ -97,6 +106,11 @@ export class ProjectDisplayer {
         if(illusClasses.contains("hide")) {
             illusClasses.remove("hide");
             illusClasses.add("show");
+        }
+
+        if(buttonClasses.contains("hide")) {
+            buttonClasses.remove("hide");
+            buttonClasses.add("show");
         }
     }
 }

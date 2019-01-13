@@ -19,6 +19,14 @@ $regular-page-breakpoint: 800px;
 
 $padding: 20px;
 
+
+/* @media not all and (min-resolution:.001dpcm) { @media {
+    .nav-menu-background, .section-background, .contact-background {
+        transition: transform 0s !important;
+    }
+}} */
+
+
 * {
 	box-sizing: border-box;
 }
@@ -118,6 +126,8 @@ input {
 .paragraph {
 	font-weight: 500;
 	color: $color-darkest-grey;
+	line-height: 1.4;
+	text-indent: 2rem;
 	@include interpolate(font-size, 40rem, 64rem,  0.81rem, 1rem);
 }
 
