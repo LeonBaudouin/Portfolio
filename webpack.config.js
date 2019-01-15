@@ -44,7 +44,7 @@ module.exports =
                 },
                 extensions: ['.ts', '.js', '.json']
             },
-            devtool: dev ? "cheap-module-eval-source-map" : "source-map",
+            devtool: dev ? "cheap-module-eval-source-map" : "",
             module: {
                 rules: [{
                     test: /\.html$/,
