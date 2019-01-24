@@ -33,20 +33,22 @@
 							height 3s 200ms cubic-bezier(.1,.86,0,1);
 			}
 
-			&:before {
+			&:before, &:after {
 				content: "";
 				position: absolute;
 				bottom: 0;
-				width: 100%;
-				border-bottom: 3px $color-medium-grey solid;
-
+				border-width: 3px;
+				border-bottom-style: solid;
+				z-index: 1;
 			}
-
+			
+			&:before {
+				width: 100%;
+				border-color: $color-medium-grey;
+			}
+			
 			&:after {
-				content: "";
-				position: absolute;
-				bottom: 0;
-				border-bottom: 3px $color-red solid;
+				border-color: $color-red;
 			}
 
 			@media screen and (min-width: $regular-page-breakpoint) {
