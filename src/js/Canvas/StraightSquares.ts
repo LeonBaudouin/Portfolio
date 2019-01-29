@@ -14,7 +14,6 @@ export class StraightSquare implements Drawable {
       this.canvasSize = canvasSize;
       
       this.offset = (canvasSize.width % this.size) / 2;
-      console.log(this.offset);
 
       this.SetPosition(anchorPoint, cellPosition);
     }
@@ -26,8 +25,7 @@ export class StraightSquare implements Drawable {
             
         } else {
 
-            for (this.position.x; this.position.x < this.canvasSize.width; this.position.x += this.size) {}
-            this.position.x -= cellPosition.x * this.size + this.offset;
+            this.position.x = this.canvasSize.width - this.offset - (cellPosition.x + 1) * this.size;
 
         }
 
@@ -38,7 +36,7 @@ export class StraightSquare implements Drawable {
         } else {
 
             for (this.position.y; this.position.y < this.canvasSize.height; this.position.y += this.size) {}
-            this.position.y -= cellPosition.y * this.size;
+            this.position.y -= (cellPosition.y + 1) * this.size;
 
         }
     }

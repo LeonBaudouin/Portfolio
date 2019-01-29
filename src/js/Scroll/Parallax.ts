@@ -1,6 +1,6 @@
 //WIP
 
-class Parallax {
+export class Parallax {
 
     DOM: HTMLElement;
     transform: string;
@@ -8,8 +8,8 @@ class Parallax {
     translate: number;
     offsetMax: number;
 
-    constructor(selector: string, offsetMax: number) {
-        this.DOM = document.querySelector(selector);
+    constructor(element: HTMLElement, offsetMax: number) {
+        this.DOM = element;
         this.transform = this.DOM.style.transform;
 
         this.clientRect = this.DOM.getBoundingClientRect();

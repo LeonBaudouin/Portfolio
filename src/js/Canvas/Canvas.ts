@@ -137,8 +137,8 @@ class Canvas {
 
   private SetupStraightSquares(gridSize: number) {
     this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: -1}, {x: 1, y: 0}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: -1}, {x: 0, y: 2}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 0, y: 0}));
+    // this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: -1}, {x: 0, y: 2}));
+    // this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 0, y: 0}));
     this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 0, y: 0}));
   }
 

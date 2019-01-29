@@ -4,6 +4,7 @@ import { ProjectDisplayer } from "./Buttons/ProjectDisplayer";
 import { CopyToClipBoard } from "./Buttons/CopyToClipBoard";
 import { OnScrollActivator } from "./Scroll/OnScrollActivator";
 import Canvas from "./Canvas/Canvas";
+import { Parallax } from "./Scroll/Parallax";
 
 class ScriptLoader {
 
@@ -52,7 +53,6 @@ class ScriptLoader {
         //  Bind a automatic copy to clipboard to elements with the class ".js-copy-to-clipboard" 
         this.BindClipboardButtons();
         
-
     }
 
     private MainPageScripts() {
@@ -91,6 +91,9 @@ class ScriptLoader {
     }
     
     private LabPageScripts() {
+
+        let parallax: HTMLElement = document.querySelector(".js-parallax");
+        let parallaxObject = new Parallax(parallax, 0);
 
         let canvas = new Canvas("canvas", true);
         canvas.Update();
