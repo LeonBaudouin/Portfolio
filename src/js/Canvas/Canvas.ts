@@ -136,10 +136,32 @@ class Canvas {
   }
 
   private SetupStraightSquares(gridSize: number) {
+    //  Top Left
     this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: -1}, {x: 1, y: 0}));
-    // this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: -1}, {x: 0, y: 2}));
-    // this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 0, y: 0}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: -1}, {x: 0, y: 2}));
+    
+    //  Top Right
     this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 0, y: 0}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 3, y: 0}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 2, y: 1}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 2, y: 2}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 1, y: 3}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 2, y: 3}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 0, y: 5}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 4, y: 1}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 5, y: 1}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 0, y: 2}));
+
+    // Bottom Right
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: 1}, {x: 0, y: 0}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: 1}, {x: 0, y: 1}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: 1}, {x: 1, y: 2}));
+    
+    //  Bottom Left
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: 1}, {x: 0, y: 1}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: 1}, {x: 0, y: 4}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: 1}, {x: 2, y: 5}));
+    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: 1}, {x: 1, y: 2}));
   }
 
 

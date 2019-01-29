@@ -33,7 +33,7 @@
 
 			position: absolute;
 
-			height: calc(var(--margin-side-buttons-top) * 3.5);
+			height: calc(var(--margin-side-buttons-top) * 3);
 			width: 70%;
 			max-width: 400px;
 			bottom: 0;
@@ -138,8 +138,8 @@
 	}
 
 	.section {
-		margin-bottom: 10vh;
-		height: calc(100% - var(--margin-side-buttons-top) * 5.5);
+		// margin-bottom: 10vh;
+		height: calc(100% - var(--margin-side-buttons-top) * 5);
 
 		@media screen and(min-width: $regular-page-breakpoint) {
 			height: 100%;
@@ -419,7 +419,7 @@
 			&-background {
 				@include interpolate(width, 400px, 1366px, 368px, 500px);
 				@include interpolate(height, 400px, 1366px, 368px, 500px);
-				transform: translate3d(50%, 50%, 0) rotate3d(0,0,1,-18deg);
+				transform: translate3d(50%, 50%, 0) rotate3d(0,0,1,-25deg);
 				@include min_query(transform, $regular-page-breakpoint, translate3d(-50%, 50%, 0) rotate3d(0,0,1,-8deg));
 			}
 			
