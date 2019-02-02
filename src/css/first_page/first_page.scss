@@ -127,7 +127,7 @@ body.main-page {
 		grid-template-areas:
 				"title all"
 				"none none"
-				"description continuer";
+				"description description";
 
 		& .regular-title {
 			grid-area: title;

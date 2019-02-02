@@ -302,3 +302,19 @@
         }
     }
 }
+
+.see-more {
+    position: relative;
+	color: $color-darkest-grey;
+    @include interpolate(font-size, 40rem, 64rem,  1rem, 1.8rem);
+    
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: -2px;
+        width: 75%;
+        height: 1px;
+        background-color: $color-red;
+    }
+}

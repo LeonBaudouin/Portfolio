@@ -17,7 +17,7 @@
 				grid-template-areas:
 						"all title"
 						"next-project none"
-						"continuer description";
+						"description description";
 
 				grid-column-gap: 2vw;
 			}
@@ -92,6 +92,15 @@
 	.description {
 		transition-delay: 1000ms;
 		@include min_query(transition-delay, $regular-page-breakpoint, 1000ms + $desktop-delay-offset);
+		
+		position: relative;
+	}
+
+	.see-more {
+		position: absolute;
+		z-index: -1;
+		bottom: 2px;
+		right: 0;
 	}
 
 	.continuer {
@@ -117,7 +126,7 @@
 		max-width: 400px;
 		@include min_query(margin-left, $regular-page-breakpoint, 28px);
 		
-		&>* {
+		&-type, &-title, &-skills {
 			position: relative;
 
 			&:before, &:after {
@@ -254,8 +263,12 @@
 			}
 
 			@include hover($regular-page-breakpoint) {
-				&>*:after {
-					width: 100%;
+				.project {
+					&-type, &-title, &-skills {
+						&:after {
+							width: 100%;
+						}
+					}
 				}
 			}
 			
