@@ -1,241 +1,367 @@
 .gallery-page {
+  .container {
+    transform-style: preserve-3d;
+    @include interpolate(margin-left, 540px, 1500px, 48px, 156px);
+    @include interpolate(margin-right, 540px, 1500px, 48px, 156px);
+    padding-top: calc(var(--margin-side-buttons-top) + 4vh);
 
-    .container {
-        transform-style: preserve-3d;
-        @include interpolate(margin-left, 540px, 1500px, 48px, 156px);
-        @include interpolate(margin-right, 540px, 1500px, 48px, 156px);
-        padding-top: calc(var(--margin-side-buttons-top) + 4vh);
-        
-        display: grid;
-        grid-template-columns: 1fr;
-        
-        @media screen and (min-width: $regular-page-breakpoint) {
-            grid-template-columns: 1fr 1fr;
-            grid-gap: 5vw;
-        }
-    }
+    grid-row-gap: 15vw;
 
-    .main-title {
-        margin: 5vh 0;
-        justify-self: start;
-        
-        @media screen and (min-width: $regular-page-breakpoint) {
-            grid-column: 1/3;
-            margin: 10vh 0;
-        }
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-flow: row dense;
+
+    @media screen and (min-width: $regular-page-breakpoint) {
+      grid-template-columns: 1fr 1fr;
+      grid-row-gap: 12vw;
+      grid-column-gap: 7vw;
     }
+  }
+
+  .main-title {
+    margin: 5vh 0;
+    justify-self: start;
+
+    @media screen and (min-width: $regular-page-breakpoint) {
+      grid-column: 1/3;
+      margin: 10vh 0;
+    }
+  }
+
+  .project,
+  .lab {
+    position: relative;
+    @include interpolate(--scaler, 480px, 1568px, 1px, 3px);
     
-    .project, .lab {
-        
-        @include interpolate(--scaler, 480px, 1568px, 1px, 3px);
-        margin-bottom: 7vh;
+    &-description {
+      display: none;
+      position: relative;
 
-        &-img {
-            position: absolute;
-            width: 100%;
-            top: 0;
-            bottom: 0;
+      align-self: center;
+
+      @media screen and (max-width: $regular-page-breakpoint) {
+        padding-top: 8vh;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 25px;
+        transform: translate3d(-50%, -50%, 0) rotate3d(0, 0, 1, -2deg);
+        top: 50%;
+        left: 50%;
+        z-index: -1;
+        background-color: $color-lightest-grey;
+      }
+
+      &-skills {
+        display: flex;
+        justify-content: center;
+        margin-right: 5px;
+
+        &-icon {
+          @include interpolate(height, 480px, 1568px, 36px, 72px);
+          margin: 0 5px;
+        }
+      }
+
+      &-paragraph {
+        margin: 20px 0;
+      }
+
+      &-link {
+        margin-left: 15px;
+        position: relative;
+        z-index: 1;
+
+        padding: 2px 6px;
+
+        color: $color-darkest-grey;
+
+        text-transform: uppercase;
+        font-weight: 800;
+
+        border: 1px solid $color-red;
+
+        transition: all 250ms ease;
+
+        &:before {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 50%;
+          z-index: -1;
+          height: calc(100% + 2px);
+          width: 0;
+          background-color: $color-darkest-grey;
+          transform: translate3d(0, -50%, 0);
+
+          transition: all 250ms ease;
+        }
+
+        @include hover($regular-page-breakpoint) {
+          color: $color-red;
+          border-color: transparent;
+
+          &:before {
+            right: unset;
             left: 0;
-            right: 0;
-
-            transition: all 500ms ease;
-            
-            &-container {
-                display: block;
-                position: relative;
-                
-                width: 100%;
-                padding-bottom: 105%;
-                
-                overflow: hidden;
-                border: 1px solid $color-red;
-                
-                &:before, &:after {
-                    content: "";
-                    position: absolute;
-                    z-index: 1;
-
-                    width: 50%;
-                    height: 0;
-
-                    transition: all 500ms ease;
-                    background-color: transparentize($color-red, 0.8);
-                }
-
-                &:before {
-                    bottom: -15%;
-                    left: 0;
-                    transform: skewY(25deg);
-                }
-                
-                &:after {
-                    top: -15%;
-                    right: 0;
-                    transform: skewY(25deg);
-                }
-                
-                @include hover($regular-page-breakpoint) {
-                    &:before, &:after {
-                        height: 130%;
-                    }
-
-                    &:before {
-                        bottom: unset;
-                        top: -15%;
-                    }
-
-                    &:after {
-                        bottom: -15%;
-                        top: unset;
-                    }
-
-                    .project-img, .lab-img {
-                        transform: scale3d(1.02,1.02,1);
-                    }
-                }
-            }
+            width: 100%;
+          }
         }
-
-        &-title {
-            position: relative;
-            margin-left: 24px;
-            z-index: 1;
-            
-            @media screen and (min-width: $regular-page-breakpoint) {
-                margin-left: 48px;
-            }
-
-            .first-part, .second-part {
-                
-                display: block;
-                
-                &-content {
-                    display: inline-block;
-                }
-            }
-            
-            .first-part {
-                position: relative;
-                font-weight: 800;
-                font-size: 2rem;
-
-                @include interpolate(font-size, 30rem, 98rem, 1.7rem, 4.25rem);
-                line-height: 0.6;
-            }
-            .second-part {
-                font-weight: 300;
-                font-size: 1.25rem;
-
-                @include interpolate(font-size, 30rem, 98rem, 1.2rem, 2.625rem);
-                color: $color-red;
-                text-align: center;
-
-            }
-        }
-
-        &:nth-of-type(2n) {
-            .red-squares {
-                display: none;
-            }
-        }
-        
-        &:nth-of-type(2n+1) {
-            .red-strokes {
-                display: none;
-            }
-        }
-
-        .red-squares {
-            position: absolute;
-            display: block;
-
-            &-element {
-                position: absolute;
-                background-color: $color-red;
-                
-                &:nth-of-type(1) {
-                    width: calc(8 * var(--scaler));
-                    height: calc(8 * var(--scaler));
-                    right: calc(6 * var(--scaler));
-                    transform: rotate3d(0,0,1,30deg);
-                }
-                &:nth-of-type(2) {
-                    width: calc(6 * var(--scaler));
-                    height: calc(6 * var(--scaler));
-                    top: calc(8 * var(--scaler));
-                    transform: rotate3d(0,0,1,-15deg);
-                }
-                &:nth-of-type(3) {
-                    width: calc(3 * var(--scaler));
-                    height: calc(3 * var(--scaler));
-                    top: calc(11 * var(--scaler));
-                    left: calc(15 * var(--scaler));
-                    transform: rotate3d(0,0,1,-45deg);
-                }
-            }
-        }
-        
-        .red-strokes {
-            position: absolute;
-            display: block;
-
-            left: calc(-5 * var(--scaler));
-            bottom: calc(2 * var(--scaler));
-            z-index: -1;
-
-            transform: rotate3d(0,0,1,13deg);
-            
-            &-element {
-                position: absolute;
-                background-color: $color-red;
-                width: calc(24 * var(--scaler));
-                height: calc(1 * var(--scaler));
-
-                &:nth-of-type(2) {
-                    top: calc(4 * var(--scaler));
-                    left: calc(10 * var(--scaler));
-                }
-                
-                &:nth-of-type(3) {
-                    top: calc(8 * var(--scaler));
-                    left: calc(4 * var(--scaler));
-                }
-            }
-
-        }
+      }
     }
+
+    &-img {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      transition: all 500ms ease;
+
+      &-container {
+        display: block;
+        position: relative;
+
+        width: 100%;
+        padding-bottom: 105%;
+
+        overflow: hidden;
+        border: 1px solid $color-red;
+
+        &:before,
+        &:after {
+          content: "";
+          position: absolute;
+          z-index: 1;
+
+          width: 50%;
+          height: 0;
+
+          transition: all 500ms ease;
+          background-color: transparentize($color-red, 0.8);
+        }
+
+        &:before {
+          bottom: -15%;
+          left: 0;
+          transform: skewY(25deg);
+        }
+
+        &:after {
+          top: -15%;
+          right: 0;
+          transform: skewY(25deg);
+        }
+
+        @include hover($regular-page-breakpoint) {
+          &:before,
+          &:after {
+            height: 130%;
+          }
+
+          &:before {
+            bottom: unset;
+            top: -15%;
+          }
+
+          &:after {
+            bottom: -15%;
+            top: unset;
+          }
+
+          .project-img,
+          .lab-img {
+            transform: scale3d(1.02, 1.02, 1);
+          }
+        }
+      }
+    }
+
+    &-title {
+      position: absolute;
+      width: 100%;
+      margin-left: 24px;
+      z-index: 1;
+
+      @media screen and (min-width: $regular-page-breakpoint) {
+        margin-left: 48px;
+      }
+
+      .first-part,
+      .second-part {
+        display: block;
+
+        &-content {
+          display: inline-block;
+        }
+      }
+
+      .first-part {
+        position: relative;
+        font-weight: 800;
+        font-size: 2rem;
+
+        @include interpolate(font-size, 30rem, 98rem, 1.7rem, 4.25rem);
+        line-height: 0.6;
+      }
+
+      .second-part {
+        font-weight: 300;
+        font-size: 1.25rem;
+
+        @include interpolate(font-size, 30rem, 98rem, 1.2rem, 2.625rem);
+        color: $color-red;
+        text-align: center;
+      }
+    }
+
+    &:nth-of-type(2n) {
+      .red-squares {
+        display: none;
+      }
+    }
+
+    &:nth-of-type(2n + 1) {
+      .red-strokes {
+        display: none;
+      }
+    }
+
+    .red-squares {
+      position: absolute;
+      display: block;
+
+      &-element {
+        position: absolute;
+        background-color: $color-red;
+
+        &:nth-of-type(1) {
+          width: calc(8 * var(--scaler));
+          height: calc(8 * var(--scaler));
+          right: calc(6 * var(--scaler));
+          transform: rotate3d(0, 0, 1, 30deg);
+        }
+        &:nth-of-type(2) {
+          width: calc(6 * var(--scaler));
+          height: calc(6 * var(--scaler));
+          top: calc(8 * var(--scaler));
+          transform: rotate3d(0, 0, 1, -15deg);
+        }
+        &:nth-of-type(3) {
+          width: calc(3 * var(--scaler));
+          height: calc(3 * var(--scaler));
+          top: calc(11 * var(--scaler));
+          left: calc(15 * var(--scaler));
+          transform: rotate3d(0, 0, 1, -45deg);
+        }
+      }
+    }
+
+    .red-strokes {
+      position: absolute;
+      display: block;
+
+      left: calc(-5 * var(--scaler));
+      bottom: calc(2 * var(--scaler));
+      z-index: -1;
+
+      transform: rotate3d(0, 0, 1, 13deg);
+
+      &-element {
+        position: absolute;
+        background-color: $color-red;
+        width: calc(24 * var(--scaler));
+        height: calc(1 * var(--scaler));
+
+        &:nth-of-type(2) {
+          top: calc(4 * var(--scaler));
+          left: calc(10 * var(--scaler));
+        }
+
+        &:nth-of-type(3) {
+          top: calc(8 * var(--scaler));
+          left: calc(4 * var(--scaler));
+        }
+      }
+    }
+
+    &-short {
+      position: relative;
+    }
+
+    &.active {
+      .project-description, .lab-description {
+        display: block;
+      }
+
+      @media screen and (min-width: $regular-page-breakpoint) {
+        grid-column: 1 / 3;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 7vw;
+      }
+    }
+  }
 }
 
 .projects-page {
-    .main-title {
-        .first-part, .second-part {
-            color: $color-lightest-grey;
-        }
+  .main-title {
+    .first-part,
+    .second-part {
+      color: $color-lightest-grey;
+    }
+  }
+
+  .project {
+    &-title {
+      .first-part {
+        color: $color-lightest-grey;
+      }
     }
 
-    .project {
-        &-title {
-            .first-part {
-                color: $color-lightest-grey;
-            }
+    &.active {
+      .project-title {
+        .first-part {
+          @media screen and (max-width: $regular-page-breakpoint) {
+            color: $color-darkest-grey;
+          }
         }
+      }
     }
+  }
 }
 
 .lab-page {
-    
-    .main-title {
-        .first-part, .second-part {
-            color: $color-darkest-grey;
-        }
+  .main-title {
+    .first-part,
+    .second-part {
+      color: $color-darkest-grey;
+    }
+  }
+
+  .lab {
+    &-title {
+      display: block;
+      .first-part {
+        color: $color-darkest-grey;
+      }
     }
 
-    .lab {
-        &-title {
-            display: block;
-            .first-part {
-                color: $color-darkest-grey;
-            }
+    &.active {
+      .lab-title {
+        .first-part {
+          @media screen and (max-width: $regular-page-breakpoint) {
+            color: $color-lightest-grey;
+          }
         }
+      }
     }
+  }
 }

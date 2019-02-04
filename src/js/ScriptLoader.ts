@@ -5,6 +5,7 @@ import { CopyToClipBoard } from "./Buttons/CopyToClipBoard";
 import { OnScrollActivator } from "./Scroll/OnScrollActivator";
 import Canvas from "./Canvas/Canvas";
 import { Parallax } from "./Scroll/Parallax";
+import { ProjectDetails } from "./Buttons/ProjectDetails";
 
 class ScriptLoader {
 
@@ -39,6 +40,10 @@ class ScriptLoader {
 
             this.LabPageScripts();
 
+        } else if(this.currentPage == "description-page") {
+
+            this.DescriptionPageScripts();
+
         }
     }
 
@@ -47,8 +52,10 @@ class ScriptLoader {
         //  Bring the page to the top when you reload it 
         window.onbeforeunload = function () {window.scrollTo(0, 0);};
 
+        let buttonMenu : HTMLElement = document.querySelector(".nav-burger");
+        let menu : HTMLElement = document.querySelector(".nav");
         //  Burger Menu
-        this.burgerMenu = new ActivationButton(".nav-burger", ".nav", "hidden");
+        this.burgerMenu = new ActivationButton(buttonMenu, menu, "hidden");
 
         //  Bind a automatic copy to clipboard to elements with the class ".js-copy-to-clipboard" 
         this.BindClipboardButtons();
@@ -86,6 +93,11 @@ class ScriptLoader {
     
     private ProjectsPageScripts() {
 
+        let projectDescriptionArray = Array.prototype.slice.call(document.querySelectorAll(".project"));
+        let projectButtonArray = Array.prototype.slice.call(document.querySelectorAll(".project-short"));
+
+        new ProjectDetails(projectButtonArray, projectDescriptionArray);
+
         let canvas = new Canvas("canvas");
         canvas.Update();
     }
@@ -98,6 +110,12 @@ class ScriptLoader {
         let canvas = new Canvas("canvas", true);
         canvas.Update();
         
+    }
+
+    private DescriptionPageScripts() {
+        
+        let canvas = new Canvas("canvas");
+        canvas.Update();
     }
 
 
