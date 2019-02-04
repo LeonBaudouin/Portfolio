@@ -149,7 +149,6 @@
 		&-content {
 
 			grid-template-rows: auto 1fr auto;
-			padding-bottom: 0;
 
 			@media screen and (min-width: $regular-page-breakpoint) {
 				
@@ -162,7 +161,7 @@
 				grid-template-areas:
 				"title all"
 				"none next-project"
-				"description continuer";
+				"description description";
 				
 				grid-column-gap: 2vw;
 			}
@@ -362,6 +361,8 @@
 	}
 	
 	.description {
+		align-self: end;
+		
 		transition-delay: 1000ms;
 		@media screen and (min-width: $regular-page-breakpoint) {
 			transition-delay: 1000ms + $desktop-delay-offset;
@@ -480,6 +481,7 @@
 		}
 
 		.paragraph {
+			max-width: 400px;
 			animation: hiding-lab-paragraph $project-exposition-time linear infinite;
 
 			@keyframes hiding-lab-paragraph {

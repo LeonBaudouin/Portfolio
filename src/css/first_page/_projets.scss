@@ -124,10 +124,10 @@
 	.project {
 
 		max-width: 400px;
-		@include min_query(margin-left, $regular-page-breakpoint, 28px);
 		
 		&-type, &-title, &-skills {
 			position: relative;
+			@include min_query(padding-left, $regular-page-breakpoint, 28px);
 
 			&:before, &:after {
 				content: "";
@@ -139,7 +139,7 @@
 				width: var(--width);
 				@include min_query(--width, $regular-page-breakpoint, 3px);
 				left: -20px;
-				@include min_query(left, $regular-page-breakpoint, -28px);
+				@include min_query(left, $regular-page-breakpoint, 0);
 				top: 50%;
 				
 				transform: translate(0, -50%);
