@@ -389,6 +389,13 @@
 		}
 	}
 
+	.see-more:after {
+		@media screen and (min-width: $regular-page-breakpoint) {
+			left: unset;
+			right: 0;
+		}
+	}
+
 	&-title {
 		display: inline-block;
 		position: relative;

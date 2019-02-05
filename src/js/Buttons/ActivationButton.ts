@@ -6,7 +6,11 @@ export class ActivationButton {
     targetClasses: DOMTokenList;
     public isActivated: boolean;
 
-    constructor(button: HTMLElement, target: HTMLElement, className: string, callback?: () => void) {
+    constructor(button: HTMLElement,
+                target: HTMLElement,
+                className: string,
+                callbefore: () => void = () => {},
+                callback: () => void = () => {}) {
 
         this.button = button;
         this.target = target;
@@ -22,15 +26,20 @@ export class ActivationButton {
         this.targetClasses = this.target.classList;
         this.isActivated = this.targetClasses.contains(this.className);
 
-        this.BindActivation(callback);
+        this.BindActivation(callbefore, callback);
     }
 
 
-    private BindActivation(callback? : () => void): void {
-        if (callback) {
-            this.button.addEventListener("click", callback);
-        }
-        this.button.addEventListener("click", () => this.ToggleActivate());        
+    private BindActivation( callbefore: () => void = () => {},
+                            callback: () => void = () => {}): void {
+
+        this.button.addEventListener("click",
+            () => {
+                callbefore();
+                this.ToggleActivate();
+                callback();
+            }
+        );        
     }
 
 

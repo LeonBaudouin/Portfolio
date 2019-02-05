@@ -98,9 +98,13 @@
 
 	.see-more {
 		position: absolute;
-		z-index: -1;
+		z-index: 1;
 		bottom: 2px;
 		right: 0;
+
+		&:after {
+			z-index: -1;
+		}
 	}
 
 	.continuer {

@@ -5,26 +5,32 @@
     @include interpolate(margin-right, 540px, 1500px, 48px, 156px);
     padding-top: calc(var(--margin-side-buttons-top) + 4vh);
 
-    grid-row-gap: 15vw;
+    grid-row-gap: 20vw;
 
     display: grid;
     grid-template-columns: 1fr;
     grid-auto-flow: row dense;
+    margin-top: 5vh;
 
     @media screen and (min-width: $regular-page-breakpoint) {
       grid-template-columns: 1fr 1fr;
       grid-row-gap: 12vw;
       grid-column-gap: 7vw;
+      margin-top: 10vh;
     }
   }
 
   .main-title {
-    margin: 5vh 0;
-    justify-self: start;
+    margin-bottom: 5vh;
+  }
 
+  .description {
+	  @include interpolate(font-size, 40rem, 64rem,  1rem, 1.3rem);
+  }
+
+  .header {
     @media screen and (min-width: $regular-page-breakpoint) {
       grid-column: 1/3;
-      margin: 10vh 0;
     }
   }
 
@@ -40,7 +46,7 @@
       align-self: center;
 
       @media screen and (max-width: $regular-page-breakpoint) {
-        padding-top: 8vh;
+        padding-top: 10vh;
       }
 
       &:after {
@@ -186,12 +192,14 @@
 
     &-title {
       position: absolute;
+      top: 100%;
       width: 100%;
       margin-left: 24px;
       z-index: 1;
-
+      
       @media screen and (min-width: $regular-page-breakpoint) {
         margin-left: 48px;
+        top: 97%;
       }
 
       .first-part,
@@ -209,7 +217,7 @@
         font-size: 2rem;
 
         @include interpolate(font-size, 30rem, 98rem, 1.7rem, 4.25rem);
-        line-height: 0.6;
+        line-height: 0.8;
       }
 
       .second-part {
@@ -319,6 +327,10 @@
     }
   }
 
+  .description {
+    color: $color-lightest-grey;
+  }
+
   .project {
     &-title {
       .first-part {
@@ -344,6 +356,10 @@
     .second-part {
       color: $color-darkest-grey;
     }
+  }
+
+  .description {
+    color: $color-darkest-grey;
   }
 
   .lab {
