@@ -104,8 +104,13 @@ class ScriptLoader {
     
     private LabPageScripts() {
 
-        let parallax: HTMLElement = document.querySelector(".js-parallax");
-        let parallaxObject = new Parallax(parallax, 0);
+        let projectDescriptionArray = Array.prototype.slice.call(document.querySelectorAll(".lab"));
+        let projectButtonArray = Array.prototype.slice.call(document.querySelectorAll(".lab-short"));
+
+        new ProjectDetails(projectButtonArray, projectDescriptionArray);
+
+        //let parallax: HTMLElement = document.querySelector(".js-parallax");
+        //let parallaxObject = new Parallax(parallax, 0);
 
         let canvas = new Canvas("canvas", true);
         canvas.Update();
