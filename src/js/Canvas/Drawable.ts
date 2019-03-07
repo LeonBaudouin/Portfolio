@@ -1,12 +1,6 @@
 import {
   Style,
-  Size,
-  Palette,
-  Point,
-  tiltedSquareSettings,
-  rotationRoutine
 } from "../Utils/CustomTypes";
-import { MathFunc } from "../Utils/UtilsFunctions";
 
   export interface Drawable {
     Draw(ctx: CanvasRenderingContext2D): void;

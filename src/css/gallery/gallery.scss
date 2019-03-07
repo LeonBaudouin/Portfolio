@@ -130,8 +130,6 @@
       left: 0;
       right: 0;
 
-      transition: all 500ms ease;
-
       &-container {
         display: block;
         position: relative;
@@ -181,11 +179,6 @@
           &:after {
             bottom: -15%;
             top: unset;
-          }
-
-          .project-img,
-          .lab-img {
-            transform: scale3d(1.02, 1.02, 1);
           }
         }
       }

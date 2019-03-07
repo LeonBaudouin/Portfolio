@@ -1,27 +1,33 @@
-import { ActivationButton } from "./ActivationButton";
+import { AddClassButton } from "./ActivationButton";
 
 export class ProjectDetails {
-  activationButtons: ActivationButton[];
+  activationButtons: AddClassButton[];
   current: HTMLElement;
 
-  constructor(projectsButtons: Array<HTMLElement>, projectsDescriptions: Array<HTMLElement>) {
+  constructor(projectsButtons: Array<HTMLElement>,
+              projectsDescriptions: Array<HTMLElement>) {
 
     this.activationButtons = [];
 
     projectsButtons.forEach((button, index) => {
       this.activationButtons.push(
-        new ActivationButton(button, projectsDescriptions[index], "active", this.CheckOthers.bind(this), this.ScrollTo.bind(this))
+        new AddClassButton(
+          button,
+          projectsDescriptions[index],
+          "active", 
+          this.CheckOthers.bind(this),
+          this.ScrollTo.bind(this))
       );
     });
   }
 
   private CheckOthers() {
-      this.activationButtons.filter((button) => button.isActivated)
-                            .forEach(button => button.ToggleActivate());
+      this.activationButtons.filter((button) => button.hasClass)
+                            .forEach(button => button.ToggleClass());
   }
 
   private ScrollTo() {
-    this.activationButtons.filter((button) => button.isActivated)
+    this.activationButtons.filter((button) => button.hasClass)
                           .forEach(button => this.current = button.target);
     
     window.scrollTo({

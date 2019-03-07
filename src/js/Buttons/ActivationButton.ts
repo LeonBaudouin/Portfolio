@@ -1,10 +1,10 @@
-export class ActivationButton {
+export class AddClassButton {
 
     className: string;
     button: HTMLElement;
     target: HTMLElement;
     targetClasses: DOMTokenList;
-    public isActivated: boolean;
+    public hasClass: boolean;
 
     constructor(button: HTMLElement,
                 target: HTMLElement,
@@ -24,7 +24,7 @@ export class ActivationButton {
         }
 
         this.targetClasses = this.target.classList;
-        this.isActivated = this.targetClasses.contains(this.className);
+        this.hasClass = this.targetClasses.contains(this.className);
 
         this.BindActivation(callbefore, callback);
     }
@@ -36,21 +36,21 @@ export class ActivationButton {
         this.button.addEventListener("click",
             () => {
                 callbefore();
-                this.ToggleActivate();
+                this.ToggleClass();
                 callback();
             }
         );        
     }
 
 
-    public ToggleActivate(): void {
+    public ToggleClass(): void {
         
-        if(this.isActivated) {
+        if(this.hasClass) {
             this.targetClasses.remove(this.className);
         } else {
             this.targetClasses.add(this.className);
         }
         
-        this.isActivated = !this.isActivated;
+        this.hasClass = !this.hasClass;
     }
 }

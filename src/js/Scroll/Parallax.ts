@@ -1,28 +1,59 @@
-//WIP
-
 export class Parallax {
 
-    DOM: HTMLElement;
-    transform: string;
-    clientRect: ClientRect;
-    translate: number;
-    offsetMax: number;
+    // Quand
+    // ContainerBottom = WindowHeight + containerHeight           ou ContainerTop = innerHeight
+    // Alors
+    // Offset = 0
 
-    constructor(element: HTMLElement, offsetMax: number) {
-        this.DOM = element;
-        this.transform = this.DOM.style.transform;
+    // Quand
+    // ContainerBottom = 0
+    // Alors
+    // Offset = maxOffset
 
-        this.clientRect = this.DOM.getBoundingClientRect();
+    container: HTMLElement
+    image: HTMLElement
+    containerHeight: number
+    imageHeight: number
+    maxOffset: number
 
-        this.offsetMax = offsetMax;
+    constructor(element: HTMLElement) {
 
-        this.translate = 0;
+        this.container = element
+        const imgSelector = this.container.getAttribute("data-img")
+        this.image = this.container.querySelector(imgSelector)
 
-        document.addEventListener("scroll", this.Offset.bind(this));
+        this.UpdateHeight()
+        document.addEventListener("resize", () => this.UpdateHeight())
+
+        this.Update()
+        document.addEventListener("scroll", () => this.Update());
     }
 
-    Offset() {
-        console.log(this.clientRect.top);
-        console.log(window.scrollY);
+    Update(): void {
+        console.log(this.Evolution * this.maxOffset)
+        this.Translate(this.Evolution * this.maxOffset)
+    }
+
+    Translate(amount: number) {
+        this.image.style.transform = `translate3d(0, ${-amount}px, 0)`
+    }
+
+    UpdateHeight() {
+        this.containerHeight = this.ContainerBoundingRect.height
+        this.imageHeight = this.image.getBoundingClientRect().height
+
+        this.maxOffset = this.imageHeight - this.containerHeight
+    }
+
+    get ContainerBoundingRect(): ClientRect {
+        return this.container.getBoundingClientRect()
+    }
+
+    get ContainerBottom(): number {
+        return this.ContainerBoundingRect.bottom
+    }
+
+    get Evolution(): number {
+        return 1 - this.ContainerBottom / (window.innerHeight + this.containerHeight)
     }
 }

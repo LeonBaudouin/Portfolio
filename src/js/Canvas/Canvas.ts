@@ -168,9 +168,16 @@ class Canvas {
 
   private SetupTiltedSquares() : void {
     let settings: tiltedSquareSettings = {
-      position: { x: this.size.width / 2, y: this.size.height / 2 },
+
+      position: {
+        x: this.size.width / 2,
+        y: this.size.height / 2
+      },
+
       size: this.size.height - 200,
+      
       strokeSize: 25,
+      
     };
 
     let FTS = new InteractiveTiltedSquare(settings, Math.PI/4, 0.05);

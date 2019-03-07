@@ -1,4 +1,4 @@
-export class ProjectDisplayer {
+export class ProjectCarousel {
 
     projectList : NodeListOf<Element>;
     illustrationList: NodeListOf<Element>;

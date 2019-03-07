@@ -1,11 +1,11 @@
 import { Point } from "../Utils/CustomTypes";
-import { ActivationButton } from "../Buttons/ActivationButton";
+import { AddClassButton } from "../Buttons/ActivationButton";
 import { MathFunc } from "../Utils/UtilsFunctions";;
-import { ProjectDisplayer } from "../Buttons/ProjectDisplayer";
+import { ProjectCarousel } from "../Buttons/ProjectDisplayer";
 import "../Utils/AddWheelListener.js";
 
 type WindowWheel = Window & {addWheelListener : (elem: any, callback: any, useCapture?: any) => {}};
-export class ScrollManager {
+export class OnePageScroll {
 
     // lineHeight: number;
 
@@ -23,10 +23,10 @@ export class ScrollManager {
 
     isScrolling: boolean;
 
-    menu: ActivationButton;
-    displayers: ProjectDisplayer[];
+    menu: AddClassButton;
+    displayers: ProjectCarousel[];
 
-    constructor(slideNumber: number, coolDown: number, burgerMenu: ActivationButton, projDisp: ProjectDisplayer[]) {
+    constructor(slideNumber: number, coolDown: number, burgerMenu: AddClassButton, projDisp: ProjectCarousel[]) {
         
         // this.lineHeight = parseFloat(window.getComputedStyle(document.documentElement).fontSize);
 
@@ -63,25 +63,6 @@ export class ScrollManager {
                 this.DirectionScroll(distance);
             }
         })
-        
-        // document.querySelector(".nav").addEventListener("wheel", (e: WheelEvent) => {
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        // });
-        
-        // document.querySelector(".nav").addEventListener("touchmove", (e: WheelEvent) => {
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        // });
-
-        // this.container.addEventListener("wheel", (e: WheelEvent) => {
-        //     console.log(e);
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        //     if(Math.abs(e.deltaY) > 50 ) {
-        //         this.DirectionScroll(e.deltaY);
-        //     }
-        // });
 
         window.addEventListener("touchstart", (e: TouchEvent) => {
             this.dragOrigin = {x: e.touches[0].screenX, y: e.touches[0].screenY};
@@ -191,7 +172,7 @@ export class ScrollManager {
 
 
     get CanScroll(): boolean {
-        return !this.isScrolling && this.menu.isActivated;
+        return !this.isScrolling && this.menu.hasClass;
     }
 
     get WindowHeight() {
