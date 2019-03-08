@@ -34,7 +34,8 @@ export class AddClassButton {
                             callback: () => void = () => {}): void {
 
         this.button.addEventListener("click",
-            () => {
+            (e: Event) => {
+                e.preventDefault();
                 callbefore();
                 this.ToggleClass();
                 callback();

@@ -1,4 +1,5 @@
 .gallery-page {
+  padding-bottom: 26vh;
   .container {
     transform-style: preserve-3d;
     @include interpolate(margin-left, 540px, 1500px, 48px, 156px);
@@ -196,12 +197,30 @@
         top: 97%;
       }
 
+      &.active {
+        .first-part-content,
+        .second-part-content {
+          left: 0;
+          opacity: 1;
+        }
+  
+        .red-squares,
+        .red-strokes {
+          &-element {
+            opacity: 1;
+          }
+        }
+      }
+
       .first-part,
       .second-part {
         display: block;
 
         &-content {
           display: inline-block;
+          position: relative;
+          opacity: 0;
+          transition: all 500ms ease-out;
         }
       }
 
@@ -212,6 +231,10 @@
 
         @include interpolate(font-size, 30rem, 98rem, 1.7rem, 4.25rem);
         line-height: 0.8;
+
+        &-content {
+          left: 50px;
+        }
       }
 
       .second-part {
@@ -221,6 +244,11 @@
         @include interpolate(font-size, 30rem, 98rem, 1.2rem, 2.625rem);
         color: $color-red;
         text-align: center;
+
+        
+        &-content {
+          left: -50px;
+        }
       }
     }
 
@@ -241,6 +269,16 @@
 
       .lab-short, .project-short {
         grid-column: 2 / 2; 
+      }
+    }
+
+    .red-squares,
+    .red-strokes {
+      &-element {
+        opacity: 0;
+
+        @include delay_by_child(transition, 200ms, 200ms, 3);
+        transition: opacity 300ms linear;
       }
     }
 
@@ -384,15 +422,5 @@
         border: 1px solid $color-red;
       }
     }
-
-    // &.active {
-    //   .lab-title {
-    //     .first-part {
-    //       @media screen and (max-width: $regular-page-breakpoint) {
-    //         color: $color-darkest-grey;
-    //       }
-    //     }
-    //   }
-    // }
   }
 }

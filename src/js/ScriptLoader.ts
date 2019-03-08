@@ -93,10 +93,12 @@ class ScriptLoader {
     
     private ProjectsPageScripts() {
 
+        this.onScrollActivator = new OnScrollActivator(".js-activate-on-scroll", window.innerHeight/4);
+
         let projectDescriptionArray = Array.prototype.slice.call(document.querySelectorAll(".project"));
         let projectButtonArray = Array.prototype.slice.call(document.querySelectorAll(".project-short"));
 
-        // new ProjectDetails(projectButtonArray, projectDescriptionArray);
+        new ProjectDetails(projectButtonArray, projectDescriptionArray);
         document.querySelectorAll(".js-parallax").forEach(
             (parallaxElem: HTMLElement) => {
                 new Parallax(parallaxElem);
@@ -108,6 +110,8 @@ class ScriptLoader {
     }
     
     private LabPageScripts() {
+        
+        this.onScrollActivator = new OnScrollActivator(".js-activate-on-scroll", window.innerHeight/4);
 
         let projectDescriptionArray = Array.prototype.slice.call(document.querySelectorAll(".lab"));
         let projectButtonArray = Array.prototype.slice.call(document.querySelectorAll(".lab-short"));

@@ -22,19 +22,30 @@
 
         flex-direction: column;
 
+        &>* {
+            $number-of-child: 3;
+            $starting-delay: 200ms;
+            $offset: 300ms;
+            @for $i from 1 through $number-of-child {
+                &:nth-child(#{$i}) {
+                    .parcours-experience {
+                        &:before {
+                            transition-delay: $starting-delay + $offset * ($i - 1);
+                        }
+                        &-wrapper {
+                            transition-delay: $starting-delay + 200ms + $offset * ($i - 1);
+                        }
+                    }
+                }
+            }
+        }
+
         &-title, &-time {
             position: relative;
             color: $color-darkest-grey;
 
             &:before {
                 content: "";
-                display: inline-block;
-                position: absolute;
-                height: 60%;
-                top: 50%;
-                transform: translateY(-50%);
-                border-left: 1px solid $color-red;
-                @include min_query(border-width, $regular-page-breakpoint, 2px);
             }
         }
 
@@ -49,6 +60,7 @@
         }
 
         &-description {
+            text-indent: 0;
             margin-top: 4vh;
 
             @media screen and (min-width: $regular-page-breakpoint) {
@@ -58,14 +70,13 @@
 
                 &:before {
                     content: "";
-                    display: inline-block;
-                    position: absolute;
-                    height: 100%;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    border-left: 2px solid $color-red;
                 }
             }
+        }
+
+        &-wrapper {
+            display: inline-block;
+            transition: all 2s cubic-bezier(0,.75,.2,.99);
         }
 
         &:nth-of-type(2n + 1) {
@@ -74,19 +85,23 @@
 
             .parcours-experience {
                 &-title, &-time {
-                    margin-left: $margin-phone;
+                    padding-left: $margin-phone;
 
                     &:before {
-                        left: -$margin-phone;
+                        left: 0;
                     }
+                }
+
+                &-wrapper {
+                    transform: translate3d(calc(-100% - 20px),0 ,0)
                 }
 
                 @media screen and (min-width: $regular-page-breakpoint) {
                     &-title, &-time, &-description {
-                        margin-left: $margin-desktop;
+                        padding-left: $margin-desktop;
     
                         &:before {
-                            left: -$margin-desktop;
+                            left: 0;
                         }
                     }
                 }
@@ -100,19 +115,23 @@
 
             .parcours-experience {
                 &-title, &-time {
-                    margin-right: $margin-phone;
+                    padding-right: $margin-phone;
 
                     &:before {
-                        right: -$margin-phone;
+                        right: 0;
                     }
+                }
+
+                &-wrapper {
+                    transform: translate3d(calc(100% + 20px),0 ,0)
                 }
 
                 @media screen and (min-width: $regular-page-breakpoint) {
                     &-title, &-time, &-description {
-                        margin-right: $margin-desktop;
+                        padding-right: $margin-desktop;
     
                         &:before {
-                            right: -$margin-desktop;
+                            right: 0;
                         }
                     }
                     
@@ -126,6 +145,21 @@
 
         &:last-of-type {
             margin-bottom: 0;
+        }
+
+        &-title, &-time, &-description {
+            overflow: hidden;
+
+            &:before {
+                display: inline-block;
+                position: absolute;
+                height: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                border-left: 1px solid $color-red;
+                @include min_query(border-width, $regular-page-breakpoint, 2px);
+                transition: height 500ms ease;
+            }
         }
     }
 
@@ -251,30 +285,14 @@
     }
 }
 
-.active {
-    .background-empty-squares-element {
-        $size-base: 30px;
-        $size-delta: 20px;
-        $size-thick-add: 5px;        
+.parcours {
 
-        &:nth-child(1) {
-            width: $size-base;
-            height: $size-base;
-        }
-        &:nth-child(2) {
-            width: $size-base + $size-delta;
-            height: $size-base + $size-delta;
-        }
-        &:nth-child(3) {
-            width: $size-base + $size-delta * 2 + $size-thick-add;
-            height: $size-base + $size-delta * 2 + $size-thick-add;
-        }
-
-        @media screen and (min-width: $regular-page-breakpoint) {
-            $size-base: 130px;
-            $size-delta: 48px;
-            $size-thick-add: 5px;
-
+    .active {
+        .background-empty-squares-element {
+            $size-base: 30px;
+            $size-delta: 20px;
+            $size-thick-add: 5px;        
+            
             &:nth-child(1) {
                 width: $size-base;
                 height: $size-base;
@@ -286,6 +304,42 @@
             &:nth-child(3) {
                 width: $size-base + $size-delta * 2 + $size-thick-add;
                 height: $size-base + $size-delta * 2 + $size-thick-add;
+            }
+            
+            @media screen and (min-width: $regular-page-breakpoint) {
+                $size-base: 130px;
+                $size-delta: 48px;
+                $size-thick-add: 5px;
+                
+                &:nth-child(1) {
+                width: $size-base;
+                height: $size-base;
+                }
+                &:nth-child(2) {
+                    width: $size-base + $size-delta;
+                    height: $size-base + $size-delta;
+                }
+                &:nth-child(3) {
+                    width: $size-base + $size-delta * 2 + $size-thick-add;
+                    height: $size-base + $size-delta * 2 + $size-thick-add;
+                }
+            }
+        }
+        .parcours-experience {
+            &-wrapper {
+                transform: translate3d(0,0,0)
+            }
+
+            &-title, &-time {
+                &:before {
+                    height: 60%;
+                }
+            }
+
+            &-description {
+                &:before {
+                    height: 100%;
+                }
             }
         }
     }

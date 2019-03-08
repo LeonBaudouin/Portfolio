@@ -22,15 +22,14 @@ export class Parallax {
         const imgSelector = this.container.getAttribute("data-img")
         this.image = this.container.querySelector(imgSelector)
 
-        this.UpdateHeight()
+        window.addEventListener("load", () => this.UpdateHeight())
         document.addEventListener("resize", () => this.UpdateHeight())
 
-        this.Update()
+        window.addEventListener("load", () => this.Update())
         document.addEventListener("scroll", () => this.Update());
     }
 
     Update(): void {
-        console.log(this.Evolution * this.maxOffset)
         this.Translate(this.Evolution * this.maxOffset)
     }
 
@@ -39,6 +38,7 @@ export class Parallax {
     }
 
     UpdateHeight() {
+        console.log("slt")
         this.containerHeight = this.ContainerBoundingRect.height
         this.imageHeight = this.image.getBoundingClientRect().height
 

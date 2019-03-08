@@ -33,26 +33,33 @@
             }
         }        
     }
-
     
     &:before {
         @media screen and (min-width: $regular-page-breakpoint) {
             content: "";
-            position: absolute;
-            
-            width: 50%;
-            padding-top: 50%;
-            
-            top: 50%;
-            right: 75vw;
-            z-index: -3;
-            
-            transform: translate3d(0, -50%, 0) rotate3d(0,0,1,-28deg);
-            background-color: $color-lightest-grey;
         }
+
+        position: absolute;
+        
+        width: 50%;
+        padding-top: 50%;
+        
+        top: 50%;
+        z-index: -3;
+        right: 45%;
+        
+        transform: translate3d(0, -50%, 0) rotate3d(0,0,1,28deg);
+        background-color: $color-lightest-grey;
+
+        transition: right 3.5s 200ms cubic-bezier(0,.83,.2,.99),
+                    transform 3.5s 200ms cubic-bezier(0,.83,.2,.99);
     }
     
     &-paragraph {
+        opacity: 0;
+        transition: opacity 200ms linear;
+        transition-delay: 700ms;
+
         margin-bottom: 20px;
 
         @media screen and (min-width: $regular-page-breakpoint) {
@@ -64,6 +71,9 @@
     }
 
     &-links {
+        opacity: 0;
+        transition: opacity 200ms linear;
+        transition-delay: 1100ms;
 
         margin-right: 5vw;
 
@@ -144,19 +154,23 @@
 
         @include interpolate(width, 320px, 800px, 400px, 600px);
 
-        top: 25%;
+        top: 65%;
         z-index: -2;
-
+        
         border: $color-red solid 1px;
-        transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,-30deg);
+        transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,-55deg);
         clip-path: polygon(0 0, 100% 0, 100% 100%, 34% 72%);
-
+        
+        transition: top 3.5s 200ms cubic-bezier(0,.83,.2,.99),
+                    left 3.5s 200ms cubic-bezier(0,.83,.2,.99),
+                    transform 3.5s 200ms cubic-bezier(0,.83,.2,.99);
+        
         @media screen and (min-width: $regular-page-breakpoint) {
             width: 90%;
-            top: 70%;
-            left: -17vw;
+            top: 65%;
+            left: 45%;
 
-            transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,17deg);
+            transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,-21deg);
             clip-path: none;
         }
 
@@ -251,5 +265,31 @@
 
             
         }
+    }
+
+}
+
+.active {
+    .presentation {
+        &-paragraph, &-links {
+            opacity: 1;
+        }
+
+        &-photo {
+            top: 25%;
+            transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,-30deg);
+        
+            @media screen and (min-width: $regular-page-breakpoint) {
+                top: 70%;
+                left: -17vw;
+    
+                transform: translate3d(-50%, -50%, 0) rotate3d(0,0,1,17deg);
+            }
+        }
+    }
+
+    &.presentation::before {
+        right: 75vw;
+        transform: translate3d(0, -50%, 0) rotate3d(0,0,1,-28deg);
     }
 }
