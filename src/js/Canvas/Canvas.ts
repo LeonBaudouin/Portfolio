@@ -1,9 +1,10 @@
 import { Size, Palette, Style, tiltedSquareSettings } from "../Utils/CustomTypes";
 import { Drawable, Interactive } from "./Drawable";
 import { MathFunc } from "../Utils/UtilsFunctions";
-import { InteractiveTiltedSquare } from "./TiltedSquares";
 import { Grid } from "./Grid";
 import { StraightSquare } from "./StraightSquares";
+import { InteractiveTiltedSquare } from "./InteractiveTiltedSquare";
+import { HoverTiltedSquare } from "./HoverTiltedSquare";
 
 class Canvas {
   private element: HTMLCanvasElement;
@@ -50,13 +51,12 @@ class Canvas {
 
   }
 
-
-
   public Update(): void {
 
     this.DrawBG();
 
     this.drawnElement.forEach(element => {
+      element.Update();
       element.Draw(this.context);
     });
 
@@ -64,8 +64,6 @@ class Canvas {
 
     requestAnimationFrame(() => this.Update());
   }
-
-
 
   private onResize(): void {
 
@@ -80,13 +78,10 @@ class Canvas {
     this.SetupElements();
   }
 
-
-
   private DrawBG(): void {
     this.context.fillStyle = this.backgroundStyle;
     this.context.fillRect(0, 0, this.size.width, this.size.height);
   }
-
 
   private DrawGradient(): void {
     let gradient: CanvasGradient = this.context.createRadialGradient(
@@ -109,7 +104,6 @@ class Canvas {
     this.context.fillRect(0, 0, this.size.width, this.size.height);
   }
 
-
   private SetupElements() {
 
     let gridSize = Math.floor(
@@ -128,8 +122,6 @@ class Canvas {
 
     }
   }
-
-
 
   private SetupGrid(gridSize: number, style: Style) {
     this.drawnElement.push(new Grid(gridSize, this.size, style));
@@ -164,9 +156,10 @@ class Canvas {
     this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: 1}, {x: 1, y: 2}));
   }
 
-
-
   private SetupTiltedSquares() : void {
+
+    const hoveredHTMLElements = <HTMLElement[]>[...document.querySelectorAll(".js-hovered-element")];
+    
     let settings: tiltedSquareSettings = {
 
       position: {
@@ -180,7 +173,7 @@ class Canvas {
       
     };
 
-    let FTS = new InteractiveTiltedSquare(settings, Math.PI/4, 0.05);
+    const FTS = new HoverTiltedSquare(settings, Math.PI/4, 0.05, hoveredHTMLElements);
 
     this.drawnElement.push(FTS);
     this.interactiveElement.push(FTS);
@@ -189,7 +182,7 @@ class Canvas {
 
     for (let i = 0; i < 3; i++) {
       settings.size = this.size.height - 300 - 100 * i;
-      let obj = new InteractiveTiltedSquare(settings, Math.PI/4, 0.045 - 0.005 * i);
+      let obj = new HoverTiltedSquare(settings, Math.PI/4, 0.045 - 0.005 * i, hoveredHTMLElements);
       this.drawnElement.push(obj);
       this.interactiveElement.push(obj);
     }

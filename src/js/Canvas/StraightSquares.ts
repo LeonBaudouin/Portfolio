@@ -41,6 +41,8 @@ export class StraightSquare implements Drawable {
         }
     }
 
+    public Update() {};
+
     public Draw(ctx: CanvasRenderingContext2D) {
         // ctx.fillStyle = "red";
         // ctx.beginPath();

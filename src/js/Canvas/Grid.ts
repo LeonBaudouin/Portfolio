@@ -1,6 +1,5 @@
 import { Drawable } from "./Drawable";
 import { Style, Size } from "../Utils/CustomTypes";
-import { MathFunc } from "../Utils/UtilsFunctions";
 
 export class Grid implements Drawable {
 
@@ -18,6 +17,8 @@ export class Grid implements Drawable {
       this.size = size;
       this.remainingSpace = this.canvasSize.width % this.size;
     }
+
+    public Update() {};
 
     public Draw(ctx: CanvasRenderingContext2D) {
       for (let i = 0; i <= this.canvasSize.width; i += this.size) {
