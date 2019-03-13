@@ -68,11 +68,29 @@
       &-skills {
         display: flex;
         justify-content: center;
+        align-items: center;
         margin-right: 5px;
 
         &-icon {
-          @include interpolate(height, 480px, 1568px, 36px, 72px);
           margin: 0 5px;
+          $min: 2.25rem;
+          $max: 3.8rem;
+          @include interpolate(height, 30rem, 98rem, $min, $max);
+
+          &.s {
+              $offset: -0.5rem;
+              @include interpolate(height, 30rem, 98rem, $min + $offset, $max + $offset);
+          }
+
+          &.xs {
+              $offset: -1.5rem;
+              @include interpolate(height, 30rem, 98rem, $min + $offset, $max + $offset);
+          }
+
+          &.l {
+              $offset: 1rem;
+              @include interpolate(height, 30rem, 98rem, $min + $offset, $max + $offset);
+          }
         }
       }
 
