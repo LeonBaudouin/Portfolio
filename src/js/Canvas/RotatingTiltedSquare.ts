@@ -2,7 +2,7 @@ import { Drawable } from "./Drawable";
 import { tiltedSquareSettings, rotationRoutine } from "../Utils/CustomTypes";
 import { TiltedSquare } from "./TiltedSquares";
 
-export class RotatingTiltedSquare extends TiltedSquare implements Drawable{
+export class RotatingTiltedSquare extends TiltedSquare {
 
     rotationRoutines: rotationRoutine[] = [];
   
@@ -42,12 +42,12 @@ export class RotatingTiltedSquare extends TiltedSquare implements Drawable{
     }
   
     private SecondaryRotation() {
-      this.processedPosition.x =
-        this.position.x +
+      this.currentPosition.x =
+        this.defaultPosition.x +
         this.rotationRoutines[1].distance * Math.cos(this.rotationRoutines[1].angle);
   
-      this.processedPosition.y =
-        this.position.y +
+      this.currentPosition.y =
+        this.defaultPosition.y +
         this.rotationRoutines[1].distance * Math.sin(this.rotationRoutines[1].angle);
   
       this.rotationRoutines[1].angle += this.rotationRoutines[1].speed;
@@ -55,8 +55,8 @@ export class RotatingTiltedSquare extends TiltedSquare implements Drawable{
   
     private PrimaryRotation(ctx: CanvasRenderingContext2D) {
       ctx.translate(
-        this.processedPosition.x,
-        this.processedPosition.y
+        this.currentPosition.x,
+        this.currentPosition.y
       );
       ctx.rotate(this.rotationRoutines[0].angle);
     }

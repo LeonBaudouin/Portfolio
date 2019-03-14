@@ -3,8 +3,9 @@ import { Drawable, Interactive } from "./Drawable";
 import { MathFunc } from "../Utils/UtilsFunctions";
 import { Grid } from "./Grid";
 import { StraightSquare } from "./StraightSquares";
-import { InteractiveTiltedSquare } from "./InteractiveTiltedSquare";
+import straightSquareSettings from "./StraightSquareSettings";
 import { HoverTiltedSquare } from "./HoverTiltedSquare";
+import Settings from "./StraightSquareSettings";
 
 class Canvas {
   private element: HTMLCanvasElement;
@@ -128,32 +129,9 @@ class Canvas {
   }
 
   private SetupStraightSquares(gridSize: number) {
-    //  Top Left
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: -1}, {x: 1, y: 0}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: -1}, {x: 0, y: 2}));
-    
-    //  Top Right
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 0, y: 0}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 3, y: 0}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 2, y: 1}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 2, y: 2}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 1, y: 3}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 2, y: 3}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 0, y: 5}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 4, y: 1}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 5, y: 1}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: -1}, {x: 0, y: 2}));
-
-    // Bottom Right
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: 1}, {x: 0, y: 0}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: 1}, {x: 0, y: 1}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: 1, y: 1}, {x: 1, y: 2}));
-    
-    //  Bottom Left
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: 1}, {x: 0, y: 1}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: 1}, {x: 0, y: 4}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: 1}, {x: 2, y: 5}));
-    this.drawnElement.push(new StraightSquare(gridSize, this.size, {x: -1, y: 1}, {x: 1, y: 2}));
+    straightSquareSettings.forEach(settings => {
+      this.drawnElement.push(new StraightSquare(gridSize, this.size, settings.anchorPoint, settings.cellPosition));
+    });
   }
 
   private SetupTiltedSquares() : void {
@@ -173,7 +151,7 @@ class Canvas {
       
     };
 
-    const FTS = new HoverTiltedSquare(settings, Math.PI/4, 0.05, hoveredHTMLElements, 0.5);
+    const FTS = new HoverTiltedSquare(settings, Math.PI/4, 0.05, hoveredHTMLElements, 0.08);
 
     this.drawnElement.push(FTS);
     this.interactiveElement.push(FTS);
@@ -182,11 +160,10 @@ class Canvas {
 
     for (let i = 0; i < 3; i++) {
       settings.size = this.size.height - 300 - 100 * i;
-      let obj = new HoverTiltedSquare(settings, Math.PI/4, 0.045 - 0.005 * i, hoveredHTMLElements, 0.5);
+      let obj = new HoverTiltedSquare(settings, Math.PI/4, 0.045 - 0.005 * i, hoveredHTMLElements, 0.08 * (i + 2));
       this.drawnElement.push(obj);
       this.interactiveElement.push(obj);
     }
-
 
     // settings = {
     //   position: { x: this.size.width / 2, y: this.size.height / 2 },

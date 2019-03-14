@@ -1,53 +1,33 @@
 import { TiltedSquare } from "./TiltedSquares";
 import { Interactive } from "./Drawable";
-import { tiltedSquareSettings } from "../Utils/CustomTypes";
+import { tiltedSquareSettings, Point } from "../Utils/CustomTypes";
 import { MathFunc } from "../Utils/UtilsFunctions";
 
 export class InteractiveTiltedSquare extends TiltedSquare implements Interactive {
 
-    offsetAngle: number;
-    focusAngle: number;
-    squareAngle: number;
     speed: number;
   
     constructor(squareSettings: tiltedSquareSettings, defaultAngle: number, speed: number) {
       super(squareSettings);
   
-      this.offsetAngle = defaultAngle;
-      this.squareAngle = defaultAngle;
+      this.defaultAngle = defaultAngle;
+      this.currentAngle = defaultAngle;
       this.focusAngle = defaultAngle;
       this.speed = speed;
     }
   
     public UpdateFromCursor(e: MouseEvent) : void {
-      let angle = MathFunc.getAngle(this.position, { x: e.clientX, y: e.clientY });
-      this.UpdateAngle(angle);
+      let angle = MathFunc.getAngle(this.defaultPosition, { x: e.clientX, y: e.clientY });
+      this.SetFocusAngle(angle);
     }
   
     public UpdateFromOrientation(e : DeviceOrientationEvent) : void {
-      this.UpdateAngle(e.alpha * Math.PI / 180);
-    }
-  
-    public UpdateAngle(newAngle: number) {
-  
-      let previousAngle = this.focusAngle;
-      let delta = newAngle - previousAngle  + this.offsetAngle;
-  
-      while(Math.abs(delta) > Math.PI/4) {
-        if(delta > 0) {
-          this.offsetAngle -= Math.PI/2;
-        } else {
-          this.offsetAngle += Math.PI/2;
-        }
-        delta = newAngle - previousAngle  + this.offsetAngle;
-      }
-  
-      this.focusAngle += delta;
+      this.SetFocusAngle(e.alpha * Math.PI / 180);
     }
 
     public Update() {
       super.Update();
-      this.squareAngle += (this.focusAngle - this.squareAngle) * this.speed;
+      this.currentAngle += (this.focusAngle - this.currentAngle) * this.speed;
     }
 
     public Draw(ctx: CanvasRenderingContext2D) {
@@ -55,10 +35,10 @@ export class InteractiveTiltedSquare extends TiltedSquare implements Interactive
       ctx.save();
     
       ctx.translate(
-        this.processedPosition.x,
-        this.processedPosition.y
+        this.currentPosition.x,
+        this.currentPosition.y
       );
-      ctx.rotate(this.squareAngle);
+      ctx.rotate(this.currentAngle);
       
       super.Draw(ctx);
   
