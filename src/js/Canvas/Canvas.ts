@@ -173,7 +173,7 @@ class Canvas {
       
     };
 
-    const FTS = new HoverTiltedSquare(settings, Math.PI/4, 0.05, hoveredHTMLElements);
+    const FTS = new HoverTiltedSquare(settings, Math.PI/4, 0.05, hoveredHTMLElements, 0.5);
 
     this.drawnElement.push(FTS);
     this.interactiveElement.push(FTS);
@@ -182,7 +182,7 @@ class Canvas {
 
     for (let i = 0; i < 3; i++) {
       settings.size = this.size.height - 300 - 100 * i;
-      let obj = new HoverTiltedSquare(settings, Math.PI/4, 0.045 - 0.005 * i, hoveredHTMLElements);
+      let obj = new HoverTiltedSquare(settings, Math.PI/4, 0.045 - 0.005 * i, hoveredHTMLElements, 0.5);
       this.drawnElement.push(obj);
       this.interactiveElement.push(obj);
     }

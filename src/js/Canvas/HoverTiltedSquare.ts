@@ -8,14 +8,24 @@ export class HoverTiltedSquare extends InteractiveTiltedSquare implements Handle
     
     isAnElementHovered: boolean = false;
     hoveredElements: HoveredElement[] = [];
+    movementAmount: number;
+    focusPoint: Point;
     
-    constructor(squareSettings: tiltedSquareSettings, defaultAngle: number, sensitivity: number, hoveredElements: HTMLElement[]) {
-        super(squareSettings, defaultAngle, sensitivity);
+    constructor(squareSettings: tiltedSquareSettings, defaultAngle: number, speed: number, hoveredElements: HTMLElement[], movementAmount: number) {
+        super(squareSettings, defaultAngle, speed);
+
+        this.movementAmount = movementAmount;
+        this.focusPoint = {x: window.innerWidth/2, y: window.innerHeight/2};
 
         hoveredElements.forEach((element: HTMLElement) => {
             this.hoveredElements.push(new HoveredElement(element, this));
         })
         
+    }
+
+    Update() {
+        super.Update()
+        console.log(`focusAngle: ${this.focusAngle}         squareAngle: ${this.squareAngle}`)
     }
 
 
@@ -34,12 +44,10 @@ export class HoverTiltedSquare extends InteractiveTiltedSquare implements Handle
     OnHoverEnter(e: MouseEvent, element: ClientRect): void {
         this.isAnElementHovered = true;
         
-        let elementCenter: Point = {
-            x: element.left + element.width/2,
-            y: element.top + element.height/2 
-        }
+        let elementCenter = MathFunc.getCenterFromClientRect(element);
 
-        this.focusAngle = MathFunc.getAngle(elementCenter, this.position);
+        this.focusPoint = elementCenter;
+        this.UpdateAngle(MathFunc.getAngle(elementCenter, this.position));
     }
 
     OnHoverMove(e: MouseEvent, element: ClientRect): void {
@@ -54,19 +62,14 @@ export class HoverTiltedSquare extends InteractiveTiltedSquare implements Handle
 
         if(element) {
             this.isAnElementHovered = true;
-
         } else {
             this.isAnElementHovered = false;
             element = elementBoundingRect;
-            console.log(this.offsetAngle);
         }
 
-        
-        let elementCenter: Point = {
-            x: element.left + element.width/2,
-            y: element.top + element.height/2 
-        }
+        let elementCenter = MathFunc.getCenterFromClientRect(element);
 
-        this.focusAngle = MathFunc.getAngle(elementCenter, this.position);
+        this.focusPoint = elementCenter;
+        this.UpdateAngle(MathFunc.getAngle(elementCenter, this.position));
     }
 }

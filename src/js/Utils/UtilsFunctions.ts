@@ -31,4 +31,11 @@ export namespace MathFunc {
   export function easeInOutQuad(progression: number) {
     return progression<.5 ? 2*progression*progression : -1+(4-2*progression)*progression
   };
+
+  export function getCenterFromClientRect(clientRect: ClientRect): Point {
+    return {
+      x: clientRect.left + clientRect.width/2,
+      y: clientRect.top + clientRect.height/2 
+    }
+  }
 }

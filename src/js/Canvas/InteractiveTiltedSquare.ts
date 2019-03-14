@@ -8,15 +8,15 @@ export class InteractiveTiltedSquare extends TiltedSquare implements Interactive
     offsetAngle: number;
     focusAngle: number;
     squareAngle: number;
-    sensitivity: number;
+    speed: number;
   
-    constructor(squareSettings: tiltedSquareSettings, defaultAngle: number, sensitivity: number) {
+    constructor(squareSettings: tiltedSquareSettings, defaultAngle: number, speed: number) {
       super(squareSettings);
   
       this.offsetAngle = defaultAngle;
       this.squareAngle = defaultAngle;
       this.focusAngle = defaultAngle;
-      this.sensitivity = sensitivity;
+      this.speed = speed;
     }
   
     public UpdateFromCursor(e: MouseEvent) : void {
@@ -47,7 +47,7 @@ export class InteractiveTiltedSquare extends TiltedSquare implements Interactive
 
     public Update() {
       super.Update();
-      this.squareAngle += (this.focusAngle - this.squareAngle) * this.sensitivity;
+      this.squareAngle += (this.focusAngle - this.squareAngle) * this.speed;
     }
 
     public Draw(ctx: CanvasRenderingContext2D) {
