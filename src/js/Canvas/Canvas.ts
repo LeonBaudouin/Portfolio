@@ -1,12 +1,12 @@
-import { Size, Palette, Style, tiltedSquareSettings } from "../Utils/CustomTypes";
-import { Drawable, Interactive } from "./Drawable";
+import { Size, Palette, Style, TiltedSquareSettings } from "../Utils/CustomTypes";
+import { Drawable } from "./Drawables/Drawable";
 import { MathFunc } from "../Utils/UtilsFunctions";
-import { Grid } from "./Grid";
-import { StraightSquare } from "./StraightSquares";
-import straightSquareSettings from "./StraightSquareSettings";
-import { HoverTiltedSquare } from "./HoverTiltedSquare";
-import Settings from "./StraightSquareSettings";
-
+import { Grid } from "./Drawables/Grid";
+import { StraightSquare } from "./Drawables/StraightSquares/StraightSquares";
+import straightSquareSettings from "./Drawables/StraightSquares/StraightSquareSettings";
+import { TiltedSquare } from "./Drawables/TiltedSquares/TiltedSquare";
+import { HoverAnimation } from "./Drawables/TiltedSquares/HoverAnimation";
+import { FollowingAnimation } from "./Drawables/TiltedSquares/FollowingAnimation"
 class Canvas {
   private element: HTMLCanvasElement;
   public context: CanvasRenderingContext2D;
@@ -15,7 +15,6 @@ class Canvas {
   private backgroundStyle: Style;
 
   private drawnElement: Drawable[] = [];
-  private interactiveElement: Interactive[] = [];
   private isLight: boolean;
 
   constructor(uniqueSelector: string, isLight: boolean = false) {
@@ -31,25 +30,6 @@ class Canvas {
     window.addEventListener("resize", () => {
       this.onResize();
     });
-
-
-    window.addEventListener("mousemove", (e : MouseEvent) => {
-      this.interactiveElement.forEach(element => {
-        if (element) {
-          element.UpdateFromCursor(e);
-        }
-      });
-    });
-
-
-    window.addEventListener("deviceorientation", (e : DeviceOrientationEvent) => {
-      this.interactiveElement.forEach(element => {
-        if (element) {
-          element.UpdateFromOrientation(e);
-        }
-      });
-    });
-
   }
 
   public Update(): void {
@@ -69,7 +49,6 @@ class Canvas {
   private onResize(): void {
 
     this.drawnElement = [];
-    this.interactiveElement = [];
 
     this.element.width = window.innerWidth;
     this.element.height = window.innerHeight;
@@ -138,31 +117,41 @@ class Canvas {
 
     const hoveredHTMLElements = <HTMLElement[]>[...document.querySelectorAll(".js-hovered-element")];
     
-    let settings: tiltedSquareSettings = {
-
-      position: {
+    let settings: TiltedSquareSettings = {
+      defaultPosition: {
         x: this.size.width / 2,
         y: this.size.height / 2
       },
-
+      defaultAngle: Math.PI/4,
+      speed: 0.05,
       size: this.size.height - 200,
-      
       strokeSize: 25,
-      
     };
 
-    const FTS = new HoverTiltedSquare(settings, Math.PI/4, 0.05, hoveredHTMLElements, 0.08);
+    const BigSquare = new TiltedSquare(settings);
 
-    this.drawnElement.push(FTS);
-    this.interactiveElement.push(FTS);
+    BigSquare.animations = [
+      new FollowingAnimation(BigSquare),
+      new HoverAnimation(BigSquare, hoveredHTMLElements, 0.08),
+    ]
+
+    this.drawnElement.push(BigSquare);
+
 
     settings.strokeSize = 3;
 
     for (let i = 0; i < 3; i++) {
       settings.size = this.size.height - 300 - 100 * i;
-      let obj = new HoverTiltedSquare(settings, Math.PI/4, 0.045 - 0.005 * i, hoveredHTMLElements, 0.08 * (i + 2));
-      this.drawnElement.push(obj);
-      this.interactiveElement.push(obj);
+
+      let SmallSquare = new TiltedSquare(settings);
+
+      SmallSquare.animations =
+        [
+          new FollowingAnimation(SmallSquare),
+          new HoverAnimation(SmallSquare, hoveredHTMLElements, 0.08 * (i + 2)),
+        ]
+
+      this.drawnElement.push(SmallSquare);
     }
 
     // settings = {

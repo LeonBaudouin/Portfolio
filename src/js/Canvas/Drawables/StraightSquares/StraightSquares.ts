@@ -1,5 +1,5 @@
-import { Drawable } from "./Drawable";
-import { Style, Palette, Point, Size } from "../Utils/CustomTypes";
+import { Drawable } from "../Drawable";
+import { Style, Palette, Point, Size } from "../../../Utils/CustomTypes";
 
 export class StraightSquare implements Drawable {
     style: Style;

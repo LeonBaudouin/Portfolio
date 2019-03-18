@@ -1,8 +1,8 @@
-import { scrollSensitiveElement } from "../Utils/CustomTypes";
+import { ScrollSensitiveElement } from "../Utils/CustomTypes";
 
 export class OnScrollActivator {
 
-    scrollElements: scrollSensitiveElement[];
+    scrollElements: ScrollSensitiveElement[];
     scrollOffset: number;
 
     constructor(selector: string, offset: number) {
@@ -20,7 +20,7 @@ export class OnScrollActivator {
 
     private FillArray(elementList: NodeListOf<Element>) {
         elementList.forEach(element => {
-            let scrollElement: scrollSensitiveElement = {
+            let scrollElement: ScrollSensitiveElement = {
                 DOM: element,
                 classes: element.classList,
                 isActive: false,
@@ -36,7 +36,7 @@ export class OnScrollActivator {
         );
     }
 
-    private CheckElement(element: scrollSensitiveElement) {
+    private CheckElement(element: ScrollSensitiveElement) {
         if(!element.isActive) {
             element.top = element.DOM.getBoundingClientRect().top - window.innerHeight;
             if(element.top <= -this.scrollOffset) {

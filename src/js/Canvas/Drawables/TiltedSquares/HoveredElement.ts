@@ -1,4 +1,4 @@
-import { HandleHover } from "./Drawable";
+import { HandleHover } from "../Drawable";
 
 export class HoveredElement {
     

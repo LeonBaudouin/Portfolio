@@ -98,7 +98,7 @@ class ScriptLoader {
         let projectDescriptionArray = Array.prototype.slice.call(document.querySelectorAll(".project"));
         let projectButtonArray = Array.prototype.slice.call(document.querySelectorAll(".project-short"));
 
-        new ProjectDetails(projectButtonArray, projectDescriptionArray);
+        // new ProjectDetails(projectButtonArray, projectDescriptionArray);
         document.querySelectorAll(".js-parallax").forEach(
             (parallaxElem: HTMLElement) => {
                 new Parallax(parallaxElem);
@@ -116,7 +116,7 @@ class ScriptLoader {
         let projectDescriptionArray = Array.prototype.slice.call(document.querySelectorAll(".lab"));
         let projectButtonArray = Array.prototype.slice.call(document.querySelectorAll(".lab-short"));
 
-        new ProjectDetails(projectButtonArray, projectDescriptionArray);
+        // new ProjectDetails(projectButtonArray, projectDescriptionArray);
         document.querySelectorAll(".js-parallax").forEach(
             (parallaxElem: HTMLElement) => {
                 new Parallax(parallaxElem);

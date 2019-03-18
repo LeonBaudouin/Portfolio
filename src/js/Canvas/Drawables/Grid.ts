@@ -1,5 +1,5 @@
 import { Drawable } from "./Drawable";
-import { Style, Size } from "../Utils/CustomTypes";
+import { Style, Size } from "../../Utils/CustomTypes";
 
 export class Grid implements Drawable {
 

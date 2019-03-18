@@ -1,6 +1,4 @@
-import {
-  Style,
-} from "../Utils/CustomTypes";
+import { Style } from "../../Utils/CustomTypes";
 
   export interface Drawable {
     Draw(ctx: CanvasRenderingContext2D): void;

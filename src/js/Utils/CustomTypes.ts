@@ -1,9 +1,9 @@
-export interface Point {
+export type Point = {
     x: number;
     y: number;
 }
 
-export interface Size {
+export type Size = {
     width: number;
     height: number;
 }
@@ -19,19 +19,21 @@ export enum Palette {
     SquareLight = "#b5b5b5"
 }
 
-export interface rotationRoutine {
+export type RotationRoutine = {
     distance: number;
     angle: number;
     speed: number;
 }
 
-export interface tiltedSquareSettings {
-    position: Point;
+export type TiltedSquareSettings = {
+    defaultPosition: Point;
+    defaultAngle: number;
+    speed: number;
     size: number;
     strokeSize: number;
 }
 
-export interface scrollSensitiveElement {
+export type ScrollSensitiveElement = {
     DOM: Element;
     classes: DOMTokenList;
     isActive: boolean;
