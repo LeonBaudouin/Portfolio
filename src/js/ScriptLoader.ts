@@ -1,5 +1,5 @@
 import { AddClassButton } from "./Buttons/ActivationButton";
-import { OnePageScroll } from "./Scroll/ScrollManager";
+import { OnePageScroll } from "./Scroll/OnePageScroll";
 import { ProjectCarousel } from "./Buttons/ProjectDisplayer";
 import { CopyToClipBoard } from "./Buttons/CopyToClipBoard";
 import { OnScrollActivator } from "./Scroll/OnScrollActivator";
@@ -73,6 +73,8 @@ class ScriptLoader {
 
         //  One Page scroll
         this.scrollManager = new OnePageScroll(4, 500, this.burgerMenu, this.displayers);
+
+
 
         //  Bind a one page scroll to the scroll icon and every sections of the scroll bar
         this.BindScrollButons();

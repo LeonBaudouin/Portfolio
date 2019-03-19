@@ -7,8 +7,6 @@ import "../Utils/AddWheelListener.js";
 type WindowWheel = Window & {addWheelListener : (elem: any, callback: any, useCapture?: any) => {}};
 export class OnePageScroll {
 
-    // lineHeight: number;
-
     bodyClassList: DOMTokenList;
     container: HTMLElement;
     pages: NodeListOf<Element>;
@@ -28,8 +26,6 @@ export class OnePageScroll {
 
     constructor(slideNumber: number, coolDown: number, burgerMenu: AddClassButton, projDisp: ProjectCarousel[]) {
         
-        // this.lineHeight = parseFloat(window.getComputedStyle(document.documentElement).fontSize);
-
         this.cooldown = coolDown;
         this.isScrolling = false;
 
