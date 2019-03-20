@@ -21,6 +21,8 @@ export class FollowingAnimation extends TiltedSquareAnimation {
 
     this.mouseMoveListener = MouseMoveListener.getInstance();
     this.deviceOrientationListener = DeviceOrientationListener.getInstance();
+
+    let value = 0;
   }
 
   Update() {

@@ -63,8 +63,6 @@ export class HoverAnimation extends TiltedSquareAnimation implements HandleHover
 
             this.focusPosition = this.defaultPosition;
             this.tiltedSquare.SetFocusAngle(MathFunc.getAngle(elementCenter, this.defaultPosition));
-            
-            console.log(this)
         }
     }
 
