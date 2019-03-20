@@ -50,6 +50,13 @@ body {
 	background-color: $color-darkest-grey;
 }
 
+.preload * {
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-ms-transition: none !important;
+	-o-transition: none !important;
+}
+
 a {
 	text-decoration: none;
 	color: inherit;

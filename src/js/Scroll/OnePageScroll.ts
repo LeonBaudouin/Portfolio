@@ -1,8 +1,9 @@
-import { Point } from "../Utils/CustomTypes";
+import { SwipeHandler } from "./SwipeHandler";
 import { AddClassButton } from "../Buttons/ActivationButton";
-import { MathFunc } from "../Utils/UtilsFunctions";;
+import { MathFunc, GetWindowHeight } from "../Utils/UtilsFunctions";
 import { ProjectCarousel } from "../Buttons/ProjectDisplayer";
 import "../Utils/AddWheelListener.js";
+import { Point } from "../Utils/CustomTypes";
 
 type WindowWheel = Window & {addWheelListener : (elem: any, callback: any, useCapture?: any) => {}};
 export class OnePageScroll {
@@ -11,11 +12,10 @@ export class OnePageScroll {
     container: HTMLElement;
     pages: NodeListOf<Element>;
     
-    dragOrigin: Point;
-    dragDelta: Point;
-    
     currentSlideIndex : number;
     slideNumber: number;
+
+    swipeHandler: SwipeHandler;
 
     cooldown: number;
 
@@ -39,12 +39,15 @@ export class OnePageScroll {
         this.bodyClassList = document.querySelector("body").classList;
         this.container = document.querySelector(".container");
         
+        this.swipeHandler =
+            new SwipeHandler((p) => {this.onVerticalSwipe(p)},
+                            (p) => this.swipeCondition(p));
+
         this.InitEvent()
     }
 
 
     InitEvent(): void {
-
         (window as WindowWheel).addWheelListener( this.container, (e : WheelEvent) => {
             let distance : number;
             e.preventDefault();
@@ -59,28 +62,17 @@ export class OnePageScroll {
                 this.DirectionScroll(distance);
             }
         })
-
-        window.addEventListener("touchstart", (e: TouchEvent) => {
-            this.dragOrigin = {x: e.touches[0].screenX, y: e.touches[0].screenY};
-            this.dragDelta = {x: 0, y: 0};
-        });
-
-        this.container.addEventListener("touchmove", (e: TouchEvent) => {   
-            e.preventDefault();
-            e.stopPropagation();
-            this.dragDelta = {  x: this.dragOrigin.x - e.touches[0].screenX,
-                                y: this.dragOrigin.y - e.touches[0].screenY };
-        });
-
-        window.addEventListener("touchend", (e) => {
-            let fraction = Math.abs(this.dragDelta.y / this.WindowHeight);
-            if(fraction > 0.05) {
-                this.DirectionScroll(this.dragDelta.y);
-            }
-            this.dragDelta = null;
-        });
     }
 
+    swipeCondition({x, y}: Point): boolean {
+        let yFraction = Math.abs(y / GetWindowHeight());
+        let xFraction = Math.abs(x / window.innerWidth);
+        return yFraction > 0.05 && xFraction < 0.35;
+    }
+
+    onVerticalSwipe({x, y}: Point) {
+        this.DirectionScroll(y);
+    }
 
     DirectionScroll(direction: number) {
 
@@ -119,8 +111,8 @@ export class OnePageScroll {
 
     public MoveTo(destination: number) {
 
-        let currentScroll = this.WindowHeight * this.currentSlideIndex;
-        let animationDistance = this.WindowHeight * destination - currentScroll;
+        let currentScroll = GetWindowHeight() * this.currentSlideIndex;
+        let animationDistance = GetWindowHeight() * destination - currentScroll;
 
         this.AnimationScroll(currentScroll, 0, animationDistance, 24);
 
@@ -169,9 +161,5 @@ export class OnePageScroll {
 
     get CanScroll(): boolean {
         return !this.isScrolling && this.menu.hasClass;
-    }
-
-    get WindowHeight() {
-        return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     }
 }

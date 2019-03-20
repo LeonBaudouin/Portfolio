@@ -30,5 +30,9 @@ export namespace MathFunc {
 
   export function easeInOutQuad(progression: number) {
     return progression<.5 ? 2*progression*progression : -1+(4-2*progression)*progression
-  };
+  }; 
+}
+
+export function GetWindowHeight(): number {
+  return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 }

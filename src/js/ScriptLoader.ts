@@ -6,6 +6,8 @@ import { OnScrollActivator } from "./Scroll/OnScrollActivator";
 import Canvas from "./Canvas/Canvas";
 import { Parallax } from "./Scroll/Parallax";
 import { ProjectDetails } from "./Buttons/ProjectDetails";
+import { SwipeLink } from "./Scroll/SwipeLink";
+import { RemovePreload } from "./Miscellaneous/PreloadScript";
 
 class ScriptLoader {
 
@@ -52,6 +54,8 @@ class ScriptLoader {
         //  Bring the page to the top when you reload it 
         window.onbeforeunload = function () {window.scrollTo(0, 0);};
 
+        RemovePreload();
+
         let buttonMenu : HTMLElement = document.querySelector(".nav-burger");
         let menu : HTMLElement = document.querySelector(".nav");
         //  Burger Menu
@@ -72,9 +76,9 @@ class ScriptLoader {
         this.displayers = [null, null, project, lab];
 
         //  One Page scroll
-        this.scrollManager = new OnePageScroll(4, 500, this.burgerMenu, this.displayers);
+        let onePageScroll = new OnePageScroll(4, 500, this.burgerMenu, this.displayers);
 
-
+        let swipeLink = new SwipeLink(onePageScroll, [null, "profil.html", "projects.html", "lab.html"]);
 
         //  Bind a one page scroll to the scroll icon and every sections of the scroll bar
         this.BindScrollButons();
