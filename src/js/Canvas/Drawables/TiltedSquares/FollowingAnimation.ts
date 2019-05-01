@@ -21,6 +21,7 @@ export class FollowingAnimation extends TiltedSquareAnimation {
 
     this.mouseMoveListener = MouseMoveListener.getInstance();
     this.deviceOrientationListener = DeviceOrientationListener.getInstance();
+
   }
 
   Update() {
@@ -39,6 +40,6 @@ export class FollowingAnimation extends TiltedSquareAnimation {
 
   SetFocusAngleFromDeviceOrientation() {
     const deviceOrientation = this.deviceOrientationListener.getValue();
-    this.tiltedSquare.SetFocusAngle( deviceOrientation * Math.PI / 180);
+    this.tiltedSquare.SetFocusAngle( deviceOrientation * Math.PI / 180 );
   }
 }

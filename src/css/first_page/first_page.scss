@@ -60,12 +60,12 @@ body.main-page {
 		width: 0%;
 		height: 100%;
 	
-		box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-		background-color: $color-lightest-grey;
+		background: $color-lightest-grey;
 		transition: width 500ms 400ms cubic-bezier(0,.64,0,1.1);
-
+		
 		@media screen and (min-width: $regular-page-breakpoint) {
-
+			
+			box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 			--rotation: -90deg;
 			
 			height: 0;

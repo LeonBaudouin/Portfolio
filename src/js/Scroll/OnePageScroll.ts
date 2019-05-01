@@ -62,6 +62,10 @@ export class OnePageScroll {
                 this.DirectionScroll(distance);
             }
         })
+
+        this.container.addEventListener("touchmove", (e) => {
+            e.preventDefault();
+        })
     }
 
     swipeCondition({x, y}: Point): boolean {

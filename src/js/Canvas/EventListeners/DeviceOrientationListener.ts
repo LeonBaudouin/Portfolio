@@ -23,7 +23,7 @@ export class DeviceOrientationListener extends CustomEventListener {
     }
 
     public UpdateValue(e: DeviceOrientationEvent) {
-        DeviceOrientationListener.value = e.alpha * Math.PI /180;
+        DeviceOrientationListener.value = e.alpha;
     }
 
 }

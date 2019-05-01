@@ -1,0 +1,116 @@
+.loading-screen {
+    position: absolute;
+    z-index: $z-index-loading-screen;
+    width: 100vw;
+    height: 100vh;
+    background: $color-darkest-grey;
+}
+
+@mixin falling-entering($index, $duration, $start, $curve, $x, $y) {
+    transform: translate3d(calc(-50% + #{$x}), calc(-50% + #{$y}), 0);
+    animation: falling-entering-#{$index} $duration $start $curve both;
+
+    @keyframes falling-entering-#{$index} {
+        0% { transform: translate3d(calc(-50% + #{$x}), calc(-50vh - var(--size) * 1.4), 0); }
+        100% { transform: translate3d(calc(-50% + #{$x}), calc(-50% + #{$y}), 0); }
+    }
+}
+
+@mixin rotating-entering($index, $duration, $start, $curve, $deg-start, $deg-end, $second-duration) {
+    .loading-screen-square {
+        transform: rotate3d(0, 0, 1, $deg-end);
+        animation: rotating-entering-#{$index} $duration $start $curve,
+                    rotating-loading-#{$index} $second-duration $start+$duration cubic-bezier(.53,-0.2,.35,1) both infinite;
+    }
+
+    @keyframes rotating-entering-#{$index} {
+        0% { transform: rotate3d(0, 0, 1, $deg-start); }
+        100% { transform: rotate3d(0, 0, 1, $deg-end); }
+    }
+
+    @keyframes rotating-loading-#{$index} {
+        0% { transform: rotate3d(0, 0, 1, $deg-end); }
+        50% { transform: rotate3d(0, 0, 1, $deg-end + 360deg); }
+        100% { transform: rotate3d(0, 0, 1, $deg-end + 360deg); }
+    }
+}
+
+.loading-screen-wrapper {
+    &:nth-of-type(1) {
+        --size: 1rem;
+        z-index: 5;
+    }
+    &:nth-of-type(2) {
+        --size: 1.414rem;
+        z-index: 4;
+    }
+    &:nth-of-type(3) {
+        --size: 2rem;
+        z-index: 3;
+    }
+    &:nth-of-type(4) {
+        --size: 2.82rem;
+        z-index: 2;
+    }
+    &:nth-of-type(5) {
+        --size: 4rem;
+        z-index: 1;
+    }
+}
+
+.active {
+
+    .loading-screen-wrapper:nth-of-type(1) {
+        $start: 0.5s;
+        @include falling-entering(1, 5s, $start, cubic-bezier(.1,1.01,.15,1), -10vh, 0vh);
+        @include rotating-entering(1, 5s, $start, cubic-bezier(.1,1.01,.15,1), -20deg, 20deg, 3s);
+    }
+    
+    .loading-screen-wrapper:nth-of-type(2) {
+        $start: 0.7s;
+        @include falling-entering(2, 5s, $start, cubic-bezier(.1,1.01,.15,1), 7vh, 2vh);
+        @include rotating-entering(2, 5s, $start, cubic-bezier(.1,1.01,.15,1), 9deg, -30deg, 3s);
+    }
+    
+    .loading-screen-wrapper:nth-of-type(3) {
+        $start: 0.8s;
+        @include falling-entering(3, 5s, $start, cubic-bezier(.1,1.01,.15,1), -2vh, 5vh);
+        @include rotating-entering(3, 5s, $start, cubic-bezier(.1,1.01,.15,1), -10deg, 30deg, 3s);
+    }
+    
+    .loading-screen-wrapper:nth-of-type(4) {
+        $start: 0.9s;
+        @include falling-entering(4, 5s, $start, cubic-bezier(.1,1.01,.15,1), -8vh, 11vh);
+        @include rotating-entering(4, 5s, $start, cubic-bezier(.1,1.01,.15,1), 0deg, 45deg, 3s);
+    }
+    
+    .loading-screen-wrapper:nth-of-type(5) {
+        $start: 1.3s;
+        @include falling-entering(5, 5s, $start, cubic-bezier(.1,1.01,.15,1), 5vh, 13vh);
+        @include rotating-entering(5, 5s, $start, cubic-bezier(.1,1.01,.15,1), -9deg, 30deg, 3s);
+    }
+}
+    
+.loading-screen-wrapper {
+    transform: translate3d(-50%, -50%, 0) !important;
+    transition: all 2s ease;
+    .loading-screen-square {
+        width: var(--size);
+        height: var(--size);
+        transition: all 2s ease;
+    }
+}
+
+.loading-screen-wrapper:nth-of-type(2n) {
+    .loading-screen-square {
+        background: $color-red;
+        transform: rotate3d(0,0,0,45deg);
+    }
+}
+
+.loading-screen-wrapper:nth-of-type(2n + 1) {
+    .loading-screen-square {
+        background: $color-lightest-grey;
+        transform: rotate3d(0,0,1,45deg);
+    }
+}

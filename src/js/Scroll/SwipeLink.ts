@@ -2,6 +2,7 @@ import { OnePageScroll } from "./OnePageScroll";
 import { SwipeHandler } from "./SwipeHandler";
 import { Point } from "../Utils/CustomTypes";
 import { GetWindowHeight } from "../Utils/UtilsFunctions";
+import { DesactivateAll } from "../Miscellaneous/DesactivateAll";
 
 export class SwipeLink {
 
@@ -13,14 +14,17 @@ export class SwipeLink {
         this.linkArray = linkArray;
         this.onePageScroll = onePageScroll;
         this.swipeHandler =
-            new SwipeHandler((p) => {this.onHorizontalSwipe()},
+            new SwipeHandler(() => {this.onHorizontalSwipe()},
                             (p) => this.swipeCondition(p))
     }
 
     onHorizontalSwipe() {
         const targetSection = this.linkArray[this.onePageScroll.currentSlideIndex];
         if(targetSection != null) {
-            window.location.href = "./" + targetSection;
+            DesactivateAll();
+            window.setTimeout(() => {
+                window.location.href = "./" + targetSection;
+            }, 1000)
         }
     }
 

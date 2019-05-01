@@ -16,7 +16,7 @@ class ScriptLoader {
     burgerMenu: AddClassButton;
 
     displayers: ProjectCarousel[];
-    scrollManager: OnePageScroll;
+    onePageScroll: OnePageScroll;
 
     onScrollActivator: OnScrollActivator;
 
@@ -76,9 +76,9 @@ class ScriptLoader {
         this.displayers = [null, null, project, lab];
 
         //  One Page scroll
-        let onePageScroll = new OnePageScroll(4, 500, this.burgerMenu, this.displayers);
+        this.onePageScroll = new OnePageScroll(4, 500, this.burgerMenu, this.displayers);
 
-        let swipeLink = new SwipeLink(onePageScroll, [null, "profil.html", "projects.html", "lab.html"]);
+        let swipeLink = new SwipeLink(this.onePageScroll, [null, "profil.html", "projects.html", "lab.html"]);
 
         //  Bind a one page scroll to the scroll icon and every sections of the scroll bar
         this.BindScrollButons();
@@ -146,11 +146,11 @@ class ScriptLoader {
 
 
     private BindScrollButons() {
-        document.querySelector(".scroll-icon").addEventListener("click", () => this.scrollManager.Next());
+        document.querySelector(".scroll-icon").addEventListener("click", () => this.onePageScroll.Next());
         
         let scrollBarSections = document.querySelectorAll(".scroll-bar-section");
         for (let i = 0; i < scrollBarSections.length; i++) {
-            scrollBarSections[i].addEventListener("click", () => this.scrollManager.MoveTo(i));    
+            scrollBarSections[i].addEventListener("click", () => this.onePageScroll.MoveTo(i));    
         }
     }
 
