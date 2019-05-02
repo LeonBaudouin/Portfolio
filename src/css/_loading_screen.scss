@@ -3,12 +3,15 @@
     z-index: $z-index-loading-screen;
     width: 100vw;
     height: 100vh;
-    background: $color-darkest-grey;
+    background: radial-gradient(circle, rgba(255,255,255,0) 30%, rgba(0,0,0,0.1) 100%) no-repeat border-box, $color-darkest-grey no-repeat border-box, ;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s 1.3s linear, visibility 0.5s 1.5s;
 }
 
 @mixin falling-entering($index, $duration, $start, $curve, $x, $y) {
     transform: translate3d(calc(-50% + #{$x}), calc(-50% + #{$y}), 0);
-    animation: falling-entering-#{$index} $duration $start $curve both;
+    animation: falling-entering-#{$index} $duration $start $curve backwards;
 
     @keyframes falling-entering-#{$index} {
         0% { transform: translate3d(calc(-50% + #{$x}), calc(-50vh - var(--size) * 1.4), 0); }
@@ -17,10 +20,10 @@
 }
 
 @mixin rotating-entering($index, $duration, $start, $curve, $deg-start, $deg-end, $second-duration) {
-    .loading-screen-square {
+    .loading-screen-square-content {
         transform: rotate3d(0, 0, 1, $deg-end);
-        animation: rotating-entering-#{$index} $duration $start $curve,
-                    rotating-loading-#{$index} $second-duration $start+$duration cubic-bezier(.53,-0.2,.35,1) both infinite;
+        animation: rotating-entering-#{$index} $duration $start $curve;
+                    //rotating-loading-#{$index} $second-duration $start+$duration cubic-bezier(.53,-0.2,.35,1);
     }
 
     @keyframes rotating-entering-#{$index} {
@@ -35,7 +38,7 @@
     }
 }
 
-.loading-screen-wrapper {
+.loading-screen-square {
     &:nth-of-type(1) {
         --size: 1rem;
         z-index: 5;
@@ -49,7 +52,7 @@
         z-index: 3;
     }
     &:nth-of-type(4) {
-        --size: 2.82rem;
+        --size: 2.828rem;
         z-index: 2;
     }
     &:nth-of-type(5) {
@@ -58,59 +61,123 @@
     }
 }
 
-.active {
+.loading {
 
-    .loading-screen-wrapper:nth-of-type(1) {
+    $curve: cubic-bezier(.02,.87,.6,.99);
+    $duration: 1.2s;
+
+    .loading-screen-square:nth-of-type(1) {
         $start: 0.5s;
-        @include falling-entering(1, 5s, $start, cubic-bezier(.1,1.01,.15,1), -10vh, 0vh);
-        @include rotating-entering(1, 5s, $start, cubic-bezier(.1,1.01,.15,1), -20deg, 20deg, 3s);
+        @include falling-entering(1, $duration, $start, $curve, -10vh, 0vh);
+        @include rotating-entering(1, $duration, $start, $curve, -20deg, 20deg, 3s);
     }
     
-    .loading-screen-wrapper:nth-of-type(2) {
+    .loading-screen-square:nth-of-type(2) {
         $start: 0.7s;
-        @include falling-entering(2, 5s, $start, cubic-bezier(.1,1.01,.15,1), 7vh, 2vh);
-        @include rotating-entering(2, 5s, $start, cubic-bezier(.1,1.01,.15,1), 9deg, -30deg, 3s);
+        @include falling-entering(2, $duration, $start, $curve, 7vh, 2vh);
+        @include rotating-entering(2, $duration, $start, $curve, 9deg, -30deg, 3s);
     }
     
-    .loading-screen-wrapper:nth-of-type(3) {
+    .loading-screen-square:nth-of-type(3) {
         $start: 0.8s;
-        @include falling-entering(3, 5s, $start, cubic-bezier(.1,1.01,.15,1), -2vh, 5vh);
-        @include rotating-entering(3, 5s, $start, cubic-bezier(.1,1.01,.15,1), -10deg, 30deg, 3s);
+        @include falling-entering(3, $duration, $start, $curve, -2vh, 5vh);
+        @include rotating-entering(3, $duration, $start, $curve, -10deg, 30deg, 3s);
     }
     
-    .loading-screen-wrapper:nth-of-type(4) {
+    .loading-screen-square:nth-of-type(4) {
         $start: 0.9s;
-        @include falling-entering(4, 5s, $start, cubic-bezier(.1,1.01,.15,1), -8vh, 11vh);
-        @include rotating-entering(4, 5s, $start, cubic-bezier(.1,1.01,.15,1), 0deg, 45deg, 3s);
+        @include falling-entering(4, $duration, $start, $curve, -8vh, 11vh);
+        @include rotating-entering(4, $duration, $start, $curve, 0deg, 45deg, 3s);
     }
     
-    .loading-screen-wrapper:nth-of-type(5) {
+    .loading-screen-square:nth-of-type(5) {
         $start: 1.3s;
-        @include falling-entering(5, 5s, $start, cubic-bezier(.1,1.01,.15,1), 5vh, 13vh);
-        @include rotating-entering(5, 5s, $start, cubic-bezier(.1,1.01,.15,1), -9deg, 30deg, 3s);
+        @include falling-entering(5, $duration, $start, $curve, 5vh, 13vh);
+        @include rotating-entering(5, $duration, $start, $curve, -9deg, 30deg, 3s);
+    }
+
+    .loading-screen-wrapper {
+        .loading-screen-background-square {
+            transform: rotate3d(0,0,1,45deg) scale3d(1.5,1.5,1);
+            animation: background-squares-appears 1s cubic-bezier(.56,0,.26,1.08) backwards;
+        }
+    }
+
+    .loading-screen {
+        opacity: 1;
+        visibility: visible;
+        transition-delay: 0s;
     }
 }
     
-.loading-screen-wrapper {
-    transform: translate3d(-50%, -50%, 0) !important;
-    transition: all 2s ease;
-    .loading-screen-square {
+.loading-screen-square {
+    transform: translate3d(-50%, calc(-25vh + 350%), 0);
+    transition: all 1s cubic-bezier(.56,0,.26,1.08);
+    .loading-screen-square-content {
         width: var(--size);
         height: var(--size);
-        transition: all 2s ease;
-    }
-}
-
-.loading-screen-wrapper:nth-of-type(2n) {
-    .loading-screen-square {
-        background: $color-red;
-        transform: rotate3d(0,0,0,45deg);
-    }
-}
-
-.loading-screen-wrapper:nth-of-type(2n + 1) {
-    .loading-screen-square {
-        background: $color-lightest-grey;
+        transition: all 1s cubic-bezier(.56,0,.26,1.08);
         transform: rotate3d(0,0,1,45deg);
+    }
+    
+    &:nth-of-type(2n) {
+        .loading-screen-square-content {
+            background: $color-red;
+        }
+    }
+    
+    &:nth-of-type(2n + 1) {
+        .loading-screen-square-content {
+            background: $color-lightest-grey;
+        }
+    }
+}
+
+.loading-screen-wrapper {   
+    .loading-screen-background-square {
+        transform: rotate3d(0,0,1,45deg) scale3d(1,1,1);
+        border: 1.5px solid $color-dark-grey;
+        width: 11rem;
+        height: 11rem;
+        transition: transform 1s cubic-bezier(.56,0,.26,1.08);
+        
+    }
+
+    @keyframes background-squares-appears {
+        0% {
+            transform: rotate3d(0,0,1,-45deg) scale3d(0,0,1);
+        }
+        
+        100% {
+            transform: rotate3d(0,0,1,45deg) scale3d(1.5,1.5,1);
+        }
+    }
+    
+    
+    &:nth-of-type(1) {
+        .loading-screen-background-square:nth-child(1) {
+            width: 11rem;
+            height: 11rem;
+            transition-delay: 0.3s;
+            animation-delay: 0.3s;
+        }
+    }
+
+    &:nth-of-type(2) {
+        .loading-screen-background-square {
+            width: 7rem;
+            height: 7rem;
+            transition-delay: 0.5s;
+            animation-delay: 0.5s;
+        }
+    }
+
+    &:nth-of-type(3) {
+        .loading-screen-background-square {
+            width: 3rem;
+            height: 3rem;
+            transition-delay: 0.7s;
+            animation-delay: 0.7s;
+        }
     }
 }

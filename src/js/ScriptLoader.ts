@@ -8,6 +8,7 @@ import { Parallax } from "./Scroll/Parallax";
 import { ProjectDetails } from "./Buttons/ProjectDetails";
 import { SwipeLink } from "./Scroll/SwipeLink";
 import { RemovePreload } from "./Miscellaneous/PreloadScript";
+import { LoadingScreen } from "./Miscellaneous/LoadingScreen";
 
 class ScriptLoader {
 
@@ -83,6 +84,7 @@ class ScriptLoader {
         //  Bind a one page scroll to the scroll icon and every sections of the scroll bar
         this.BindScrollButons();
 
+        LoadingScreen.Load();
         
         let canvas = new Canvas("canvas");
         canvas.Update();
