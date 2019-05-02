@@ -14,9 +14,10 @@ export class LoadingScreen {
         }
     }
 
-    public static Load() {
+    public static Load(callback: () => void = () => {}) {
         LoadingScreen.setLoading();
-        setTimeout(LoadingScreen.setLoaded, 2600);
+        setTimeout(LoadingScreen.setLoaded, 2350);
+        setTimeout(callback, 2350);
     }
     
     private static get classList() : DOMTokenList {

@@ -1,15 +1,5 @@
 export class Parallax {
 
-    // Quand
-    // ContainerBottom = WindowHeight + containerHeight           ou ContainerTop = innerHeight
-    // Alors
-    // Offset = 0
-
-    // Quand
-    // ContainerBottom = 0
-    // Alors
-    // Offset = maxOffset
-
     container: HTMLElement
     image: HTMLElement
     containerHeight: number
@@ -22,10 +12,10 @@ export class Parallax {
         const imgSelector = this.container.getAttribute("data-img")
         this.image = this.container.querySelector(imgSelector)
 
-        window.addEventListener("load", () => this.UpdateHeight())
+        this.UpdateHeight();
+        this.Update()
+        
         document.addEventListener("resize", () => this.UpdateHeight())
-
-        window.addEventListener("load", () => this.Update())
         document.addEventListener("scroll", () => this.Update());
     }
 
@@ -38,7 +28,6 @@ export class Parallax {
     }
 
     UpdateHeight() {
-        console.log("slt")
         this.containerHeight = this.ContainerBoundingRect.height
         this.imageHeight = this.image.getBoundingClientRect().height
 

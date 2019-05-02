@@ -9,6 +9,7 @@ import { ProjectDetails } from "./Buttons/ProjectDetails";
 import { SwipeLink } from "./Scroll/SwipeLink";
 import { RemovePreload } from "./Miscellaneous/PreloadScript";
 import { LoadingScreen } from "./Miscellaneous/LoadingScreen";
+import { ExecuteFunctionByName } from "./Utils/ExecuteFunctionByName";
 
 class ScriptLoader {
 
@@ -22,32 +23,14 @@ class ScriptLoader {
     onScrollActivator: OnScrollActivator;
 
     constructor() {
-
-        this.currentPage = document.body.getAttribute("data-page");
-
+        this.currentPage = document.body
+            .getAttribute("data-page")
+            .split("-")
+            .map((word) =>  word.charAt(0).toUpperCase() + word.slice(1))
+            .join('');
+ 
         this.GeneralScripts();
-
-        if(this.currentPage == "main-page") {
-
-            this.MainPageScripts();
-
-        } else if(this.currentPage == "profil-page") {
-
-            this.ProfilPageScripts();
-
-        } else if(this.currentPage == "projects-page") {
-
-            this.ProjectsPageScripts();
-
-        } else if(this.currentPage == "lab-page") {
-
-            this.LabPageScripts();
-
-        } else if(this.currentPage == "description-page") {
-
-            this.DescriptionPageScripts();
-
-        }
+        LoadingScreen.Load(() => ExecuteFunctionByName(`${this.currentPage}Scripts`, this));
     }
 
     private GeneralScripts() {
@@ -83,8 +66,6 @@ class ScriptLoader {
 
         //  Bind a one page scroll to the scroll icon and every sections of the scroll bar
         this.BindScrollButons();
-
-        LoadingScreen.Load();
         
         let canvas = new Canvas("canvas");
         canvas.Update();
@@ -106,7 +87,7 @@ class ScriptLoader {
         let projectDescriptionArray = Array.prototype.slice.call(document.querySelectorAll(".project"));
         let projectButtonArray = Array.prototype.slice.call(document.querySelectorAll(".project-short"));
 
-        // new ProjectDetails(projectButtonArray, projectDescriptionArray);
+        new ProjectDetails(projectButtonArray, projectDescriptionArray);
         document.querySelectorAll(".js-parallax").forEach(
             (parallaxElem: HTMLElement) => {
                 new Parallax(parallaxElem);
@@ -124,7 +105,7 @@ class ScriptLoader {
         let projectDescriptionArray = Array.prototype.slice.call(document.querySelectorAll(".lab"));
         let projectButtonArray = Array.prototype.slice.call(document.querySelectorAll(".lab-short"));
 
-        // new ProjectDetails(projectButtonArray, projectDescriptionArray);
+        new ProjectDetails(projectButtonArray, projectDescriptionArray);
         document.querySelectorAll(".js-parallax").forEach(
             (parallaxElem: HTMLElement) => {
                 new Parallax(parallaxElem);

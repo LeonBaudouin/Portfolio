@@ -1,9 +1,10 @@
 .loading-screen {
     position: absolute;
     z-index: $z-index-loading-screen;
-    width: 100vw;
-    height: 100vh;
-    background: radial-gradient(circle, rgba(255,255,255,0) 30%, rgba(0,0,0,0.1) 100%) no-repeat border-box, $color-darkest-grey no-repeat border-box, ;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: radial-gradient(circle, rgba(255,255,255,0) 30%, rgba(0,0,0,0.1) 100%) no-repeat border-box, $color-darkest-grey no-repeat border-box;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s 1.3s linear, visibility 0.5s 1.5s;
@@ -64,7 +65,7 @@
 .loading {
 
     $curve: cubic-bezier(.02,.87,.6,.99);
-    $duration: 1.2s;
+    $duration: 1s;
 
     .loading-screen-square:nth-of-type(1) {
         $start: 0.5s;
@@ -100,6 +101,16 @@
         .loading-screen-background-square {
             transform: rotate3d(0,0,1,45deg) scale3d(1.5,1.5,1);
             animation: background-squares-appears 1s cubic-bezier(.56,0,.26,1.08) backwards;
+        }
+
+        @keyframes background-squares-appears {
+            0% {
+                transform: rotate3d(0,0,1,-45deg) scale3d(0,0,1);
+            }
+            
+            100% {
+                transform: rotate3d(0,0,1,45deg) scale3d(1.5,1.5,1);
+            }
         }
     }
 
@@ -139,18 +150,7 @@
         border: 1.5px solid $color-dark-grey;
         width: 11rem;
         height: 11rem;
-        transition: transform 1s cubic-bezier(.56,0,.26,1.08);
-        
-    }
-
-    @keyframes background-squares-appears {
-        0% {
-            transform: rotate3d(0,0,1,-45deg) scale3d(0,0,1);
-        }
-        
-        100% {
-            transform: rotate3d(0,0,1,45deg) scale3d(1.5,1.5,1);
-        }
+        transition: transform 1s cubic-bezier(.56,0,.26,1.08);  
     }
     
     
