@@ -4,6 +4,7 @@ import { MathFunc, GetWindowHeight } from "../Utils/UtilsFunctions";
 import { ProjectCarousel } from "../Buttons/ProjectDisplayer";
 import "../Utils/AddWheelListener.js";
 import { Point } from "../Utils/CustomTypes";
+import { ExitFullScreen } from "../Utils/NonTSFriendlyFuncs";
 
 type WindowWheel = Window & {addWheelListener : (elem: any, callback: any, useCapture?: any) => {}};
 export class OnePageScroll {
@@ -61,6 +62,10 @@ export class OnePageScroll {
             if(Math.abs(distance) > 80 ) {
                 this.DirectionScroll(distance);
             }
+        })
+
+        document.addEventListener("scroll", (e) => {
+            ExitFullScreen();
         })
 
         this.container.addEventListener("touchmove", (e) => {

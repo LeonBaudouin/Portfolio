@@ -9,7 +9,7 @@ import { ProjectDetails } from "./Buttons/ProjectDetails";
 import { SwipeLink } from "./Scroll/SwipeLink";
 import { RemovePreload } from "./Miscellaneous/PreloadScript";
 import { LoadingScreen } from "./Miscellaneous/LoadingScreen";
-import { ExecuteFunctionByName } from "./Utils/ExecuteFunctionByName";
+import { ExecuteFunctionByName } from "./Utils/NonTSFriendlyFuncs";
 
 class ScriptLoader {
 
