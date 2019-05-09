@@ -474,7 +474,7 @@
     }
 
     &-description {
-      &:after {
+      &-background {
         background-color: transparentize($color-lightest-grey, 0.2);
         border: 1px solid $color-red;
       }
