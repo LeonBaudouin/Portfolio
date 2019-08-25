@@ -38,25 +38,13 @@ module.exports =
                 alias: {
                     "@": path.resolve("./src/"),
                     "@css": path.resolve("./src/css/"),
-                    "@img": path.resolve("./src/img/"),
-                    "@svg": path.resolve("./src/svg/"),
                     "@js": path.resolve("./src/js/"),
                 },
                 extensions: ['.ts', '.js', '.json']
             },
             devtool: dev ? "cheap-module-eval-source-map" : "",
             module: {
-                rules: [{
-                    test: /\.html$/,
-                    use: {
-                        loader: 'html-loader',
-                        options: {
-                            minimize: prod,
-                            removeComments: prod,
-                            attrs: ['img:src', 'source:srcset', 'link:href']
-                        }
-                    }
-                },
+                rules: [
                 {
                     test: /\.css$/,
                     use: ExtractTextPlugin.extract({
@@ -77,74 +65,31 @@ module.exports =
                     exclude: /node_modules/
                 },
                 {
-                    test: /\.(png|jpg|gif)$/,
-                    use: [{
-                        loader: "url-loader",
-                        options: {
-                            limit: 8192,
-                            name: "[name].[ext]",
-                            outputPath: "img/",
-                            publicPath: "img/"
-                        }
-                    },
-                    {
-                        loader: "img-loader",
-                        options: {
-                            enabled: prod
-                        }
-                    }
-                    ]
-                },
-                {
                     test: /\.(woff|woff2|eot|ttf|otf)$/,
                     use: [{
                         loader: 'file-loader',
                         options: {
                             name: "[name].[ext]",
                             useRelativePath: true,
-                            publicPath: "../fonts/"
-                        }
-                    }]
-                },
-                {
-                    test: /\.svg$/,
-                    use: [{
-                        loader: 'file-loader',
-                        options: {
-                            name: "[name].svg",
-                            outputPath: "svg/",
-                            publicPath: "svg/"
+                            publicPath: "./fonts/"
                         }
                     }]
                 }
                 ]
             },
             plugins: [
-                new HtmlWebpackPlugin({
-                    filename: "index.html",
-                    template: "./src/index.html"
-                }),
-                new HtmlWebpackPlugin({
-                    filename: "profil.html",
-                    template: "./src/profil.html"
-                }),
-                new HtmlWebpackPlugin({
-                    filename: "projects.html",
-                    template: "./src/projects.html"
-                }),
-                new HtmlWebpackPlugin({
-                    filename: "lab.html",
-                    template: "./src/lab.html"
-                }),
                 new ExtractTextPlugin({
-                    filename: "css/[name].css"
+                    filename: "[name].css"
                 }),
-                new CleanWebpackPlugin(path.resolve("./dist/"), {
+                new CleanWebpackPlugin(path.resolve("./assets/"), {
                     root: path.resolve("./"),
                     verbose: true,
                     dry: false
                 })
-            ]
+            ],
+            output: {
+                path: path.resolve("./assets/")
+            }
         }
 
         return config;
