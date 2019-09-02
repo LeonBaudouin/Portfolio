@@ -1,6 +1,7 @@
 {% import "macro/img.twig" as img %}
 {% import "macro/div.twig" as div %}
 {% import "macro/svg.twig" as svg %}
+{% import "macro/title.twig" as title %}
 <div class="page profil">
     <section class="section">
         <div class="section-background">
@@ -19,10 +20,7 @@
             </svg>
         </div>
         <div class="section-content">
-            <h2 class="title regular-title direction-right">
-                <a href="{{ getUrl('profile') }}" class="first-part"><span class="first-part-content">Mon</span></a>
-                <a href="{{ getUrl('profile') }}" class="second-part"><span class="second-part-content">Profil</span></a>
-            </h2>
+            {{ title.link('h2', 'direction-right', getUrl('profile'), 'Mon', 'Profil') }}
             <p class="description paragraph fade-from-left">
                 Je me présente, je m’appelle Léon Baudouin, j’ai 19 ans et je suis un développeur et motion designer passionné. Je suis rigoureux et critique...
             </p>

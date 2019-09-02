@@ -1,0 +1,36 @@
+{% import "macro/div.twig" as div %}
+{% import "macro/title.twig" as title %}
+{% set courses = [
+    {name: 'BAC Scientifique', date: '2015-2017', description: 'J’ai obtenu le Bac S avec mention Bien au lycée Hector Berlioz à Vincennes. Les deux années que j’ai passées en filière scientifique m’ont permis de me forger une rigueur et une logique qui me sont très utiles aujourd’hui. C’est durant cette période que j’ai consacré beaucoup de temps à me former au Motion Design.'},
+    {name: 'Stage Mikros', date: 'Aout 2018', description: 'J’ai effectué un Stage d’un mois au sein de la société de Post-production Mikros Image en tant que Motion Designer. Cette expérience m’a permis de découvrir le milieu de la post-production en tant qu’élément au sein de cette industrie. De plus, j’ai pu me familiariser avec un milieu professionnel.'},
+    {name: 'DUT MMI', date: '2017-2019', description: 'MMI (Métiers du Multimédia et de l’Internet) est une formation pluridisciplinaire que je suis actuellement à l’IUT de Champs sur Marne. En plus de me faire découvrir le monde passionnant du web, elle m’a permis d\'expérimenter et de mettre à profit mes connaissances à travers des dizaines de projets.'},
+] %}
+<section class="section parcours">
+    <div class="wrapper js-activate-on-scroll">
+        {{ title.regular('h2', 'section-title', 'Mon', 'Parcours') }}
+    </div>
+    {% for course in courses %}
+        <article class="parcours-experience js-activate-on-scroll">
+            <h3 class="title parcours-experience-title">
+                <span class="parcours-experience-wrapper">{{ course.name }}</span>
+            </h3>
+            <time class="parcours-experience-time">
+                <span class="parcours-experience-wrapper">{{ course.date }}</span>
+            </time>
+            <p class="parcours-experience-description paragraph">
+                <span class="parcours-experience-wrapper">{{ course.description }}</span>
+            </p>
+            {% if loop.index is odd %}
+                <div class="background-empty-squares">
+                    {{ div.fromClassArray(['', '', 'thick'], 'background-empty-squares-element') }}
+                </div>
+            {% else %}
+                <div class="background-squares">
+                    <div class="background-squares-group">
+                        {{ div.multiples('background-squares-group-element', 15) }}
+                    </div>
+                </div>
+            {% endif %}
+        </article>
+    {% endfor %}
+</section>

@@ -1,0 +1,28 @@
+{% import "macro/img.twig" as img %}
+{% import "macro/div.twig" as div %}
+{% import "macro/title.twig" as title %}
+<section class="section presentation js-activate-on-scroll">
+    {{ img.pictureTag('profilPhoto_1200.jpg', 'profilPhoto_800.jpg', 'Photo de moi à la BNF', 'presentation-photo') }}
+    {{ title.regular('h2', 'section-title', 'Qui', 'Suis-je ?') }}
+    <p class="presentation-paragraph paragraph">
+        Je me présente, je m’appelle Léon Baudouin, j’ai 19 ans et je suis un <strong>développeur</strong> et <strong>motion designer</strong> passionné. Je suis rigoureux et critique vis-à-vis de moi-même mais ce qui me définit par dessus tout est ma <strong>soif de connaissance</strong>. Je cherche à apprendre de chaque expérience. Je suis actuellement à la recherche d’un <strong>stage en web</strong> à partir d’avril.
+        <span class="v-m-page">
+            <br><br>N’hésitez pas à me contacter sur les réseaux sociaux, je serai heureux de répondre à vos questions.
+        </span>
+    </p>
+    <div class="presentation-links space-even">
+        <div class="null"></div>
+        <a href="{{ getUrl('project_list') }}" class="presentation-links-element v-m-page"><span class="light-text">Mes</span> projets</a>
+        <a href="#contact" class="presentation-links-element"><span class="light-text">Me</span> contacter</a>
+    </div>
+    <div class="presentation-particles">
+        <div class="presentation-particles-group z-minus-1">
+            {{ div.multiples('presentation-particles-element', 4) }}
+        </div>
+        <div class="presentation-particles-group z-plus-1">
+            {{ div.multiples('presentation-particles-element', 4) }}
+        </div>
+    </div>
+    <div class="presentation-background">
+    </div>
+</section>

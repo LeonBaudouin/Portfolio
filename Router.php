@@ -42,6 +42,8 @@ class Router
     {
         $match = $this->altoRouter->match();
         if( is_array($match) && is_callable( $match['target'] ) ) {
+            \Model\Registry::init();
+            \Model\Registry::register('route', $match['name']);
             $function = $match['target'];
             $function($match['params']);
         } else {

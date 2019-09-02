@@ -71,7 +71,7 @@ class ScriptLoader {
         canvas.Update();
     }
 
-    private ProfilPageScripts() {
+    private ProfilePageScripts() {
 
         // Object that add the "active" class when the user scroll the element
         this.onScrollActivator = new OnScrollActivator(".js-activate-on-scroll", window.innerHeight/4);

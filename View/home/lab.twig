@@ -1,5 +1,6 @@
 {% import "macro/img.twig" as img %}
 {% import "macro/div.twig" as div %}
+{% import "macro/title.twig" as title %}
 {% set projects = [
     {name: "Particules", highResFeaturedImage: "Particles_1920.png", lowResFeaturedImage: "Particles_800.png", url: "./particles/", description: "Cette page compile trois expérimentations avec les canvas et les objets Javascript. L’un de ses travaux utilise des fonctions physiques pour reproduire la gravité."},
     {name: "Mikros Motion", highResFeaturedImage: "Mikros_1920.png", lowResFeaturedImage: "Mikros_800.png", url: "https://www.youtube.com/watch?v=-lfYiAm-qjc", description: "Animation réalisée à l’occasion de mon stage au sein de Mikros Image. Je me suis entraîné à créer des mouvements réalistes."},
@@ -34,10 +35,7 @@
             </div>
         </div>
         <div class="section-content">
-            <h2 class="title regular-title">
-                <a href="{{ getUrl('lab_list') }}" class="first-part"><span class="first-part-content">Mon</span></a>
-                <a href="{{ getUrl('lab_list') }}" class="second-part"><span class="second-part-content">Lab</span></a>
-            </h2>
+            {{ title.link('h2', '', getUrl('lab_list'), 'Mon', 'Lab') }}
             {% for project in projects %}
                 <div class="description fade-from-left">
                     <h3 class="lab-title title"><span class="lab-title-content">{{ project.name }}</span></h3>

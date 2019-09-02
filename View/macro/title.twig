@@ -1,0 +1,13 @@
+{% macro regular(tag, class, firstLine, secondLine, class) %}
+    <{{tag}} class="title regular-title {{ class }}">
+        <div class="first-part"><span class="first-part-content">{{ firstLine }}</span></div>
+        <div class="second-part"><span class="second-part-content">{{ secondLine }}</span></div>
+    </{{tag}}>
+{% endmacro %}
+
+{% macro link(tag, class, url, firstLine, secondLine) %}
+    <{{tag}} class="title regular-title {{ class }}">
+        <a href='{{ url }}' class="first-part"><span class="first-part-content">{{ firstLine }}</span></a>
+        <a href='{{ url }}' class="second-part"><span class="second-part-content">{{ secondLine }}</span></a>
+    </{{tag}}>
+{% endmacro %}

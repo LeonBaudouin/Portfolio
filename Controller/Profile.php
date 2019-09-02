@@ -6,6 +6,6 @@ class Profile extends AbstractController
 {
     public static function execute($params)
     {
-        require 'profil.html';
+        self::getRenderer()->render('profile.twig');
     }
 }

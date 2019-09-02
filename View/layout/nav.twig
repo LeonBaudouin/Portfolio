@@ -1,16 +1,20 @@
+{% import "macro/svg.twig" as svg %}
 <nav class="nav hidden">
     <svg class="nav-burger sideButton js-hovered-element" viewbox="0 0 44 44" width="44" height="44">
         <rect class="nav-burger-rect" x="7" y="7" width="30" height="30" />
-        <line class="nav-burger-line" x1="16" y1="15" x2="28" y2="15" />
-        <line class="nav-burger-line" x1="16" y1="29" x2="28" y2="29" />
-        <line class="nav-burger-line" x1="10" y1="22" x2="34" y2="22" />
-        <line class="nav-burger-line" x1="10" y1="22" x2="34" y2="22" />
+        {% set lines = [
+            {from: {x: 16, y: 15}, to: {x: 28, y: 15}},
+            {from: {x: 16, y: 29}, to: {x: 28, y: 29}},
+            {from: {x: 10, y: 22}, to: {x: 34, y: 22}},
+            {from: {x: 10, y: 22}, to: {x: 34, y: 22}}
+        ] %}
+        {{ svg.lines(lines, 'nav-burger-line') }}
     </svg>
     <div class="nav-menu">
         <ul class="nav-menu-list">
-            <li class="nav-menu-item"><a href="{{ getUrl('profile') }}" class="nav-menu-link">Mon profil</a></li>
-            <li class="nav-menu-item"><a href="{{ getUrl('project_list') }}" class="nav-menu-link">Mes projets</a></li>
-            <li class="nav-menu-item"><a href="{{ getUrl('lab_list') }}" class="nav-menu-link">Le lab</a></li>
+            <li class="nav-menu-item"><a href="{{ getUrl('profile') }}" class="nav-menu-link{{ getFromRegistry('route') == 'profile' ? ' active' : '' }}">Mon profil</a></li>
+            <li class="nav-menu-item"><a href="{{ getUrl('project_list') }}" class="nav-menu-link{{ getFromRegistry('route') == 'project_list' ? ' active' : '' }}">Mes projets</a></li>
+            <li class="nav-menu-item"><a href="{{ getUrl('lab_list') }}" class="nav-menu-link{{ getFromRegistry('route') == 'lab_list' ? ' active' : '' }}">Le lab</a></li>
             <li class="nav-menu-item space-even v-s-nav">
                 <a href="{{ getForeignUrl('cv') }}" target="_blank" class="contact-item">CV</a>
                 <a href="mailto:leondedouin@gmail.com" class="contact-item js-copy-to-clipboard">Mail</a>
