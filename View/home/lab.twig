@@ -1,4 +1,4 @@
-{% import "macro/home.twig" as home %}
+{% import "macro/img.twig" as img %}
 {% import "macro/div.twig" as div %}
 {% set projects = [
     {name: "Particules", highResFeaturedImage: "Particles_1920.png", lowResFeaturedImage: "Particles_800.png", url: "./particles/", description: "Cette page compile trois expérimentations avec les canvas et les objets Javascript. L’un de ses travaux utilise des fonctions physiques pour reproduire la gravité."},
@@ -9,7 +9,7 @@
     <section class="section">
         <div class="section-background">
             {% for project in projects %}
-                {{ home.featuredImage(project, "photo-lab") }}
+                {{ img.pictureTag(project.highResFeaturedImage, project.lowResFeaturedImage, 'Illustration du projet' ~ project.name, "photo-lab") }}
             {% endfor %}
             <div class="background-squares v-s-page">
                 <div class="background-squares-group">
@@ -35,8 +35,8 @@
         </div>
         <div class="section-content">
             <h2 class="title regular-title">
-                <a href="./profil.html" class="first-part"><span class="first-part-content">Mon</span></a>
-                <a href="./profil.html" class="second-part"><span class="second-part-content">Lab</span></a>
+                <a href="{{ getUrl('lab_list') }}" class="first-part"><span class="first-part-content">Mon</span></a>
+                <a href="{{ getUrl('lab_list') }}" class="second-part"><span class="second-part-content">Lab</span></a>
             </h2>
             {% for project in projects %}
                 <div class="description fade-from-left">
@@ -45,7 +45,7 @@
                     <a href="{{ project.url }}" target="_blank" class="see-more">Voir le projet</a>
                 </div>
             {% endfor %}
-            <a href="./lab.html" class="button all fade-from-left">
+            <a href="{{ getUrl('lab_list') }}" class="button all fade-from-left">
                 {% include "svg/tout-voir.twig" only %}
                 {% include "svg/double-arrow.twig" only %}
             </a>

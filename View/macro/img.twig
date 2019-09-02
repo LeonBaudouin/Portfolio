@@ -1,0 +1,6 @@
+{% macro pictureTag(highRes, lowRes, alt, class) %}
+    <picture class="{{ class }}">
+        <source media="(min-width: 800px)" srcset="{{ getImagePath(highRes) }}">
+        <img src="{{ getImagePath(lowRes) }}" alt="{{ alt }}">
+    </picture>
+{% endmacro %}

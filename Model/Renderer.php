@@ -4,6 +4,10 @@ namespace Model;
 
 class Renderer {
 
+    const EXTENSIONS = [
+        \Twig\UrlExtension::class
+    ];
+
     private $loader;
     private $twig;
 
@@ -15,9 +19,13 @@ class Renderer {
         $config = include('config.php');
         
         $this->twig = new \Twig_Environment($this->loader, [
-            'cache' => $config['production'] ? $config['cache_path'] : false,
+            'cache' => $config['production'] ? __DIR__ . $config['cache_path'] : false,
             'debug' => !$config['production']
         ]);
+
+        foreach (self::EXTENSIONS as $extensionClass) {
+            $this->twig->addExtension(new $extensionClass());
+        }
     }
 
     public function render($fileName, $data = [])

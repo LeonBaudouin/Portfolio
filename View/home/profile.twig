@@ -1,3 +1,4 @@
+{% import "macro/img.twig" as img %}
 {% import "macro/div.twig" as div %}
 {% import "macro/svg.twig" as svg %}
 <div class="page profil">
@@ -6,10 +7,7 @@
             <div class="background-empty-squares">
                 {{ div.fromClassArray(['', '', '', 'thick'], 'background-empty-squares-element') }}
             </div>
-            <picture class="photo-profil">
-                <source media="(min-width: 800px)" srcset="img/profil_1920.png">
-                <img src="img/profil_800.png" alt="Une photo de moi">
-            </picture>
+            {{ img.pictureTag('profil_1920.png', 'profil_800.png', 'Une photo de moi', 'photo-profil') }}
             <svg class="background-strokes" viewbox="0 0 190 50">
                 {% set lines = [
                     {from: {x: 70, y: 1}, to: {x: 190, y: 2}},
@@ -22,13 +20,13 @@
         </div>
         <div class="section-content">
             <h2 class="title regular-title direction-right">
-                <a href="./profil.html" class="first-part"><span class="first-part-content">Mon</span></a>
-                <a href="./profil.html" class="second-part"><span class="second-part-content">Profil</span></a>
+                <a href="{{ getUrl('profile') }}" class="first-part"><span class="first-part-content">Mon</span></a>
+                <a href="{{ getUrl('profile') }}" class="second-part"><span class="second-part-content">Profil</span></a>
             </h2>
             <p class="description paragraph fade-from-left">
                 Je me présente, je m’appelle Léon Baudouin, j’ai 19 ans et je suis un développeur et motion designer passionné. Je suis rigoureux et critique...
             </p>
-            <a href="./profil.html" class="button continuer fade-from-left">
+            <a href="{{ getUrl('profile') }}" class="button continuer fade-from-left">
                 {% include "svg/continuer.twig" only %}
                 {% include "svg/simple-arrow.twig" only %}
             </a>

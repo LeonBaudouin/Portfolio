@@ -4,15 +4,15 @@ namespace Controller;
 
 abstract class AbstractController implements ControllerInterface
 {
-    protected $renderer;
+    private static $renderer;
 
-    public abstract function execute(array $params);
+    public static abstract function execute(array $params);
 
-    protected function getRenderer()
+    protected static function getRenderer()
     {
-        if (!$this->renderer) {
-            $this->renderer = new \Model\Renderer();
+        if (!self::$renderer) {
+            self::$renderer = new \Model\Renderer();
         }
-        return $this->renderer;
+        return self::$renderer;
     }
 }

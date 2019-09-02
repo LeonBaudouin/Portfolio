@@ -3,15 +3,39 @@
 class Router
 {
     const ROUTES = [
-        '/' => \Controller\MainPage::class
+        'home' => [
+            'path' => '/',
+            'controller' => \Controller\MainPage::class
+        ],
+        'profile' => [
+            'path'=> '/profile',
+            'controller' => \Controller\Profile::class
+        ],
+        'project_list' => [
+            'path'=> '/project',
+            'controller' => \Controller\ProjectList::class
+        ],
+        'lab_list' => [
+            'path'=> '/lab',
+            'controller' => \Controller\LabList::class
+        ]
     ];
 
+    private static $instance;
     private $altoRouter;
 
-    public function __construct()
+    private function __construct()
     {
         $this->altoRouter = new \AltoRouter();
         $this->addRoutes();
+    }
+
+    public static function getInstance()
+    {
+        if (!self::$instance) {
+            self::$instance = new Router();
+        }
+        return self::$instance;
     }
 
     public function route()
@@ -21,27 +45,30 @@ class Router
             $function = $match['target'];
             $function($match['params']);
         } else {
-            $controller = new \Controller\NotFound();
-            $controller->execute([]);
+            \Controller\NotFound::execute([]);
         }
+    }
+
+    public function generate($route, $params = [])
+    {
+        return $this->altoRouter->generate($route, $params);
     }
 
     private function addRoutes()
     {
         $routes = [];
-        foreach (self::ROUTES as $path => $controllerClass) {
-            $routes[] = $this->createRoute($path, $controllerClass);
+        foreach (self::ROUTES as $name => $data) {
+            $routes[] = $this->createRoute($data['path'], $data['controller'], $name);
         }
         $this->altoRouter->addRoutes($routes);
     }
 
-    private function createRoute($path, $controllerClass)
+    private function createRoute($path, $controllerClass, $name)
     {
         $callback = function($params) use ($controllerClass) {
-            $controller = new $controllerClass();
-            $controller->execute($params);
+            $controllerClass::execute($params);
         };
 
-        return ['GET', $path, $callback];
+        return ['GET', $path, $callback, $name];
     }
 }

@@ -3,5 +3,5 @@
 namespace Controller;
 
 interface ControllerInterface {
-    public function execute(array $params);
+    public static function execute(array $params);
 }

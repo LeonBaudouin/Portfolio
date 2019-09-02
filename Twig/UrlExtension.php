@@ -1,0 +1,14 @@
+<?php
+
+namespace Twig;
+
+class UrlExtension extends \Twig_Extension
+{
+    public function getFunctions() {
+        return [
+            new \Twig_Function('getUrl', ['\Helper\UrlBuilder', 'getUrl']),
+            new \Twig_Function('getImagePath', ['\Helper\UrlBuilder', 'getImagePath']),
+            new \Twig_Function('getForeignUrl', ['\Helper\UrlBuilder', 'getForeignUrl'])
+        ];
+    }
+}

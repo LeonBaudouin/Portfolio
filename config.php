@@ -2,5 +2,7 @@
 
 return [
     'production' => false,
-    'cache_path' => __DIR__ . '/tmp',
+    'cache_path' => '/tmp',
+    'image_path' => '/img',
+    'svg_path'   => '/svg',
 ];

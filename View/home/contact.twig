@@ -3,14 +3,14 @@
     <div class="contact-content">
         <h5 class="contact-content-title title v-m-page"><span class="color-red">contactez</span> moi <span class="color-red">!</span></h5>
         <div class="contact-content-grid">
-            <a href="./cv.pdf" target="_blank" class="contact-content-link contact-item cv v-m-page">mon cv</a>
-            <a href="./cv.pdf" target="_blank" class="contact-content-link contact-item cv v-s-page">CV</a>
+            <a href="{{ getForeignUrl('cv') }}" target="_blank" class="contact-content-link contact-item cv v-m-page">mon cv</a>
+            <a href="{{ getForeignUrl('cv') }}" target="_blank" class="contact-content-link contact-item cv v-s-page">CV</a>
             <a href="mailto:leondedouin@gmail.com" class="contact-content-link contact-item mail v-m-page js-copy-to-clipboard">leondedouin<span class="color-red">@</span>gmail.com</a>
             <a href="mailto:leondedouin@gmail.com" class="contact-content-link contact-item mail v-s-page js-copy-to-clipboard">Mail</a>
-            <a href="https://codepen.io/leonbaudouin/" class="contact-content-link contact-icon codepen"></a>
-            <a href="https://www.instagram.com/leon2motion/" class="contact-content-link contact-icon instagram"></a>
-            <a href="https://github.com/LeonBaudouin" class="contact-content-link contact-icon github"></a>
-            <a href="https://www.youtube.com/channel/UCbZjms-bVUHVsETHmuvnWRQ" class="contact-content-link contact-icon youtube"></a>
+            <a href="{{ getForeignUrl('codepen') }}" class="contact-content-link contact-icon codepen"></a>
+            <a href="{{ getForeignUrl('instagram') }}" class="contact-content-link contact-icon instagram"></a>
+            <a href="{{ getForeignUrl('github') }}" class="contact-content-link contact-icon github"></a>
+            <a href="{{ getForeignUrl('youtube') }}" class="contact-content-link contact-icon youtube"></a>
         </div>
     </div>
 </div>

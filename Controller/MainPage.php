@@ -4,8 +4,8 @@ namespace Controller;
 
 class MainPage extends AbstractController
 {
-    public function execute($params)
+    public static function execute($params)
     {
-        $this->getRenderer()->render('index.twig');
+        self::getRenderer()->render('index.twig');
     }
 }
