@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+    {% block head %}
+        {% include 'layout/head.twig' with {color: '#333131', title: 'Léon Baudouin'} only %}
+    {% endblock %}
+
+    <body class="preload loading {% block pageName %}{% endblock %} {% block bodyClass %}{% endblock %}" data-page="{{ block('pageName') }}">
+        {% include 'layout/loading-screen.twig' only %}
+        
+        <canvas></canvas>
+        
+        <div class="popup">
+            <p class="popup-text">Copié <span class="color-red">!</span></p>
+        </div>
+
+        {% include 'layout/logo.twig' only %}
+        {% include 'layout/nav.twig' only %}
+
+        {% block sideButton %}
+        {% endblock %}
+
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <script type="text/javascript" src="./assets/main.js"></script>
+    </body>
+
+</html>

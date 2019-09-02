@@ -1,0 +1,11 @@
+{% macro multiples(class, number) %}
+    {% for i in 1..number %}
+        <div class={{ class }}></div>
+    {% endfor %}
+{% endmacro %}
+
+{% macro fromClassArray(classes, baseClass) %}
+    {% for class in classes %}
+        <div class="{{ baseClass ~ ' ' ~ class | trim(' ') }}"></div>
+    {% endfor %}
+{% endmacro %}
