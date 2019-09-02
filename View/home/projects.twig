@@ -1,0 +1,41 @@
+{% import "macro/home.twig" as home %}
+{% set projects = [
+    {name: "Glint", type: 'Jeu vidéo', skills: [{name: "C#", logo: 'Csharp.svg'}, {name: "Unity", logo: 'Unity.svg'}], highResFeaturedImage: "Glint_1920.png", lowResFeaturedImage: "Glint_800.png", url: "https://www.glintgame.fr"},
+    {name: "CV Interactif", skills: [{name: "CSS", logo: 'CSS.svg'}, {name: "Javascript", logo: 'JS.svg'}], type: 'Site web', highResFeaturedImage: "CV_1920.png", lowResFeaturedImage: "CV_800.png", url: "./cv/"},
+    {name: "Call Me", skills: [{name: "After Effects", logo: 'AE.svg'}, {name: "Illustrator", logo: 'AI.svg'}], type: 'Motion design', highResFeaturedImage: "CallMe_1920.png", lowResFeaturedImage: "CallMe_800.png", url: "https://www.youtube.com/watch?v=GK1ZqDCcR6Q"}
+] %}
+<div class="page projets">
+    <section class="section">
+        <div class="section-background">
+            {% for project in projects %}
+                {{ home.featuredImage(project, "photo-projet") }}
+            {% endfor %}
+            <div class="background-empty-squares">
+                {{ div.fromClassArray(['', '', '', 'thick'], 'background-empty-squares-element') }}
+            </div>
+        </div>
+        <div class="section-content">
+            <h2 class="title regular-title">
+                <a class="first-part" href="./projects.html"><span class="first-part-content">Mes</span></a>
+                <a class="second-part" href="./projects.html"><span class="second-part-content">Projets</span></a>
+            </h2>
+            {% for project in projects %}
+                <div class="description project fade-from-left">
+                    <h3 class="project-title title">{{ project.name }}</h3>
+                    <h4 class="project-type title">{{ project.type }}</h4>
+                    <div class="project-skills">
+                        {% for skill in project.skills %}
+                            <img src="svg/{{ skill.logo }}" alt="{{ skill.name }}" class="project-skills-icon">
+                        {% endfor %}
+                    </div>
+                    <a href="{{ project.url }}" target="_blank" class="project-more see-more">Voir le projet</a>
+                </div>
+            {% endfor %}
+            <a href="./projects.html" class="button all fade-from-left">
+                {% include "svg/tout-voir.twig" only %}
+                {% include "svg/double-arrow.twig" only %}
+            </a>
+            {% include "home/next-project-button.twig" with {projects: projects} only %}
+        </div>
+    </section>
+</div>

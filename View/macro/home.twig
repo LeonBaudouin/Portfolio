@@ -1,0 +1,6 @@
+{% macro featuredImage(project, class) %}
+    <picture class="{{ class }}">
+        <source media="(min-width: 800px)" srcset="img/{{ project.highResFeaturedImage }}">
+        <img src="img/{{ project.lowResFeaturedImage }}" alt="Illustration du projet {{ project.name }}">
+    </picture>
+{% endmacro %}

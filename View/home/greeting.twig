@@ -1,0 +1,18 @@
+{% import "macro/div.twig" as div %}
+
+<div class="page accueil">
+    <h1 class="title main_title js-hovered-element">
+        <div class="first-part">
+            <span>Léon</span>
+            <div class="red-squares">
+                {{ div.multiples("red-squares-element", 4) }}
+            </div>
+        </div>
+        <div class="second-part">
+            <span class="z-plus-2">B</span>a<span class="z-plus-3">u</span>douin
+            <div class="grey-strokes">
+                {{ div.fromClassArray(['z-minus-1', 'z-plus-3', ''], 'grey-strokes-element') }}
+            </div>
+        </div>
+    </h1>
+</div>
