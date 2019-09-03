@@ -1,0 +1,44 @@
+{% import "macro/div.twig" as div %}
+<div class="project">
+    <div class="project-short">
+        <a target="_blank" href="{{ project.url }}" class="project-img-container js-parallax" data-img=".project-img">
+            <div class="project-img-wrapper">
+                <img src="{{ getImagePath(project.galleryImage) }}" alt="Illustration du projet {{ project.name }}" class="project-img">
+            </div>
+        </a>
+        <h2 class="title project-title js-activate-on-scroll">
+            <div class="first-part">
+                <div class="first-part-content">
+                    {{ project.name }}
+                </div>
+                <div class="red-squares">
+                    {{ div.multiples('red-squares-element', 3) }}
+                </div>
+                <div class="red-strokes">
+                    {{ div.multiples('red-strokes-element', 3) }}
+                </div>
+            </div>
+            <div class="second-part">
+                <div class="second-part-content">
+                    {{ project.type }}
+                </div>
+            </div>
+        </h2>
+    </div>
+    <div class="project-description">
+        <div class="project-description-skills">
+            {% for skill in project.skills %}
+                <img src="{{ getImagePath(skill.logo, 'svg') }}" alt="{{ skill.name }}" class="project-description-skills-icon">
+            {% endfor %}
+        </div>
+    <div class="project-description-paragraph paragraph">
+        <p class="paragraph">
+            {{ project.description | nl2br }}
+        </p>
+    </div>
+    <a target="_blank" href="{{ project.url }}" class="project-description-link">
+        Voir le projet
+    </a>
+    <div class="project-description-background"></div>
+    </div>
+</div>

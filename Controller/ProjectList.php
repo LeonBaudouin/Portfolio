@@ -6,6 +6,6 @@ class ProjectList extends AbstractController
 {
     public static function execute($params)
     {
-        require 'projects.html';
+        self::getRenderer()->render('project-list.twig');
     }
 }
