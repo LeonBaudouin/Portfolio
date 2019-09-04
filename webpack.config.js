@@ -1,7 +1,7 @@
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports =
     (env, argv) => {
@@ -85,7 +85,11 @@ module.exports =
                     root: path.resolve("./"),
                     verbose: true,
                     dry: false
-                })
+                }),
+                new CopyPlugin([
+                    { from: './src/img', to: './img' },
+                    { from: './src/svg', to: './svg' },
+                ])
             ],
             output: {
                 path: path.resolve("./assets/")

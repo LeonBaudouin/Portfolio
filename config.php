@@ -3,6 +3,6 @@
 return [
     'production' => false,
     'cache_path' => '/tmp',
-    'image_path' => '/img',
-    'svg_path'   => '/svg',
+    'image_path' => '/assets/img',
+    'svg_path'   => '/assets/svg',
 ];
