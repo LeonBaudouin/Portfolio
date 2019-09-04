@@ -2,7 +2,7 @@
 
 namespace Model\Project;
 
-interface ProjectInterface extends \Model\EntityInterface {
+interface ProjectInterface extends \Model\Entity\EntityInterface {
 
     const NAME = 'name';
     const SKILLS = 'skills';

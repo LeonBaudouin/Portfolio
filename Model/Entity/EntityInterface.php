@@ -2,8 +2,8 @@
 
 namespace Model\Entity;
 
-interface EntityInterface {
-    
+interface EntityInterface
+{    
     const ID = 'id';
     
     public function getId();

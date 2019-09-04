@@ -6,7 +6,7 @@ class DataObject {
 
     protected $data;
 
-    public function _contruct(array $data = [])
+    public function __construct(array $data = [])
     {
         $this->data = $data;
     }

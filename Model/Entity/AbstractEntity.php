@@ -2,7 +2,7 @@
 
 namespace Model\Entity;
 
-abstract class AbstractEntity extends \Model\DataObject implements EntitInterface
+abstract class AbstractEntity extends \Model\DataObject implements EntityInterface
 {
     public function getId() {
         return $this->_get(self::ID);
