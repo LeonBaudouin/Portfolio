@@ -2,7 +2,7 @@
 
 namespace Model\Skill;
 
-interface SkillInterface extends \Model\EntityInterface {
+interface SkillInterface extends \Model\Entity\EntityInterface {
 
     const NAME = 'name';
     const LOGO = 'logo';

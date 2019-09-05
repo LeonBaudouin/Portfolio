@@ -2,17 +2,27 @@
 
 namespace Model\Project;
 
-class ProjectRepository
+use \Model\Skill\SkillRepository;
+use \Model\Entity\AbstractRepository;
+
+class ProjectRepository extends AbstractRepository
 {
     const TABLE_NAME = 'projects';
 
     public static function getById($id)
     {
-        $pdo = \Model\Connection::getConnection();
-        $statement = $pdo->prepare('SELECT * FROM ' . self::TABLE_NAME . ' WHERE id = :id LIMIT 1');
-        $statement->execute(['id' => $id]);
-        $data = $statement->fetch(\PDO::FETCH_ASSOC);
+        $data = self::Select(['id' => $id]);
+        $project = ProjectFactory::create($data);
 
-        return new Project($data);
+        $skills = SkillRepository::getSkillsFromProject($project);
+        $project->setSkills($skills);
+
+        return $project;
+    }
+
+    public static function getAll()
+    {
+        $dataArray = self::Select();
+        return array_map([ProjectFactory::class, 'create'], $dataArray);
     }
 }

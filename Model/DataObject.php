@@ -18,4 +18,8 @@ class DataObject {
     protected function _set($key, $value) {
         $this->data[$key] = $value;
     }
+
+    public function getData() {
+        return $this->data;
+    }
 }
