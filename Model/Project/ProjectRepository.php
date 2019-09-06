@@ -12,6 +12,9 @@ class ProjectRepository extends AbstractRepository
     public static function getById($id)
     {
         $data = self::Select(['id' => $id]);
+        if (empty($data)) {
+            return null;
+        }
         $project = ProjectFactory::create($data);
 
         $skills = SkillRepository::getSkillsFromProject($project);

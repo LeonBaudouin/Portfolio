@@ -12,6 +12,9 @@ class SkillRepository extends AbstractRepository
     public static function getById($id)
     {
         $data = self::Select(['id' => $id]);
+        if (empty($data)) {
+            return null;
+        }
         return SkillFactory::create($data);
     }
 

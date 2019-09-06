@@ -91,4 +91,14 @@ class Project extends \Model\Entity\AbstractEntity implements ProjectInterface
     {
         $this->_set(self::DESCRIPTION, $value);
     }
+
+    public function getIsFeatured()
+    {
+        return $this->_get(self::IS_FEATURED);
+    }
+
+    public function setIsFeatured($value)
+    {
+        $this->_set(self::IS_FEATURED, $value);
+    }
 }

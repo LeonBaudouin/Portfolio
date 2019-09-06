@@ -2,11 +2,10 @@ import { SwipeHandler } from "./SwipeHandler";
 import { AddClassButton } from "../Buttons/ActivationButton";
 import { MathFunc, GetWindowHeight } from "../Utils/UtilsFunctions";
 import { ProjectCarousel } from "../Buttons/ProjectDisplayer";
-import "../Utils/AddWheelListener.js";
+import { addWheelListener } from "../Utils/AddWheelListener.js";
 import { Point } from "../Utils/CustomTypes";
 import { ExitFullScreen } from "../Utils/NonTSFriendlyFuncs";
 
-type WindowWheel = Window & {addWheelListener : (elem: any, callback: any, useCapture?: any) => {}};
 export class OnePageScroll {
 
     bodyClassList: DOMTokenList;
@@ -49,7 +48,7 @@ export class OnePageScroll {
 
 
     InitEvent(): void {
-        (window as WindowWheel).addWheelListener( this.container, (e : WheelEvent) => {
+        addWheelListener( this.container, (e : WheelEvent) => {
             let distance : number;
             e.preventDefault();
 

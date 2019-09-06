@@ -12,6 +12,7 @@ interface ProjectInterface extends \Model\Entity\EntityInterface {
     const LOW_RES_FEATURED_IMAGE = 'low_res_featured_image';
     const URL = 'url';
     const DESCRIPTION = 'description';
+    const IS_FEATURED = 'is_featured';
 
     public function getName();
     public function setName($value);
@@ -37,4 +38,6 @@ interface ProjectInterface extends \Model\Entity\EntityInterface {
     public function getDescription();
     public function setDescription($value);
 
+    public function getIsFeatured();
+    public function setIsFeatured($value);
 }

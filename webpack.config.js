@@ -22,9 +22,7 @@ module.exports =
             loader: "postcss-loader",
             options: {
                 plugins: (loader) => [
-                    require('autoprefixer')({
-                        browsers: ["last 2 versions"]
-                    })
+                    require('autoprefixer')
                     // , cssnano
                 ]
             }
