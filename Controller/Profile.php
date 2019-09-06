@@ -3,11 +3,13 @@
 namespace Controller;
 
 use Model\SkillSet\SkillSetRepository;
+use Model\Course\CourseRepository;
 class Profile extends AbstractController
 {
     public static function execute($params)
     {
         $skillSets = SkillSetRepository::getAll();
-        self::getRenderer()->render('profile.twig', ['skillSets' => $skillSets]);
+        $courses = CourseRepository::getAll();
+        self::getRenderer()->render('profile.twig', ['skillSets' => $skillSets, 'courses' => $courses]);
     }
 }

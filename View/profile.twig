@@ -12,7 +12,7 @@
         {{ title.regular('h1', 'main-title direction-center', 'Mon', 'Profil') }}
     </section>
     {% include "profile/presentation.twig" only %}
-    {% include "profile/parcours.twig" only %}
+    {% include "profile/parcours.twig" with {courses: courses} only %}
     {% include "profile/skills.twig" with {skillSets: skillSets} only %}
     {% include "profile/contact.twig" only %}
 {% endblock %}
