@@ -13,7 +13,7 @@
     </section>
     {% include "profile/presentation.twig" only %}
     {% include "profile/parcours.twig" only %}
-    {% include "profile/skills.twig" only %}
+    {% include "profile/skills.twig" with {skillSets: skillSets} only %}
     {% include "profile/contact.twig" only %}
 {% endblock %}
 

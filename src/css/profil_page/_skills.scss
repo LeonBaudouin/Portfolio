@@ -48,24 +48,14 @@
             align-items: center;
 
             &-element {
-                $min: 2.25rem;
-                $max: 3rem;
-                @include interpolate(width, 25rem, 64rem, $min, $max);
+                $min: 2.75rem;
+                $max: 3.25rem;
+                @include interpolate(height, 25rem, 64rem, $min, $max);
                 margin-right: 10px;
 
                 transform: scale3d(0,0,1);
                 transition: transform 1.5s cubic-bezier(0,.75,.15,1.16);
                 @include delay_by_child(transition, 0ms, 200ms, 6);
-
-                &.s {
-                    $offset: -0.5rem;
-                    @include interpolate(width, 25rem, 64rem, $min + $offset, $max + $offset);
-                }
-
-                &.l {
-                    $offset: 1rem;
-                    @include interpolate(width, 25rem, 64rem, $min + $offset, $max + $offset);
-                }
 
                 &:last-of-type {
                     margin-right: 0;

@@ -35,4 +35,15 @@ class Skill extends \Model\Entity\AbstractEntity implements SkillInterface
     {    
         $this->_set(self::SKILL_SET, $value);
     }
+    
+
+    public function getParentSkill()
+    {
+        return $this->_get(self::PARENT_SKILL);
+    }
+
+    public function setParentSkill($value)
+    {    
+        $this->_set(self::PARENT_SKILL, $value);
+    }
 }

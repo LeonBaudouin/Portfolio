@@ -34,4 +34,11 @@ class SkillRepository extends AbstractRepository
         
         return array_map([SkillFactory::class, 'create'], $dataArray);
     }
+
+    public static function getSkillsFromSkillSet(
+        \Model\SkillSet\SkillSet $skillSet
+    ) {
+        $dataArray = self::Select(['skill_set' => $skillSet->getId()]);
+        return array_map([SkillFactory::class, 'create'], $dataArray);
+    }
 }

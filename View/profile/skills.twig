@@ -1,28 +1,20 @@
 {% import "macro/title.twig" as title %}
-{% set skillsSets = [
-    { name: 'Développement Front-end', skills: [{name: 'HTML', logo: 'HTML.svg', scaling: 's'}, {name: 'Sass', logo: 'Sass.svg'}, {name: 'Typescript', logo: 'Ts.svg', scaling: 's'}, {name: 'Webpack', logo: 'Webpack.svg'}], description: 'En plus de maîtriser les langages standard du développement front-end ( HTML, CSS et Javascript ), j’utilise des outils plus avancés tels que Typescript, SASS et Webpack. Je connais aussi la méthode OOCSS.' },
-    { name: 'Développement Back-end', skills: [{name: 'PHP', logo: 'PHP.svg', scaling: 'l'}, {name: 'Mysql', logo: 'Mysql.svg', scaling: 'l'}, {name: 'NodeJS', logo: 'NodeJS.svg'}], description: 'Bien que le développement back-end ne soit pas ma spécialité, je connais bien PHP natif et MySQL. J\'apprend actuellement Node.js et j’ai l’intention de me former à Laravel et Symphony, deux framework PHP.' },
-    { name: 'Développement Jeu-vidéo', skills: [{name: 'C#', logo: 'Csharp.svg'}, {name: 'Unity', logo: 'Unity.svg'}], description: 'Pour mon projet tutoré de 2ème année MMI, je me suis formé au C# et au moteur de jeu Unity. Je connais donc les principes de développement orienté objet avancés Tels que les principes SOLID.' },
-    { name: 'Motion Design', skills: [{name: 'After effects', logo: 'Ae.svg'}, {name: 'Premiere', logo: 'Pr.svg'}], description: 'J’ai découvert le Motion Design en 2015 avec After Effects, c’est donc un logiciel que je maîtrise. J’utilise aussi Premiere Pro pour mes animations longues. Ces connaissances sont complétées par mon expérience en effets spéciaux.' },
-    { name: 'Web Design', skills: [{name: 'Photoshop', logo: 'Ps.svg'}, {name: 'Illustrator', logo: 'Ai.svg'}], description: 'Pour chacun de mes sites web, je réalise en premier lieux une maquette complète et détaillée afin d’être efficace et rigoureux lors du développement. Je réalise mes maquettes avec Photoshop et Illustrator.' },
-    { name: 'Print Design', skills: [{name: 'Indesign', logo: 'Id.svg'}], description: 'Ma formation m’a amené à me former à Indesign. Par la suite, ces compétences m’ont permis de réaliser des revues et mes rapports.' },
-] %}
 <section class="section skills">
     <div class="wrapper js-activate-on-scroll">
         {{ title.regular('h2', 'section-title', 'Mes', 'Compétences') }}
     </div>
     <div class="null"></div>
-    {% for skillsSet in skillsSets %}
+    {% for skillsSet in skillSets %}
         <article class="skills-set js-activate-on-scroll">
             <div class="skills-set-icons">
-                {% for skill in skillsSet.skills %}
-                    <img src="{{ getImagePath(skill.logo, 'svg') }}" alt="Logo {{ skill.name }}" class="skills-set-icons-element {{ logo.scaling }}">
+                {% for skill in skillsSet.getHigherSkills() %}
+                    <img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="Logo {{ skill.getName() }}" class="skills-set-icons-element {{ logo.scaling }}">
                 {% endfor %}
             </div>
-            {% set titleArray = skillsSet.name | split(' ') %}
+            {% set titleArray = skillsSet.getName() | split(' ') %}
             {{ title.regular('h3', 'skills-set-title direction-center', titleArray[0], titleArray[1]) }}
             <p class="paragraph skills-set-description">
-                {{ skillsSet.description }}
+                {{ skillsSet.getDescription() }}
             </p>
         </article>
     {% endfor %}

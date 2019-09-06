@@ -7,6 +7,7 @@ interface SkillInterface extends \Model\Entity\EntityInterface {
     const NAME = 'name';
     const LOGO = 'logo';
     const SKILL_SET = 'skill_set';
+    const PARENT_SKILL = 'parent_skill';
 
     public function getName();
     public function setName($value);
@@ -16,5 +17,8 @@ interface SkillInterface extends \Model\Entity\EntityInterface {
     
     public function getSkillSet();
     public function setSkillSet($value);
+    
+    public function getParentSkill();
+    public function setParentSkill($value);
 
 }

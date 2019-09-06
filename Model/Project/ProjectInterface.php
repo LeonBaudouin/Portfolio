@@ -13,6 +13,7 @@ interface ProjectInterface extends \Model\Entity\EntityInterface {
     const URL = 'url';
     const DESCRIPTION = 'description';
     const IS_FEATURED = 'is_featured';
+    const IS_LAB = 'is_lab';
 
     public function getName();
     public function setName($value);
@@ -40,4 +41,7 @@ interface ProjectInterface extends \Model\Entity\EntityInterface {
 
     public function getIsFeatured();
     public function setIsFeatured($value);
+
+    public function getIsLab();
+    public function setIsLab($value);
 }

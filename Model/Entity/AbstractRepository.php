@@ -22,8 +22,8 @@ abstract class AbstractRepository
         }
 
         $statement = $pdo->prepare($query);
-        $statement->execute(['id' => '1']);
-        $data = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        $statement->execute($params);
+        return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     private static function getTableName()
