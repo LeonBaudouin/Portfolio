@@ -1,15 +1,10 @@
 {% import "macro/img.twig" as img %}
 {% import "macro/title.twig" as title %}
-{% set projects = [
-    {name: "Glint", skills: [{name: "C#", logo: 'Csharp.svg'}, {name: "Unity", logo: 'Unity.svg'}], type: 'Jeu vidéo' , highResFeaturedImage: "Glint_1920.png", lowResFeaturedImage: "Glint_800.png", url: "https://www.glintgame.fr"},
-    {name: "CV Interactif", skills: [{name: "CSS", logo: 'CSS.svg'}, {name: "Javascript", logo: 'JS.svg'}], type: 'Site web', highResFeaturedImage: "CV_1920.png", lowResFeaturedImage: "CV_800.png", url: "./cv/"},
-    {name: "Call Me", skills: [{name: "After Effects", logo: 'AE.svg'}, {name: "Illustrator", logo: 'AI.svg'}], type: 'Motion design', highResFeaturedImage: "CallMe_1920.png", lowResFeaturedImage: "CallMe_800.png", url: "https://www.youtube.com/watch?v=GK1ZqDCcR6Q"}
-] %}
 <div class="page projets">
     <section class="section">
         <div class="section-background">
             {% for project in projects %}
-                {{ img.pictureTag(project.highResFeaturedImage, project.lowResFeaturedImage, 'Illustration du projet' ~ project.name, "photo-projet") }}
+                {{ img.pictureTag(project.getHighResFeaturedImage(), project.getLowResFeaturedImage(), 'Illustration du projet' ~ project.getName(), "photo-projet") }}
             {% endfor %}
             <div class="background-empty-squares">
                 {{ div.fromClassArray(['', '', '', 'thick'], 'background-empty-squares-element') }}
@@ -19,14 +14,14 @@
             {{ title.link('h2', '', getUrl('project_list'), 'Mes', 'Projets') }}
             {% for project in projects %}
                 <div class="description project fade-from-left">
-                    <h3 class="project-title title">{{ project.name }}</h3>
-                    <h4 class="project-type title">{{ project.type }}</h4>
+                    <h3 class="project-title title">{{ project.getName() }}</h3>
+                    <h4 class="project-type title">{{ project.getType() }}</h4>
                     <div class="project-skills">
-                        {% for skill in project.skills %}
-                            <img src="{{ getImagePath(skill.logo, 'svg') }}" alt="{{ skill.name }}" class="project-skills-icon">
+                        {% for skill in project.getSkills() %}
+                            <img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="{{ skill.getName() }}" class="project-skills-icon">
                         {% endfor %}
                     </div>
-                    <a href="{{ project.url }}" target="_blank" class="project-more see-more">Voir le projet</a>
+                    <a href="{{ project.getUrl() }}" target="_blank" class="project-more see-more">Voir le projet</a>
                 </div>
             {% endfor %}
             <a href="{{ getUrl('project_list') }}" class="button all fade-from-left">

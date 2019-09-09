@@ -1,16 +1,11 @@
 {% import "macro/img.twig" as img %}
 {% import "macro/div.twig" as div %}
 {% import "macro/title.twig" as title %}
-{% set projects = [
-    {name: "Particules", highResFeaturedImage: "Particles_1920.png", lowResFeaturedImage: "Particles_800.png", url: "./particles/", description: "Cette page compile trois expérimentations avec les canvas et les objets Javascript. L’un de ses travaux utilise des fonctions physiques pour reproduire la gravité."},
-    {name: "Mikros Motion", highResFeaturedImage: "Mikros_1920.png", lowResFeaturedImage: "Mikros_800.png", url: "https://www.youtube.com/watch?v=-lfYiAm-qjc", description: "Animation réalisée à l’occasion de mon stage au sein de Mikros Image. Je me suis entraîné à créer des mouvements réalistes."},
-    {name: "Cane Shuga", highResFeaturedImage: "CaneShuga_1920.png", lowResFeaturedImage: "CaneShuga_800.png", url: "https://www.youtube.com/watch?v=1C1Urfbjxo4", description: "Pour cette réalisation, j’ai expérimenté avec le plugin Ae Sound Keys afin de créer une animation entièrement synchronisée avec la musique."}
-] %}
 <div class="page lab">
     <section class="section">
         <div class="section-background">
             {% for project in projects %}
-                {{ img.pictureTag(project.highResFeaturedImage, project.lowResFeaturedImage, 'Illustration du projet' ~ project.name, "photo-lab") }}
+                {{ img.pictureTag(project.getHighResFeaturedImage(), project.getLowResFeaturedImage(), 'Illustration du projet' ~ project.getName(), "photo-lab") }}
             {% endfor %}
             <div class="background-squares v-s-page">
                 <div class="background-squares-group">
@@ -38,9 +33,9 @@
             {{ title.link('h2', '', getUrl('lab_list'), 'Mon', 'Lab') }}
             {% for project in projects %}
                 <div class="description fade-from-left">
-                    <h3 class="lab-title title"><span class="lab-title-content">{{ project.name }}</span></h3>
-                    <p class="paragraph">{{ project.description }}</p>
-                    <a href="{{ project.url }}" target="_blank" class="see-more">Voir le projet</a>
+                    <h3 class="lab-title title"><span class="lab-title-content">{{ project.getName() }}</span></h3>
+                    <p class="paragraph">{{ project.getDescription() | slice(0, 150) ~ '...' }}</p>
+                    <a href="{{ project.getUrl() }}" target="_blank" class="see-more">Voir le projet</a>
                 </div>
             {% endfor %}
             <a href="{{ getUrl('lab_list') }}" class="button all fade-from-left">

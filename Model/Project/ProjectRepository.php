@@ -29,15 +29,17 @@ class ProjectRepository extends AbstractRepository
         return array_map([self::class, 'createAndAddSkills'], $dataArray);
     }
 
-    public static function getProjects()
+    public static function getProjects($onlyFeatured = false)
     {
-        $dataArray = self::Select(['is_lab' => 0]);
+        $params = $onlyFeatured ? ['is_lab' => 0, 'is_featured' => 1] : ['is_lab' => 0];
+        $dataArray = self::Select($params);
         return array_map([self::class, 'createAndAddSkills'], $dataArray);
     }
 
-    public static function getLabs()
+    public static function getLabs($onlyFeatured = false)
     {
-        $dataArray = self::Select(['is_lab' => 1]);
+        $params = $onlyFeatured ? ['is_lab' => 1, 'is_featured' => 1] : ['is_lab' => 1];
+        $dataArray = self::Select($params);
         return array_map([self::class, 'createAndAddSkills'], $dataArray);
     }
 
