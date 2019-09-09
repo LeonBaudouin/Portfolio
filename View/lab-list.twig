@@ -1,0 +1,22 @@
+{% import "macro/title.twig" as title %}
+{% extends "layout.twig" %}
+
+{% block head %}
+    {% include 'layout/head.twig' with {color: '#333131', title: 'Léon Baudouin - Lab'} only %}
+{% endblock %}
+
+{% block pageName %}lab-page{% endblock %}
+{% block bodyClass %}gallery-page{% endblock %}
+
+{% block containerClass %}active{% endblock %}
+{% block content %}
+    <div class="header">
+        {{ title.regular('h1', 'main-title', 'Le', 'Lab') }}
+        <p class="description">
+            Bienvenue dans le Lab ! Ici, vous retrouverez des expérimentations ou des plus petits projets.
+        </p>
+    </div>
+    {% for project in projects %}
+        {% include "gallery/lab.twig" with {project: project} only %}
+    {% endfor %}
+{% endblock %}

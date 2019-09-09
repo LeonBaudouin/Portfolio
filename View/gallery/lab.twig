@@ -1,0 +1,44 @@
+{% import "macro/div.twig" as div %}
+<div class="lab">
+    <div class="lab-short">
+        <a target="_blank" href="{{ project.getUrl() }}" class="lab-img-container js-parallax" data-img=".lab-img">
+            <div class="lab-img-wrapper">
+                <img src="{{ getImagePath(project.getGalleryImage()) }}" alt="Illustration du projet {{ project.getName() }}" class="lab-img">
+            </div>
+        </a>
+        <h2 class="title lab-title js-activate-on-scroll">
+            <div class="first-part">
+                <div class="first-part-content">
+                    {{ project.getName() }}
+                </div>
+                <div class="red-squares">
+                    {{ div.multiples('red-squares-element', 3) }}
+                </div>
+                <div class="red-strokes">
+                    {{ div.multiples('red-strokes-element', 3) }}
+                </div>
+            </div>
+            <div class="second-part">
+                <div class="second-part-content">
+                    {{ project.getType() }}
+                </div>
+            </div>
+        </h2>
+    </div>
+    <div class="lab-description">
+        <div class="lab-description-skills">
+            {% for skill in project.getSkills() %}
+                <img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="{{ skill.getName() }}" class="lab-description-skills-icon">
+            {% endfor %}
+        </div>
+    <div class="lab-description-paragraph paragraph">
+        <p class="paragraph">
+            {{ project.getDescription() | nl2br }}
+        </p>
+    </div>
+    <a target="_blank" href="{{ project.getUrl() }}" class="lab-description-link">
+        Voir le projet
+    </a>
+    <div class="lab-description-background"></div>
+    </div>
+</div>

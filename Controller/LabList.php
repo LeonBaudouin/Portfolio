@@ -6,6 +6,7 @@ class LabList extends AbstractController
 {
     public static function execute($params)
     {
-        require 'lab.html';
+        $projects = \Model\Project\ProjectRepository::getLabs();
+        self::getRenderer()->render('lab-list.twig', ['projects' => $projects]);
     }
 }

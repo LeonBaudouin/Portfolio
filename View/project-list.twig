@@ -17,6 +17,6 @@
         </p>
     </div>
     {% for project in projects %}
-        {% include "project/cell.twig" with {project: project} only %}
+        {% include "gallery/project.twig" with {project: project} only %}
     {% endfor %}
 {% endblock %}

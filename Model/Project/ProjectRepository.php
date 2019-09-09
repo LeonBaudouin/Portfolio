@@ -26,13 +26,25 @@ class ProjectRepository extends AbstractRepository
     public static function getAll()
     {
         $dataArray = self::Select();
+        return array_map([self::class, 'createAndAddSkills'], $dataArray);
+    }
 
-        $createAndAddSkills = function ($data) {
-            $project = ProjectFactory::create($data);
-            $project->setSkills(SkillRepository::getSkillsFromProject($project));
-            return $project;
-        };
+    public static function getProjects()
+    {
+        $dataArray = self::Select(['is_lab' => 0]);
+        return array_map([self::class, 'createAndAddSkills'], $dataArray);
+    }
 
-        return array_map($createAndAddSkills, $dataArray);
+    public static function getLabs()
+    {
+        $dataArray = self::Select(['is_lab' => 1]);
+        return array_map([self::class, 'createAndAddSkills'], $dataArray);
+    }
+
+    private static function createAndAddSkills(array $data)
+    {
+        $project = ProjectFactory::create($data);
+        $project->setSkills(SkillRepository::getSkillsFromProject($project));
+        return $project;
     }
 }
