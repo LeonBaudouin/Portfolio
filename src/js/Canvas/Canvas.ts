@@ -142,6 +142,7 @@ class Canvas {
 
     for (let i = 0; i < 3; i++) {
       settings.size = this.size.height - 300 - 100 * i;
+      settings.speed = 0.05 - 0.005 * i;
 
       let SmallSquare = new TiltedSquare(settings);
 

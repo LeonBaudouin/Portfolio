@@ -11,7 +11,7 @@ abstract class AbstractRepository
     protected static function Select(array $params = [])
     {
         $pdo = \Model\Connection::getConnection();
-        $query = 'SELECT * FROM ' . self::getTableName();
+        $query = 'SELECT * FROM ' . static::TABLE_NAME;
 
         if ($params) {
             $conditions = [];
@@ -25,9 +25,4 @@ abstract class AbstractRepository
         $statement->execute($params);
         return $statement->fetchAll(\PDO::FETCH_ASSOC);
     }
-
-    private static function getTableName()
-    {
-        return (new \ReflectionClass(static::class))->getConstant('TABLE_NAME');
-    } 
 }

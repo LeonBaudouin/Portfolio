@@ -22,6 +22,7 @@
 {% endblock %}
 
 {% block content %}
+    <img id='image' src='/assets/img/profil_1920.png' alt='slt' style='display: none' />
     {% include 'home/greeting.twig' only %}
     {% include 'home/profile.twig' only %}
     {% include 'home/projects.twig' with {projects: projects} only %}
