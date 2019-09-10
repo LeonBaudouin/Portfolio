@@ -1,11 +1,11 @@
 import { Drawable } from "../Drawable";
-import { Point, Style, TiltedSquareSettings, Palette } from "../../../Utils/CustomTypes";
+import { Point, Style, TiltedSquareSettings, Palette, Size } from "../../../Utils/CustomTypes";
 import { TiltedSquareAnimation } from "./TiltedSquareAnimation";
 
 export class TiltedSquare implements Drawable {
   
   style: Style;
-  size: number;
+  size: Size;
   speed: number;
   strokeSize: number;
 
@@ -67,7 +67,7 @@ export class TiltedSquare implements Drawable {
     ctx.strokeStyle = this.style;
     ctx.lineWidth = this.strokeSize;
     
-    ctx.strokeRect(- this.size / 2, - this.size / 2, this.size, this.size);
+    ctx.strokeRect(- this.size.width / 2, - this.size.height / 2, this.size.width, this.size.height);
 
     ctx.restore();
   }

@@ -1,10 +1,10 @@
-import { Style } from "../../Utils/CustomTypes";
+import { Style, Size } from "../../Utils/CustomTypes";
 
   export interface Drawable {
     Draw(ctx: CanvasRenderingContext2D): void;
     Update(): void;
     style: Style;
-    size: number;
+    size: Size;
   }
 
   export interface Interactive {

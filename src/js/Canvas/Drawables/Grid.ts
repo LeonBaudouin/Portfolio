@@ -4,27 +4,27 @@ import { Style, Size } from "../../Utils/CustomTypes";
 export class Grid implements Drawable {
 
     style: Style;
-    size: number;
+    size: Size;
 
     mouseSensible: boolean = false;
 
     remainingSpace: number;
     canvasSize: Size;
 
-    constructor(size: number, canvasSize: Size, style: Style) {
+    constructor(size: Size, canvasSize: Size, style: Style) {
       this.style = style;
       this.canvasSize = canvasSize;
       this.size = size;
-      this.remainingSpace = this.canvasSize.width % this.size;
+      this.remainingSpace = this.canvasSize.width % this.size.width;
     }
 
     public Update() {};
 
     public Draw(ctx: CanvasRenderingContext2D) {
-      for (let i = 0; i <= this.canvasSize.width; i += this.size) {
+      for (let i = 0; i <= this.canvasSize.width; i += this.size.width) {
         this.DrawVerticalLine(i + this.remainingSpace / 2, ctx);
       }
-      for (let j = 0; j < this.canvasSize.height; j += this.size) {
+      for (let j = 0; j < this.canvasSize.height; j += this.size.height) {
         this.DrawHorizontalLine(j, ctx);
       }
     }

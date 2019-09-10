@@ -29,7 +29,7 @@ export type TiltedSquareSettings = {
     defaultPosition: Point;
     defaultAngle: number;
     speed: number;
-    size: number;
+    size: Size;
     strokeSize: number;
 }
 
