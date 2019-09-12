@@ -1,7 +1,6 @@
-import { CustomEventListener, ListenEvent } from "./CustomEventListener";
+import { SimpleEventListener, ListenEvent, NativeEventListener } from "./SimpleEventListener";
 
-
-export class DeviceOrientationListener extends CustomEventListener {
+export class DeviceOrientationListener extends NativeEventListener {
 
     protected static instance: DeviceOrientationListener;
     protected static value: number = 0;

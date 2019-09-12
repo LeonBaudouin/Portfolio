@@ -3,13 +3,13 @@ import { OnePageScroll } from "./Scroll/OnePageScroll";
 import { ProjectCarousel } from "./Buttons/ProjectDisplayer";
 import { CopyToClipBoard } from "./Buttons/CopyToClipBoard";
 import { OnScrollActivator } from "./Scroll/OnScrollActivator";
-import Canvas from "./Canvas/Canvas";
 import { Parallax } from "./Scroll/Parallax";
 import { ProjectDetails } from "./Buttons/ProjectDetails";
 import { SwipeLink } from "./Scroll/SwipeLink";
 import { RemovePreload } from "./Miscellaneous/PreloadScript";
 import { LoadingScreen } from "./Miscellaneous/LoadingScreen";
 import { ExecuteFunctionByName } from "./Utils/NonTSFriendlyFuncs";
+import { CanvasSetup } from "./Canvas/CanvasSetup";
 
 class ScriptLoader {
 
@@ -67,8 +67,7 @@ class ScriptLoader {
         //  Bind a one page scroll to the scroll icon and every sections of the scroll bar
         this.BindScrollButons();
         
-        let canvas = new Canvas("canvas");
-        canvas.Update();
+        const canvas = CanvasSetup();
     }
 
     private ProfilePageScripts() {
@@ -76,8 +75,7 @@ class ScriptLoader {
         // Object that add the "active" class when the user scroll the element
         this.onScrollActivator = new OnScrollActivator(".js-activate-on-scroll", window.innerHeight/4);
 
-        let canvas = new Canvas("canvas");
-        canvas.Update();
+        const canvas = CanvasSetup();
     }
     
     private ProjectsPageScripts() {
@@ -94,8 +92,7 @@ class ScriptLoader {
             }
         )
 
-        let canvas = new Canvas("canvas");
-        canvas.Update();
+        const canvas = CanvasSetup();
     }
     
     private LabPageScripts() {
@@ -111,16 +108,12 @@ class ScriptLoader {
                 new Parallax(parallaxElem);
             }
         )
-
-        let canvas = new Canvas("canvas", true);
-        canvas.Update();
         
+        const canvas = CanvasSetup();
     }
 
     private DescriptionPageScripts() {
-        
-        let canvas = new Canvas("canvas");
-        canvas.Update();
+        const canvas = CanvasSetup();
     }
 
 

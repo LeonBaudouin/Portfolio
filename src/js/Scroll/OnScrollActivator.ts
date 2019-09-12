@@ -1,4 +1,4 @@
-import { ScrollSensitiveElement } from "../Utils/CustomTypes";
+import { ScrollSensitiveElement } from "../CustomTypes/ScrollSensitiveElement";
 
 export class OnScrollActivator {
 

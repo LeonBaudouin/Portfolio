@@ -1,8 +1,8 @@
 import { OnePageScroll } from "./OnePageScroll";
 import { SwipeHandler } from "./SwipeHandler";
-import { Point } from "../Utils/CustomTypes";
 import { GetWindowHeight } from "../Utils/UtilsFunctions";
 import { DesactivateAll } from "../Miscellaneous/DesactivateAll";
+import { Point } from "../CustomTypes/Point";
 
 export class SwipeLink {
 

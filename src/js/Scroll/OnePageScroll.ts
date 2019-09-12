@@ -3,8 +3,8 @@ import { AddClassButton } from "../Buttons/ActivationButton";
 import { MathFunc, GetWindowHeight } from "../Utils/UtilsFunctions";
 import { ProjectCarousel } from "../Buttons/ProjectDisplayer";
 import { addWheelListener } from "../Utils/AddWheelListener.js";
-import { Point } from "../Utils/CustomTypes";
 import { ExitFullScreen } from "../Utils/NonTSFriendlyFuncs";
+import { Point } from "../CustomTypes/Point";
 
 export class OnePageScroll {
 

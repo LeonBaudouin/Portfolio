@@ -1,5 +1,4 @@
-import { Point } from "../Utils/CustomTypes";
-import { GetWindowHeight } from "../Utils/UtilsFunctions";
+import { Point } from "../CustomTypes/Point";
 
 export class SwipeHandler {
 
