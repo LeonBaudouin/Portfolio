@@ -27,8 +27,9 @@ export class FollowAngle implements ControllerInterface {
     
     public Update(currentState: SquareState, defaultState: SquareState): SquareState {
         this.ChangeFocusAngle(defaultState);
-        currentState.angle = this.GetNewSquareAngleFromState(currentState);
-        return currentState;
+        const newState = currentState.Clone();
+        newState.angle = this.GetNewSquareAngleFromState(currentState);
+        return newState;
     }
 
     private ChangeFocusAngle(defaultState: SquareState) {

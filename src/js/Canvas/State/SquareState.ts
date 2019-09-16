@@ -9,6 +9,8 @@ export class SquareState implements SquareStateInterface, StateObjectInterface {
     angle: number;
     strokeSize: number;
     style: Style;
+    image: HTMLImageElement;
+    imageOpacity: number;
 
     constructor(data: SquareStateInterface) {
         this.size = data.size;
@@ -16,6 +18,8 @@ export class SquareState implements SquareStateInterface, StateObjectInterface {
         this.strokeSize = data.strokeSize;
         this.position = {...data.position};
         this.style = data.style;
+        this.image = data.image;
+        this.imageOpacity = data.imageOpacity
     }
 
     public Clone() {
@@ -29,5 +33,7 @@ interface SquareStateInterface {
     position: Point,
     angle: number,
     strokeSize: number,
-    style: Style
+    style: Style,
+    image: HTMLImageElement,
+    imageOpacity: number
 }

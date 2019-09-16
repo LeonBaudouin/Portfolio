@@ -11,6 +11,7 @@ import { FillRectRenderer } from "./Renderer/FillRectRenderer";
 import { GridState } from "./State/GridState";
 import { GridRenderer } from "./Renderer/GridRenderer";
 import { Canvas } from "./Canvas";
+import { HoverImage } from "./Controller/Square/HoverImage";
 
 
 export function CanvasSetup() {
@@ -19,81 +20,14 @@ export function CanvasSetup() {
     const context = htmlCanvas.getContext('2d');
 
     const drawnObject = [
+        // Background
         new BaseDrawable(
             new FillRectState({
                 style: Palette.BackgroundDark
             }),
             new FillRectRenderer()
         ),
-        new BaseDrawable(
-            new SquareState({
-                size: window.innerHeight - 200,
-                position: {
-                    x: window.innerWidth / 2,
-                    y: window.innerHeight / 2
-                },
-                angle: Math.PI/4,
-                strokeSize: 25,
-                style: Palette.SquareDark
-            }),
-            new SquareRenderer(),
-            [
-                new FollowAngle({
-                    speed: 0.05
-                }),
-                new HoverMove({
-                    amount: 0.08,
-                    speed: 0.05,
-                    selector: '.js-hovered-element'
-                })
-            ]
-        ),
-        new BaseDrawable(
-            new SquareState({
-                size: window.innerHeight - 300,
-                position: {
-                    x: window.innerWidth / 2,
-                    y: window.innerHeight / 2
-                },
-                angle: Math.PI/4,
-                strokeSize: 3,
-                style: Palette.SquareDark
-            }),
-            new SquareRenderer(),
-            [
-                new FollowAngle({
-                    speed: 0.045
-                }),
-                new HoverMove({
-                    amount: 0.12,
-                    speed: 0.05,
-                    selector: '.js-hovered-element'
-                })
-            ]
-        ),
-        new BaseDrawable(
-            new SquareState({
-                size: window.innerHeight - 400,
-                position: {
-                    x: window.innerWidth / 2,
-                    y: window.innerHeight / 2
-                },
-                angle: Math.PI/4,
-                strokeSize: 3,
-                style: Palette.SquareDark
-            }),
-            new SquareRenderer(),
-            [
-                new FollowAngle({
-                    speed: 0.04
-                }),
-                new HoverMove({
-                    amount: 0.16,
-                    speed: 0.05,
-                    selector: '.js-hovered-element'
-                })
-            ]
-        ),
+        // Rect 4
         new BaseDrawable(
             new SquareState({
                 size: window.innerHeight - 500,
@@ -103,7 +37,9 @@ export function CanvasSetup() {
                 },
                 angle: Math.PI/4,
                 strokeSize: 3,
-                style: Palette.SquareDark
+                style: Palette.SquareDark,
+                image: null,
+                imageOpacity: 0
             }),
             new SquareRenderer(),
             [
@@ -117,6 +53,91 @@ export function CanvasSetup() {
                 })
             ]
         ),
+        // Rect 3
+        new BaseDrawable(
+            new SquareState({
+                size: window.innerHeight - 400,
+                position: {
+                    x: window.innerWidth / 2,
+                    y: window.innerHeight / 2
+                },
+                angle: Math.PI/4,
+                strokeSize: 3,
+                style: Palette.SquareDark,
+                image: null,
+                imageOpacity: 0
+            }),
+            new SquareRenderer(),
+            [
+                new FollowAngle({
+                    speed: 0.04
+                }),
+                new HoverMove({
+                    amount: 0.16,
+                    speed: 0.05,
+                    selector: '.js-hovered-element'
+                })
+            ]
+        ),
+        // Rect 2
+        new BaseDrawable(
+            new SquareState({
+                size: window.innerHeight - 300,
+                position: {
+                    x: window.innerWidth / 2,
+                    y: window.innerHeight / 2
+                },
+                angle: Math.PI/4,
+                strokeSize: 3,
+                style: Palette.SquareDark,
+                image: null,
+                imageOpacity: 0
+            }),
+            new SquareRenderer(),
+            [
+                new FollowAngle({
+                    speed: 0.045
+                }),
+                new HoverMove({
+                    amount: 0.12,
+                    speed: 0.05,
+                    selector: '.js-hovered-element'
+                })
+            ]
+        ),
+        // Rect 1
+        new BaseDrawable(
+            new SquareState({
+                size: window.innerHeight - 200,
+                position: {
+                    x: window.innerWidth / 2,
+                    y: window.innerHeight / 2
+                },
+                angle: Math.PI/4,
+                strokeSize: 25,
+                style: Palette.SquareDark,
+                image: null,
+                imageOpacity: 0
+            }),
+            new SquareRenderer(),
+            [
+                new FollowAngle({
+                    speed: 0.05
+                }),
+                new HoverMove({
+                    amount: 0.08,
+                    speed: 0.05,
+                    selector: '.js-hovered-element'
+                }),
+                new HoverImage({
+                    selector: '.js-project-element',
+                    imageSelector: '.js-project-image',
+                    duration: 20,
+                    maxOpacity: 0.5
+                })
+            ]
+        ),
+        // Grid
         new BaseDrawable(
             new GridState({
                 style: Palette.GridDark,
@@ -124,6 +145,7 @@ export function CanvasSetup() {
             }),
             new GridRenderer()
         ),
+        // Gradient
         new BaseDrawable(
             new FillRectState({
                 style: generateGradient({

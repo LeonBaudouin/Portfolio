@@ -28,10 +28,13 @@ export class HoverMove implements ControllerInterface {
                 y: defaultState.position.y * (1 - this.amount) + elementCenter.y * this.amount
             }
         }
+        
         const x = currentState.position.x + (focusPoint.x - currentState.position.x) * this.speed;
         const y = currentState.position.y + (focusPoint.y - currentState.position.y) * this.speed;
-        currentState.position = {x: x, y: y};
-        return currentState;
+
+        const newState = currentState.Clone();
+        newState.position = {x: x, y: y};
+        return newState;
     }
 
     private GetCenterOfElement(element: Element): Point {

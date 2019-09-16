@@ -27,7 +27,6 @@ export class HoverElementListener implements ListenEvent {
     }
     
     private addToHovered(element: Element) {
-        console.log(element);
         this.hoveredElement.push(element);
     }
     

@@ -1,9 +1,9 @@
 {% import "macro/div.twig" as div %}
-<div class="project">
+<div class="project js-project-element">
     <div class="project-short">
         <a target="_blank" href="{{ project.getUrl() }}" class="project-img-container js-parallax" data-img=".project-img">
             <div class="project-img-wrapper">
-                <img src="{{ getImagePath(project.getGalleryImage()) }}" alt="Illustration du projet {{ project.getName() }}" class="project-img">
+                <img src="{{ getImagePath(project.getGalleryImage()) }}" alt="Illustration du projet {{ project.getName() }}" class="project-img js-project-image">
             </div>
         </a>
         <h2 class="title project-title js-activate-on-scroll">
