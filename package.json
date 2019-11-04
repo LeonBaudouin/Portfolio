@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^12.12.5",
     "autoprefixer": "^9.6.1",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^5.0.4",
@@ -34,5 +35,7 @@
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7"
   },
-  "dependencies": {}
+  "dependencies": {
+    "simplex-noise": "^2.4.0"
+  }
 }

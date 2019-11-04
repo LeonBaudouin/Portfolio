@@ -7,7 +7,7 @@ import { SwipeLink } from "./Scroll/SwipeLink";
 import { RemovePreload } from "./Miscellaneous/PreloadScript";
 import { LoadingScreen } from "./Miscellaneous/LoadingScreen";
 import { ExecuteFunctionByName } from "./Utils/NonTSFriendlyFuncs";
-import { CanvasSetup } from "./Canvas/CanvasSetup";
+import { CanvasSetup, LightCanvasSetup } from "./Canvas/CanvasSetup";
 import { GetWindowHeight } from "./Utils/UtilsFunctions";
 import { EventProvider } from "./Canvas/Core/Events/EventProvider";
 
@@ -152,7 +152,7 @@ class ScriptLoader {
 
         //  One Page scroll
         this.onePageScroll = new OnePageScroll(6, 500, GetWindowHeight() * 0.5, [activateLabs, changeBackgroundImage]);
-        const canvas = CanvasSetup();
+        const canvas = LightCanvasSetup();
     }
 
     private ProjectShowPageScripts() {
@@ -160,7 +160,7 @@ class ScriptLoader {
     }
 
     private LabShowPageScripts() {
-        const canvas = CanvasSetup();
+        const canvas = LightCanvasSetup();
     }
 
     private BindScrollButons() {

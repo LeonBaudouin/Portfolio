@@ -1,5 +1,5 @@
 import { Size } from "../CustomTypes/Size";
-import { DrawableInterface } from "./DrawnObject/DrawableInterface";
+import { DrawableInterface } from "./Core/Abstract/DrawableInterface";
 
 export class Canvas {
 
