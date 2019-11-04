@@ -72,6 +72,17 @@ module.exports =
                             publicPath: "./fonts/"
                         }
                     }]
+                },
+                {
+                    test: /\.(png|jpg)$/,
+                    use: [{
+                        loader: 'file-loader',
+                        options: {
+                            name: "[name].[ext]",
+                            useRelativePath: true,
+                            publicPath: "./img/"
+                        }
+                    }]
                 }
                 ]
             },

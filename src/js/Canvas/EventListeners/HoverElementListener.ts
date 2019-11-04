@@ -1,4 +1,4 @@
-import { ListenEvent } from "./SimpleEventListener";
+import { ListenEvent } from "../Core/Events/EventListeners/SimpleEventListener";
 
 export class HoverElementListener implements ListenEvent {
 

@@ -4,8 +4,8 @@
         {% include 'layout/head.twig' with {color: '#333131', title: 'Léon Baudouin'} only %}
     {% endblock %}
 
-    <body class="preload loading {% block pageName %}{% endblock %} {% block bodyClass %}{% endblock %}" data-page="{{ block('pageName') }}">
-        {% include 'layout/loading-screen.twig' only %}
+    <body class="preload loaded {% block pageName %}{% endblock %} {% block bodyClass %}{% endblock %}" data-page="{{ block('pageName') }}">
+        {# {% include 'layout/loading-screen.twig' only %} #}
         
         <canvas></canvas>
         
@@ -26,7 +26,7 @@
 
         {% block footer %}
         {% endblock %}
-        <script type="text/javascript" src="./assets/main.js"></script>
+        <script type="text/javascript" src="/assets/main.js"></script>
     </body>
 
 </html>

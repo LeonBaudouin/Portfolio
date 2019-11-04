@@ -1,4 +1,5 @@
 {% import "macro/title.twig" as title %}
+{% import "macro/div.twig" as div %}
 {% extends "layout.twig" %}
 
 {% block head %}
@@ -8,12 +9,25 @@
 {% block pageName %}projects-page{% endblock %}
 {% block bodyClass %}gallery-page{% endblock %}
 
-{% block containerClass %}active{% endblock %}
+{% set scrollBar = ['Title'] | merge(projectsName) %}
+
+{% block sideButton %}
+    <div class="scroll-bar sideButton">
+        <div class="scroll-bar-container">
+            {{ div.fromClassArray(scrollBar, 'scroll-bar-section js-hovered-element') }}
+        </div>
+        <div class="scroll-bar-current-container">
+            <div class="scroll-bar-current"></div>
+            {{ div.fromClassArray(scrollBar | slice(1), 'scroll-bar-current-hidden') }}
+        </div>
+    </div>
+{% endblock %}
+
 {% block content %}
-    <div class="header">
-        {{ title.regular('h1', 'main-title', 'Mes', 'Projets') }}
+    <div class="header active">
+        {{ title.regular('h1', 'main-title direction-center', 'Mes', 'Projets') }}
         <p class="description">
-            Bienvenue dans ma gallerie de projet, vous pouvez cliquer sur n'importe quel projet pour en voir les détails !
+            Bienvenue dans ma galerie de projet, vous pouvez cliquer sur n'importe quel projet pour en voir les détails !
         </p>
     </div>
     {% for project in projects %}

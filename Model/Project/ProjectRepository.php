@@ -15,10 +15,11 @@ class ProjectRepository extends AbstractRepository
         if (empty($data)) {
             return null;
         }
-        $project = ProjectFactory::create($data);
+        $project = ProjectFactory::create($data[0]);
 
         $skills = SkillRepository::getSkillsFromProject($project);
         $project->setSkills($skills);
+
 
         return $project;
     }

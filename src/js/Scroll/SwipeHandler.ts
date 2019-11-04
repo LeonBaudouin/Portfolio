@@ -9,12 +9,12 @@ export class SwipeHandler {
     xTreshold: number;
     yTreshold: number;
 
-    constructor(swipeCallback: (p: Point) => void = () => {},
-                conditionFunction: (p: Point) => boolean = () => true) {
-
+    constructor(
+        swipeCallback: (p: Point) => void,
+        conditionFunction: (p: Point) => boolean = () => true
+    ) {
         this.swipeCallback = swipeCallback;
         this.conditionFunction = conditionFunction;
-
         this.InitEvents();
     }
 

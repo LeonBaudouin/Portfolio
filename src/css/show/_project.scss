@@ -1,0 +1,18 @@
+
+.project-show-page {
+    .header {
+        .main-title {
+            .first-part, .second-part {
+                color: $color-lightest-grey;
+            }
+        }
+
+        a.back-to-project {
+            color: $color-lightest-grey;
+
+            &::before {
+                background-color: $color-lightest-grey;
+            }
+        }
+    }
+}

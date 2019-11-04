@@ -1,4 +1,4 @@
-import { SimpleEventListener, ListenEvent, NativeEventListener } from "./SimpleEventListener";
+import { NativeEventListener, ListenEvent } from "../Core/Events/EventListeners/SimpleEventListener";
 
 export class DeviceOrientationListener extends NativeEventListener {
 

@@ -1,44 +1,4 @@
-{% import "macro/div.twig" as div %}
-<div class="project js-project-element">
-    <div class="project-short">
-        <a target="_blank" href="{{ project.getUrl() }}" class="project-img-container js-parallax" data-img=".project-img">
-            <div class="project-img-wrapper">
-                <img src="{{ getImagePath(project.getGalleryImage()) }}" alt="Illustration du projet {{ project.getName() }}" class="project-img js-project-image">
-            </div>
-        </a>
-        <h2 class="title project-title js-activate-on-scroll">
-            <div class="first-part">
-                <div class="first-part-content">
-                    {{ project.getName() }}
-                </div>
-                <div class="red-squares">
-                    {{ div.multiples('red-squares-element', 3) }}
-                </div>
-                <div class="red-strokes">
-                    {{ div.multiples('red-strokes-element', 3) }}
-                </div>
-            </div>
-            <div class="second-part">
-                <div class="second-part-content">
-                    {{ project.getType() }}
-                </div>
-            </div>
-        </h2>
-    </div>
-    <div class="project-description">
-        <div class="project-description-skills">
-            {% for skill in project.getSkills() %}
-                <img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="{{ skill.getName() }}" class="project-description-skills-icon">
-            {% endfor %}
-        </div>
-    <div class="project-description-paragraph paragraph">
-        <p class="paragraph">
-            {{ project.getDescription() | nl2br }}
-        </p>
-    </div>
-    <a target="_blank" href="{{ project.getUrl() }}" class="project-description-link">
-        Voir le projet
-    </a>
-    <div class="project-description-background"></div>
-    </div>
-</div>
+{% import "macro/title.twig" as title %}
+<a href='{{ getUrl('project_show', {id: project.getId()}) }}' class="project" data-section-image='{{ getImagePath(project.getGalleryImage()) }}'>
+    {{ title.regular('h2', 'direction-center project-title', project.getName(), project.getType()) }}
+</a>

@@ -1,7 +1,7 @@
 import { DrawableInterface } from "./DrawableInterface";
 import { RendererInterface } from "../Renderer/RendererInterface";
-import { ControllerInterface } from "../Controller/ControllerInterface";
-import { StateObjectInterface } from "../State/StateObjectInterface";
+import { StateObjectInterface } from "../Core/Abstract/StateObjectInterface";
+import { ControllerInterface } from "../Core/Abstract/ControllerInterface";
 
 export class BaseDrawable implements DrawableInterface {
     

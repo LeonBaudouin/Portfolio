@@ -18,6 +18,14 @@ class Router
         'lab_list' => [
             'path'=> '/lab',
             'controller' => \Controller\LabList::class
+        ],
+        'project_show' => [
+            'path'=> '/project/[i:id]/show/',
+            'controller' => \Controller\ProjectShow::class
+        ],
+        'lab_show' => [
+            'path'=> '/lab/[i:id]/show/',
+            'controller' => \Controller\LabShow::class
         ]
     ];
 

@@ -1,0 +1,17 @@
+.projects-page {
+    .header {
+        .description {
+            color: $color-light-grey
+        }
+
+        .first-part, .second-part {
+            color: $color-light-grey;
+        }
+    }
+
+    .project {
+        .first-part {
+            color: $color-light-grey;
+        }
+    }
+}

@@ -8,8 +8,11 @@ abstract class AbstractRepository
 
     public abstract static function getAll();
 
-    protected static function Select(array $params = [])
-    {
+    protected static function Select(
+        array $params = [],
+        string $order_attr = null,
+        bool $asc = true
+    ) {
         $pdo = \Model\Connection::getConnection();
         $query = 'SELECT * FROM ' . static::TABLE_NAME;
 

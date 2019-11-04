@@ -1,53 +1,46 @@
 import { SwipeHandler } from "./SwipeHandler";
-import { AddClassButton } from "../Buttons/ActivationButton";
 import { MathFunc, GetWindowHeight } from "../Utils/UtilsFunctions";
-import { ProjectCarousel } from "../Buttons/ProjectDisplayer";
 import { addWheelListener } from "../Utils/AddWheelListener.js";
 import { ExitFullScreen } from "../Utils/NonTSFriendlyFuncs";
 import { Point } from "../CustomTypes/Point";
 
+type ScrollCallback = (i: number) => void; 
+
 export class OnePageScroll {
 
-    bodyClassList: DOMTokenList;
-    container: HTMLElement;
-    pages: NodeListOf<Element>;
+    bodyClassList: DOMTokenList = document.querySelector("body").classList;
+    container: HTMLElement = document.querySelector(".container");
+    currentSlideIndex : number = 0;
+    isScrolling: boolean = false;
     
-    currentSlideIndex : number;
     slideNumber: number;
-
     swipeHandler: SwipeHandler;
-
+    scrollAmount: number
     cooldown: number;
+    scrollCallbacks: ScrollCallback[]
 
-    isScrolling: boolean;
-
-    menu: AddClassButton;
-    displayers: ProjectCarousel[];
-
-    constructor(slideNumber: number, coolDown: number, burgerMenu: AddClassButton, projDisp: ProjectCarousel[]) {
-        
+    constructor(slideNumber: number, coolDown: number, scrollAmount: number, scrollCallbacks: ScrollCallback[] = []) {
         this.cooldown = coolDown;
-        this.isScrolling = false;
-
-        this.menu = burgerMenu;
-        this.displayers = projDisp;
-        
-        this.currentSlideIndex = 0;
+        this.scrollAmount = scrollAmount;
         this.slideNumber = slideNumber;
-        
-        this.pages = document.querySelectorAll(".page");
-        this.bodyClassList = document.querySelector("body").classList;
-        this.container = document.querySelector(".container");
-        
-        this.swipeHandler =
-            new SwipeHandler((p) => {this.onVerticalSwipe(p)},
-                            (p) => this.swipeCondition(p));
+        this.scrollCallbacks = scrollCallbacks;
+        this.bodyClassList.add("scroll-index-0");
 
         this.InitEvent()
     }
 
+    private swipeCondition({x, y}: Point): boolean {
+        let yFraction = Math.abs(y / GetWindowHeight());
+        let xFraction = Math.abs(x / window.innerWidth);
+        return yFraction > 0.05 && xFraction < 0.35;
+    }
 
-    InitEvent(): void {
+    private InitEvent(): void {
+        this.swipeHandler = new SwipeHandler(
+            (p) => {this.DirectionScroll(p.y);},
+            (p) => this.swipeCondition(p)
+        );
+
         addWheelListener( this.container, (e : WheelEvent) => {
             let distance : number;
             e.preventDefault();
@@ -63,98 +56,59 @@ export class OnePageScroll {
             }
         })
 
-        document.addEventListener("scroll", (e) => {
-            ExitFullScreen();
-        })
+        // document.addEventListener("scroll", (e) => {
+        //     ExitFullScreen();
+        // })
 
         this.container.addEventListener("touchmove", (e) => {
             e.preventDefault();
         })
     }
 
-    swipeCondition({x, y}: Point): boolean {
-        let yFraction = Math.abs(y / GetWindowHeight());
-        let xFraction = Math.abs(x / window.innerWidth);
-        return yFraction > 0.05 && xFraction < 0.35;
-    }
-
-    onVerticalSwipe({x, y}: Point) {
-        this.DirectionScroll(y);
-    }
-
-    DirectionScroll(direction: number) {
-
+    private DirectionScroll(direction: number) {
         if(direction > 0 && this.currentSlideIndex < this.slideNumber - 1) {
-            
             this.Next();
-            
         } else if(direction < 0 && this.currentSlideIndex > 0) {
-            
             this.Previous();
-            
         }
     }
         
-
     public Next(): void {
-
-        if(this.CanScroll) {
-            
+        if(this.CanScroll) {   
             this.Timeout();
             this.MoveTo(this.currentSlideIndex + 1);
         }
-
     }
 
-
-    Previous(): void {
-
+    public Previous(): void {
         if(this.CanScroll) {
-            
             this.Timeout();
             this.MoveTo(this.currentSlideIndex - 1);
         }
-
     }
 
     public MoveTo(destination: number) {
+        let currentScroll = this.scrollAmount * this.currentSlideIndex;
+        let animationDistance = this.scrollAmount * destination - currentScroll;
 
-        let currentScroll = GetWindowHeight() * this.currentSlideIndex;
-        let animationDistance = GetWindowHeight() * destination - currentScroll;
-
+        this.scrollCallbacks.forEach(func => func(destination))
         this.AnimationScroll(currentScroll, 0, animationDistance, 24);
 
         this.bodyClassList.remove("scroll-index-" + this.currentSlideIndex);
         this.currentSlideIndex = destination;
         this.bodyClassList.add("scroll-index-" + this.currentSlideIndex);
-        this.ActivatePage();
     }
 
-
-
-    ActivatePage(): void {
-
-        let classList: DOMTokenList = this.pages[this.currentSlideIndex].classList;
-
-        if(!classList.contains("active")) {
-            classList.add("active");
-            if(this.displayers[this.currentSlideIndex]) {
-                this.displayers[this.currentSlideIndex].Activate();
-            }
-        }
-
-    }
-
-
-    Timeout(): void {
+    private Timeout(): void {
         this.isScrolling = true;
         setTimeout(
             (() => this.isScrolling = false),
-            this.cooldown);
+            this.cooldown
+        );
     }
 
 
-    AnimationScroll(currentScroll: number, currentTime: number, scrollDistance: number, animationDuration: number) {
+    private AnimationScroll(currentScroll: number, currentTime: number, scrollDistance: number, animationDuration: number) {
 
         if(animationDuration > currentTime) {
 
@@ -168,6 +122,6 @@ export class OnePageScroll {
 
 
     get CanScroll(): boolean {
-        return !this.isScrolling && this.menu.hasClass;
+        return !this.isScrolling;
     }
 }

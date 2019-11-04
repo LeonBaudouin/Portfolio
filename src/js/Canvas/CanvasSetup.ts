@@ -1,17 +1,18 @@
 import { MathFunc } from "../Utils/UtilsFunctions";
-import { GradientData } from "./StyleData";
 import { Palette } from "./Palette";
 import { BaseDrawable } from "./DrawnObject/BaseDrawable";
-import { SquareState } from "./State/SquareState";
-import { SquareRenderer } from "./Renderer/SquareRenderer";
-import { FollowAngle } from "./Controller/Square/FollowAngle";
-import { HoverMove } from "./Controller/Square/HoverMove";
-import { FillRectState } from "./State/FIllRectState";
-import { FillRectRenderer } from "./Renderer/FillRectRenderer";
-import { GridState } from "./State/GridState";
-import { GridRenderer } from "./Renderer/GridRenderer";
+import { FollowAngle } from "./Controllers/FollowAngle";
+import { HoverMove } from "./Controllers/HoverMove";
+import { FillRectState } from "./Shapes/Rectangle/FIllRectState";
+import { FillRectRenderer } from "./Shapes/Rectangle/FillRectRenderer";
+import { GridState } from "./Shapes/Grid/GridState";
+import { GridRenderer } from "./Shapes/Grid/GridRenderer";
 import { Canvas } from "./Canvas";
-import { HoverImage } from "./Controller/Square/HoverImage";
+import { SectionImage } from "./Controllers/SectionImage";
+import { DarkThemeSquareState } from "./Shapes/Square/DarkThemeSquareState";
+import Color from "./Core/CustomTypes/Color";
+import { GradientData } from "./StyleData";
+import { DarkThemeSquareRenderer } from "./Shapes/Square/DarkThemeSquareRenderer";
 
 
 export function CanvasSetup() {
@@ -29,7 +30,7 @@ export function CanvasSetup() {
         ),
         // Rect 4
         new BaseDrawable(
-            new SquareState({
+            new DarkThemeSquareState({
                 size: window.innerHeight - 500,
                 position: {
                     x: window.innerWidth / 2,
@@ -37,11 +38,11 @@ export function CanvasSetup() {
                 },
                 angle: Math.PI/4,
                 strokeSize: 3,
-                style: Palette.SquareDark,
+                strokeColor: Color.fromHex(Palette.SquareDark),
                 image: null,
                 imageOpacity: 0
             }),
-            new SquareRenderer(),
+            new DarkThemeSquareRenderer(),
             [
                 new FollowAngle({
                     speed: 0.035
@@ -55,7 +56,7 @@ export function CanvasSetup() {
         ),
         // Rect 3
         new BaseDrawable(
-            new SquareState({
+            new DarkThemeSquareState({
                 size: window.innerHeight - 400,
                 position: {
                     x: window.innerWidth / 2,
@@ -63,11 +64,11 @@ export function CanvasSetup() {
                 },
                 angle: Math.PI/4,
                 strokeSize: 3,
-                style: Palette.SquareDark,
+                strokeColor: Color.fromHex(Palette.SquareDark),
                 image: null,
                 imageOpacity: 0
             }),
-            new SquareRenderer(),
+            new DarkThemeSquareRenderer(),
             [
                 new FollowAngle({
                     speed: 0.04
@@ -81,7 +82,7 @@ export function CanvasSetup() {
         ),
         // Rect 2
         new BaseDrawable(
-            new SquareState({
+            new DarkThemeSquareState({
                 size: window.innerHeight - 300,
                 position: {
                     x: window.innerWidth / 2,
@@ -89,11 +90,11 @@ export function CanvasSetup() {
                 },
                 angle: Math.PI/4,
                 strokeSize: 3,
-                style: Palette.SquareDark,
+                strokeColor: Color.fromHex(Palette.SquareDark),
                 image: null,
                 imageOpacity: 0
             }),
-            new SquareRenderer(),
+            new DarkThemeSquareRenderer(),
             [
                 new FollowAngle({
                     speed: 0.045
@@ -107,7 +108,7 @@ export function CanvasSetup() {
         ),
         // Rect 1
         new BaseDrawable(
-            new SquareState({
+            new DarkThemeSquareState({
                 size: window.innerHeight - 200,
                 position: {
                     x: window.innerWidth / 2,
@@ -115,11 +116,11 @@ export function CanvasSetup() {
                 },
                 angle: Math.PI/4,
                 strokeSize: 25,
-                style: Palette.SquareDark,
+                strokeColor: Color.fromHex(Palette.SquareDark),
                 image: null,
                 imageOpacity: 0
             }),
-            new SquareRenderer(),
+            new DarkThemeSquareRenderer(),
             [
                 new FollowAngle({
                     speed: 0.05
@@ -129,10 +130,8 @@ export function CanvasSetup() {
                     speed: 0.05,
                     selector: '.js-hovered-element'
                 }),
-                new HoverImage({
-                    selector: '.js-project-element',
-                    imageSelector: '.js-project-image',
-                    duration: 20,
+                new SectionImage({
+                    duration: 12,
                     maxOpacity: 0.5
                 })
             ]

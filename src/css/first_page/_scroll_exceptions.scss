@@ -1,99 +1,97 @@
-.scroll-index-0 {
-    & .nav {
-        @include min_query(--margin-side-buttons-right, $nav-breakpoint, 50vw);
-    }
-    
-    & .scroll-icon {
-        @include min_query(left, $nav-breakpoint, 50%);
-        @include min_query(transform, $nav-breakpoint, translateX(-50%));
+.main-page {
+    &.scroll-index-0 {
+        .nav {
+            @include min_query(--margin-side-buttons-right, $nav-breakpoint, 50vw);
+        }
+        
+        .scroll-icon {
+            @include min_query(left, $nav-breakpoint, 50%);
+            @include min_query(transform, $nav-breakpoint, translateX(-50%));
+        }
+
+        .logo {
+            @include min_query(display, $nav-breakpoint, none);
+        }
+
+        .projets .section, .profil .section {
+            @include min_query(top, $regular-page-breakpoint, 120vh);
+        }
+
     }
 
-    & .logo {
-        @include min_query(display, $nav-breakpoint, none);
+    &.scroll-index-1 {
+
+        .logo  {
+            $offset-delay: 2000ms;
+
+            // skew animation
+            animation-delay: 300ms + $offset-delay;
+
+            .first-part,
+            .second-part {
+                
+                // height animation
+                animation-delay: $offset-delay;
+            }
+        
+            .first-part-content {
+
+                // offset animation
+                animation-delay: 500ms + $offset-delay;
+            }
+        
+            .second-part-content {
+
+                // offset animation
+                animation-delay: 700ms + $offset-delay;
+            }
+        }
+
+        .nav-burger {
+            $offset-delay: 0;
+            transition-delay: $offset-delay;
+        }
+
+        .projets .section {
+            @include min_query(top, $regular-page-breakpoint, 120vh);
+        }
+
     }
 
-    & .projets .section, & .profil .section {
-        @include min_query(top, $regular-page-breakpoint, 120vh);
+    &.scroll-index-2 {
+        
+        .profil .section {
+            @include min_query(top, $regular-page-breakpoint, -120vh);
+        }
+
+        .lab .section {
+            @include min_query(top, $regular-page-breakpoint, 60vh);
+        }
+
     }
 
-    & .scroll-bar-current {
-        top: 0;
+    &.scroll-index-3 {
+
+        .projets .section {
+            @include min_query(top, $regular-page-breakpoint, -120vh);
+        }
+
+        .profil .section {
+            @include min_query(top, $regular-page-breakpoint, -50vh);
+        }
+
+        .scroll-icon-line {
+            animation: none;
+            stroke-dashoffset: -$scroll-line--length;
+        }
+        
     }
 }
 
-.scroll-index-1 {
-
-    & .logo  {
-        $offset-delay: 2000ms;
-
-        // skew animation
-        animation-delay: 300ms + $offset-delay;
-
-        & .first-part,
-        & .second-part {
-            
-            // height animation
-            animation-delay: $offset-delay;
+@for $i from 1 to 14 {
+    &.scroll-index-#{$i} {
+        .scroll-bar-current {
+            transform: translateY(calc(#{$i} * 100% + #{$i} * 20px));
         }
-    
-        & .first-part-content {
-
-            // offset animation
-            animation-delay: 500ms + $offset-delay;
-        }
-    
-        & .second-part-content {
-
-            // offset animation
-            animation-delay: 700ms + $offset-delay;
-        }
-    }
-
-    & .nav-burger {
-        $offset-delay: 0;
-        transition-delay: $offset-delay;
-    }
-
-    & .projets .section {
-        @include min_query(top, $regular-page-breakpoint, 120vh);
-    }
-
-    & .scroll-bar-current {
-        top: 25%;
-    }
-}
-
-.scroll-index-2 {
-    
-    & .profil .section {
-        @include min_query(top, $regular-page-breakpoint, -120vh);
-    }
-
-    & .lab .section {
-        @include min_query(top, $regular-page-breakpoint, 60vh);
-    }
-
-    & .scroll-bar-current {
-        top: 50%;
-    }
-}
-
-.scroll-index-3 {
-
-    & .projets .section {
-        @include min_query(top, $regular-page-breakpoint, -120vh);
-    }
-
-    & .profil .section {
-        @include min_query(top, $regular-page-breakpoint, -50vh);
-    }
-
-    & .scroll-icon-line {
-        animation: none;
-        stroke-dashoffset: -$scroll-line--length;
-    }
-    
-    & .scroll-bar-current {
-        top: 75%;
     }
 }

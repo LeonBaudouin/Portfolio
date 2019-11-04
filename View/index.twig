@@ -3,12 +3,18 @@
 {% extends "layout.twig" %}
 
 {% block pageName %}main-page{% endblock %}
-{% block bodyClass %}scroll-index-0{% endblock %}
+
+{% set scrollBar = ['to-title', 'to-profil', 'to-projet', 'to-lab'] %}
 
 {% block sideButton %}
     <div class="scroll-bar sideButton">
-        {{ div.fromClassArray(['to-title', 'to-profil', 'to-projet', 'to-lab'], 'scroll-bar-section js-hovered-element') }}
-        <div class="scroll-bar-current"></div>
+        <div class="scroll-bar-container">
+            {{ div.fromClassArray(scrollBar, 'scroll-bar-section js-hovered-element') }}
+        </div>
+        <div class="scroll-bar-current-container">
+            <div class="scroll-bar-current"></div>
+            {{ div.fromClassArray(scrollBar | slice(1), 'scroll-bar-current-hidden') }}
+        </div>
     </div>
 
     <svg class="scroll-icon sideButton js-hovered-element" viewbox="-1 0 15 52" width="16" height="52">
