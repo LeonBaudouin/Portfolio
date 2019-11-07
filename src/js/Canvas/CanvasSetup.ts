@@ -18,7 +18,7 @@ import { DrawableInterface } from "./Core/Abstract/DrawableInterface";
 import BaseDrawable from "./Core/Abstract/BaseDrawable";
 import Noise from "./Noise";
 import { Point } from "./Core/CustomTypes/Point";
-import { easeInOutExpo, easeOutQuad } from "./Core/CustomTypes/Easing";
+import { easeInOutExpo, easeOutQuad, easeInQuad, easeInExpo, easeInSine, easeInOutSine, easeInOutQuad, easeOutCubic, easeInOutCirc } from "./Core/CustomTypes/Easing";
 import OpacityOverTime from "./Controllers/OpacityOverTime";
 import { LightThemeSectionImage } from "./Controllers/LightThemeSectionImage";
 
@@ -249,15 +249,15 @@ function generateLightSquare(row: number, col: number, size: number): DrawableIn
         {x: window.innerWidth + offsetX, y: window.innerHeight +  offsetY}
     ]
 
-    const radiusFactor = points.reduce((acc, cur) => {
+    const regularRadiusFactor = points.reduce((acc, cur) => {
         const distToPoint = Point.getDistance(position, cur);
         return acc + (distToPoint > radius ? 0 : easeOutQuad(1 - (distToPoint / radius), 0, 1, 1));
     }, 0)
 
-    const proba = radiusFactor * 0.6 + noiseVar * 0.4;
+    const proba = regularRadiusFactor * 0.6 + noiseVar * 0.4;
 
     let controllers = [];
-    if (radiusFactor > 0.3 && proba > 0.3) {
+    if (regularRadiusFactor > 0.3 && proba > 0.3) {
         controllers.push(
             new OpacityOverTime({
                 offset: easeInOutExpo(proba, 0, 1, 1),
@@ -266,7 +266,11 @@ function generateLightSquare(row: number, col: number, size: number): DrawableIn
         );
     }
 
-    if (Point.getDistance(position, {x: 0, y: 0}) < 700) {
+    const centerDist = Point.getDistance(position, {x: window.innerWidth / 2, y: window.innerHeight / 2});
+    const imageRadiusFactor = centerDist > radius ? 0 : easeInQuad(1 - (centerDist / radius), 0, 1, 1)
+    const imageProba = imageRadiusFactor * 0.5 + noiseVar * 0.5;
+
+    if (imageRadiusFactor > 0.3 && imageProba > 0.3) {
         controllers.push(
             new LightThemeSectionImage({
                 duration: 12,
@@ -277,7 +281,7 @@ function generateLightSquare(row: number, col: number, size: number): DrawableIn
 
     return new BaseDrawable(
         new LightThemeSquareState({
-            fillColor: radiusFactor > 0.3 && proba > 0.3 ? Color.fromHex(Palette.SquareLight) : new Color(0, 0, 0, 0),
+            fillColor: regularRadiusFactor > 0.3 && proba > 0.3 ? Color.fromHex(Palette.SquareLight) : new Color(0, 0, 0, 0),
             size,
             position,
             image: null,
