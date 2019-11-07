@@ -7,7 +7,7 @@ import { FillRectRenderer } from "./Shapes/Rectangle/FillRectRenderer";
 import { GridState } from "./Shapes/Grid/GridState";
 import { GridRenderer } from "./Shapes/Grid/GridRenderer";
 import { Canvas } from "./Canvas";
-import { SectionImage } from "./Controllers/SectionImage";
+import { DarkThemeSectionImage } from "./Controllers/DarkThemeSectionImage";
 import { DarkThemeSquareState } from "./Shapes/Square/DarkThemeSquareState";
 import Color from "./Core/CustomTypes/Color";
 import { GradientData } from "./StyleData";
@@ -18,8 +18,9 @@ import { DrawableInterface } from "./Core/Abstract/DrawableInterface";
 import BaseDrawable from "./Core/Abstract/BaseDrawable";
 import Noise from "./Noise";
 import { Point } from "./Core/CustomTypes/Point";
-import { easeInOutExpo, easeOutQuart, easeOutQuad } from "./Core/CustomTypes/Easing";
+import { easeInOutExpo, easeOutQuad } from "./Core/CustomTypes/Easing";
 import OpacityOverTime from "./Controllers/OpacityOverTime";
+import { LightThemeSectionImage } from "./Controllers/LightThemeSectionImage";
 
 
 export function CanvasSetup() {
@@ -141,7 +142,7 @@ export function CanvasSetup() {
                     speed: 0.05,
                     selector: '.js-hovered-element'
                 }),
-                new SectionImage({
+                new DarkThemeSectionImage({
                     duration: 12,
                     maxOpacity: 0.5
                 })
@@ -183,8 +184,8 @@ export function LightCanvasSetup() {
 
     const gridSize = MathFunc.easeInOutSine(window.innerWidth, 40, 24, 1920);
 
-    const rowsNumber = Math.ceil(window.innerWidth / gridSize);
-    const colsNumber = Math.ceil(window.innerHeight / gridSize);
+    const rowsNumber = Math.ceil(window.innerWidth / gridSize) + 1;
+    const colsNumber = Math.ceil(window.innerHeight / gridSize) + 1;
     const squares : DrawableInterface[] = [];
     for (let i = 0; i < rowsNumber; i++) {
         for (let j = 0; j < colsNumber; j++) {
@@ -235,18 +236,21 @@ function generateLightSquare(row: number, col: number, size: number): DrawableIn
     const noise = Noise.getSimplex().noise2D(row / 4, col / 4) + 0.2;
     // const noiseVar = easeInOutExpo(noise, 0, 1, 1);
     const noiseVar = noise;
-    const position = {x: row * size - (window.innerWidth % size) + size / 2, y: col * size + size / 2};
+    const position = {x: (row - 1) * size + (window.innerWidth % size) / 2 + size / 2, y: col * size + size / 2};
+    
+    const offsetY = window.innerWidth * 0.15625;
+    const offsetX = window.innerHeight * 0.105;
+    const radius =  window.innerWidth / 2.25 + 100;
 
     const points = [
-        {x: -100, y: -300},
-        {x: window.innerWidth + 100, y: -300},
-        {x: -100, y: window.innerHeight + 300},
-        {x: window.innerWidth + 100, y: window.innerHeight + 300}
+        {x: - offsetX, y: - offsetY},
+        {x: window.innerWidth + offsetX, y: - offsetY},
+        {x: - offsetX, y: window.innerHeight +  offsetY},
+        {x: window.innerWidth + offsetX, y: window.innerHeight +  offsetY}
     ]
 
     const radiusFactor = points.reduce((acc, cur) => {
         const distToPoint = Point.getDistance(position, cur);
-        const radius = window.innerWidth / 2;
         return acc + (distToPoint > radius ? 0 : easeOutQuad(1 - (distToPoint / radius), 0, 1, 1));
     }, 0)
 
@@ -261,7 +265,17 @@ function generateLightSquare(row: number, col: number, size: number): DrawableIn
             })
         );
     }
-    const base = new BaseDrawable(
+
+    if (Point.getDistance(position, {x: 0, y: 0}) < 700) {
+        controllers.push(
+            new LightThemeSectionImage({
+                duration: 12,
+                maxOpacity: 0.5
+            })
+        )
+    }
+
+    return new BaseDrawable(
         new LightThemeSquareState({
             fillColor: radiusFactor > 0.3 && proba > 0.3 ? Color.fromHex(Palette.SquareLight) : new Color(0, 0, 0, 0),
             size,
@@ -273,8 +287,6 @@ function generateLightSquare(row: number, col: number, size: number): DrawableIn
         [],
         controllers
     )
-
-    return base;
 }
 
 function generateGradient(gradientData: GradientData, context: CanvasRenderingContext2D) {
