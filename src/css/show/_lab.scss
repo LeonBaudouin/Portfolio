@@ -1,0 +1,14 @@
+.lab-show-page {
+    .content {
+        background-color: transparentize($color-lightest-grey, 0.2);
+
+        .upper-triangle {
+            fill: transparentize($color-lightest-grey, 0.2);
+
+            &-stroke {
+                stroke: $color-red;
+                stroke-width: 3px;
+            }
+        }
+    }
+}

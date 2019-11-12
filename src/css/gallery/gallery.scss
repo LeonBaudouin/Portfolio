@@ -51,7 +51,7 @@
 
         &-title {
             .first-part {
-                font-weight: 600;
+                font-weight: 800;
                 @include min_query(font-size, $regular-page-breakpoint, 5rem);
                 @include min_query(height, $regular-page-breakpoint, 5.7rem);
                 font-size: 2rem;

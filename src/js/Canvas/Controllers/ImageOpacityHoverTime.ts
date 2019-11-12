@@ -1,10 +1,10 @@
 import { ControllerInterface } from "../Core/Abstract/ControllerInterface";
 import { StateObjectInterface } from "../Core/Abstract/StateObjectInterface";
-import Color from "../Core/CustomTypes/Color";
+import ImageState from "../BaseStates/ImageState";
 
-type ColorStateType = StateObjectInterface & {fillColor: Color}
+type ImageStateType = StateObjectInterface & ImageState
 
-export default class OpacityOverTime implements ControllerInterface {
+export default class ImageOpacityOverTime implements ControllerInterface {
 
     public offset: number;
     public overTimeFunc: OverTimeFunc;
@@ -15,9 +15,9 @@ export default class OpacityOverTime implements ControllerInterface {
         this.overTimeFunc = overTimeFunc;
     }
 
-    Update(currentState: ColorStateType, defaultState: ColorStateType): ColorStateType {
-        const newState = <ColorStateType>currentState.Clone();
-        newState.fillColor.a = 0.5 + this.overTimeFunc(this.offset, this.timer) / 2;
+    Update(currentState: ImageStateType, defaultState: ImageStateType): ImageStateType {
+        const newState = <ImageStateType>currentState.Clone();
+        newState.imageOpacity = currentState.imageOpacity * (0.5 + this.overTimeFunc(this.offset, this.timer) / 2);
         this.timer++;
         return newState;
     }

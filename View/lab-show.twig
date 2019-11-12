@@ -7,7 +7,7 @@
 
 {% block pageName %}lab-show-page{% endblock %}
 {% block content %}
-    <div class="header active">
+    <div class="header active" data-background-image="{{ getImagePath(project.getGalleryImage()) }}">
         {% set titleArray = project.getName()|split(' ') %}
         {{ title.regular('h1', 'main-title', titleArray[0], titleArray[1]) }}
         <div class='skills'>
@@ -19,7 +19,8 @@
     </div>
     <div class="content">
         <svg class='upper-triangle' version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1920 172" xml:space="preserve">
-            <polygon class="lower-triangle-path" points="0,0 1920,172 0,172 "/>
+            <polygon class="upper-triangle-path" points="0,0 1920,172 0,172 "/>
+            <line class="upper-triangle-stroke" x1="0" y1="0" x2="1920" y2="172"/>
         </svg>
         <div class="elements active">
             {% for element in description %}

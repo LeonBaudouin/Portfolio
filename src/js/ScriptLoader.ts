@@ -156,11 +156,21 @@ class ScriptLoader {
     }
 
     private ProjectShowPageScripts() {
-        const canvas = CanvasSetup();
+        const header = document.querySelector('.header');
+        const img = new Image();
+        const url = header.getAttribute('data-background-image');
+        img.src = url;
+
+        const canvas = CanvasSetup(img);
     }
 
     private LabShowPageScripts() {
-        const canvas = LightCanvasSetup();
+        const header = document.querySelector('.header');
+        const img = new Image();
+        const url = header.getAttribute('data-background-image');
+        img.src = url;
+
+        const canvas = LightCanvasSetup(img);
     }
 
     private BindScrollButons() {

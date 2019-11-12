@@ -100,18 +100,12 @@
         .content {
             width: 100%;
             margin-top: 10vh;
-            background-color: $color-lightest-grey;
-            background-image: url('../img/square-background.png');
-            border-top: 0.2px solid transparent;
             @include min_query(margin-top, $regular-page-breakpoint, 15vh);
             
             .upper-triangle {
                 width: 100%;
                 position: absolute;
                 left: 0;
-                fill: $color-lightest-grey;
-                stroke: $color-light-grey;
-                stroke-width: 3px;
                 transform: translateY(-100%);
                 @include min_query(transform, $regular-page-breakpoint, translateY(-75%) scaleY(0.5));
             }

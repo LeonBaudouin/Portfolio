@@ -5,7 +5,7 @@ import { StateObjectInterface } from "../Core/Abstract/StateObjectInterface";
 
 type ImageStateType = ImageState & StateObjectInterface;
 
-export class LightThemeSectionImage implements ControllerInterface {
+export class SectionImage implements ControllerInterface {
 
     private slideImage: HTMLImageElement;
     private duration: number;

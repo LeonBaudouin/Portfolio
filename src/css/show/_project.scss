@@ -1,4 +1,3 @@
-
 .project-show-page {
     .header {
         .main-title {
@@ -13,6 +12,17 @@
             &::before {
                 background-color: $color-lightest-grey;
             }
+        }
+    }
+
+    .content {
+        background-color: $color-lightest-grey;
+        background-image: url('../img/square-background.png');
+
+        .upper-triangle {
+            fill: $color-lightest-grey;
+            stroke: $color-light-grey;
+            stroke-width: 3px;
         }
     }
 }

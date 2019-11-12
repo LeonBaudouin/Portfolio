@@ -7,7 +7,7 @@ import { FillRectRenderer } from "./Shapes/Rectangle/FillRectRenderer";
 import { GridState } from "./Shapes/Grid/GridState";
 import { GridRenderer } from "./Shapes/Grid/GridRenderer";
 import { Canvas } from "./Canvas";
-import { DarkThemeSectionImage } from "./Controllers/DarkThemeSectionImage";
+import { SectionImage } from "./Controllers/SectionImage";
 import { DarkThemeSquareState } from "./Shapes/Square/DarkThemeSquareState";
 import Color from "./Core/CustomTypes/Color";
 import { GradientData } from "./StyleData";
@@ -20,13 +20,15 @@ import Noise from "./Noise";
 import { Point } from "./Core/CustomTypes/Point";
 import { easeInOutExpo, easeOutQuad, easeInQuad, easeInExpo, easeInSine, easeInOutSine, easeInOutQuad, easeOutCubic, easeInOutCirc } from "./Core/CustomTypes/Easing";
 import OpacityOverTime from "./Controllers/OpacityOverTime";
-import { LightThemeSectionImage } from "./Controllers/LightThemeSectionImage";
+import ImageOpacityOverTime from "./Controllers/ImageOpacityHoverTime";
+import ResetImageOpacity from "./Controllers/ResetImageOpacity";
 
-
-export function CanvasSetup() {
+export function CanvasSetup(image: HTMLImageElement = null) {
 
     const htmlCanvas = document.querySelector('canvas');
     const context = htmlCanvas.getContext('2d');
+
+    const imageController = image ? new ResetImageOpacity() : new SectionImage({duration: 12, maxOpacity: 0.5})
 
     const drawnObject = [
         // Background
@@ -128,8 +130,8 @@ export function CanvasSetup() {
                 angle: Math.PI/4,
                 strokeSize: 25,
                 strokeColor: Color.fromHex(Palette.SquareDark),
-                image: null,
-                imageOpacity: 0
+                image,
+                imageOpacity: 0.5
             }),
             new DarkThemeSquareRenderer(),
             [],
@@ -142,10 +144,7 @@ export function CanvasSetup() {
                     speed: 0.05,
                     selector: '.js-hovered-element'
                 }),
-                new DarkThemeSectionImage({
-                    duration: 12,
-                    maxOpacity: 0.5
-                })
+                imageController
             ]
         ),
         // Grid
@@ -177,7 +176,7 @@ export function CanvasSetup() {
     return new Canvas(drawnObject, htmlCanvas, context);
 }
 
-export function LightCanvasSetup() {
+export function LightCanvasSetup(image: HTMLImageElement = null) {
 
     const htmlCanvas = document.querySelector('canvas');
     const context = htmlCanvas.getContext('2d');
@@ -189,7 +188,7 @@ export function LightCanvasSetup() {
     const squares : DrawableInterface[] = [];
     for (let i = 0; i < rowsNumber; i++) {
         for (let j = 0; j < colsNumber; j++) {
-            squares.push(generateLightSquare(i, j, gridSize))
+            squares.push(generateLightSquare(i, j, gridSize, image))
         }        
     }
 
@@ -232,9 +231,8 @@ export function LightCanvasSetup() {
 
 }
 
-function generateLightSquare(row: number, col: number, size: number): DrawableInterface {
+function generateLightSquare(row: number, col: number, size: number, image: HTMLImageElement = null): DrawableInterface {
     const noise = Noise.getSimplex().noise2D(row / 4, col / 4) + 0.2;
-    // const noiseVar = easeInOutExpo(noise, 0, 1, 1);
     const noiseVar = noise;
     const position = {x: (row - 1) * size + (window.innerWidth % size) / 2 + size / 2, y: col * size + size / 2};
     
@@ -266,15 +264,24 @@ function generateLightSquare(row: number, col: number, size: number): DrawableIn
         );
     }
 
+    const imageRadius = window.innerWidth / 4 + window.innerHeight / 2;
     const centerDist = Point.getDistance(position, {x: window.innerWidth / 2, y: window.innerHeight / 2});
-    const imageRadiusFactor = centerDist > radius ? 0 : easeInQuad(1 - (centerDist / radius), 0, 1, 1)
+    const imageRadiusFactor = centerDist > imageRadius ? 0 : easeInQuad(1 - (centerDist / imageRadius), 0, 1, 1)
     const imageProba = imageRadiusFactor * 0.5 + noiseVar * 0.5;
 
     if (imageRadiusFactor > 0.3 && imageProba > 0.3) {
         controllers.push(
-            new LightThemeSectionImage({
+            image ?
+            new ResetImageOpacity() :
+            new SectionImage({
                 duration: 12,
                 maxOpacity: 0.5
+            })
+        )
+        controllers.push(
+            new ImageOpacityOverTime({
+                offset: Math.random(),
+                overTimeFunc: (offset, time) => Math.sin(offset * Math.PI * 2 + time / 100)
             })
         )
     }
@@ -284,8 +291,8 @@ function generateLightSquare(row: number, col: number, size: number): DrawableIn
             fillColor: regularRadiusFactor > 0.3 && proba > 0.3 ? Color.fromHex(Palette.SquareLight) : new Color(0, 0, 0, 0),
             size,
             position,
-            image: null,
-            imageOpacity: 1
+            image: imageRadiusFactor > 0.3 && imageProba > 0.3 ? image : null,
+            imageOpacity: 0.5
         }),
         new LightThemeSquareRenderer(),
         [],
