@@ -5,7 +5,12 @@
     <section class="section">
         <div class="section-background">
             {% for project in projects %}
-                {{ img.pictureTag(project.getHighResFeaturedImage(), project.getLowResFeaturedImage(), 'Illustration du projet' ~ project.getName(), "photo-lab") }}
+                {{ img.pictureTag(
+                    'featured/' ~ project.getHighResFeaturedImage(),
+                    'featured/' ~ project.getLowResFeaturedImage(),
+                    'Illustration du projet' ~ project.getName(),
+                    "photo-lab"
+                ) }}
             {% endfor %}
             <div class="background-squares v-s-page">
                 <div class="background-squares-group">

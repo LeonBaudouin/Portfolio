@@ -1,4 +1,8 @@
 {% import "macro/title.twig" as title %}
-<a href='{{ getUrl('project_show', {id: project.getId()}) }}' class="project" data-section-image='{{ getImagePath(project.getGalleryImage()) }}'>
+<a 
+    class="project"
+    href='{{ getUrl('project_show', {id: project.getId()}) }}' 
+    data-section-image='{{ getImagePath("gallery/" ~ project.getGalleryImage()) }}'
+>
     {{ title.regular('h2', 'direction-center project-title', project.getName(), project.getType()) }}
 </a>

@@ -9,12 +9,14 @@ export class LightThemeSquareRenderer implements RendererInterface {
         ctx.fillStyle = fillColor.toString();
         ctx.fillRect(x - size / 2, y - size / 2, size, size);
         if (image) {
+            const { width: imageWidth, height: imageHeight } = image
+            const width = canvasHeight * imageWidth / imageHeight;
             ctx.save();
             ctx.beginPath();
             ctx.rect(x - size / 2, y - size / 2, size, size);   
             ctx.clip();
             ctx.globalAlpha = imageOpacity;
-            ctx.drawImage(image, (canvasWitdth - image.width) / 2, (canvasHeight - image.height) / 2);
+            ctx.drawImage(image, (canvasWitdth - width) / 2 - size, (canvasHeight - canvasHeight) / 2);
             ctx.globalAlpha = 1; 
             ctx.restore();
         }

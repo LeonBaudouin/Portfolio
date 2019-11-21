@@ -159,6 +159,12 @@
                 height: 100%;
             }
 
+            &-img {
+                width: 80%;
+                border: 2px solid $color-red;
+                justify-self: center;
+            }
+
             &-link {
 
                 &-container {

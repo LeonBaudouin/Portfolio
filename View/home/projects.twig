@@ -4,7 +4,12 @@
     <section class="section">
         <div class="section-background">
             {% for project in projects %}
-                {{ img.pictureTag(project.getHighResFeaturedImage(), project.getLowResFeaturedImage(), 'Illustration du projet' ~ project.getName(), "photo-projet") }}
+                {{ img.pictureTag(
+                    'featured/' ~ project.getHighResFeaturedImage(),
+                    'featured/' ~ project.getLowResFeaturedImage(),
+                    'Illustration du projet' ~ project.getName(),
+                    "photo-projet"
+                ) }}
             {% endfor %}
             <div class="background-empty-squares">
                 {{ div.fromClassArray(['', '', '', 'thick'], 'background-empty-squares-element') }}
