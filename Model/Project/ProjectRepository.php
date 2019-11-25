@@ -2,8 +2,8 @@
 
 namespace Model\Project;
 
-use \Model\Skill\SkillRepository;
 use \Model\Entity\AbstractRepository;
+use \Model\Skill\SkillRepository;
 
 class ProjectRepository extends AbstractRepository
 {
@@ -19,7 +19,6 @@ class ProjectRepository extends AbstractRepository
 
         $skills = SkillRepository::getSkillsFromProject($project);
         $project->setSkills($skills);
-
 
         return $project;
     }

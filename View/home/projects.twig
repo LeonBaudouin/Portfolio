@@ -1,39 +1,39 @@
 {% import "macro/img.twig" as img %}
 {% import "macro/title.twig" as title %}
 <div class="page projets">
-    <section class="section">
-        <div class="section-background">
-            {% for project in projects %}
-                {{ img.pictureTag(
-                    'featured/' ~ project.getHighResFeaturedImage(),
-                    'featured/' ~ project.getLowResFeaturedImage(),
+	<section class="section">
+		<div class="section-background">
+			{% for project in projects %}
+				{{ img.pictureTag(
+                    'featured/' ~ project.getDesktopFeaturedImage(),
+                    'featured/' ~ project.getPhoneFeaturedImage(),
                     'Illustration du projet' ~ project.getName(),
                     "photo-projet"
                 ) }}
-            {% endfor %}
-            <div class="background-empty-squares">
-                {{ div.fromClassArray(['', '', '', 'thick'], 'background-empty-squares-element') }}
-            </div>
-        </div>
-        <div class="section-content">
-            {{ title.link('h2', '', getUrl('project_list'), 'Mes', 'Projets') }}
-            {% for project in projects %}
-                <div class="description project fade-from-left">
-                    <h3 class="project-title title">{{ project.getName() }}</h3>
-                    <h4 class="project-type title">{{ project.getType() }}</h4>
-                    <div class="project-skills">
-                        {% for skill in project.getSkills() %}
-                            <img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="{{ skill.getName() }}" class="project-skills-icon">
-                        {% endfor %}
-                    </div>
-                    <a href="{{ project.getUrl() }}" target="_blank" class="project-more see-more">Voir le projet</a>
-                </div>
-            {% endfor %}
-            <a href="{{ getUrl('project_list') }}" class="button all fade-from-left">
-                {% include "svg/tout-voir.twig" only %}
-                {% include "svg/double-arrow.twig" only %}
-            </a>
-            {% include "home/next-project-button.twig" with {projects: projects} only %}
-        </div>
-    </section>
+			{% endfor %}
+			<div class="background-empty-squares">
+				{{ div.fromClassArray(['', '', '', 'thick'], 'background-empty-squares-element') }}
+			</div>
+		</div>
+		<div class="section-content">
+			{{ title.link('h2', '', getUrl('project_list'), 'Mes', 'Projets') }}
+			{% for project in projects %}
+				<div class="description project fade-from-left">
+					<h3 class="project-title title">{{ project.getName() }}</h3>
+					<h4 class="project-type title">{{ project.getType() }}</h4>
+					<div class="project-skills">
+						{% for skill in project.getSkills() %}
+							<img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="{{ skill.getName() }}" class="project-skills-icon">
+						{% endfor %}
+					</div>
+					<a href="{{ project.getUrl() }}" target="_blank" class="project-more see-more">Voir le projet</a>
+				</div>
+			{% endfor %}
+			<a href="{{ getUrl('project_list') }}" class="button all fade-from-left">
+				{% include "svg/tout-voir.twig" only %}
+				{% include "svg/double-arrow.twig" only %}
+			</a>
+			{% include "home/next-project-button.twig" with {projects: projects} only %}
+		</div>
+	</section>
 </div>
