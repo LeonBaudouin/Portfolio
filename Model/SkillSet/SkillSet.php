@@ -9,29 +9,27 @@ class SkillSet extends \Model\Entity\AbstractEntity implements SkillSetInterface
     {
         return $this->_get(self::NAME);
     }
-    
+
     public function setName($value)
     {
         $this->_set(self::NAME, $value);
     }
-    
-    
+
     public function getDescription()
     {
         return $this->_get(self::DESCRIPTION);
     }
-    
+
     public function setDescription($value)
     {
         $this->_set(self::DESCRIPTION, $value);
     }
-    
-    
+
     public function getSkills()
     {
         return $this->_get(self::SKILLS);
     }
-    
+
     public function setSkills($value)
     {
         $this->_set(self::SKILLS, $value);
@@ -53,5 +51,25 @@ class SkillSet extends \Model\Entity\AbstractEntity implements SkillSetInterface
         };
 
         return array_filter($skills, $filterParent);
+    }
+
+    public function getIsVisible()
+    {
+        return $this->_get(self::IS_VISIBLE);
+    }
+
+    public function setIsVisble($value)
+    {
+        $this->_set(self::IS_VISIBLE, $value);
+    }
+
+    public function getOrder()
+    {
+        return $this->_get(self::ORDER);
+    }
+
+    public function setOrder($value)
+    {
+        $this->_set(self::ORDER, $value);
     }
 }

@@ -3,6 +3,7 @@
 namespace Model\SkillSet;
 
 use \Model\Entity\AbstractRepository;
+use \Model\Skill\Skill;
 use \Model\Skill\SkillRepository;
 
 class SkillSetRepository extends AbstractRepository
@@ -28,7 +29,13 @@ class SkillSetRepository extends AbstractRepository
 
         $createSkillSetAndAddSkills = function ($data) {
             $skillSet = SkillSetFactory::create($data);
-            $skillSet->setSkills(SkillRepository::getSkillsFromSkillSet($skillSet));
+            $skills = array_filter(
+                SkillRepository::getSkillsFromSkillSet($skillSet),
+                function (Skill $cur) {
+                    return $cur->getIsVisible();
+                }
+            );
+            $skillSet->setSkills($skills);
             return $skillSet;
         };
 

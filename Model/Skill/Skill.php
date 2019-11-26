@@ -10,10 +10,9 @@ class Skill extends \Model\Entity\AbstractEntity implements SkillInterface
     }
 
     public function setName($value)
-    {    
+    {
         $this->_set(self::NAME, $value);
     }
-    
 
     public function getLogo()
     {
@@ -21,10 +20,9 @@ class Skill extends \Model\Entity\AbstractEntity implements SkillInterface
     }
 
     public function setLogo($value)
-    {    
+    {
         $this->_set(self::LOGO, $value);
     }
-    
 
     public function getSkillSet()
     {
@@ -32,10 +30,9 @@ class Skill extends \Model\Entity\AbstractEntity implements SkillInterface
     }
 
     public function setSkillSet($value)
-    {    
+    {
         $this->_set(self::SKILL_SET, $value);
     }
-    
 
     public function getParentSkill()
     {
@@ -43,7 +40,17 @@ class Skill extends \Model\Entity\AbstractEntity implements SkillInterface
     }
 
     public function setParentSkill($value)
-    {    
+    {
         $this->_set(self::PARENT_SKILL, $value);
+    }
+
+    public function getIsVisible()
+    {
+        return $this->_get(self::IS_VISIBLE);
+    }
+
+    public function setIsVisible($value)
+    {
+        $this->_set(self::IS_VISIBLE, $value);
     }
 }
