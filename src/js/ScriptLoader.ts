@@ -45,6 +45,25 @@ class ScriptLoader {
         //  Burger Menu
         this.burgerMenu = new AddClassButton(buttonMenu, menu, "hidden");
 
+        // Object that add the "active" class when the user scroll the element
+        const lazyLoading = [...document.querySelectorAll(".js-lazy-loading")];
+        this.onScrollActivator = new OnScrollActivator(
+            lazyLoading,
+            lazyLoading.map((element: HTMLElement) =>
+                element.dataset.offset
+                    ? -window.innerHeight * parseInt(element.dataset.offset)
+                    : -window.innerHeight * 0.5
+            ),
+            element => {
+                if (element instanceof HTMLImageElement) {
+                    element.src = element.dataset.src;
+                }
+                if (element instanceof HTMLSourceElement) {
+                    element.srcset = element.dataset.srcset;
+                }
+            }
+        );
+
         //  Bind a automatic copy to clipboard to elements with the class ".js-copy-to-clipboard"
         this.BindClipboardButtons();
     }
@@ -62,6 +81,7 @@ class ScriptLoader {
             "projects.html",
             "lab.html"
         ]);
+
         const activatePages = (i: number) => {
             const page = pages[i];
             swipeLink.updateSlideIndex(i);
@@ -101,8 +121,11 @@ class ScriptLoader {
     private ProfilePageScripts() {
         // Object that add the "active" class when the user scroll the element
         this.onScrollActivator = new OnScrollActivator(
-            ".js-activate-on-scroll",
-            window.innerHeight / 4
+            [...document.querySelectorAll(".js-activate-on-scroll")],
+            window.innerHeight / 4,
+            element => {
+                element.classList.add("active");
+            }
         );
 
         const canvas = CanvasSetup();

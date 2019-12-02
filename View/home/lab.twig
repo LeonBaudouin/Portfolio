@@ -2,54 +2,55 @@
 {% import "macro/div.twig" as div %}
 {% import "macro/title.twig" as title %}
 <div class="page lab">
-	<section class="section">
-		<div class="section-background">
-			{% for project in projects %}
-				{{ img.pictureTag(
+    <section class="section">
+        <div class="section-background">
+            {% for project in projects %}
+                {{ img.pictureTag(
                     'featured/' ~ project.getDesktopFeaturedImage(),
                     'featured/' ~ project.getPhoneFeaturedImage(),
                     'Illustration du projet' ~ project.getName(),
-                    "photo-lab"
+                    "photo-lab",
+					 1
                 ) }}
-			{% endfor %}
-			<div class="background-squares v-s-page">
-				<div class="background-squares-group">
-					{{ div.multiples("background-squares-group-element", 8) }}
-				</div>
-				<div class="background-squares-group">
-					{{ div.multiples("background-squares-group-element", 15) }}
-				</div>
-				<div class="background-squares-group">
-					{{ div.multiples("background-squares-group-element", 5) }}
-				</div>
-			</div>
-			<div class="background-squares v-m-page">
-				<div class="background-squares-group">
-					{{ div.multiples("background-squares-group-element", 9) }}
-				</div>
-				<div class="background-squares-group">
-					{{ div.multiples("background-squares-group-element", 17) }}
-				</div>
-				<div class="background-squares-group"></div>
-			</div>
-		</div>
-		<div class="section-content">
-			{{ title.link('h2', '', getUrl('lab_list'), 'Mon', 'Lab') }}
-			{% for project in projects %}
-				<div class="description fade-from-left">
-					<h3 class="lab-title title">
-						<span class="lab-title-content">{{ project.getName() }}</span>
-					</h3>
-					<p class="paragraph">{{ project.getDescription() | slice(0, 150) ~ '...' }}</p>
-					<a href="{{ project.getUrl() }}" target="_blank" class="see-more">Voir le projet</a>
-				</div>
-			{% endfor %}
-			<a href="{{ getUrl('lab_list') }}" class="button all fade-from-left">
-				{% include "svg/tout-voir.twig" only %}
-				{% include "svg/double-arrow.twig" only %}
-			</a>
-			{% include "home/next-project-button.twig" with {projects: projects} only %}
-		</div>
-	</section>
-	{% include "home/contact.twig" only %}
+            {% endfor %}
+            <div class="background-squares v-s-page">
+                <div class="background-squares-group">
+                    {{ div.multiples("background-squares-group-element", 8) }}
+                </div>
+                <div class="background-squares-group">
+                    {{ div.multiples("background-squares-group-element", 15) }}
+                </div>
+                <div class="background-squares-group">
+                    {{ div.multiples("background-squares-group-element", 5) }}
+                </div>
+            </div>
+            <div class="background-squares v-m-page">
+                <div class="background-squares-group">
+                    {{ div.multiples("background-squares-group-element", 9) }}
+                </div>
+                <div class="background-squares-group">
+                    {{ div.multiples("background-squares-group-element", 17) }}
+                </div>
+                <div class="background-squares-group"></div>
+            </div>
+        </div>
+        <div class="section-content">
+            {{ title.link('h2', '', getUrl('lab_list'), 'Mon', 'Lab') }}
+            {% for project in projects %}
+                <div class="description fade-from-left">
+                    <h3 class="lab-title title">
+                        <span class="lab-title-content">{{ project.getName() }}</span>
+                    </h3>
+                    <p class="paragraph">{{ project.getDescription() | slice(0, 150) ~ '...' }}</p>
+                    <a href="{{ project.getUrl() }}" target="_blank" class="see-more">Voir le projet</a>
+                </div>
+            {% endfor %}
+            <a href="{{ getUrl('lab_list') }}" class="button all fade-from-left">
+                {% include "svg/tout-voir.twig" only %}
+                {% include "svg/double-arrow.twig" only %}
+            </a>
+            {% include "home/next-project-button.twig" with {projects: projects} only %}
+        </div>
+    </section>
+    {% include "home/contact.twig" only %}
 </div>

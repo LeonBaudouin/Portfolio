@@ -1,6 +1,6 @@
-{% macro pictureTag(highRes, lowRes, alt, class) %}
+{% macro pictureTag(highRes, lowRes, alt, class, offset) %}
     <picture class="{{ class }}">
-        <source media="(min-width: 800px)" srcset="{{ getImagePath(highRes) }}">
-        <img src="{{ getImagePath(lowRes) }}" alt="{{ alt }}">
+        <source class="js-lazy-loading" srcset="{{ getImagePath('placeholder.png') }}" media="(min-width: 800px)" data-srcset="{{ getImagePath(highRes) }}" data-offset="{{offset}}">
+        <img class="js-lazy-loading" src="{{ getImagePath('placeholder.png') }}" alt="{{ alt }}" data-src="{{ getImagePath(lowRes) }}" data-offset="{{offset}}">
     </picture>
 {% endmacro %}

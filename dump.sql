@@ -2,7 +2,7 @@
 -- Hôte :                        localhost
 -- Version du serveur:           5.7.24 - MySQL Community Server (GPL)
 -- SE du serveur:                Win64
--- HeidiSQL Version:             10.2.0.5599
+-- HeidiSQL Version:             9.5.0.5332
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,6 +10,11 @@
 /*!50503 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+-- Listage de la structure de la base pour portfolio_development
+CREATE DATABASE IF NOT EXISTS `portfolio_development` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `portfolio_development`;
 
 -- Listage de la structure de la table portfolio_development. courses
 CREATE TABLE IF NOT EXISTS `courses` (
@@ -22,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
 
 -- Listage des données de la table portfolio_development.courses : ~3 rows (environ)
 /*!40000 ALTER TABLE `courses` DISABLE KEYS */;
-REPLACE INTO `courses` (`id`, `name`, `date`, `description`) VALUES
+INSERT INTO `courses` (`id`, `name`, `date`, `description`) VALUES
 	(1, 'Bac Scientifique', '2015-2017', 'J’ai obtenu le Bac S avec mention Bien au lycée Hector Berlioz à Vincennes. Les deux années que j’ai passées en filière scientifique m’ont permis de me forger une rigueur et une logique qui me sont très utiles aujourd’hui. C’est durant cette période que j’ai consacré beaucoup de temps à me former au Motion Design.'),
 	(2, 'Stage Mikros', 'Aout 2018', 'J’ai effectué un Stage d’un mois au sein de la société de Post-production Mikros Image en tant que Motion Designer. Cette expérience m’a permis de découvrir le milieu de la post-production en tant qu’élément au sein de cette industrie. De plus, j’ai pu me familiariser avec un milieu professionnel.'),
 	(3, 'DUT MMI', '2017-2019', 'MMI (Métiers du Multimédia et de l’Internet) est une formation pluridisciplinaire que j\'ai suivi à l’IUT de Champs sur Marne. En plus de me faire découvrir le monde passionnant du web, elle m’a permis d\'expérimenter et de mettre à profit mes connaissances à travers des dizaines de projets.');
@@ -42,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `descriptions` (
 
 -- Listage des données de la table portfolio_development.descriptions : ~26 rows (environ)
 /*!40000 ALTER TABLE `descriptions` DISABLE KEYS */;
-REPLACE INTO `descriptions` (`id`, `project_id`, `type`, `content`, `order`) VALUES
+INSERT INTO `descriptions` (`id`, `project_id`, `type`, `content`, `order`) VALUES
 	(1, 1, 'text', 'Glint est mon projet tutoré de 2ème année de DUT MMI. Ce projet réunit une équipe de cinq autres étudiants. Nous nous sommes fixé l’objectif ambitieux de créer un jeu vidéo. La production inclut, la création d’une charte graphique, de sprites, d’animations, d’opérations de communication mais surtout du développement du jeu en lui-même.\r\n\r\nJ\'ai ainsi assuré le rôle de développeur logiciel. Je me suis formé en autodidacte au C#, au développement Unity, aux principes de POO avancé. Je me suis spécialisé dans le développement de l’Interface Utilisateur. Ça inclut les menus, les modifications des touches de jeu, le HUD, la gestion des textes (changement de langue par exemple). Unity ne m’a pas facilité la tâche, il ne dispose pas encore de beaucoup d’outils pour manipuler l’UI.', 200),
 	(2, 2, 'text', 'Ce projet est mon premier site web. Il s’agit d’un Portrait Chinois one-page. Le concept, en 2 mots, est d’associer sa personnalité avec un thème. Ce site web est donc construit autour de la formule consacrée “Si j’étais… je serais…”. Ce projet est une première expérience dans le monde du web à la fois en développement et en design.\r\n\r\nDurant la conception graphique, la maquette a été revue plusieurs fois avant d’avoir un résultat qui me convient. Chaque “pages“ correspondant à une facette de ma personnalité, j’ai décidé de donner un thème de couleur particulier à chacune d’elles. En ce qui concerne le développement, le site étant one-page, j’ai créé une navigation entièrement encapsulée par du Javascript. J’ai utilisé jQuery en pour manipuler le DOM avec facilité. J’ai aussi ajouté un canvas HTML5, une technologie qui m’a intéressée très tôt.', 200),
 	(3, 3, 'text', 'La fin de la 1ère année de DUT approchant et afin de proposer une alternative au CV traditionnel, j’ai réalisé un CV web. Ce dernier avait un triple enjeu : expliquer mon parcours et mon profil, montrer mes compétences techniques par le code et ma personnalité par le design du site.\r\n\r\nJ’ai basé le design du site sur des leitmotivs propres au motion design. J’ai pensé chaque élément avec une animation associée. j’ai trouvé intéressant jouer avec la dichotomie technique / créatif avec les couleurs et les polices d’écriture. Ce projet fut une occasion idéale pour m’initier au CSS avancé. J’ai expérimenté les animations complexes, les transform3d, les pseudos-éléments, les variables CSS et parfois même tout ça en même temps.', 200),
@@ -90,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
 
 -- Listage des données de la table portfolio_development.projects : ~10 rows (environ)
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-REPLACE INTO `projects` (`id`, `name`, `type`, `desktop_gallery_image`, `phone_gallery_image`, `desktop_featured_image`, `phone_featured_image`, `url`, `description`, `is_featured`, `is_lab`, `is_visible`) VALUES
+INSERT INTO `projects` (`id`, `name`, `type`, `desktop_gallery_image`, `phone_gallery_image`, `desktop_featured_image`, `phone_featured_image`, `url`, `description`, `is_featured`, `is_lab`, `is_visible`) VALUES
 	(1, 'Glint Game', 'Jeu vidéo', 'GlintDesktop.jpg', 'GlintPhone.jpg', 'Glint_1920.png', 'Glint_800.png', 'https://www.glintgame.fr', 'Glint est mon projet tutoré de 2ème année de DUT MMI. Ce projet réunit une équipe de cinq autres étudiants. Nous nous sommes fixé l’objectif ambitieux de créer un jeu vidéo. La production inclut, la création d’une charte graphique, de sprites, d’animations, d’opérations de communication mais surtout du développement du jeu en lui-même.\r\n\r\nJ\'ai ainsi assuré le rôle de développeur logiciel. Je me suis formé en autodidacte au C#, au développement Unity, aux principes de POO avancé. Je me suis spécialisé dans le développement de l’Interface Utilisateur. Ça inclut les menus, les modifications des touches de jeu, le HUD, la gestion des textes (changement de langue par exemple). Unity ne m’a pas facilité la tâche, il ne dispose pas encore de beaucoup d’outils pour manipuler l’UI.', 1, 0, 0),
 	(2, 'Portrait Chinois', 'Site Web', 'PortraitDesktop.jpg', 'PortraitPhone.jpg', '', '', './portrait/', 'Ce projet est mon premier site web. Il s’agit d’un Portrait Chinois one-page. Le concept, en 2 mots, est d’associer sa personnalité avec un thème. Ce site web est donc construit autour de la formule consacrée “Si j’étais… je serais…”. Ce projet est une première expérience dans le monde du web à la fois en développement et en design.\r\n\r\nDurant la conception graphique, la maquette a été revue plusieurs fois avant d’avoir un résultat qui me convient. Chaque “pages“ correspondant à une facette de ma personnalité, j’ai décidé de donner un thème de couleur particulier à chacune d’elles. En ce qui concerne le développement, le site étant one-page, j’ai créé une navigation entièrement encapsulée par du Javascript. J’ai utilisé jQuery en pour manipuler le DOM avec facilité. J’ai aussi ajouté un canvas HTML5, une technologie qui m’a intéressée très tôt.', 0, 0, 0),
 	(3, 'CV Interactif', 'Site Web', 'CvDesktop.png', 'CvPhone.png', 'CV_1920.png', 'CV_800.png', './cv/', 'La fin de la 1ère année de DUT approchant et afin de proposer une alternative au CV traditionnel, j’ai réalisé un CV web. Ce dernier avait un triple enjeu : expliquer mon parcours et mon profil, montrer mes compétences techniques par le code et ma personnalité par le design du site.\r\n\r\nJ’ai basé le design du site sur des leitmotivs propres au motion design. J’ai pensé chaque élément avec une animation associée. j’ai trouvé intéressant jouer avec la dichotomie technique / créatif avec les couleurs et les polices d’écriture. Ce projet fut une occasion idéale pour m’initier au CSS avancé. J’ai expérimenté les animations complexes, les transform3d, les pseudos-éléments, les variables CSS et parfois même tout ça en même temps.', 1, 0, 0),
@@ -115,28 +120,7 @@ CREATE TABLE IF NOT EXISTS `projects_skills_relation` (
 
 -- Listage des données de la table portfolio_development.projects_skills_relation : ~42 rows (environ)
 /*!40000 ALTER TABLE `projects_skills_relation` DISABLE KEYS */;
-REPLACE INTO `projects_skills_relation` (`project_id`, `skill_id`) VALUES
-	(1, 10),
-	(1, 11),
-	(2, 14),
-	(2, 15),
-	(2, 2),
-	(2, 4),
-	(2, 17),
-	(3, 14),
-	(3, 2),
-	(3, 4),
-	(4, 12),
-	(5, 12),
-	(5, 15),
-	(6, 4),
-	(7, 1),
-	(7, 4),
-	(7, 17),
-	(8, 12),
-	(9, 12),
-	(9, 15),
-	(10, 12),
+INSERT INTO `projects_skills_relation` (`project_id`, `skill_id`) VALUES
 	(1, 10),
 	(1, 11),
 	(2, 14),
@@ -171,17 +155,17 @@ CREATE TABLE IF NOT EXISTS `skills` (
   PRIMARY KEY (`id`),
   KEY `skill_set` (`skill_set`),
   CONSTRAINT `skill_set` FOREIGN KEY (`skill_set`) REFERENCES `skill_sets` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table portfolio_development.skills : ~18 rows (environ)
+-- Listage des données de la table portfolio_development.skills : ~20 rows (environ)
 /*!40000 ALTER TABLE `skills` DISABLE KEYS */;
-REPLACE INTO `skills` (`id`, `name`, `logo`, `skill_set`, `parent_skill`, `is_visible`) VALUES
+INSERT INTO `skills` (`id`, `name`, `logo`, `skill_set`, `parent_skill`, `is_visible`) VALUES
 	(1, 'HTML', 'HTML.svg', 1, NULL, 0),
 	(2, 'CSS', 'CSS.svg', 1, NULL, 1),
 	(3, 'Sass', 'Sass.svg', 1, 2, 1),
 	(4, 'Javascript', 'JS.svg', 1, NULL, 1),
 	(5, 'Typescript', 'TS.svg', 1, 4, 1),
-	(6, 'Webpack', 'Webpack.svg', 1, NULL, 1),
+	(6, 'Webpack', 'Webpack.svg', 1, NULL, 0),
 	(7, 'PHP', 'PHP.svg', 2, NULL, 1),
 	(8, 'MySQL', 'MySQL.svg', 2, NULL, 1),
 	(9, 'Rails', 'Rails.svg', 2, NULL, 1),
@@ -193,7 +177,9 @@ REPLACE INTO `skills` (`id`, `name`, `logo`, `skill_set`, `parent_skill`, `is_vi
 	(15, 'Illustrator', 'Ai.svg', 5, NULL, 1),
 	(16, 'Indesign', 'Id.svg', 6, NULL, 1),
 	(17, 'jQuery', 'jQuery.svg', 1, NULL, 0),
-	(18, 'Magento', 'Magento.svg', 2, NULL, 1);
+	(18, 'Magento', 'Magento.svg', 2, NULL, 1),
+	(19, 'React', 'React.svg', 1, NULL, 1),
+	(20, 'Vue', 'Vue.svg', 1, NULL, 1);
 /*!40000 ALTER TABLE `skills` ENABLE KEYS */;
 
 -- Listage de la structure de la table portfolio_development. skill_sets
@@ -204,17 +190,18 @@ CREATE TABLE IF NOT EXISTS `skill_sets` (
   `is_visible` int(11) DEFAULT '1',
   `order` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- Listage des données de la table portfolio_development.skill_sets : ~6 rows (environ)
 /*!40000 ALTER TABLE `skill_sets` DISABLE KEYS */;
-REPLACE INTO `skill_sets` (`id`, `name`, `description`, `is_visible`, `order`) VALUES
-	(1, 'Développement Front-End', 'En plus de maîtriser les langages standard du développement front-end ( HTML, CSS et Javascript ), j’utilise des outils plus avancés tels que Typescript, SASS et Webpack. Je connais aussi la méthode OOCSS.', 1, 100),
-	(2, 'Développement Back-End', 'Bien que le développement back-end ne soit pas ma spécialité, je connais bien PHP natif et MySQL. J\'apprend actuellement Node.js et j’ai l’intention de me former à Laravel et Symphony, deux framework PHP.', 1, 200),
-	(3, 'Développement Jeu-Vidéo', 'Pour mon projet tutoré de 2ème année MMI, je me suis formé au C# et au moteur de jeu Unity. Je connais donc les principes de développement orienté objet avancés Tels que les principes SOLID.', 1, 300),
+INSERT INTO `skill_sets` (`id`, `name`, `description`, `is_visible`, `order`) VALUES
+	(1, 'Développement Front-End', 'Le développement front-end est ma spécialité. J\'ai de l\'expérience avec React et les hooks et de bonnes connaissances en Vue. J\'utilise SASS pour l\'intégration de tous mes projets et Typescript est de loin mon langage de prédilection.', 1, 100),
+	(2, 'Développement Back-End', 'Lors de mon stage à Opsone, j\'ai travaillé sur Ruby on Rails et Magento. J\'ai donc une solide connaissance de l\'architecture MVC . Je développe aussi en PHP natif, ce portfolio ne requiert d\'ailleurs que Twig et Alto Router.', 1, 200),
+	(3, 'Développement Jeu-Vidéo', 'Pour mon projet tutoré de 2ème année MMI, je me suis formé au C# et au moteur de jeu Unity. Je connais donc les principes de développement orienté objet avancés Tels que les principes SOLID.', 1, 350),
 	(4, 'Motion Design', 'J’ai découvert le Motion Design en 2015 avec After Effects, c’est donc un logiciel que je maîtrise. J’utilise aussi Premiere Pro pour mes animations longues. Ces connaissances sont complétées par mon expérience en effets spéciaux.', 1, 400),
 	(5, 'Web Design', 'Pour chacun de mes sites web, je réalise en premier lieux une maquette complète et détaillée afin d’être efficace et rigoureux lors du développement. Je réalise mes maquettes avec Photoshop et Illustrator.', 1, 500),
-	(6, 'Print Design', 'Ma formation m’a amené à me former à Indesign. Par la suite, ces compétences m’ont permis de réaliser des revues et mes rapports.', 0, 600);
+	(6, 'Print Design', 'Ma formation m’a amené à me former à Indesign. Par la suite, ces compétences m’ont permis de réaliser des revues et mes rapports.', 0, 600),
+	(7, 'Développement Créatif', 'Le développement créatif me permet d\'associer mes appétences créatives et techniques. Je me forme donc à THREE.JS et à la création de shader en GLSL. D\'autre part, ayant entamé mon propre "framework", je suis très à l\'aise avec le Canvas HTML.', 1, 300);
 /*!40000 ALTER TABLE `skill_sets` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
