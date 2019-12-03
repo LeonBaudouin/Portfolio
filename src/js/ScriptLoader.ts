@@ -28,8 +28,12 @@ class ScriptLoader {
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))
             .join("");
 
-        this.GeneralScripts();
-        ExecuteFunctionByName(`${this.currentPage}Scripts`, this);
+        window.addEventListener("load", () => {
+            this.GeneralScripts();
+            ExecuteFunctionByName(`${this.currentPage}Scripts`, this);
+            document.body.classList.remove("loading");
+            document.body.classList.add("loaded");
+        });
     }
 
     private GeneralScripts() {
@@ -38,7 +42,11 @@ class ScriptLoader {
             window.scrollTo(0, 0);
         };
 
-        RemovePreload();
+        let preloadElements = document.querySelectorAll(".preload");
+
+        preloadElements.forEach(el => {
+            el.classList.remove("preload");
+        });
 
         let buttonMenu: HTMLElement = document.querySelector(".nav-burger");
         let menu: HTMLElement = document.querySelector(".nav");
@@ -101,16 +109,9 @@ class ScriptLoader {
         };
 
         //  One Page scroll
-        window.addEventListener(
-            "load",
-            () =>
-                (this.onePageScroll = new OnePageScroll(
-                    4,
-                    500,
-                    GetWindowHeight(),
-                    [activatePages]
-                ))
-        );
+        this.onePageScroll = new OnePageScroll(4, 500, GetWindowHeight(), [
+            activatePages
+        ]);
 
         //  Bind a one page scroll to the scroll icon and every sections of the scroll bar
         this.BindScrollButons();

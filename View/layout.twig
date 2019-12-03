@@ -4,29 +4,27 @@
         {% include 'layout/head.twig' with {color: '#333131', title: 'Léon Baudouin'} only %}
     {% endblock %}
 
-    <body class="preload loaded {% block pageName %}{% endblock %} {% block bodyClass %}{% endblock %}" data-page="{{ block('pageName') }}">
-        {# {% include 'layout/loading-screen.twig' only %} #}
-        
+    <body class="preload loading {% block pageName %}{% endblock %} {% block bodyClass %}{% endblock %}" data-page="{{ block('pageName') }}">
+        {% include 'layout/loading-screen.twig' only %}
+
         <canvas></canvas>
-        
+
         <div class="popup">
-            <p class="popup-text">Copié <span class="color-red">!</span></p>
+            <p class="popup-text">Copié
+                <span class="color-red">!</span>
+            </p>
         </div>
 
         {% include 'layout/logo.twig' only %}
         {% include 'layout/nav.twig' only %}
 
-        {% block sideButton %}
-        {% endblock %}
+        {% block sideButton %}{% endblock %}
 
-        <div class="container {% block containerClass %}{% endblock %}">
-            {% block content %}
-            {% endblock %}
-        </div>
+        <div class="container {% block containerClass %}{% endblock %}"> {% block content %}{% endblock %}
+            </div>
 
-        {% block footer %}
-        {% endblock %}
-        <script type="text/javascript" src="/assets/main.js"></script>
-    </body>
+            {% block footer %}{% endblock %}
+            <script type="text/javascript" src="/assets/main.js"></script>
+        </body>
 
-</html>
+    </html>
