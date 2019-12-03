@@ -56,9 +56,11 @@ export class OnePageScroll {
             }
         })
 
-        document.addEventListener("touchend", (e) => {
-            ExitFullScreen();
-        })
+        document.querySelectorAll('.sideButton').forEach(
+            el => el.addEventListener('touchmove',
+                e => e.preventDefault()
+            )
+        )
 
         this.container.addEventListener("touchmove", (e) => {
             e.preventDefault();
