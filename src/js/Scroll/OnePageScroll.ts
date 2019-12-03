@@ -4,15 +4,15 @@ import { addWheelListener } from "../Utils/AddWheelListener.js";
 import { ExitFullScreen } from "../Utils/NonTSFriendlyFuncs";
 import { Point } from "../CustomTypes/Point";
 
-type ScrollCallback = (i: number) => void; 
+type ScrollCallback = (i: number) => void;
 
 export class OnePageScroll {
 
     bodyClassList: DOMTokenList = document.querySelector("body").classList;
     container: HTMLElement = document.querySelector(".container");
-    currentSlideIndex : number = 0;
+    currentSlideIndex: number = 0;
     isScrolling: boolean = false;
-    
+
     slideNumber: number;
     swipeHandler: SwipeHandler;
     scrollAmount: number
@@ -29,7 +29,7 @@ export class OnePageScroll {
         this.InitEvent()
     }
 
-    private swipeCondition({x, y}: Point): boolean {
+    private swipeCondition({ x, y }: Point): boolean {
         let yFraction = Math.abs(y / GetWindowHeight());
         let xFraction = Math.abs(x / window.innerWidth);
         return yFraction > 0.05 && xFraction < 0.35;
@@ -37,28 +37,28 @@ export class OnePageScroll {
 
     private InitEvent(): void {
         this.swipeHandler = new SwipeHandler(
-            (p) => {this.DirectionScroll(p.y);},
+            (p) => { this.DirectionScroll(p.y); },
             (p) => this.swipeCondition(p)
         );
 
-        addWheelListener( this.container, (e : WheelEvent) => {
-            let distance : number;
+        addWheelListener(this.container, (e: WheelEvent) => {
+            let distance: number;
             e.preventDefault();
 
-            if(e.deltaMode === 1) {
+            if (e.deltaMode === 1) {
                 distance = e.deltaY * 50;
             } else {
                 distance = e.deltaY;
             }
 
-            if(Math.abs(distance) > 80 ) {
+            if (Math.abs(distance) > 80) {
                 this.DirectionScroll(distance);
             }
         })
 
-        // document.addEventListener("scroll", (e) => {
-        //     ExitFullScreen();
-        // })
+        document.addEventListener("touchend", (e) => {
+            ExitFullScreen();
+        })
 
         this.container.addEventListener("touchmove", (e) => {
             e.preventDefault();
@@ -66,22 +66,22 @@ export class OnePageScroll {
     }
 
     private DirectionScroll(direction: number) {
-        if(direction > 0 && this.currentSlideIndex < this.slideNumber - 1) {
+        if (direction > 0 && this.currentSlideIndex < this.slideNumber - 1) {
             this.Next();
-        } else if(direction < 0 && this.currentSlideIndex > 0) {
+        } else if (direction < 0 && this.currentSlideIndex > 0) {
             this.Previous();
         }
     }
-        
+
     public Next(): void {
-        if(this.CanScroll) {   
+        if (this.CanScroll) {
             this.Timeout();
             this.MoveTo(this.currentSlideIndex + 1);
         }
     }
 
     public Previous(): void {
-        if(this.CanScroll) {
+        if (this.CanScroll) {
             this.Timeout();
             this.MoveTo(this.currentSlideIndex - 1);
         }
@@ -110,13 +110,13 @@ export class OnePageScroll {
 
     private AnimationScroll(currentScroll: number, currentTime: number, scrollDistance: number, animationDuration: number) {
 
-        if(animationDuration > currentTime) {
+        if (animationDuration > currentTime) {
 
             currentTime++;
-            let factor = MathFunc.easeInOutQuad(currentTime/animationDuration);
+            let factor = MathFunc.easeInOutQuad(currentTime / animationDuration);
             window.scroll(0, currentScroll + scrollDistance * factor);
-            
-            window.requestAnimationFrame( () => this.AnimationScroll(currentScroll, currentTime, scrollDistance, animationDuration) );
+
+            window.requestAnimationFrame(() => this.AnimationScroll(currentScroll, currentTime, scrollDistance, animationDuration));
         }
     }
 

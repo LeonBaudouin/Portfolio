@@ -38,7 +38,7 @@ class ScriptLoader {
 
     private GeneralScripts() {
         //  Bring the page to the top when you reload it
-        window.onbeforeunload = function() {
+        window.onbeforeunload = function () {
             window.scrollTo(0, 0);
         };
 
@@ -167,17 +167,13 @@ class ScriptLoader {
         this.BindScrollButons();
 
         //  One Page scroll
-        window.addEventListener(
-            "load",
-            () =>
-                (this.onePageScroll = new OnePageScroll(
-                    6,
-                    500,
-                    GetWindowHeight() * 0.5,
-                    [activateProjects, changeBackgroundImage]
-                ))
+        this.onePageScroll = new OnePageScroll(
+            6,
+            500,
+            GetWindowHeight() * 0.5,
+            [activateProjects, changeBackgroundImage]
         );
-        //  One Page scroll
+
         const canvas = CanvasSetup();
     }
 

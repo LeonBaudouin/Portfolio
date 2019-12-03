@@ -12,6 +12,7 @@
 {% set scrollBar = ['Title'] | merge(projectsName) %}
 
 {% block sideButton %}
+    <div class="spacer"></div>
     <div class="scroll-bar sideButton">
         <div class="scroll-bar-container">
             {{ div.fromClassArray(scrollBar, 'scroll-bar-section js-hovered-element') }}
@@ -21,9 +22,11 @@
             {{ div.fromClassArray(scrollBar | slice(1), 'scroll-bar-current-hidden') }}
         </div>
     </div>
+    <div class="spacer"></div>
 {% endblock %}
 
 {% block content %}
+    <div class="spacer"></div>
     <div class="header active">
         {{ title.regular('h1', 'main-title direction-center', 'Mes', 'Projets') }}
         <p class="description">
@@ -33,4 +36,5 @@
     {% for project in projects %}
         {% include "gallery/project.twig" with {project: project} only %}
     {% endfor %}
+    <div class="spacer"></div>
 {% endblock %}

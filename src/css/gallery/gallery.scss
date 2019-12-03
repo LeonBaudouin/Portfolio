@@ -2,11 +2,15 @@
 @import "gallery/_lab.scss";
 
 .gallery-page {
+    height: 100%;
     overflow-y: hidden;
 
     .container {
-        padding-top: 25vh;
         height: 100vh;
+
+        .spacer {
+            height: 25%;
+        }
     }
 
     .header, .project, .lab {
@@ -39,10 +43,6 @@
         opacity: 0.5;
         transform: scale3d(0.8, 0.8, 0.8);
         transition: opacity linear 500ms, transform cubic-bezier(0.67, 0.01, 0.17, 1) 500ms;
-        
-        &:nth-last-child(1) {
-            margin-bottom: 25vh;
-        }
         
         &.active {
             opacity: 1;

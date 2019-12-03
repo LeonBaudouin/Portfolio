@@ -24,6 +24,7 @@
 {% endblock %}
 
 {% block content %}
+    <div class="spacer"></div>
     <div class="header active">
         {{ title.regular('h1', 'main-title direction-center', 'Le', 'Lab') }}
         <p class="description">
@@ -33,4 +34,5 @@
     {% for project in projects %}
         {% include "gallery/lab.twig" with {project: project} only %}
     {% endfor %}
+    <div class="spacer"></div>
 {% endblock %}
