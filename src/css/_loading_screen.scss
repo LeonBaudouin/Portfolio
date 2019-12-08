@@ -24,7 +24,6 @@
     .loading-screen-square-content {
         transform: rotate3d(0, 0, 1, $deg-end);
         animation: rotating-entering-#{$index} $duration $start $curve;
-                    //rotating-loading-#{$index} $second-duration $start+$duration cubic-bezier(.53,-0.2,.35,1);
     }
 
     @keyframes rotating-entering-#{$index} {
@@ -100,7 +99,16 @@
     .loading-screen-wrapper {
         .loading-screen-background-square {
             transform: rotate3d(0,0,1,45deg) scale3d(1.5,1.5,1);
-            animation: background-squares-appears 1s cubic-bezier(.56,0,.26,1.08) backwards;
+        }
+
+        @for $i from 1 to 4 {
+            &:nth-of-type(#{$i}) {
+                .loading-screen-background-square {
+                    $animationDelay: 0.1s + $i * 0.2s;
+                    animation: background-squares-appears 1s $animationDelay cubic-bezier(.56,0,.26,1.08) backwards,
+                                background-squares-idle 2s 3s + $animationDelay cubic-bezier(.29,-0.01,.7,1.01) infinite;
+                }
+            }
         }
 
         @keyframes background-squares-appears {
@@ -109,6 +117,24 @@
             }
             
             100% {
+                transform: rotate3d(0,0,1,45deg) scale3d(1.5,1.5,1);
+            }
+        }
+
+        @keyframes background-squares-idle {
+            0% {
+                transform: rotate3d(0,0,1,45deg) scale3d(1.5,1.5,1);
+            }
+            
+            20% {
+                transform: rotate3d(0,0,1,40deg) scale3d(1.5,1.5,1);
+            }
+            
+            35% {
+                transform: rotate3d(0,0,1,50deg) scale3d(1.5,1.5,1);
+            }
+            
+            55% {
                 transform: rotate3d(0,0,1,45deg) scale3d(1.5,1.5,1);
             }
         }
@@ -124,6 +150,7 @@
 .loading-screen-square {
     transform: translate3d(-50%, calc(-25vh + 350%), 0);
     transition: all 1s cubic-bezier(.56,0,.26,1.08);
+
     .loading-screen-square-content {
         width: var(--size);
         height: var(--size);
@@ -150,34 +177,25 @@
         border: 1.5px solid $color-dark-grey;
         width: 11rem;
         height: 11rem;
-        transition: transform 1s cubic-bezier(.56,0,.26,1.08);  
-    }
-    
-    
-    &:nth-of-type(1) {
-        .loading-screen-background-square:nth-child(1) {
-            width: 11rem;
-            height: 11rem;
-            transition-delay: 0.3s;
-            animation-delay: 0.3s;
-        }
+        animation: background-squares-disappears 1s cubic-bezier(.56,0,.26,1.08) both;
     }
 
-    &:nth-of-type(2) {
-        .loading-screen-background-square {
-            width: 7rem;
-            height: 7rem;
-            transition-delay: 0.5s;
-            animation-delay: 0.5s;
+    @keyframes background-squares-disappears {
+        0% {
+            transform: rotate3d(0,0,1,45deg) scale3d(1.5,1.5,1.5);
+        }
+        100% {
+            transform: rotate3d(0,0,1,45deg) scale3d(1,1,1);
         }
     }
-
-    &:nth-of-type(3) {
-        .loading-screen-background-square {
-            width: 3rem;
-            height: 3rem;
-            transition-delay: 0.7s;
-            animation-delay: 0.7s;
+    
+    @for $i from 1 to 4 {
+        &:nth-of-type(#{$i}) {
+            .loading-screen-background-square {
+                animation-delay: 0.1s + $i * 0.2s;
+                width: 15rem - $i * 4rem;
+                height: 15rem - $i * 4rem;
+            }
         }
     }
 }

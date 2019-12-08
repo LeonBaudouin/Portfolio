@@ -18,7 +18,7 @@ import { DrawableInterface } from "./Core/Abstract/DrawableInterface";
 import BaseDrawable from "./Core/Abstract/BaseDrawable";
 import Noise from "./Noise";
 import { Point } from "./Core/CustomTypes/Point";
-import { easeInOutExpo, easeOutQuad, easeInQuad, easeInExpo, easeInSine, easeInOutSine, easeInOutQuad, easeOutCubic, easeInOutCirc } from "./Core/CustomTypes/Easing";
+import { easeInOutExpo, easeOutQuad, easeInQuad } from "./Core/CustomTypes/Easing";
 import OpacityOverTime from "./Controllers/OpacityOverTime";
 import ImageOpacityOverTime from "./Controllers/ImageOpacityHoverTime";
 import ResetImageOpacity from "./Controllers/ResetImageOpacity";

@@ -144,9 +144,11 @@
 
             &-youtube {
                 &-container {
-                    position: relative; 
-                    width: 80%;
-                    padding-top: 45%; /* 16:9 Aspect Ratio */
+                    position: relative;
+                    @include min_query(width, $regular-page-breakpoint, 80%);
+                    @include min_query(padding-top, $regular-page-breakpoint, 45%);
+                    width: 100%;
+                    padding-top: 56.25%; /* 16:9 Aspect Ratio */
                     border: 2px solid $color-red;
                     justify-self: center;
                 }
@@ -160,7 +162,8 @@
             }
 
             &-img {
-                width: 80%;
+                width: 100%;
+                @include min_query(width, $regular-page-breakpoint, 80%);
                 border: 2px solid $color-red;
                 justify-self: center;
             }

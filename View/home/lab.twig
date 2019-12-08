@@ -42,7 +42,7 @@
                         <span class="lab-title-content">{{ project.getName() }}</span>
                     </h3>
                     <p class="paragraph">{{ project.getDescription() | slice(0, 150) ~ '...' }}</p>
-                    <a href="{{ project.getUrl() }}" target="_blank" class="see-more">Voir le projet</a>
+                    <a href="{{ getUrl('project_show', {id: project.getId()}) }}" class="see-more">Voir le projet</a>
                 </div>
             {% endfor %}
             <a href="{{ getUrl('lab_list') }}" class="button all fade-from-left">

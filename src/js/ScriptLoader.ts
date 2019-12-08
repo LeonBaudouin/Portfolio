@@ -1,11 +1,4 @@
-import { AddClassButton } from "./Buttons/ActivationButton";
-import { OnePageScroll } from "./Scroll/OnePageScroll";
-import { ProjectDisplayer } from "./Buttons/ProjectDisplayer";
 import { CopyToClipBoard } from "./Buttons/CopyToClipBoard";
-import { OnScrollActivator } from "./Scroll/OnScrollActivator";
-import { SwipeLink } from "./Scroll/SwipeLink";
-import { RemovePreload } from "./Miscellaneous/PreloadScript";
-import { LoadingScreen } from "./Miscellaneous/LoadingScreen";
 import { ExecuteFunctionByName } from "./Utils/NonTSFriendlyFuncs";
 import { CanvasSetup, LightCanvasSetup } from "./Canvas/CanvasSetup";
 import { GetWindowHeight } from "./Utils/UtilsFunctions";
@@ -13,13 +6,6 @@ import { EventProvider } from "./Canvas/Core/Events/EventProvider";
 
 class ScriptLoader {
     currentPage: string;
-
-    burgerMenu: AddClassButton;
-
-    displayers: ProjectDisplayer[];
-    onePageScroll: OnePageScroll;
-
-    onScrollActivator: OnScrollActivator;
 
     constructor() {
         this.currentPage = document.body
@@ -50,84 +36,107 @@ class ScriptLoader {
 
         let buttonMenu: HTMLElement = document.querySelector(".nav-burger");
         let menu: HTMLElement = document.querySelector(".nav");
+
         //  Burger Menu
-        this.burgerMenu = new AddClassButton(buttonMenu, menu, "hidden");
+        import('./Buttons/ActivationButton').then(({ ActivationButton }) => {
+            new ActivationButton(buttonMenu, menu, "hidden");
+        });
 
         // Object that add the "active" class when the user scroll the element
         const lazyLoading = [...document.querySelectorAll(".js-lazy-loading")];
-        this.onScrollActivator = new OnScrollActivator(
-            lazyLoading,
-            lazyLoading.map((element: HTMLElement) =>
+
+        import('./Scroll/OnScrollActivator').then(({OnScrollActivator}) => {
+            new OnScrollActivator(
+                lazyLoading,
+                lazyLoading.map((element: HTMLElement) =>
                 element.dataset.offset
-                    ? -window.innerHeight * parseInt(element.dataset.offset)
-                    : -window.innerHeight * 0.5
-            ),
-            element => {
-                if (element instanceof HTMLImageElement) {
-                    element.src = element.dataset.src;
+                ? -window.innerHeight * parseInt(element.dataset.offset)
+                : -window.innerHeight * 0.5
+                ),
+                element => {
+                    if (element instanceof HTMLImageElement) {
+                        element.src = element.dataset.src;
+                    }
+                    if (element instanceof HTMLSourceElement) {
+                        element.srcset = element.dataset.srcset;
+                    }
                 }
-                if (element instanceof HTMLSourceElement) {
-                    element.srcset = element.dataset.srcset;
-                }
-            }
-        );
+            );
+        })
 
         //  Bind a automatic copy to clipboard to elements with the class ".js-copy-to-clipboard"
         this.BindClipboardButtons();
     }
 
     private MainPageScripts() {
-        //  Objects that add the classes required to display projects every 7000ms
-        const project = new ProjectDisplayer(".photo-projet", ".projets", 7000);
-        const lab = new ProjectDisplayer(".photo-lab", ".lab", 7000);
 
-        const pages = document.querySelectorAll(".page");
+        const windowHeight = GetWindowHeight();
 
-        const swipeLink = new SwipeLink([
-            null,
-            "profil.html",
-            "projects.html",
-            "lab.html"
-        ]);
-
-        const activatePages = (i: number) => {
-            const page = pages[i];
-            swipeLink.updateSlideIndex(i);
-            if (!page.classList.contains("active")) {
-                page.classList.add("active");
-                switch (i) {
-                    case 2:
-                        project.Activate();
-                        break;
-                    case 3:
-                        lab.Activate();
-                        break;
-                    default:
-                        break;
+        Promise.all([
+            import('./Buttons/ProjectDisplayer'),
+            import('./Scroll/SwipeLink'),
+            import('./Scroll/OnePageScroll')
+        ]).then(([
+            {ProjectDisplayer},
+            {SwipeLink},
+            {OnePageScroll}
+        ]) => {
+            //  Objects that add the classes required to display projects every 7000ms
+            const project = new ProjectDisplayer(".photo-projet", ".projets", 7000);
+            const lab = new ProjectDisplayer(".photo-lab", ".lab", 7000);
+    
+            const pages = document.querySelectorAll(".page");
+    
+            const swipeLink = new SwipeLink([
+                null,
+                "profil.html",
+                "projects.html",
+                "lab.html"
+            ]);
+    
+            const activatePages = (i: number) => {
+                const page = pages[i];
+                swipeLink.updateSlideIndex(i);
+                if (!page.classList.contains("active")) {
+                    page.classList.add("active");
+                    switch (i) {
+                        case 2:
+                            project.Activate();
+                            break;
+                        case 3:
+                            lab.Activate();
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
-        };
+            };
+    
+            //  One Page scroll
+            const onePage = new OnePageScroll(4, 500, windowHeight, [
+                activatePages
+            ]);
 
-        //  One Page scroll
-        this.onePageScroll = new OnePageScroll(4, 500, GetWindowHeight(), [
-            activatePages
-        ]);
+            this.BindScrollButons(onePage);
+
+        })
 
         //  Bind a one page scroll to the scroll icon and every sections of the scroll bar
-        this.BindScrollButons();
 
         const canvas = CanvasSetup();
     }
 
     private ProfilePageScripts() {
         // Object that add the "active" class when the user scroll the element
-        this.onScrollActivator = new OnScrollActivator(
-            [...document.querySelectorAll(".js-activate-on-scroll")],
-            window.innerHeight / 4,
-            element => {
-                element.classList.add("active");
-            }
-        );
+        import('./Scroll/OnScrollActivator').then(({OnScrollActivator}) => {
+            new OnScrollActivator(
+                [...document.querySelectorAll(".js-activate-on-scroll")],
+                window.innerHeight / 4,
+                element => {
+                    element.classList.add("active");
+                }
+            );
+        });
 
         const canvas = CanvasSetup();
     }
@@ -164,15 +173,16 @@ class ScriptLoader {
             EventProvider.dispatch("change-section-image", images[i]);
         };
 
-        this.BindScrollButons();
-
         //  One Page scroll
-        this.onePageScroll = new OnePageScroll(
-            6,
-            500,
-            GetWindowHeight() * 0.5,
-            [activateProjects, changeBackgroundImage]
-        );
+        import('./Scroll/OnePageScroll').then(({OnePageScroll}) => {
+            const onePage = new OnePageScroll(
+                6,
+                500,
+                GetWindowHeight() * 0.5,
+                [activateProjects, changeBackgroundImage]
+            );
+            this.BindScrollButons(onePage);
+        })
 
         const canvas = CanvasSetup();
     }
@@ -209,15 +219,18 @@ class ScriptLoader {
             EventProvider.dispatch("change-section-image", images[i]);
         };
 
-        this.BindScrollButons();
-
         //  One Page scroll
-        this.onePageScroll = new OnePageScroll(
-            6,
-            500,
-            GetWindowHeight() * 0.5,
-            [activateLabs, changeBackgroundImage]
-        );
+        import('./Scroll/OnePageScroll').then(({OnePageScroll}) => {
+            const onePage = new OnePageScroll(
+                6,
+                500,
+                GetWindowHeight() * 0.5,
+                [activateLabs, changeBackgroundImage]
+            );
+
+            this.BindScrollButons(onePage);
+        });
+
         const canvas = LightCanvasSetup();
     }
 
@@ -247,11 +260,11 @@ class ScriptLoader {
         const canvas = LightCanvasSetup(img);
     }
 
-    private BindScrollButons() {
+    private BindScrollButons(onePageScroll: any) {
         const scrollIcon = document.querySelector(".scroll-icon");
         if (scrollIcon) {
             scrollIcon.addEventListener("click", () =>
-                this.onePageScroll.Next()
+                onePageScroll.Next()
             );
         }
 
@@ -260,7 +273,7 @@ class ScriptLoader {
         );
         for (let i = 0; i < scrollBarSections.length; i++) {
             scrollBarSections[i].addEventListener("click", () =>
-                this.onePageScroll.MoveTo(i)
+                onePageScroll.MoveTo(i)
             );
         }
     }

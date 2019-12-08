@@ -1,4 +1,4 @@
-export class AddClassButton {
+export class ActivationButton {
 
     className: string;
     button: HTMLElement;
