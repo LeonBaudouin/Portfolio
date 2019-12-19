@@ -24,7 +24,7 @@
                     <h4 class="project-type title">{{ project.getType() }}</h4>
                     <div class="project-skills">
                         {% for skill in project.getSkills() %}
-                            <img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="{{ skill.getName() }}" class="project-skills-icon">
+                            <img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="{{ skill.getName() }}" title="{{ skill.getName() }}" class="project-skills-icon">
                         {% endfor %}
                     </div>
                     <a href="{{ getUrl('project_show', {id: project.getId()}) }}" class="project-more see-more">Voir le projet</a>

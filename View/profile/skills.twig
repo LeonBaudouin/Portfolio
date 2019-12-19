@@ -8,7 +8,7 @@
         <article class="skills-set js-activate-on-scroll">
             <div class="skills-set-icons">
                 {% for skill in skillsSet.getHigherSkills() %}
-                    <img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="Logo {{ skill.getName() }}" class="skills-set-icons-element {{ logo.scaling }}">
+                    <img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="Logo {{ skill.getName() }}" title="{{ skill.getName() }}" class="skills-set-icons-element {{ logo.scaling }}">
                 {% endfor %}
             </div>
             {% set titleArray = skillsSet.getName() | split(' ') %}

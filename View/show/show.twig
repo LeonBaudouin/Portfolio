@@ -4,7 +4,7 @@
     {{ title.regular('h1', 'main-title', titleArray[0], titleArray[1]) }}
     <div class='skills'>
         {% for skill in project.getSkills() %}
-            <img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="{{ skill.getName() }}" class="skills-icon">
+            <img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="{{ skill.getName() }}" title="{{ skill.getName() }}" class="skills-icon">
         {% endfor %}
     </div>
     <a href="{{ getUrl(isLab ? 'lab_list' : 'project_list') }}" class="back-to-project">{{ isLab ? 'Retour au lab' : 'Retour aux projets'}}</a>
