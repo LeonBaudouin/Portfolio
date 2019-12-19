@@ -1,5 +1,4 @@
 {% import "macro/div.twig" as div %}
-{% import "macro/svg.twig" as svg %}
 {% extends "layout.twig" %}
 
 {% block pageName %}main-page{% endblock %}
@@ -16,15 +15,7 @@
             {{ div.fromClassArray(scrollBar | slice(1), 'scroll-bar-current-hidden') }}
         </div>
     </div>
-
-    <svg class="scroll-icon sideButton js-hovered-element" viewbox="-1 0 15 52" width="16" height="52">
-        {% set lines = [
-            {from: {x: 1, y: 8}, to: {x: 1, y: 46}},
-            {from: {x: 7, y: 17}, to: {x: 7, y: 55}},
-            {from: {x: 13, y: 0}, to: {x: 13, y: 38}}
-        ] %}
-        {{ svg.lines(lines, "scroll-icon-line", 2) }}
-    </svg>
+    {% include 'svg/scroll-icon.twig' only %}
 {% endblock %}
 
 {% block content %}

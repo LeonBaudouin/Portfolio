@@ -9,36 +9,13 @@ use \Model\Skill\SkillRepository;
 class SkillSetRepository extends AbstractRepository
 {
     const TABLE_NAME = 'skill_sets';
+    
+    const POPULATE_METHOD = [self::class, 'createAndAddSkills'];
 
-    public static function getById($id)
+    public static function createAndAddSkills(array $data)
     {
-        $data = self::Select(['id' => $id]);
-        if (empty($data)) {
-            return null;
-        }
-
         $skillSet = SkillSetFactory::create($data);
-        $skillSet->setSkills(SkillRepository::getSkillsFromSkillSet($skillSet));
-
+        $skillSet->setSkills(SkillRepository::getAll(['skill_set' => $skillSet->getId(), 'is_visible' => 1]));
         return $skillSet;
-    }
-
-    public static function getAll()
-    {
-        $dataArray = self::Select();
-
-        $createSkillSetAndAddSkills = function ($data) {
-            $skillSet = SkillSetFactory::create($data);
-            $skills = array_filter(
-                SkillRepository::getSkillsFromSkillSet($skillSet),
-                function (Skill $cur) {
-                    return $cur->getIsVisible();
-                }
-            );
-            $skillSet->setSkills($skills);
-            return $skillSet;
-        };
-
-        return array_map($createSkillSetAndAddSkills, $dataArray);
     }
 }

@@ -9,20 +9,7 @@ class SkillRepository extends AbstractRepository
     const TABLE_NAME = 'skills';
     const PROJECT_RELATION_TABLE = 'projects_skills_relation';
 
-    public static function getById($id)
-    {
-        $data = self::Select(['id' => $id]);
-        if (empty($data)) {
-            return null;
-        }
-        return SkillFactory::create($data);
-    }
-
-    public static function getAll()
-    {
-        $dataArray = self::Select();
-        return array_map([SkillFactory::class, 'create'], $dataArray);
-    }
+    const POPULATE_METHOD = [SkillFactory::class, 'create'];
 
     public static function getSkillsFromProject(
         \Model\Project\Project $project
@@ -32,13 +19,13 @@ class SkillRepository extends AbstractRepository
         $statement->execute(['id' => $project->getId()]);
         $dataArray = $statement->fetchAll(\PDO::FETCH_ASSOC);
         
-        return array_map([SkillFactory::class, 'create'], $dataArray);
+        return array_map(self::POPULATE_METHOD, $dataArray);
     }
 
     public static function getSkillsFromSkillSet(
         \Model\SkillSet\SkillSet $skillSet
     ) {
         $dataArray = self::Select(['skill_set' => $skillSet->getId()]);
-        return array_map([SkillFactory::class, 'create'], $dataArray);
+        return array_map(self::POPULATE_METHOD, $dataArray);
     }
 }

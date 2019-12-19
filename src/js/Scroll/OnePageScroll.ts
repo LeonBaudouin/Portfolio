@@ -84,14 +84,14 @@ export class OnePageScroll {
     }
 
     public Next(): void {
-        if (this.CanScroll) {
+        if (this.CanScroll && this.currentSlideIndex + 1 < this.slideNumber) {
             this.Timeout();
             this.MoveTo(this.currentSlideIndex + 1);
         }
     }
 
     public Previous(): void {
-        if (this.CanScroll) {
+        if (this.CanScroll && this.currentSlideIndex > 0) {
             this.Timeout();
             this.MoveTo(this.currentSlideIndex - 1);
         }

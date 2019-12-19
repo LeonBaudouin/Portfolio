@@ -12,7 +12,6 @@
 {% set scrollBar = ['Title'] | merge(projectsName) %}
 
 {% block sideButton %}
-    <div class="spacer"></div>
     <div class="scroll-bar sideButton">
         <div class="scroll-bar-container">
             {{ div.fromClassArray(scrollBar, 'scroll-bar-section js-hovered-element') }}
@@ -22,6 +21,7 @@
             {{ div.fromClassArray(scrollBar | slice(1), 'scroll-bar-current-hidden') }}
         </div>
     </div>
+    {% include 'svg/scroll-icon.twig' only %}
 {% endblock %}
 
 {% block content %}
