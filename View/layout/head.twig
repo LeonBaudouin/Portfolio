@@ -1,12 +1,15 @@
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta property="og:title" content="{{ title }}" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta property="og:title" content="Léon Baudouin - Portfolio">
+    <meta property="og:description" content="Portfolio d'un développeur créatif, projets et expérimentations en tout genre !">
+    <meta property="og:image" content="https://leonbaudouin.fr/assets/thumbnail.jpg">
+    <meta property="og:url" content="https://leonbaudouin.fr">
     <meta name="theme-color" content="{{ color }}">
     <meta name="msapplication-navbutton-color" content="{{ color }}">
     <meta name="apple-mobile-web-app-status-bar-style" content="{{ color }}">
-    <meta name="description" content="Je me présente, je m’appelle Léon Baudouin, j’ai 19 ans et je suis un développeur et motion designer passionné et voici mon portfolio." />
+    <meta name="description" content="Je me présente, je m’appelle Léon Baudouin, j’ai 19 ans et je suis un développeur et motion designer passionné et voici mon portfolio."/>
     <meta name="theme-color" content="{{ color }}">
     <meta name="msapplication-navbutton-color" content="{{ color }}">
     <meta name="apple-mobile-web-app-status-bar-style" content="{{ color }}">
@@ -15,22 +18,25 @@
         /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
-        (function() {
-            var u="//leonbaudouin.fr/analytics/";
-            _paq.push(['setTrackerUrl', u+'matomo.php']);
+        (function () {
+            var u = "//leonbaudouin.fr/analytics/";
+            _paq.push([
+                'setTrackerUrl',
+                u + 'matomo.php'
+            ]);
             _paq.push(['setSiteId', '1']);
-            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-        })();   
+            var d = document,
+                g = d.createElement('script'),
+                s = d.getElementsByTagName('script')[0];
+            g.type = 'text/javascript';
+            g.async = true;
+            g.defer = true;
+            g.src = u + 'matomo.js';
+            s.parentNode.insertBefore(g, s);
+        })();
     </script>
-    <link
-        href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,800"
-        rel="stylesheet"
-    />
-    <link
-        href="/assets/main.css"
-        rel="stylesheet"
-    />
-    <link rel="icon" href="{{ getImagePath('favicon.png') }}" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,800" rel="stylesheet"/>
+    <link href="/assets/main.css" rel="stylesheet"/>
+    <link rel="icon" href="{{ getImagePath('favicon.png') }}"/>
     <title>{{ title }}</title>
 </head>
