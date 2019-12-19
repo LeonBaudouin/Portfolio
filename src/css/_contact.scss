@@ -35,7 +35,7 @@
             grid-template-columns: repeat(4, 1fr);
             grid-template-areas: 
                         "cv cv mail mail"
-                        "codepen instagram github youtube";
+                        "twitter instagram github youtube";
                         
             justify-items: center;
             align-items: center;
@@ -43,7 +43,7 @@
             @media screen and (min-width: $regular-page-breakpoint) {
                 grid-template-areas: 
                         "cv mail mail mail"
-                        "codepen instagram github youtube";
+                        "twitter instagram github youtube";
             }
         }
 
@@ -116,26 +116,33 @@
         &.codepen {
             grid-area: codepen;
             &:before {
-                content: "\f100";
+                content: "\f104";
             }
         }
     
         &.github{
             grid-area: github;
             &:before {
-                content: "\f101";
+                content: "\f100";
             }
         }
     
         &.instagram{
             grid-area: instagram;
             &:before {
-                content: "\f102";
+                content: "\f101";
             }
         }
     
         &.youtube{
             grid-area: youtube;
+            &:before {
+                content: "\f102";
+            }
+        }
+    
+        &.twitter{
+            grid-area: twitter;
             &:before {
                 content: "\f103";
             }

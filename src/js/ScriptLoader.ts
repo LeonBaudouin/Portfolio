@@ -25,7 +25,7 @@ class ScriptLoader {
     private GeneralScripts() {
         //  Bring the page to the top when you reload it
         window.onbeforeunload = function () {
-            window.scrollTo(0, 0);
+            document.body.classList.add("loading");
         };
 
         let preloadElements = document.querySelectorAll(".preload");
@@ -81,9 +81,9 @@ class ScriptLoader {
             {SwipeLink},
             {OnePageScroll}
         ]) => {
-            //  Objects that add the classes required to display projects every 7000ms
-            const project = new ProjectDisplayer(".photo-projet", ".projets", 7000);
-            const lab = new ProjectDisplayer(".photo-lab", ".lab", 7000);
+            //  Objects that add the classes required to display projects every 10000ms
+            const project = new ProjectDisplayer(".photo-projet", ".projets", 10000);
+            const lab = new ProjectDisplayer(".photo-lab", ".lab", 10000);
     
             const pages = document.querySelectorAll(".page");
     
@@ -116,6 +116,8 @@ class ScriptLoader {
             const onePage = new OnePageScroll(4, 500, windowHeight, [
                 activatePages
             ]);
+
+            onePage.MoveTo(0)
 
             this.BindScrollButons(onePage);
 
@@ -181,6 +183,7 @@ class ScriptLoader {
                 GetWindowHeight() * 0.5,
                 [activateProjects, changeBackgroundImage]
             );
+            onePage.MoveTo(0)
             this.BindScrollButons(onePage);
         })
 
@@ -227,6 +230,7 @@ class ScriptLoader {
                 GetWindowHeight() * 0.5,
                 [activateLabs, changeBackgroundImage]
             );
+            onePage.MoveTo(0)
 
             this.BindScrollButons(onePage);
         });

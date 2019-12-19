@@ -7,6 +7,7 @@ class UrlBuilder {
     const FOREIGN_URL = [
         'github' => 'https://github.com/LeonBaudouin',
         'codepen' => 'https://codepen.io/leonbaudouin/',
+        'twitter' => 'https://twitter.com/BaudouinLeon',
         'instagram' => 'https://www.instagram.com/leon2motion/',
         'youtube' => 'https://www.youtube.com/channel/UCbZjms-bVUHVsETHmuvnWRQ',
         'cv' => './cv.pdf'

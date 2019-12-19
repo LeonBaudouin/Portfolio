@@ -1,39 +1,39 @@
 {% import "macro/title.twig" as title %}
 <div class="header active" data-background-desktop-image="{{ getImagePath( 'gallery/' ~ project.getDesktopGalleryImage()) }}" data-background-phone-image="{{ getImagePath( 'gallery/' ~ project.getPhoneGalleryImage()) }}">
-	{% set titleArray = project.getName()|split(' ') %}
-	{{ title.regular('h1', 'main-title', titleArray[0], titleArray[1]) }}
-	<div class='skills'>
-		{% for skill in project.getSkills() %}
-			<img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="{{ skill.getName() }}" class="skills-icon">
-		{% endfor %}
-	</div>
-	<a href="{{ getUrl(isLab ? 'lab_list' : 'project_list') }}" class="back-to-project">{{ isLab ? 'Retour au lab' : 'Retour aux projets'}}</a>
+    {% set titleArray = project.getName()|split(' ') %}
+    {{ title.regular('h1', 'main-title', titleArray[0], titleArray[1]) }}
+    <div class='skills'>
+        {% for skill in project.getSkills() %}
+            <img src="{{ getImagePath(skill.getLogo(), 'svg') }}" alt="{{ skill.getName() }}" class="skills-icon">
+        {% endfor %}
+    </div>
+    <a href="{{ getUrl(isLab ? 'lab_list' : 'project_list') }}" class="back-to-project">{{ isLab ? 'Retour au lab' : 'Retour aux projets'}}</a>
 </div>
 <div class="content">
-	<svg class='upper-triangle' version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 1920 172" xml:space="preserve">
-		<polygon class="upper-triangle-path" points="0,0 1920,172 0,172 "/>
-		<line class="upper-triangle-stroke" x1="0" y1="0" x2="1920" y2="172"/>
-	</svg>
-	<div class="elements active">
-		{% for element in description %}
-			{% if element.getType() == 'text' %}
-				<p class="element-paragraph paragraph">{{ element.getContent()|nl2br }}</p>
-			{% elseif element.getType() == 'youtube' %}
-				<div class="element-youtube-container">
-					<iframe class="element-youtube" src="{{ element.getContent() }}" frameborder="0" allowfullscreen></iframe>
-				</div>
-			{% elseif element.getType() == 'title' %}
-				<h2 class="title regular-title element-title">
-					<div class="first-part">
-						<span class="first-part-content">{{ element.getContent() }}</span>
-					</div>
-				</h2>
-			{% elseif element.getType() == 'image' %}
-				<img class="element-img" src='{{ getImagePath(element.getContent()) }}' alt='Illustration du projet'/>
-			{% endif %}
-		{% endfor %}
-		<div class="element-link-container">
-			<a href="{{ project.getUrl() }}" target="_blank" class="element-link">Voir le projet</a>
-		</div>
-	</div>
+    <svg class='upper-triangle' version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 1920 172" xml:space="preserve">
+        <polygon class="upper-triangle-path" points="0,0 1920,172 0,172 "/>
+        <line class="upper-triangle-stroke" x1="0" y1="0" x2="1920" y2="172"/>
+    </svg>
+    <div class="elements active">
+        {% for element in description %}
+            {% if element.getType() == 'text' %}
+                <p class="element-paragraph paragraph">{{ element.getContent()|nl2br }}</p>
+            {% elseif element.getType() == 'youtube' %}
+                <div class="element-youtube-container">
+                    <iframe class="element-youtube" src="{{ element.getContent() }}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            {% elseif element.getType() == 'title' %}
+                <h2 class="title regular-title element-title">
+                    <div class="first-part">
+                        <span class="first-part-content">{{ element.getContent() }}</span>
+                    </div>
+                </h2>
+            {% elseif element.getType() == 'image' %}
+                <img class="element-img" src='{{ getImagePath('description/' ~ element.getContent()) }}' alt='Illustration du projet'/>
+            {% endif %}
+        {% endfor %}
+        <div class="element-link-container">
+            <a href="{{ project.getUrl() }}" target="_blank" class="element-link">Voir le projet</a>
+        </div>
+    </div>
 </div>
