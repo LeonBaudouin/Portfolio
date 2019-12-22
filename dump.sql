@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL DEFAULT '',
   `date` varchar(100) NOT NULL DEFAULT '',
-  `description` text,
+  `description` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -39,21 +39,21 @@ CREATE TABLE IF NOT EXISTS `descriptions` (
   `project_id` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
   `content` text NOT NULL,
-  `order` int(11) NOT NULL DEFAULT '1',
+  `order` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `project_id` (`project_id`),
   CONSTRAINT `foreign_project_id` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table portfolio_development.descriptions : ~26 rows (environ)
+-- Listage des données de la table leonbaudouin_portfolio.descriptions : ~41 rows (environ)
 /*!40000 ALTER TABLE `descriptions` DISABLE KEYS */;
 INSERT INTO `descriptions` (`id`, `project_id`, `type`, `content`, `order`) VALUES
 	(1, 1, 'text', 'Glint est mon projet tutoré de 2ème année de DUT MMI. Ce projet réunit une équipe de cinq autres étudiants. Nous nous sommes fixé l’objectif ambitieux de créer un jeu vidéo. La production inclut, la création d’une charte graphique, de sprites, d’animations, d’opérations de communication mais surtout du développement du jeu en lui-même.\r\n\r\nJ\'ai ainsi assuré le rôle de développeur logiciel. Je me suis formé en autodidacte au C#, au développement Unity, aux principes de POO avancé. Je me suis spécialisé dans le développement de l’Interface Utilisateur. Ça inclut les menus, les modifications des touches de jeu, le HUD, la gestion des textes (changement de langue par exemple). Unity ne m’a pas facilité la tâche, il ne dispose pas encore de beaucoup d’outils pour manipuler l’UI.', 200),
-	(2, 2, 'text', 'Ce projet est mon premier site web. Il s’agit d’un Portrait Chinois one-page. Le concept, en 2 mots, est d’associer sa personnalité avec un thème. Ce site web est donc construit autour de la formule consacrée “Si j’étais… je serais…”. Ce projet est une première expérience dans le monde du web à la fois en développement et en design.\r\n\r\nDurant la conception graphique, la maquette a été revue plusieurs fois avant d’avoir un résultat qui me convient. Chaque “pages“ correspondant à une facette de ma personnalité, j’ai décidé de donner un thème de couleur particulier à chacune d’elles. En ce qui concerne le développement, le site étant one-page, j’ai créé une navigation entièrement encapsulée par du Javascript. J’ai utilisé jQuery en pour manipuler le DOM avec facilité. J’ai aussi ajouté un canvas HTML5, une technologie qui m’a intéressée très tôt.', 200),
+	(2, 2, 'text', 'Ce projet est mon premier site web. Il s’agit d’un Portrait Chinois one-page. Le concept, en 2 mots, est d’associer sa personnalité avec un thème. Ce site web est donc construit autour de la formule consacrée “Si j’étais… je serais…”. Ce projet est une première expérience dans le monde du web à la fois en développement et en design.', 200),
 	(3, 3, 'text', 'La fin de la 1ère année de DUT approchant et afin de proposer une alternative au CV traditionnel, j’ai réalisé un CV web. Ce dernier avait un triple enjeu : expliquer mon parcours et mon profil, montrer mes compétences techniques par le code et ma personnalité par le design du site.\r\n\r\nJ’ai basé le design du site sur des leitmotivs propres au motion design. J’ai pensé chaque élément avec une animation associée. j’ai trouvé intéressant jouer avec la dichotomie technique / créatif avec les couleurs et les polices d’écriture. Ce projet fut une occasion idéale pour m’initier au CSS avancé. J’ai expérimenté les animations complexes, les transform3d, les pseudos-éléments, les variables CSS et parfois même tout ça en même temps.', 200),
 	(4, 4, 'text', 'Alors que je fais du Motion Design depuis 2015, début 2017, je me lance sur un projet de Kinetic Typography sur la musique Call Me, de Shinedown. En effet, bien qu’ayant souvent travaillé sur des animations de textes et des animations musicales, je n’aie jamais associé les deux. Cette musique m’a paru idéale car les paroles et le rythme, notamment au sein du générique, m’inspiraient beaucoup.', 200),
 	(5, 5, 'text', 'En décembre 2017, je découvre l’univers du Generative Design avec notamment le compte twitter @BeesAndBombs. Cet univers qui allie mes deux passions, le motion design et le développement, m’a beaucoup inspiré. Je me suis donc lancé dans la conception d’HEXAGONE, ma dernière animation musicale à ce jour.\r\n\r\nPour cette animation, je voulais travailler avec l’environnement 3D de After Effects avec notamment le plug-in Trapcode Particular. Cette animation a aussi nécessité un travail de synesthésie car j’ai essayé d’adapter au mieux les mouvements à l’ambiance et aux subtilités de la musique.', 200),
-	(6, 6, 'text', 'Cette expérimentation voit son origine au croisement de deux souhaits : créer un écran de chargement pour le web et m\'initier aux Canvas HTML5. Je me suis donc lancé dans le développement de systèmes de particules basé sur les déplacements de la souris, sur le clic ou encore sur des curseurs glissières.\r\n\r\nL\'idée était de faire évoluer chacune des particules de façon indépendante mais avec des comportements similaires. Ainsi, cette expérimentation a été l\'occasion de me former à la programmation orientée objet. Ce fut aussi l\'occasion de mettre en pratique mes anciens cours de physique avec le calcul de fonctions de chute libre.', 200),
+	(6, 6, 'text', 'Cette expérimentation voit son origine au croisement de deux souhaits : créer un écran de chargement pour le web et m\'initier aux Canvas HTML5. Je me suis donc lancé dans le développement de systèmes de particules basé sur les déplacements de la souris, sur le clic ou encore sur des curseurs glissières.', 200),
 	(7, 7, 'text', 'Il s\'agit non seulement de mon tout premier projet JavaScript mais aussi de mon tout premier projet de développement en autonomie. Il s\'agit d\'un petit jeu de couleurs. Contrairement à mes autres projets qui mettent la logique au service du visuel, celui-ci, moins artistique, met le visuel au service de la logique.\r\n\r\nEn effet, un jeu “un joueur” réduit à sa plus simple forme est une interaction entre le joueur et “la machine”. Ce fut donc l\'occasion d\'expérimenter la gestion des inputs (entrés) et des outputs (sorties) utilisateurs avec la gestion de formulaire HTML et l\'animation du DOM. Pour me faciliter la tâche, je me suis servi de la bibliothèque JQuery.', 200),
 	(8, 8, 'text', 'La musique Cane Shuga m’a beaucoup inspiré dès ses premières écoutes. Cette musique aux tonalités bien détachées et à la mélodie assez répétitive est un terrain de jeu idéal pour mettre un premier pied dans les animations musicales. Ce projet, initialement très prometteur s’est vu grandement ralenti au milieu de sa conception. En effet, l’absence d’une idée parfaitement définie et ma trop grande ambition vis-à-vis de ce projet ont fait que cette animation ne me satisfait pas. Néanmoins, j’ai grandement appris grâce à sa conception et cela m’a permis de créer de nouvelles animations dont je suis très fier.', 200),
 	(9, 9, 'text', 'Lors de ma 1ère année en MMI, j\'ai effectué un stage à Mikros Image en tant que VFX artist au sein du département Motion Design. J’ai profité de l’occasion d’être entouré de Motion Designers expérimentés pour réaliser une animation à l’effigie de cette société de post-production.', 200),
@@ -85,10 +85,16 @@ INSERT INTO `descriptions` (`id`, `project_id`, `type`, `content`, `order`) VALU
 	(35, 12, 'text', 'Afin de faire découvrir les abysses, créer notre site sous forme d\'un one-page en ScroliTelling tombait sous le sens. Nous avons aussi décidé de réaliser un environnement 3D pour rendre l\'expérience plus immersive. Ainsi, le visiteur suit un sous-marin s\'enfonçant dans les profondeurs de l\'océan. Il y découvre plusieurs espèces abyssales et quelques données sur la vie sous-marine sous forme d\'infographies.', 400),
 	(36, 12, 'image', 'AbyssCalamar.jpg', 500),
 	(37, 12, 'text', 'Rachel Duvauchelle c\'est occupée de réaliser les modèles 3D nécessaires, la maquette du site et les infographies 2D. Je me suis occupé de l\'intégration, du développement front-end et de l\'animation de l\'ensemble avec les technologies SASS, Typescript et ThreeJS pour la 3D.', 600),
-	(38, 12, 'image', 'AbyssLastPage.png', 700);
+	(38, 12, 'image', 'AbyssLastPage.png', 700),
+	(39, 3, 'image', 'CvMainPage.png', 300),
+	(40, 2, 'image', 'PortraitMockup.jpg', 300),
+	(41, 2, 'text', 'Durant la conception graphique, la maquette a été revue plusieurs fois avant d’avoir un résultat qui me convient. Chaque “pages“ correspondant à une facette de ma personnalité, j’ai décidé de donner un thème de couleur particulier à chacune d’elles. En ce qui concerne le développement, le site étant one-page, j’ai créé une navigation entièrement encapsulée par du Javascript. J’ai utilisé jQuery en pour manipuler le DOM avec facilité. J’ai aussi ajouté un canvas HTML5, une technologie qui m’a intéressée très tôt.', 400),
+	(42, 6, 'image', 'Particles.png', 300),
+	(43, 6, 'text', 'L\'idée était de faire évoluer chacune des particules de façon indépendante mais avec des comportements similaires. Ainsi, cette expérimentation a été l\'occasion de me former à la programmation orientée objet. Ce fut aussi l\'occasion de mettre en pratique mes anciens cours de physique avec le calcul de fonctions de chute libre.', 400),
+	(44, 7, 'image', 'Couleur.jpg', 300);
 /*!40000 ALTER TABLE `descriptions` ENABLE KEYS */;
 
--- Listage de la structure de la table portfolio_development. projects
+-- Listage de la structure de la table leonbaudouin_portfolio. projects
 CREATE TABLE IF NOT EXISTS `projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
@@ -98,32 +104,32 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `desktop_featured_image` varchar(50) NOT NULL DEFAULT '',
   `phone_featured_image` varchar(50) NOT NULL DEFAULT '',
   `url` varchar(150) NOT NULL DEFAULT '',
-  `description` text,
-  `is_featured` tinyint(4) NOT NULL DEFAULT '0',
-  `is_lab` tinyint(4) NOT NULL DEFAULT '0',
-  `is_visible` tinyint(4) NOT NULL DEFAULT '1',
-  `order` int(11) DEFAULT '0',
+  `description` text DEFAULT NULL,
+  `is_featured` tinyint(4) NOT NULL DEFAULT 0,
+  `is_lab` tinyint(4) NOT NULL DEFAULT 0,
+  `is_visible` tinyint(4) NOT NULL DEFAULT 1,
+  `order` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table portfolio_development.projects : ~10 rows (environ)
+-- Listage des données de la table leonbaudouin_portfolio.projects : ~12 rows (environ)
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
 INSERT INTO `projects` (`id`, `name`, `type`, `desktop_gallery_image`, `phone_gallery_image`, `desktop_featured_image`, `phone_featured_image`, `url`, `description`, `is_featured`, `is_lab`, `is_visible`, `order`) VALUES
 	(1, 'Glint Game', 'Jeu vidéo', 'GlintDesktop.jpg', 'GlintPhone.jpg', 'Glint_1920.png', 'Glint_800.png', 'https://www.glintgame.fr', 'Glint est mon projet tutoré de 2ème année de DUT MMI. Ce projet réunit une équipe de cinq autres étudiants. Nous nous sommes fixé l’objectif ambitieux de créer un jeu vidéo. La production inclut, la création d’une charte graphique, de sprites, d’animations, d’opérations de communication mais surtout du développement du jeu en lui-même.\r\n\r\nJ\'ai ainsi assuré le rôle de développeur logiciel. Je me suis formé en autodidacte au C#, au développement Unity, aux principes de POO avancé. Je me suis spécialisé dans le développement de l’Interface Utilisateur. Ça inclut les menus, les modifications des touches de jeu, le HUD, la gestion des textes (changement de langue par exemple). Unity ne m’a pas facilité la tâche, il ne dispose pas encore de beaucoup d’outils pour manipuler l’UI.', 1, 0, 1, 100),
-	(2, 'Portrait Chinois', 'Site Web', 'PortraitDesktop.jpg', 'PortraitPhone.jpg', '', '', './portrait/', 'Ce projet est mon premier site web. Il s’agit d’un Portrait Chinois one-page. Le concept, en 2 mots, est d’associer sa personnalité avec un thème. Ce site web est donc construit autour de la formule consacrée “Si j’étais… je serais…”. Ce projet est une première expérience dans le monde du web à la fois en développement et en design.\r\n\r\nDurant la conception graphique, la maquette a été revue plusieurs fois avant d’avoir un résultat qui me convient. Chaque “pages“ correspondant à une facette de ma personnalité, j’ai décidé de donner un thème de couleur particulier à chacune d’elles. En ce qui concerne le développement, le site étant one-page, j’ai créé une navigation entièrement encapsulée par du Javascript. J’ai utilisé jQuery en pour manipuler le DOM avec facilité. J’ai aussi ajouté un canvas HTML5, une technologie qui m’a intéressée très tôt.', 0, 0, 1, 800),
-	(3, 'CV Interactif', 'Site Web', 'CvDesktop.png', 'CvPhone.png', 'CV_1920.png', 'CV_800.png', './cv/', 'La fin de la 1ère année de DUT approchant et afin de proposer une alternative au CV traditionnel, j’ai réalisé un CV web. Ce dernier avait un triple enjeu : expliquer mon parcours et mon profil, montrer mes compétences techniques par le code et ma personnalité par le design du site.\r\n\r\nJ’ai basé le design du site sur des leitmotivs propres au motion design. J’ai pensé chaque élément avec une animation associée. j’ai trouvé intéressant jouer avec la dichotomie technique / créatif avec les couleurs et les polices d’écriture. Ce projet fut une occasion idéale pour m’initier au CSS avancé. J’ai expérimenté les animations complexes, les transform3d, les pseudos-éléments, les variables CSS et parfois même tout ça en même temps.', 1, 0, 1, 500),
+	(2, 'Portrait Chinois', 'Site Web', 'PortraitDesktop.jpg', 'PortraitPhone.jpg', '', '', 'http://portrait.leonbaudouin.fr/', 'Ce projet est mon premier site web. Il s’agit d’un Portrait Chinois one-page. Le concept, en 2 mots, est d’associer sa personnalité avec un thème. Ce site web est donc construit autour de la formule consacrée “Si j’étais… je serais…”. Ce projet est une première expérience dans le monde du web à la fois en développement et en design.\r\n\r\nDurant la conception graphique, la maquette a été revue plusieurs fois avant d’avoir un résultat qui me convient. Chaque “pages“ correspondant à une facette de ma personnalité, j’ai décidé de donner un thème de couleur particulier à chacune d’elles. En ce qui concerne le développement, le site étant one-page, j’ai créé une navigation entièrement encapsulée par du Javascript. J’ai utilisé jQuery en pour manipuler le DOM avec facilité. J’ai aussi ajouté un canvas HTML5, une technologie qui m’a intéressée très tôt.', 0, 0, 1, 800),
+	(3, 'CV Interactif', 'Site Web', 'CvDesktop.png', 'CvPhone.png', 'CV_1920.png', 'CV_800.png', 'http://cv.leonbaudouin.fr/', 'La fin de la 1ère année de DUT approchant et afin de proposer une alternative au CV traditionnel, j’ai réalisé un CV web. Ce dernier avait un triple enjeu : expliquer mon parcours et mon profil, montrer mes compétences techniques par le code et ma personnalité par le design du site.\r\n\r\nJ’ai basé le design du site sur des leitmotivs propres au motion design. J’ai pensé chaque élément avec une animation associée. j’ai trouvé intéressant jouer avec la dichotomie technique / créatif avec les couleurs et les polices d’écriture. Ce projet fut une occasion idéale pour m’initier au CSS avancé. J’ai expérimenté les animations complexes, les transform3d, les pseudos-éléments, les variables CSS et parfois même tout ça en même temps.', 1, 0, 1, 500),
 	(4, 'Call Me', 'Motion Design', 'CallMeDesktop.png', 'CallMePhone.png', 'CallMe_1920.png', 'CallMe_800.png', 'https://www.youtube.com/watch?v=GK1ZqDCcR6Q', 'Alors que je fais du Motion Design depuis 2015, début 2017, je me lance sur un projet de Kinetic Typography sur la musique Call Me, de Shinedown. En effet, bien qu’ayant souvent travaillé sur des animations de textes et des animations musicales, je n’aie jamais associé les deux. Cette musique m’a paru idéale car les paroles et le rythme, notamment au sein du générique, m’inspiraient beaucoup.\r\n\r\nJ’ai donc axé mon animation sur l’opposition vertu / vice, avec l\'utilisation et l’alternance du noir et du blanc. Mais ce parti pris a aussi été une grande contrainte : il fallait donner vie aux paroles qu’en noir et blanc. Pour ce faire, j’ai redoublé de créativité en allant chercher dans le mouvement ou la déconstruction des mots ( “Same” qui se décompose en particules, “Saint” qui émet un halo de lumière,... ).', 1, 0, 1, 700),
-	(5, 'Hexagone', 'Motion Design', 'HexagoneDesktop.png', 'HexagonePhone.png', 'Hexagone_1920.png', 'Hexagone_800.png', 'https://www.youtube.com/watch?v=THNxEycy0jM', 'En décembre 2017, je découvre l’univers du Generative Design avec notamment le compte twitter @BeesAndBombs. Cet univers qui allie mes deux passions, le motion design et le développement, m’a beaucoup inspiré. Je me suis donc lancé dans la conception d’HEXAGONE, ma dernière animation musicale à ce jour.\r\n\r\nPour cette animation, je voulais travailler avec l’environnement 3D de After Effects avec notamment le plug-in Trapcode Particular. Cette animation a aussi nécessité un travail de synesthésie car j’ai essayé d’adapter au mieux les mouvements à l’ambiance et aux subtilités de la musique.', 1, 0, 1, 400),
-	(6, 'Particles', 'Site Web', 'ParticlesDesktop.png', 'ParticlesPhone.png', 'Particles_1920.png', 'Particles_800.png', './particles/', 'Cette expérimentation voit son origine au croisement de deux souhaits : créer un écran de chargement pour le web et m\'initier aux Canvas HTML5. Je me suis donc lancé dans le développement de systèmes de particules basé sur les déplacements de la souris, sur le clic ou encore sur des curseurs glissières.\r\n\r\nL\'idée était de faire évoluer chacune des particules de façon indépendante mais avec des comportements similaires. Ainsi, cette expérimentation a été l\'occasion de me former à la programmation orientée objet. Ce fut aussi l\'occasion de mettre en pratique mes anciens cours de physique avec le calcul de fonctions de chute libre.', 1, 1, 1, 200),
-	(7, 'Jeu Couleurs', 'Site Web', 'CouleurDesktop.png', 'CouleurPhone.png', '', '', './jeucouleurs/', 'Il s\'agit non seulement de mon tout premier projet JavaScript mais aussi de mon tout premier projet de développement en autonomie. Il s\'agit d\'un petit jeu de couleurs. Contrairement à mes autres projets qui mettent la logique au service du visuel, celui-ci, moins artistique, met le visuel au service de la logique.\r\n\r\nEn effet, un jeu “un joueur” réduit à sa plus simple forme est une interaction entre le joueur et “la machine”. Ce fut donc l\'occasion d\'expérimenter la gestion des inputs (entrés) et des outputs (sorties) utilisateurs avec la gestion de formulaire HTML et l\'animation du DOM. Pour me faciliter la tâche, je me suis servi de la bibliothèque JQuery.', 0, 1, 1, 800),
+	(5, 'Hexagone', 'Motion Design', 'HexagoneDesktop.png', 'HexagonePhone.png', 'Hexagone_1920.png', 'Hexagone_800.png', 'https://www.youtube.com/watch?v=THNxEycy0jM', 'En décembre 2017, je découvre l’univers du Generative Design avec notamment le compte twitter @BeesAndBombs. Cet univers qui allie mes deux passions, le motion design et le développement, m’a beaucoup inspiré. Je me suis donc lancé dans la conception d’HEXAGONE, ma dernière animation musicale à ce jour.\r\n\r\nPour cette animation, je voulais travailler avec l’environnement 3D de After Effects avec notamment le plug-in Trapcode Particular. Cette animation a aussi nécessité un travail de synesthésie car j’ai essayé d’adapter au mieux les mouvements à l’ambiance et aux subtilités de la musique.', 0, 0, 1, 400),
+	(6, 'Particles', 'Site Web', 'ParticlesDesktop.png', 'ParticlesPhone.png', 'Particles_1920.png', 'Particles_800.png', 'http://particles.leonbaudouin.fr/', 'Cette expérimentation voit son origine au croisement de deux souhaits : créer un écran de chargement pour le web et m\'initier aux Canvas HTML5. Je me suis donc lancé dans le développement de systèmes de particules basé sur les déplacements de la souris, sur le clic ou encore sur des curseurs glissières.\r\n\r\nL\'idée était de faire évoluer chacune des particules de façon indépendante mais avec des comportements similaires. Ainsi, cette expérimentation a été l\'occasion de me former à la programmation orientée objet. Ce fut aussi l\'occasion de mettre en pratique mes anciens cours de physique avec le calcul de fonctions de chute libre.', 1, 1, 1, 200),
+	(7, 'Jeu Couleurs', 'Site Web', 'CouleurDesktop.png', 'CouleurPhone.png', '', '', 'http://couleur.leonbaudouin.fr/', 'Il s\'agit non seulement de mon tout premier projet JavaScript mais aussi de mon tout premier projet de développement en autonomie. Il s\'agit d\'un petit jeu de couleurs. Contrairement à mes autres projets qui mettent la logique au service du visuel, celui-ci, moins artistique, met le visuel au service de la logique.\r\n\r\nEn effet, un jeu “un joueur” réduit à sa plus simple forme est une interaction entre le joueur et “la machine”. Ce fut donc l\'occasion d\'expérimenter la gestion des inputs (entrés) et des outputs (sorties) utilisateurs avec la gestion de formulaire HTML et l\'animation du DOM. Pour me faciliter la tâche, je me suis servi de la bibliothèque JQuery.', 0, 1, 1, 800),
 	(8, 'Cane Shuga', 'Motion Design', 'CaneShugaDesktop.png', 'CaneShugaDesktop.png', '', '', 'https://www.youtube.com/watch?v=1C1Urfbjxo4', 'La musique Cane Shuga m’a beaucoup inspiré dès ses premières écoutes. Cette musique aux tonalités bien détachées et à la mélodie assez répétitive est un terrain de jeu idéal pour mettre un premier pied dans les animations musicales. Ce projet, initialement très prometteur s’est vu grandement ralenti au milieu de sa conception. En effet, l’absence d’une idée parfaitement définie et ma trop grande ambition vis-à-vis de ce projet ont fait que cette animation ne me satisfait pas. Néanmoins, j’ai grandement appris grâce à sa conception et cela m’a permis de créer de nouvelles animations dont je suis très fier.', 0, 1, 1, 300),
 	(9, 'Mikros', 'Motion Design', 'MikrosDesktop.png', 'MikrosPhone.png', 'Mikros_1920.png', 'Mikros_800.png', 'https://www.youtube.com/watch?v=-lfYiAm-qjc', 'Lors de ma 1ère année en MMI, j\'ai effectué un stage à Mikros Image en tant que VFX artist au sein du département Motion Design. J’ai profité de l’occasion d’être entouré de Motion Designers expérimentés pour réaliser une animation à l’effigie de cette société de post-production.\r\n\r\nJe suis parti de l’idée de représenter Mikros au milieu de tracés géométriques fins comme sur un plan de travail d’architecte. Ma volonté était que le mot apparaisse le long de ces tracés. Pour casser avec l’aspect trop rigide d’un tel résultat, j’ai donné vie à chacune des lettres. Pour ce faire, j’ai essayé de créer des mouvements réalistes et naturels basés sur la réalité.', 1, 1, 1, 600),
 	(10, 'Pop Culture', 'Motion Design', 'PopCultureDesktop.png', 'PopCulturePhone.png', 'CaneShuga_1920.png', 'CaneShuga_800.png', 'https://www.youtube.com/watch?v=V4_7iXHihUk', 'Ce projet est le plus ancien que vous retrouverez ici. J’ai réalisé cet exercice en 2016 pour améliorer ma maîtrise d’After Effect. Pour cette animation, je souhaitais rester dans une forme de minimalisme technique en n’utilisant que très peu de calque de formes. Néanmoins, graphiquement, je décide de me détacher un tant soit peu du Flat design pur de mes débuts en ajoutant des effets se voulant plus réalistes.', 1, 1, 1, 700),
-	(11, 'Fairy Galaxy', 'Site Web', 'FairyDesktop.jpg', 'FairyPhone.jpg', 'FairyGalaxy_1920.png', 'FairyGalaxy_800.png', 'http://fairygalaxy.leonbaudouin.fr/', 'Ce projet est un exercice sur 3 jours lors d\'une semaine dédié au développement créatif.', 1, 1, 1, 100),
-	(12, 'Abyss', 'Site Web', 'AbyssDesktop.jpg', 'AbyssPhone.jpg', 'Abyss_1920.png', 'Abyss_800.jpg', 'http://abyss.leonbaudouin.fr/', 'Durant mon année de Bachelor Développeur Interactif à l\'école des Gobelins, une semaine a été dédiée à la data-visualisation. En binôme avec un designer de la même formation, Rachel Duvauchelle, nous avons réalisé un site web mettant à l\'honneur la faune des abysses.', 1, 0, 1, 200);
+	(11, 'Fairy Galaxy', 'Site Web', 'FairyDesktop.jpg', 'FairyPhone.jpg', 'FairyGalaxy_1920.png', 'FairyGalaxy_800.png', 'http://fairygalaxy.leonbaudouin.fr/', 'Ce projet est un exercice sur 3 jours lors d\'une semaine dédié au développement créatif.', 0, 1, 0, 100),
+	(12, 'Abyss', 'Site Web', 'AbyssDesktop.jpg', 'AbyssPhone.jpg', 'Abyss_1920.png', 'Abyss_800.jpg', 'http://abyss.leonbaudouin.fr/', 'Durant mon année de Bachelor Développeur Interactif à l\'école des Gobelins, une semaine a été dédiée à la data-visualisation. En binôme avec un designer de la même formation, Rachel Duvauchelle, nous avons réalisé un site web mettant à l\'honneur la faune des abysses.', 0, 0, 0, 200);
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 
--- Listage de la structure de la table portfolio_development. projects_skills_relation
+-- Listage de la structure de la table leonbaudouin_portfolio. projects_skills_relation
 CREATE TABLE IF NOT EXISTS `projects_skills_relation` (
   `project_id` int(11) DEFAULT NULL,
   `skill_id` int(11) DEFAULT NULL,
@@ -133,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `projects_skills_relation` (
   CONSTRAINT `skill_id` FOREIGN KEY (`skill_id`) REFERENCES `skills` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Listage des données de la table portfolio_development.projects_skills_relation : ~21 rows (environ)
+-- Listage des données de la table leonbaudouin_portfolio.projects_skills_relation : ~25 rows (environ)
 /*!40000 ALTER TABLE `projects_skills_relation` DISABLE KEYS */;
 INSERT INTO `projects_skills_relation` (`project_id`, `skill_id`) VALUES
 	(1, 10),
@@ -163,20 +169,20 @@ INSERT INTO `projects_skills_relation` (`project_id`, `skill_id`) VALUES
 	(12, 21);
 /*!40000 ALTER TABLE `projects_skills_relation` ENABLE KEYS */;
 
--- Listage de la structure de la table portfolio_development. skills
+-- Listage de la structure de la table leonbaudouin_portfolio. skills
 CREATE TABLE IF NOT EXISTS `skills` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
   `logo` varchar(50) NOT NULL DEFAULT '',
   `skill_set` int(11) DEFAULT NULL,
   `parent_skill` int(11) DEFAULT NULL,
-  `is_visible` int(11) DEFAULT '1',
+  `is_visible` int(11) DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `skill_set` (`skill_set`),
   CONSTRAINT `skill_set` FOREIGN KEY (`skill_set`) REFERENCES `skill_sets` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table portfolio_development.skills : ~20 rows (environ)
+-- Listage des données de la table leonbaudouin_portfolio.skills : ~21 rows (environ)
 /*!40000 ALTER TABLE `skills` DISABLE KEYS */;
 INSERT INTO `skills` (`id`, `name`, `logo`, `skill_set`, `parent_skill`, `is_visible`) VALUES
 	(1, 'HTML', 'HTML.svg', 1, NULL, 0),
@@ -195,24 +201,24 @@ INSERT INTO `skills` (`id`, `name`, `logo`, `skill_set`, `parent_skill`, `is_vis
 	(14, 'Photoshop', 'Ps.svg', 5, NULL, 1),
 	(15, 'Illustrator', 'Ai.svg', 5, NULL, 1),
 	(16, 'Indesign', 'Id.svg', 6, NULL, 1),
-	(17, 'jQuery', 'jQuery.svg', 1, NULL, 0),
+	(17, 'jQuery', 'jquery.svg', 1, NULL, 0),
 	(18, 'Magento', 'Magento.svg', 2, NULL, 1),
 	(19, 'React', 'React.svg', 1, NULL, 1),
 	(20, 'Vue', 'Vue.svg', 1, NULL, 1),
 	(21, 'ThreeJS', 'ThreeJS.svg', 7, NULL, 0);
 /*!40000 ALTER TABLE `skills` ENABLE KEYS */;
 
--- Listage de la structure de la table portfolio_development. skill_sets
+-- Listage de la structure de la table leonbaudouin_portfolio. skill_sets
 CREATE TABLE IF NOT EXISTS `skill_sets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) DEFAULT NULL,
-  `description` text,
-  `is_visible` int(11) DEFAULT '1',
-  `order` int(11) DEFAULT '0',
+  `description` text DEFAULT NULL,
+  `is_visible` int(11) DEFAULT 1,
+  `order` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table portfolio_development.skill_sets : ~6 rows (environ)
+-- Listage des données de la table leonbaudouin_portfolio.skill_sets : ~7 rows (environ)
 /*!40000 ALTER TABLE `skill_sets` DISABLE KEYS */;
 INSERT INTO `skill_sets` (`id`, `name`, `description`, `is_visible`, `order`) VALUES
 	(1, 'Développement Front-End', 'Le développement front-end est ma spécialité. J\'ai de l\'expérience avec React et les hooks et de bonnes connaissances en Vue. J\'utilise SASS pour l\'intégration de tous mes projets et Typescript est de loin mon langage de prédilection.', 1, 100),
