@@ -86,13 +86,10 @@ class ScriptLoader {
             const lab = new ProjectDisplayer(".photo-lab", ".lab", 10000);
     
             const pages = document.querySelectorAll(".page");
+            
+            const links = [...pages].map(el => (<HTMLElement>el).dataset.jsUrl)
     
-            const swipeLink = new SwipeLink([
-                null,
-                "profil.html",
-                "projects.html",
-                "lab.html"
-            ]);
+            const swipeLink = new SwipeLink(links);
     
             const activatePages = (i: number) => {
                 const page = pages[i];

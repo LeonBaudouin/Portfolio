@@ -1,7 +1,7 @@
 {% import "macro/img.twig" as img %}
 {% import "macro/div.twig" as div %}
 {% import "macro/title.twig" as title %}
-<div class="page lab">
+<div class="page lab" data-js-url="{{ getUrl('lab_list') }}">
     <section class="section">
         <div class="section-background">
             {% for project in projects %}

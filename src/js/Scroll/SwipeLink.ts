@@ -21,9 +21,7 @@ export class SwipeLink {
         const targetSection = this.linkArray[this.currentSlideIndex];
         if(targetSection != null) {
             DesactivateAll();
-            window.setTimeout(() => {
-                window.location.href = "./" + targetSection;
-            }, 1000)
+            window.location.href = targetSection;
         }
     }
 

@@ -10,7 +10,7 @@
     .red-squares-element {
        @for $i from 1 through 10 {
            &:nth-of-type(#{$i}) {
-               animation: square-entering 1s 800ms - 100ms * $i cubic-bezier(0,.75,.2,.99) both, square-hovering 5s -500ms * $i ease-in-out infinite;
+               animation: square-entering 1s 1500ms - 100ms * $i cubic-bezier(0,.75,.2,.99) both, square-hovering 5s - 500ms * $i ease-in-out infinite;
            }
        }
     }
@@ -18,7 +18,7 @@
     .grey-strokes-element {
        @for $i from 1 through 10 {
            &:nth-of-type(#{$i}) {
-               animation: square-entering 1s 800ms - 100ms * $i cubic-bezier(0,.75,.2,.99) both, square-hovering 5s -500ms * $i ease-in-out infinite;
+               animation: stroke-entering 1s 1500ms - 100ms * $i cubic-bezier(0,.75,.2,.99) both, stroke-hovering 5s - 500ms * $i ease-in-out infinite;
            }
        }
     }
@@ -64,12 +64,6 @@
             position: relative;
             z-index: -1;
             background-color: $color-red;
-
-            @for $i from 1 through 10 {
-                &:nth-of-type(#{$i}) {
-                    animation: square-entering 1s 800ms - 100ms * $i cubic-bezier(0,.75,.2,.99) both, square-hovering 5s -500ms * $i ease-in-out infinite;
-                }
-            }
 
             &:nth-of-type(1) {
                 width: calc(11 * var(--scaler ));
@@ -119,12 +113,6 @@
                 animation-delay: -700ms;
                 top: calc(22 * var(--scaler ));
                 --left: 0;
-            }
-
-            @for $i from 1 through 10 {
-                &:nth-of-type(#{$i}) {
-                    animation: stroke-entering 1s 1s - 100ms * $i cubic-bezier(0,.75,.2,.99) both, stroke-hovering 8s -600ms * $i ease-in-out infinite;
-                }
             }
         }
     }

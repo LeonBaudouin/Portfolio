@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL DEFAULT '',
   `date` varchar(100) NOT NULL DEFAULT '',
-  `description` text DEFAULT NULL,
+  `description` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
@@ -39,13 +39,13 @@ CREATE TABLE IF NOT EXISTS `descriptions` (
   `project_id` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
   `content` text NOT NULL,
-  `order` int(11) NOT NULL DEFAULT 1,
+  `order` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `project_id` (`project_id`),
   CONSTRAINT `foreign_project_id` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table leonbaudouin_portfolio.descriptions : ~41 rows (environ)
+-- Listage des données de la table portfolio_development.descriptions : ~44 rows (environ)
 /*!40000 ALTER TABLE `descriptions` DISABLE KEYS */;
 INSERT INTO `descriptions` (`id`, `project_id`, `type`, `content`, `order`) VALUES
 	(1, 1, 'text', 'Glint est mon projet tutoré de 2ème année de DUT MMI. Ce projet réunit une équipe de cinq autres étudiants. Nous nous sommes fixé l’objectif ambitieux de créer un jeu vidéo. La production inclut, la création d’une charte graphique, de sprites, d’animations, d’opérations de communication mais surtout du développement du jeu en lui-même.\r\n\r\nJ\'ai ainsi assuré le rôle de développeur logiciel. Je me suis formé en autodidacte au C#, au développement Unity, aux principes de POO avancé. Je me suis spécialisé dans le développement de l’Interface Utilisateur. Ça inclut les menus, les modifications des touches de jeu, le HUD, la gestion des textes (changement de langue par exemple). Unity ne m’a pas facilité la tâche, il ne dispose pas encore de beaucoup d’outils pour manipuler l’UI.', 200),
@@ -94,7 +94,7 @@ INSERT INTO `descriptions` (`id`, `project_id`, `type`, `content`, `order`) VALU
 	(44, 7, 'image', 'Couleur.jpg', 300);
 /*!40000 ALTER TABLE `descriptions` ENABLE KEYS */;
 
--- Listage de la structure de la table leonbaudouin_portfolio. projects
+-- Listage de la structure de la table portfolio_development. projects
 CREATE TABLE IF NOT EXISTS `projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
@@ -104,15 +104,15 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `desktop_featured_image` varchar(50) NOT NULL DEFAULT '',
   `phone_featured_image` varchar(50) NOT NULL DEFAULT '',
   `url` varchar(150) NOT NULL DEFAULT '',
-  `description` text DEFAULT NULL,
-  `is_featured` tinyint(4) NOT NULL DEFAULT 0,
-  `is_lab` tinyint(4) NOT NULL DEFAULT 0,
-  `is_visible` tinyint(4) NOT NULL DEFAULT 1,
-  `order` int(11) DEFAULT 0,
+  `description` text,
+  `is_featured` tinyint(4) NOT NULL DEFAULT '0',
+  `is_lab` tinyint(4) NOT NULL DEFAULT '0',
+  `is_visible` tinyint(4) NOT NULL DEFAULT '1',
+  `order` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table leonbaudouin_portfolio.projects : ~12 rows (environ)
+-- Listage des données de la table portfolio_development.projects : ~12 rows (environ)
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
 INSERT INTO `projects` (`id`, `name`, `type`, `desktop_gallery_image`, `phone_gallery_image`, `desktop_featured_image`, `phone_featured_image`, `url`, `description`, `is_featured`, `is_lab`, `is_visible`, `order`) VALUES
 	(1, 'Glint Game', 'Jeu vidéo', 'GlintDesktop.jpg', 'GlintPhone.jpg', 'Glint_1920.png', 'Glint_800.png', 'https://www.glintgame.fr', 'Glint est mon projet tutoré de 2ème année de DUT MMI. Ce projet réunit une équipe de cinq autres étudiants. Nous nous sommes fixé l’objectif ambitieux de créer un jeu vidéo. La production inclut, la création d’une charte graphique, de sprites, d’animations, d’opérations de communication mais surtout du développement du jeu en lui-même.\r\n\r\nJ\'ai ainsi assuré le rôle de développeur logiciel. Je me suis formé en autodidacte au C#, au développement Unity, aux principes de POO avancé. Je me suis spécialisé dans le développement de l’Interface Utilisateur. Ça inclut les menus, les modifications des touches de jeu, le HUD, la gestion des textes (changement de langue par exemple). Unity ne m’a pas facilité la tâche, il ne dispose pas encore de beaucoup d’outils pour manipuler l’UI.', 1, 0, 1, 100),
@@ -126,10 +126,10 @@ INSERT INTO `projects` (`id`, `name`, `type`, `desktop_gallery_image`, `phone_ga
 	(9, 'Mikros', 'Motion Design', 'MikrosDesktop.png', 'MikrosPhone.png', 'Mikros_1920.png', 'Mikros_800.png', 'https://www.youtube.com/watch?v=-lfYiAm-qjc', 'Lors de ma 1ère année en MMI, j\'ai effectué un stage à Mikros Image en tant que VFX artist au sein du département Motion Design. J’ai profité de l’occasion d’être entouré de Motion Designers expérimentés pour réaliser une animation à l’effigie de cette société de post-production.\r\n\r\nJe suis parti de l’idée de représenter Mikros au milieu de tracés géométriques fins comme sur un plan de travail d’architecte. Ma volonté était que le mot apparaisse le long de ces tracés. Pour casser avec l’aspect trop rigide d’un tel résultat, j’ai donné vie à chacune des lettres. Pour ce faire, j’ai essayé de créer des mouvements réalistes et naturels basés sur la réalité.', 1, 1, 1, 600),
 	(10, 'Pop Culture', 'Motion Design', 'PopCultureDesktop.png', 'PopCulturePhone.png', 'CaneShuga_1920.png', 'CaneShuga_800.png', 'https://www.youtube.com/watch?v=V4_7iXHihUk', 'Ce projet est le plus ancien que vous retrouverez ici. J’ai réalisé cet exercice en 2016 pour améliorer ma maîtrise d’After Effect. Pour cette animation, je souhaitais rester dans une forme de minimalisme technique en n’utilisant que très peu de calque de formes. Néanmoins, graphiquement, je décide de me détacher un tant soit peu du Flat design pur de mes débuts en ajoutant des effets se voulant plus réalistes.', 1, 1, 1, 700),
 	(11, 'Fairy Galaxy', 'Site Web', 'FairyDesktop.jpg', 'FairyPhone.jpg', 'FairyGalaxy_1920.png', 'FairyGalaxy_800.png', 'http://fairygalaxy.leonbaudouin.fr/', 'Ce projet est un exercice sur 3 jours lors d\'une semaine dédié au développement créatif.', 0, 1, 0, 100),
-	(12, 'Abyss', 'Site Web', 'AbyssDesktop.jpg', 'AbyssPhone.jpg', 'Abyss_1920.png', 'Abyss_800.jpg', 'http://abyss.leonbaudouin.fr/', 'Durant mon année de Bachelor Développeur Interactif à l\'école des Gobelins, une semaine a été dédiée à la data-visualisation. En binôme avec un designer de la même formation, Rachel Duvauchelle, nous avons réalisé un site web mettant à l\'honneur la faune des abysses.', 0, 0, 0, 200);
+	(12, 'Abyss', 'Site Web', 'AbyssDesktop.jpg', 'AbyssPhone.jpg', 'Abyss_1920.png', 'Abyss_800.png', 'http://abyss.leonbaudouin.fr/', 'Durant mon année de Bachelor Développeur Interactif à l\'école des Gobelins, une semaine a été dédiée à la data-visualisation. En binôme avec un designer de la même formation, Rachel Duvauchelle, nous avons réalisé un site web mettant à l\'honneur la faune des abysses.', 1, 0, 1, 200);
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 
--- Listage de la structure de la table leonbaudouin_portfolio. projects_skills_relation
+-- Listage de la structure de la table portfolio_development. projects_skills_relation
 CREATE TABLE IF NOT EXISTS `projects_skills_relation` (
   `project_id` int(11) DEFAULT NULL,
   `skill_id` int(11) DEFAULT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `projects_skills_relation` (
   CONSTRAINT `skill_id` FOREIGN KEY (`skill_id`) REFERENCES `skills` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Listage des données de la table leonbaudouin_portfolio.projects_skills_relation : ~25 rows (environ)
+-- Listage des données de la table portfolio_development.projects_skills_relation : ~25 rows (environ)
 /*!40000 ALTER TABLE `projects_skills_relation` DISABLE KEYS */;
 INSERT INTO `projects_skills_relation` (`project_id`, `skill_id`) VALUES
 	(1, 10),
@@ -169,20 +169,20 @@ INSERT INTO `projects_skills_relation` (`project_id`, `skill_id`) VALUES
 	(12, 21);
 /*!40000 ALTER TABLE `projects_skills_relation` ENABLE KEYS */;
 
--- Listage de la structure de la table leonbaudouin_portfolio. skills
+-- Listage de la structure de la table portfolio_development. skills
 CREATE TABLE IF NOT EXISTS `skills` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
   `logo` varchar(50) NOT NULL DEFAULT '',
   `skill_set` int(11) DEFAULT NULL,
   `parent_skill` int(11) DEFAULT NULL,
-  `is_visible` int(11) DEFAULT 1,
+  `is_visible` int(11) DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `skill_set` (`skill_set`),
   CONSTRAINT `skill_set` FOREIGN KEY (`skill_set`) REFERENCES `skill_sets` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table leonbaudouin_portfolio.skills : ~21 rows (environ)
+-- Listage des données de la table portfolio_development.skills : ~21 rows (environ)
 /*!40000 ALTER TABLE `skills` DISABLE KEYS */;
 INSERT INTO `skills` (`id`, `name`, `logo`, `skill_set`, `parent_skill`, `is_visible`) VALUES
 	(1, 'HTML', 'HTML.svg', 1, NULL, 0),
@@ -208,17 +208,17 @@ INSERT INTO `skills` (`id`, `name`, `logo`, `skill_set`, `parent_skill`, `is_vis
 	(21, 'ThreeJS', 'ThreeJS.svg', 7, NULL, 0);
 /*!40000 ALTER TABLE `skills` ENABLE KEYS */;
 
--- Listage de la structure de la table leonbaudouin_portfolio. skill_sets
+-- Listage de la structure de la table portfolio_development. skill_sets
 CREATE TABLE IF NOT EXISTS `skill_sets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(150) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `is_visible` int(11) DEFAULT 1,
-  `order` int(11) DEFAULT 0,
+  `description` text,
+  `is_visible` int(11) DEFAULT '1',
+  `order` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
--- Listage des données de la table leonbaudouin_portfolio.skill_sets : ~7 rows (environ)
+-- Listage des données de la table portfolio_development.skill_sets : ~7 rows (environ)
 /*!40000 ALTER TABLE `skill_sets` DISABLE KEYS */;
 INSERT INTO `skill_sets` (`id`, `name`, `description`, `is_visible`, `order`) VALUES
 	(1, 'Développement Front-End', 'Le développement front-end est ma spécialité. J\'ai de l\'expérience avec React et les hooks et de bonnes connaissances en Vue. J\'utilise SASS pour l\'intégration de tous mes projets et Typescript est de loin mon langage de prédilection.', 1, 100),
