@@ -1,7 +1,7 @@
 {% extends "layout.twig" %}
 
 {% block head %}
-    {% include 'layout/head.twig' with {color: '#333131', title: 'Léon Baudouin - ' ~ project.getName()} only %}
+    {% include 'layout/head.twig' with metaHead only %}
 {% endblock %}
 
 {% block pageName %}project-show-page{% endblock %}

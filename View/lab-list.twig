@@ -3,13 +3,13 @@
 {% extends "layout.twig" %}
 
 {% block head %}
-    {% include 'layout/head.twig' with {color: '#333131', title: 'Léon Baudouin - Lab'} only %}
+    {% include 'layout/head.twig' with metaHead only %}
 {% endblock %}
 
 {% block pageName %}lab-page{% endblock %}
 {% block bodyClass %}gallery-page{% endblock %}
 
-{% set scrollBar = ['Title'] | merge(projectsName) %}
+{% set scrollBar = ['Title']|merge(projectsName) %}
 
 {% block sideButton %}
     <div class="scroll-bar sideButton">
@@ -18,7 +18,7 @@
         </div>
         <div class="scroll-bar-current-container">
             <div class="scroll-bar-current"></div>
-            {{ div.fromClassArray(scrollBar | slice(1), 'scroll-bar-current-hidden') }}
+            {{ div.fromClassArray(scrollBar|slice(1), 'scroll-bar-current-hidden') }}
         </div>
     </div>
     {% include 'svg/scroll-icon.twig' only %}
