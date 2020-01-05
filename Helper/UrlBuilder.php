@@ -13,19 +13,33 @@ class UrlBuilder {
         'cv' => './cv.pdf'
     ];
 
-    public static function getUrl($routeName, array $params = [])
+    public static function getUrl($routeName, array $params = [], bool $fullRoute = false)
     {
-        return \Router::getInstance()->generate($routeName, $params);
+        $base = $fullRoute ? UrlBuilder::getBaseUrl() : '';
+        return $base . \Router::getInstance()->generate($routeName, $params);
     }
 
-    public static function getImagePath($imageName, $type = "img")
+    public static function getCurrentUrl(bool $fullRoute = false) {
+        $base = $fullRoute ? UrlBuilder::getBaseUrl() : '';
+        return $base . $_SERVER['REQUEST_URI']; 
+    }
+
+    public static function getBaseUrl()
     {
+        $base = "https://";     
+        $base .= $_SERVER['HTTP_HOST'];
+        return $base;
+    }
+
+    public static function getImagePath($imageName, $type = "img", bool $fullRoute = false)
+    {
+        $base = $fullRoute ? UrlBuilder::getBaseUrl() : '';
         $config = include('config.php');
         $typeToKey = [
             'img' => 'image_path',
             'svg' => 'svg_path'
         ];
-        return $config[$typeToKey[$type]] . '/' . $imageName;
+        return $base . $config[$typeToKey[$type]] . '/' . $imageName;
     }
 
     public static function getForeignUrl($alias)

@@ -1,6 +1,10 @@
 {% import "macro/div.twig" as div %}
 {% extends "layout.twig" %}
 
+{% block head %}
+    {% include 'layout/head.twig' with {color: '#333131', title: 'Léon Baudouin'} only %}
+{% endblock %}
+
 {% block pageName %}main-page{% endblock %}
 
 {% set scrollBar = ['to-title', 'to-profil', 'to-projet', 'to-lab'] %}

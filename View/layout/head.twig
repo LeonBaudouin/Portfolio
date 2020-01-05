@@ -2,21 +2,21 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <meta property="og:title" content="Léon Baudouin - Portfolio">
-    <meta property="og:description" content="Portfolio d'un développeur créatif, multiples projets et expérimentations !">
-    <meta property="og:image" content="https://leonbaudouin.fr/assets/img/thumbnail.jpg">
-    <meta property="og:url" content="https://leonbaudouin.fr">
-    <meta name="twitter:title" content="Léon Baudouin - Portfolio">
-    <meta name="twitter:description" content="Portfolio d'un développeur créatif, multiples projets et expérimentations !">
-    <meta name="twitter:image" content="https://leonbaudouin.fr/assets/img/thumbnail.jpg">
+    <meta property="og:title" content="{{ og_title|default('Léon Baudouin - Portfolio') }}">
+    <meta property="og:description" content="{{ og_description|default('Portfolio d\'un développeur créatif, multiples projets et expérimentations !') }}">
+    <meta property="og:image" content="{{ thumbnail|default(getImagePath('thumbnail.jpg', 'img', true)) }}">
+    <meta property="og:url" content="{{ url|default(getCurrentUrl(true)) }}">
+    <meta name="twitter:title" content="{{ og_title|default('Léon Baudouin - Portfolio') }}">
+    <meta name="twitter:description" content="{{ og_description|default('Portfolio d\'un développeur créatif, multiples projets et expérimentations !') }}">
+    <meta name="twitter:image" content="{{ thumbnail|default(getImagePath('thumbnail.jpg', 'img', true)) }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="theme-color" content="{{ color }}">
-    <meta name="msapplication-navbutton-color" content="{{ color }}">
-    <meta name="apple-mobile-web-app-status-bar-style" content="{{ color }}">
-    <meta name="description" content="Je me présente, je m’appelle Léon Baudouin, j’ai 19 ans et je suis un développeur et motion designer passionné et voici mon portfolio."/>
-    <meta name="theme-color" content="{{ color }}">
-    <meta name="msapplication-navbutton-color" content="{{ color }}">
-    <meta name="apple-mobile-web-app-status-bar-style" content="{{ color }}">
+    <meta name="theme-color" content="{{ color|default('#333131') }}">
+    <meta name="msapplication-navbutton-color" content="{{ color|default('#333131') }}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="{{ color|default('#333131') }}">
+    <meta name="description" content="{{ description|default('Portfolio d\'un développeur créatif, multiples projets et expérimentations !') }}"/>
+    <meta name="theme-color" content="{{ color|default('#333131') }}">
+    <meta name="msapplication-navbutton-color" content="{{ color|default('#333131') }}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="{{ color|default('#333131') }}">
     <script type="text/javascript">
         var _paq = window._paq || [];
         /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
@@ -43,5 +43,5 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,800" rel="stylesheet"/>
     <link href="/assets/main.css" rel="stylesheet"/>
     <link rel="icon" href="{{ getImagePath('favicon.png') }}"/>
-    <title>{{ title }}</title>
+    <title>{{ title|default('Léon Baudouin') }}</title>
 </head>
