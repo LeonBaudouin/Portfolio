@@ -28,6 +28,12 @@
                         <span class="first-part-content">{{ element.getContent() }}</span>
                     </div>
                 </h2>
+            {% elseif element.getType() == 'subtitle' %}
+                <h3 class="title regular-title element-subtitle">
+                    <div class="first-part">
+                        <span class="first-part-content">{{ element.getContent() }}</span>
+                    </div>
+                </h3>
             {% elseif element.getType() == 'image' %}
                 <img class="element-img" src='{{ getImagePath('description/' ~ element.getContent()) }}' alt='Illustration du projet'/>
             {% endif %}

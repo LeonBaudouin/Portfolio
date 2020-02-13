@@ -138,6 +138,17 @@
                 }
             }
 
+            &-subtitle {
+                font-size: 1.3rem;
+                @include min_query(font-size, $regular-page-breakpoint, 2rem);
+
+                .first-part {
+                    height: 1.7rem;
+                    @include min_query(height, $regular-page-breakpoint, 2.7rem);
+                    font-weight: 800;
+                }
+            }
+
             &-paragraph {
                 margin: 0;
             }
