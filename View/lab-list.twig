@@ -26,7 +26,7 @@
 
 {% block content %}
     <div class="spacer"></div>
-    <div class="header active">
+    <div class="header active" data-js-project-amount="{{ scrollBar|length }}">
         {{ title.regular('h1', 'main-title direction-center', 'Le', 'Lab') }}
         <p class="description">
             Bienvenue dans le Lab ! Ici, vous retrouverez des expérimentations ou des plus petits projets.

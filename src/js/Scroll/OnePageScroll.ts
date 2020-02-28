@@ -29,6 +29,7 @@ export class OnePageScroll {
         this.slideNumber = slideNumber;
         this.scrollCallbacks = scrollCallbacks;
         this.bodyClassList.add("scroll-index-0");
+        console.log(slideNumber);
 
         this.InitEvent();
     }

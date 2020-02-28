@@ -172,10 +172,11 @@ class ScriptLoader {
             EventProvider.dispatch("change-section-image", images[i]);
         };
 
+        const projectAmount = parseInt(document.querySelector(".header").getAttribute("data-js-project-amount"))
         //  One Page scroll
         import('./Scroll/OnePageScroll').then(({OnePageScroll}) => {
             const onePage = new OnePageScroll(
-                6,
+                projectAmount,
                 500,
                 GetWindowHeight() * 0.5,
                 [activateProjects, changeBackgroundImage]
@@ -219,10 +220,11 @@ class ScriptLoader {
             EventProvider.dispatch("change-section-image", images[i]);
         };
 
+        const labsAmount = parseInt(document.querySelector(".header").getAttribute("data-js-project-amount"))
         //  One Page scroll
         import('./Scroll/OnePageScroll').then(({OnePageScroll}) => {
             const onePage = new OnePageScroll(
-                6,
+                labsAmount,
                 500,
                 GetWindowHeight() * 0.5,
                 [activateLabs, changeBackgroundImage]
