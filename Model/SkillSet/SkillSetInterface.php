@@ -20,7 +20,7 @@ interface SkillSetInterface extends \Model\Entity\EntityInterface
     public function setSkills($value);
 
     public function getIsVisible();
-    public function setIsVisble($value);
+    public function setIsVisible($value);
 
     public function getOrder();
     public function setOrder($value);

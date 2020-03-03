@@ -58,7 +58,7 @@ class SkillSet extends \Model\Entity\AbstractEntity implements SkillSetInterface
         return $this->_get(self::IS_VISIBLE);
     }
 
-    public function setIsVisble($value)
+    public function setIsVisible($value)
     {
         $this->_set(self::IS_VISIBLE, $value);
     }
