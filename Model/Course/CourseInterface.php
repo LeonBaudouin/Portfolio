@@ -8,6 +8,7 @@ interface CourseInterface extends \Model\Entity\EntityInterface
     const DATE = 'date';
     const DESCRIPTION = 'description';
     const IS_VISIBLE = 'is_visible';
+    const ORDER = 'order';
 
     public function getName();
     public function setName($value);
@@ -20,4 +21,7 @@ interface CourseInterface extends \Model\Entity\EntityInterface
 
     public function getIsVisible();
     public function setIsVisible($value);
+
+    public function getOrder();
+    public function setOrder($value);
 }

@@ -43,4 +43,14 @@ class Course extends \Model\Entity\AbstractEntity implements CourseInterface
     {
         $this->_set(self::IS_VISIBLE, $value);
     }
+
+    public function getOrder()
+    {
+        return $this->_get(self::ORDER);
+    }
+
+    public function setOrder($value)
+    {
+        $this->_set(self::ORDER, $value);
+    }
 }

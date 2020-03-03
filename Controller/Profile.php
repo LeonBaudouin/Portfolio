@@ -11,7 +11,7 @@ class Profile extends AbstractController
     public static function execute($params)
     {
         $skillSets = SkillSetRepository::getAll(['is_visible' => 1], true);
-        $courses = CourseRepository::getAll(['is_visible' => 1]);
+        $courses = CourseRepository::getAll(['is_visible' => 1], true);
         $metaHead = [
             'color' => '#333131',
             'title' => 'Léon Baudouin - Profil',
