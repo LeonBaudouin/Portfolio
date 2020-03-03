@@ -33,4 +33,14 @@ class Course extends \Model\Entity\AbstractEntity implements CourseInterface
     {
         $this->_set(self::DESCRIPTION, $value);
     }
+
+    public function getIsVisible()
+    {
+        return $this->_get(self::IS_VISIBLE);
+    }
+
+    public function setIsVisible($value)
+    {
+        $this->_set(self::IS_VISIBLE, $value);
+    }
 }
