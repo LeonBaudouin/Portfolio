@@ -4,12 +4,12 @@
         position: relative;
         display: grid;
         grid-row-gap: 8vh;
+        grid-column-gap: 6vw;
         margin-bottom: 13vh;
         align-items: start;
 
         @media screen and (min-width: $regular-page-breakpoint) and (max-width: 999px) {
             grid-template-columns: 1fr 1fr;
-            grid-column-gap: 6vw;
         }
         
         @media screen and (min-width: 1000px) {
@@ -77,7 +77,6 @@
 
             &-description {
                 margin: 0;
-                text-align: justify;
                 opacity: 0;
                 transition: opacity 300ms 600ms linear;
             }
