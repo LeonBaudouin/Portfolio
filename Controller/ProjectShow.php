@@ -24,8 +24,8 @@ class ProjectShow extends AbstractController
             'color' => '#333131',
             'title' => 'Léon Baudouin - ' . $project->getName(),
             'og_title' => 'Léon Baudouin - ' . $project->getName(),
-            'description' => substr($firstText->getContent(), 0, 125) . '...',
-            'og_description' => substr($firstText->getContent(), 0, 75) . '...',
+            'description' => substr($firstText->getContent(), 0, 160) . '...',
+            'og_description' => substr($firstText->getContent(), 0, 100) . '...',
             'thumbnail' => empty($images)
                         ? UrlBuilder::getImagePath('gallery/'.$project->getDesktopGalleryImage(), 'img', true)
                         : UrlBuilder::getImagePath('description/'.array_shift($images)->getContent(), 'img', true)

@@ -12,8 +12,8 @@ class LabList extends AbstractController
             'color' => '#333131',
             'title' => 'Léon Baudouin - Lab',
             'og_title' => 'Léon Baudouin - Lab',
-            'description' => 'Bienvenue dans le Lab ! Ici, vous retrouverez des expérimentations ou des plus petits projets.',
-            'og_description' => 'Bienvenue dans le Lab ! Ici, vous retrouverez des expérimentations ou des plus petits projets.',
+            'description' => 'Bienvenue dans mon Lab ! Ici, vous retrouverez des expérimentations ou des projets de petite envergure.',
+            'og_description' => 'Bienvenue dans mon Lab ! Ici, vous retrouverez des expérimentations ou des projets de petite envergure.',
             'thumbnail' => \Helper\UrlBuilder::getImagePath('labThumbnail.jpg', 'img', true),
         ];
         self::getRenderer()->render('lab-list.twig', ['projects' => $projects, 'projectsName' => $projectsName, 'metaHead' => $metaHead]);

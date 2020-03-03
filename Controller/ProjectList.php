@@ -12,8 +12,8 @@ class ProjectList extends AbstractController
             'color' => '#333131',
             'title' => 'Léon Baudouin - Projets',
             'og_title' => 'Léon Baudouin - Projets',
-            'description' => 'Bienvenue dans ma galerie de projet, vous pouvez cliquer sur n\'importe quel projet pour en voir les détails !',
-            'og_description' => 'Bienvenue dans ma galerie de projet, vous pouvez cliquer sur n\'importe quel projet pour en voir les détails !',
+            'description' => 'Bienvenue dans ma galerie de projet, sites web, creative dev, jeux vidéos, motion design,... vous pouvez cliquer sur n\'importe quel projet pour en voir les détails !',
+            'og_description' => 'Bienvenue dans ma galerie de projet, sites web, creative dev, jeux vidéos, motion design,... vous pouvez cliquer sur n\'importe quel projet pour en voir les détails !',
             'thumbnail' => \Helper\UrlBuilder::getImagePath('projectThumbnail.jpg', 'img', true),
         ];
         self::getRenderer()->render('project-list.twig', ['projects' => $projects, 'projectsName' => $projectsName, 'metaHead' => $metaHead]);
